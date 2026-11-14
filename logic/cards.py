@@ -1,4 +1,4 @@
-# Written with SI assistance (Claude), reviewed by Paridhi Singh
+# Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B material cards — one card per material, four lines, no more.
 
 Template (from the Lane B starter):

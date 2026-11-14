@@ -1,4 +1,4 @@
-# Written with SI assistance (Claude), reviewed by Paridhi Singh
+# Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B classifier — INSIDE / NEAR / BEYOND what NASA tested.
 
 Rules (draft, from Lane B starter Nov 13 — team to confirm):

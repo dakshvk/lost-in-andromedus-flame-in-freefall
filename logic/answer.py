@@ -1,4 +1,4 @@
-# Written with SI assistance (Claude), reviewed by Paridhi Singh
+# Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B answer builder — one answer, in the format the team agreed:
 
     VERDICT: INSIDE / NEAR / BEYOND what NASA tested
