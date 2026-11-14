@@ -28,6 +28,13 @@ Entries start here
 
 - 2026-11-14 Paridhi: Added data/raw/PSI-25_Experimental_table_BASS-II.csv (BASS-II, 129 tests, PSI-25, CC0, DOI 10.60555/4qc4-de67) — raw source, unedited.
 
+### 2026-11-14 13:42 | Paridhi | Added Lane B retrieval (rag.py)
+
+- What: `logic/rag.py` — retrieve() embeds each row as one sentence with sentence-transformers/all-MiniLM-L6-v2 (free, local, no API key) and returns the top 3 rows by cosine similarity; keyword fallback when the model is not installed.
+- Why: Lane B — free-text questions need to find the right rows before answer.py builds the answer. Retrieval only: it never writes an answer sentence, so no model output can invent a number.
+- How: wrote the file with SI assistance (Muse), installed the model with `pip install sentence-transformers`, then ran `python3 rag.py` in `logic/`.
+- Check: ran with the real model — SIBAL question returns T1, T25 on top; Moon-base question returns B1, B2 on top. Known limit: "highest oxygen" ranks T1 (18.5%) above B1/B2 (22.2%) because embeddings do not compare numbers; closest_rows in answer.py is the right tool for highest/lowest questions. Fixed the model re-loading for every question (now cached once per run).
+
 ### 2026-11-14 13:01 | Paridhi | Added Lane B material cards (PMMA, Nomex, SIBAL)
 
 - What: `logic/cards.py` — builds one 4-line card per material (what happened / why it matters / next action / what's not known) from `logic/sample_data.csv`, and prints the cards as JSON for the website.
