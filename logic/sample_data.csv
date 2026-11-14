@@ -1,0 +1,7 @@
+test_id,material,material_form,oxygen_pct,airflow_cm_s,outcome,outcome_source,source,source_url,notes
+B1,PMMA,film,22.2,,,,"PSI-25","https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","SAMPLE row — airflow and outcome left blank: CSV has Fan display only, no cm/s; outcomes only in BASS-II report Appendix A"
+B2,PMMA,film,22.2,,,,"PSI-25","https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","SAMPLE row — final O2 in CSV is 1.6% (oxygen consumed during the test); do not present that as an outcome"
+F1,Nomex,cloth,22.2,,,,"PSI-25","https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","SAMPLE row — Nomex natural (nomex III); flame-resistant fabric, NOT candle wax"
+F2,Nomex,cloth,21.0,,,,"PSI-25","https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","SAMPLE row — Nomex natural (nomex III)"
+T1,SIBAL,cloth,18.5,,,,"PSI-25","https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","SAMPLE row — 2 cm SIBAL cloth"
+T25,SIBAL,cloth,20.8,,,,"PSI-25","https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","SAMPLE row — 2 cm SIBAL cloth"
