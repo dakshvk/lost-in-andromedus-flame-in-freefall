@@ -1,1 +1,153 @@
-{"answers":[{"evidence":[{"airflow_cm_s":null,"material":"PMMA","material_form":"film","outcome":null,"oxygen_pct":22.2,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"B1"},{"airflow_cm_s":null,"material":"Nomex","material_form":"cloth","outcome":null,"oxygen_pct":22.2,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"F1"},{"airflow_cm_s":null,"material":"SIBAL","material_form":"cloth","outcome":null,"oxygen_pct":20.8,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"T25"}],"number_check":{"ok":true,"unverified":[]},"question":"A Moon base runs at 30% oxygen. What does NASA's testing actually cover?","sentence":"NASA's BASS-II tests cover 13.6–22.2% oxygen, so 30% oxygen is beyond what was tested — we can only show the closest tests, not an answer for that condition.","sources":["https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"],"unknown":["What happens at 30% oxygen — no BASS-II test goes above 22.2%","Airflow in cm/s (CSV has Fan display only; needs the fan calibration file)","Outcome (not in the PSI-25 CSV — only in the BASS-II report Appendix A)"],"verdict":"BEYOND"},{"evidence":[{"airflow_cm_s":null,"material":"Nomex","material_form":"cloth","outcome":null,"oxygen_pct":21.0,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"F2"},{"airflow_cm_s":null,"material":"SIBAL","material_form":"cloth","outcome":null,"oxygen_pct":20.8,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"T25"},{"airflow_cm_s":null,"material":"SIBAL","material_form":"cloth","outcome":null,"oxygen_pct":18.5,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"T1"}],"number_check":{"ok":true,"unverified":[]},"question":"Do materials burn as well in microgravity as on Earth?","sentence":"At 21% oxygen the question is inside the tested range (13.6–22.2% oxygen, 129 BASS-II tests), but the honest answer is conditional: the tests cover microgravity burning across that oxygen range, and a direct burn-as-well-as-Earth comparison needs the airflow for each test, which is not in the sample yet.","sources":["https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"],"unknown":["Earth-control comparison — no Earth rows in the BASS-II sample","Airflow in cm/s (CSV has Fan display only; needs the fan calibration file)","Outcome (not in the PSI-25 CSV — only in the BASS-II report Appendix A)"],"verdict":"INSIDE"},{"evidence":[{"airflow_cm_s":null,"material":"PMMA","material_form":"film","outcome":null,"oxygen_pct":22.2,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"B1"},{"airflow_cm_s":null,"material":"SIBAL","material_form":"cloth","outcome":null,"oxygen_pct":20.8,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"T25"},{"airflow_cm_s":null,"material":"SIBAL","material_form":"cloth","outcome":null,"oxygen_pct":18.5,"source":"PSI-25","source_url":"https://psi.nasa.gov/physci/repo/data/investigations/PSI-25","test_id":"T1"}],"number_check":{"ok":true,"unverified":[]},"question":"Compare two materials — PMMA film and SIBAL cloth. Which was tested at higher oxygen, and under what conditions?","sentence":"Both materials were tested inside the range: PMMA film test B1 at 22.2% oxygen is the highest-oxygen row in the sample, and SIBAL cloth test T25 at 20.8% oxygen is the closest SIBAL row — but which kept burning longer cannot be answered from the sample, because outcomes are not in the CSV.","sources":["https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"],"unknown":["Which material kept burning longer — outcomes are not in the PSI-25 CSV (BASS-II report Appendix A only)","Airflow in cm/s (CSV has Fan display only; needs the fan calibration file)"],"verdict":"INSIDE"}],"note":"Pre-saved answers to the 3 proposed demo questions (Lane B starter, Nov 13 — proposed, team to confirm). Generated with answer.py from sample_data.csv on Nov 14. Every number was number-checked against the frozen dataset. Airflow and outcomes are blank in the sample because the PSI-25 CSV has no cm/s column and no outcome column — do not fill them in by guessing."}
+{
+  "answers": [
+    {
+      "question": "A Moon base runs at 30% oxygen. What does NASA's testing actually cover?",
+      "verdict": "BEYOND",
+      "sentence": "NASA's BASS-II tests cover 13.6\u201322.2% oxygen, so 30.0% oxygen is beyond what was tested \u2014 we can only show the closest tests, not an answer for that condition.",
+      "evidence": [
+        {
+          "test_id": "B1",
+          "material": "PMMA",
+          "material_form": "film",
+          "oxygen_pct": "22.2",
+          "airflow_cm_s": "5",
+          "airflow_end_cm_s": null,
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        },
+        {
+          "test_id": "B2",
+          "material": "PMMA",
+          "material_form": "film",
+          "oxygen_pct": "22.2",
+          "airflow_cm_s": "5",
+          "airflow_end_cm_s": null,
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        },
+        {
+          "test_id": "F1",
+          "material": "Nomex",
+          "material_form": "cloth",
+          "oxygen_pct": "22.2",
+          "airflow_cm_s": "9.5",
+          "airflow_end_cm_s": null,
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        }
+      ],
+      "unknown": [
+        "airflow_cm_s (not given for this question)",
+        "outcome (not in the PSI-25 CSV \u2014 only in the BASS-II report Appendix A)"
+      ],
+      "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+      "sources": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+      ],
+      "number_check": {
+        "ok": true,
+        "unverified": []
+      }
+    },
+    {
+      "question": "Do materials burn as well in microgravity as on Earth?",
+      "verdict": "INSIDE",
+      "sentence": "21.0% oxygen is inside the tested range (13.6\u201322.2% oxygen, 129 BASS-II tests), so the rows below are direct evidence for this condition.",
+      "evidence": [
+        {
+          "test_id": "F2",
+          "material": "Nomex",
+          "material_form": "cloth",
+          "oxygen_pct": "21.0",
+          "airflow_cm_s": "15",
+          "airflow_end_cm_s": null,
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        },
+        {
+          "test_id": "T25",
+          "material": "SIBAL",
+          "material_form": "cloth",
+          "oxygen_pct": "20.8",
+          "airflow_cm_s": "5",
+          "airflow_end_cm_s": "2.5",
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        },
+        {
+          "test_id": "B1",
+          "material": "PMMA",
+          "material_form": "film",
+          "oxygen_pct": "22.2",
+          "airflow_cm_s": "5",
+          "airflow_end_cm_s": null,
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        }
+      ],
+      "unknown": [
+        "airflow_cm_s (not given for this question)",
+        "outcome (not in the PSI-25 CSV \u2014 only in the BASS-II report Appendix A)"
+      ],
+      "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+      "sources": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+      ],
+      "number_check": {
+        "ok": true,
+        "unverified": []
+      }
+    },
+    {
+      "question": "Compare two materials \u2014 PMMA film and SIBAL cloth. Which was tested at higher oxygen, and under what conditions?",
+      "verdict": "INSIDE",
+      "sentence": "Both materials were tested inside the range: PMMA film test B1 at 22.2% oxygen is the highest-oxygen row in the sample, and SIBAL cloth test T25 at 20.8% oxygen is the closest SIBAL row \u2014 but which kept burning longer cannot be answered from the sample, because outcomes are not in the CSV.",
+      "evidence": [
+        {
+          "test_id": "B1",
+          "material": "PMMA",
+          "material_form": "film",
+          "oxygen_pct": "22.2",
+          "airflow_cm_s": "5",
+          "airflow_end_cm_s": null,
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        },
+        {
+          "test_id": "T25",
+          "material": "SIBAL",
+          "material_form": "cloth",
+          "oxygen_pct": "20.8",
+          "airflow_cm_s": "5",
+          "airflow_end_cm_s": "2.5",
+          "outcome": null,
+          "source": "PSI-25",
+          "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+        }
+      ],
+      "unknown": [
+        "Which material kept burning longer \u2014 outcomes are not in the PSI-25 CSV (BASS-II report Appendix A only)"
+      ],
+      "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+      "sources": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+      ],
+      "number_check": {
+        "ok": true,
+        "unverified": []
+      },
+      "built_from": [
+        "build_answer(PMMA, 22.2%)",
+        "build_answer(SIBAL, 20.8%)"
+      ]
+    }
+  ],
+  "note": "Q1 and Q2 are generated by build_answer() from sample_data.csv with stats derived from the full 129-row PSI-25 CSV. Q3 is assembled from two build_answer() outputs (PMMA 22.2%, SIBAL 20.8%); its comparison sentence is the only hand-written line, and its numbers were number-checked. Airflow comes from the PSI Air display column (transducer reading in cm/s). Generated Nov 14, 2026."
+}

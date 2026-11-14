@@ -1,15 +1,12 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B material cards — one card per material, four lines, no more.
 
-Template (from the Lane B starter):
-- What happened: one plain sentence from the rows.
-- Why it matters: one sentence for a mission planner.
-- Next action: what a planner should check next.
-- What's not known: the gap, stated plainly.
-
-Every number on a card comes from the rows in sample_data.csv.
-Outcomes and airflow are NOT on the cards yet — they are not in the
-PSI-25 CSV, so the card says so instead of guessing.
+v2 changes (PR #1 review, Daksh):
+- Cards now show airflow: flow_start comes from the PSI "Air display"
+  column (transducer reading in cm/s); T25 also shows flow_end 2.5.
+  The old "airflow is not in the CSV" line is gone — it was wrong.
+- Outcome is still not known: it is not in the PSI-25 CSV, only in
+  the BASS-II report Appendix A, so the card still says so.
 """
 
 import json
@@ -28,6 +25,16 @@ def group_by_material(rows):
     return grouped
 
 
+def _flow_text(row):
+    start = row.get("airflow_cm_s")
+    end = row.get("airflow_end_cm_s")
+    if start in (None, ""):
+        return None
+    if end not in (None, ""):
+        return f"{start} -> {end} cm/s"
+    return f"{start} cm/s"
+
+
 def build_card(material, rows):
     """Build one card from all the rows for one material."""
     test_ids = [row["test_id"] for row in rows]
@@ -37,19 +44,19 @@ def build_card(material, rows):
     n = len(rows)
     tests = "test" if n == 1 else "tests"
     form_text = " / ".join(forms)
+    flows = sorted({f for f in (_flow_text(r) for r in rows) if f})
 
     if o2_low == o2_high:
         o2_text = f"{o2_high}% oxygen"
     else:
         o2_text = f"{o2_low}–{o2_high}% oxygen"
+    flow_text = f", airflow {', '.join(flows)}" if flows else ""
 
     what_happened = (
         f"Tested in BASS-II: {n} {tests} ({', '.join(test_ids)}) as {form_text} "
-        f"at {o2_text}."
+        f"at {o2_text}{flow_text}."
     )
 
-    # "Why it matters" is only what the rows themselves support:
-    # where this material sits in the tested range.
     if o2_high >= 22.2:
         why_it_matters = (
             f"{material} was tested at the highest oxygen in the sample "
@@ -70,12 +77,12 @@ def build_card(material, rows):
 
     next_action = (
         f"Check the BASS-II report Appendix A for the outcomes of "
-        f"{', '.join(test_ids)}, and the fan calibration file for airflow in cm/s."
+        f"{', '.join(test_ids)}."
     )
 
     not_known = (
-        "Outcome and airflow in cm/s are not in the PSI-25 CSV — "
-        "the card cannot say how long each test burned, or at what airflow."
+        "Outcome is not in the PSI-25 CSV — the card cannot say how long "
+        "each test burned. Airflow is from the Air display column."
     )
 
     return {
@@ -83,6 +90,7 @@ def build_card(material, rows):
         "material_form": form_text,
         "test_ids": test_ids,
         "oxygen_range_pct": [o2_low, o2_high],
+        "airflow_cm_s": flows,
         "what_happened": what_happened,
         "why_it_matters": why_it_matters,
         "next_action": next_action,
