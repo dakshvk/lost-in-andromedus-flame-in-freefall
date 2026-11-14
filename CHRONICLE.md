@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+### 2026-11-14 14:04 | Paridhi | Correction: filename in the first CHRONICLE entry
+
+- What: corrects the first entry (2026-11-14, PSI-25 CSV). The file is `data/raw/PSI-25_Experimental table_BASS-II.csv` — with a space, not underscores.
+- Why: the first entry wrote the filename with underscores, which does not match the file in the repo.
+- How: this new entry only — the old entry was left untouched, per the CHRONICLE rules.
+- Check: `git ls-files data/raw/` lists the file with a space in its name.
+
 - 2026-11-14 Paridhi: Added data/raw/PSI-25_Experimental_table_BASS-II.csv (BASS-II, 129 tests, PSI-25, CC0, DOI 10.60555/4qc4-de67) — raw source, unedited.
 
 ### 2026-11-14 13:42 | Paridhi | Added Lane B retrieval (rag.py)
