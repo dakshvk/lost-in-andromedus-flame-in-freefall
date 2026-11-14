@@ -1,4 +1,4 @@
-# Written with SI assistance (Claude), reviewed by Paridhi Singh
+# Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B number checker — every number in an answer must appear in the
 frozen dataset (or in the question itself), or it is flagged UNVERIFIED.
 
