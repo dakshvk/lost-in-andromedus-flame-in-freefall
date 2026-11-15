@@ -57,7 +57,7 @@ def allowed_numbers_from_rows(rows):
     return allowed
 
 
-def check_answer_numbers(sentence, evidence, stats, question_oxygen=None):
+def check_answer_numbers(sentence, evidence, stats, question_oxygen=None, extra_allowed=None):
     """Row+unit-aware check of one answer sentence.
 
     evidence: the evidence rows the answer cites (dicts with test_id,
@@ -65,6 +65,8 @@ def check_answer_numbers(sentence, evidence, stats, question_oxygen=None):
     stats: {"total_tests": 129, "o2_min": 13.6, "o2_max": 22.2,
         "rows_above_21": 18} — derived from the full dataset, not typed in.
     question_oxygen: the O2 value from the question itself.
+    extra_allowed: numbers derived from the data for this answer only
+        (e.g. the count of tests tied at the max oxygen).
     Returns {"ok": bool, "unverified": [str, ...]} with a reason per item.
     """
     unverified = []
@@ -106,5 +108,12 @@ def check_answer_numbers(sentence, evidence, stats, question_oxygen=None):
     for value in COUNT_RE.findall(sentence or ""):
         if int(value) != stats["total_tests"]:
             unverified.append(f"{value} BASS-II tests is not the dataset count ({stats['total_tests']})")
+
+    # 5. A bare "N tests" count (e.g. "14 tests at the highest oxygen")
+    #    is only allowed when N was derived from the data for this answer.
+    allowed_counts = {float(n) for n in (extra_allowed or set())}
+    for value in re.findall(r"(\d+)\s+tests\b", sentence or ""):
+        if float(value) not in allowed_counts and int(value) != stats["total_tests"]:
+            unverified.append(f"{value} tests is not a count derived from the data for this answer")
 
     return {"ok": not unverified, "unverified": sorted(set(unverified))}

@@ -8,21 +8,19 @@
     Sources: links, kept small.
     Gravity note: every answer says the tests were in microgravity.
 
-v2 changes (PR #1 review, Daksh):
-- closest_rows() filters by material first when one is given, so a
-  SIBAL question no longer returns PMMA rows.
-- A missing oxygen value returns verdict NEED_OXYGEN and an answer
-  that asks for a value, instead of BEYOND.
-- Stats (129 tests, 13.6–22.2% O2, 18 rows above 21%) are DERIVED
-  from the full PSI-25 CSV by dataset_stats(), never typed in.
-  The sample file alone must not be used for those numbers.
-- "Airflow is unknown" is only said when the evidence rows really
-  have no airflow. Airflow now comes from the PSI "Air display"
-  column (transducer reading in cm/s); flow_start is the first
-  number in that column, flow_end the second when present (T25: 5 -> 2.5).
-- Every answer carries the gravity note: the data is microgravity
-  (ISS); the Moon is about one-sixth Earth's gravity and pressure
-  differs, so a Moon-base condition is not covered by these tests.
+v4 changes (PR #1 review, Daksh):
+- answer_highest_oxygen(): the router says "code" for highest/lowest
+  questions, so there is now code behind it — max over the full 129
+  rows, all 14 ties returned (B1, B2, B3, B4, B5, B7, B12, F1, M1,
+  M2, M5, M14, O1, O2), number-checked with the tie count (14)
+  allowed as a derived count.
+- Saffire V nearest evidence: corrected citation — the numbers come
+  from the ICES 2021 Saffire IV/V paper, Table 1 (NTRS 20210011521):
+  V-2 cotton 26.2% O2 at 70.7 kPa, V-3 PMMA 25.4% at 71.3 kPa,
+  V-4 PMMA 25.7% at 72.6 kPa, all at 20 cm/s flow. Ranges used:
+  25.4–26.2% O2, 70.7–72.6 kPa. Moon cabin from the challenge notes:
+  30%+ O2 at 10.2 psi or less. "per Daksh" removed; Saffire IV/V
+  data is described as "not in the PSI tables we loaded".
 """
 
 import csv
@@ -63,6 +61,71 @@ def dataset_stats(full_csv_path):
         "o2_min": min(o2),
         "o2_max": max(o2),
         "rows_above_21": sum(1 for v in o2 if v > 21.0),
+    }
+
+
+def max_oxygen(rows):
+    """The highest oxygen tested, over the rows given, with ALL ties.
+
+    Returns {"max_oxygen": float, "test_ids": [...], "materials": [...]}.
+    Use the full 129 rows, not the 6-row sample: the sample's max is
+    also 22.2%, but it only shows 3 of the 14 tests at that level.
+    """
+    best = None
+    for row in rows:
+        try:
+            value = float(row["oxygen_pct"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if best is None or value > best:
+            best = value
+    if best is None:
+        return {"max_oxygen": None, "test_ids": [], "materials": []}
+    ties = [r for r in rows if r.get("oxygen_pct") not in (None, "") and float(r["oxygen_pct"]) == best]
+    return {
+        "max_oxygen": best,
+        "test_ids": [r["test_id"] for r in ties],
+        "materials": sorted({r["material"] for r in ties}),
+    }
+
+
+def answer_highest_oxygen(rows, stats=None):
+    """Answer 'which material was tested at the highest oxygen?' with
+    code, not embeddings: compute the max over the rows, return all
+    ties, and run the number checker on the result. The count of ties
+    (14) is derived from the data, so it is an allowed number here."""
+    result = max_oxygen(rows)
+    if result["max_oxygen"] is None:
+        return {
+            "question": "Which material was tested at the highest oxygen?",
+            "verdict": "NEED_OXYGEN",
+            "sentence": "No oxygen values are in the rows I was given.",
+            "evidence": [],
+            "nearest_evidence": None,
+            "unknown": ["oxygen_pct"],
+            "gravity_note": GRAVITY_NOTE,
+            "sources": [PSI_25_URL],
+            "number_check": {"ok": True, "unverified": []},
+        }
+    n = len(result["test_ids"])
+    tests = ", ".join(result["test_ids"])
+    sentence = (
+        f"The highest oxygen tested is {result['max_oxygen']}%, in {n} tests "
+        f"({tests}) — materials: {', '.join(result['materials'])}."
+    )
+    evidence = [r for r in rows if r.get("test_id") in result["test_ids"]]
+    stats = stats or {"total_tests": len(rows), "o2_min": min(float(r["oxygen_pct"]) for r in rows if r.get("oxygen_pct") not in (None, "")), "o2_max": result["max_oxygen"], "rows_above_21": 0}
+    check = check_answer_numbers(sentence, evidence, stats, extra_allowed={float(n)})
+    return {
+        "question": "Which material was tested at the highest oxygen?",
+        "verdict": "INSIDE",
+        "sentence": sentence,
+        "evidence": evidence,
+        "nearest_evidence": None,
+        "unknown": [],
+        "gravity_note": GRAVITY_NOTE,
+        "sources": [PSI_25_URL],
+        "number_check": check,
     }
 
 
@@ -148,22 +211,26 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
         )
 
     # Nearest evidence beyond BASS-II, for Moon-cabin conditions.
-    # NASA's challenge notes (per Daksh, Nov 14) put the Moon cabin at
-    # 30%+ O2 at about 10 psi, and Saffire V at about 26% O2 at about
-    # 71 kPa — the closest published reference, still below the cabin.
-    # Saffire IV/V data is NOT in PSI (GIPOC-locked, per Daksh Part 1),
-    # so this is cited to NASA's notes, not to a row in our dataset,
-    # and its numbers are checked against the notes, not the dataset.
+    # CORRECTION (Daksh, Nov 14): the Saffire V numbers come from the
+    # ICES 2021 Saffire IV/V paper, Table 1 (NTRS 20210011521), not
+    # from NASA's challenge notes. V-2 cotton 26.2% O2 at 70.7 kPa,
+    # V-3 PMMA 25.4% at 71.3 kPa, V-4 PMMA 25.7% at 72.6 kPa, all at
+    # 20 cm/s flow. The challenge notes only give the Moon cabin
+    # (30%+ O2 at 10.2 psi or less). Saffire IV/V data is not in the
+    # PSI tables we loaded, so this is cited to the paper, not to a
+    # row in our dataset, and its numbers are checked against the
+    # paper, not the dataset.
     nearest_evidence = None
     if verdict == "BEYOND" and oxygen_pct is not None and float(oxygen_pct) >= 30.0:
         nearest_evidence = {
             "text": (
-                "Nearest evidence beyond BASS-II: Saffire V, at about 26% "
-                "oxygen and about 71 kPa — still below a 30%+ oxygen Moon "
-                "cabin at about 10 psi."
+                "Nearest evidence beyond BASS-II: Saffire V tests V-2 to "
+                "V-4, 25.4–26.2% oxygen at 70.7–72.6 kPa and 20 cm/s "
+                "flow — still below a 30%+ oxygen Moon cabin at 10.2 psi "
+                "or less."
             ),
-            "source": "NASA challenge notes (per Daksh, Nov 14, 2026)",
-            "numbers": [26.0, 71.0, 10.0, 30.0],
+            "source": "Urban et al., ICES 2021, Saffire IV/V paper, Table 1 (NTRS 20210011521)",
+            "numbers": [25.4, 26.2, 70.7, 72.6, 20.0, 30.0, 10.2],
         }
 
     unknown = list(result["unknown"])
@@ -233,3 +300,11 @@ if __name__ == "__main__":
         print(build_answer(q, o2, rows, material=mat, stats=stats))
         print()
 
+    # Highest-oxygen question: computed over the full 129 rows, not the sample.
+    if os.path.exists(full_csv):
+        from cards import rows_from_full_csv
+        full_rows = rows_from_full_csv(full_csv)
+    else:
+        full_rows = rows
+    print(answer_highest_oxygen(full_rows, stats=stats))
+    print()
