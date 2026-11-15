@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-15 13:10 PT — Paridhi Singh — Clear IDE import/type errors for Lane B/C
+
+- What: `web/export_data.py` and `api/app.py` import Lane B as `logic.*` (with ROOT + LOGIC on `sys.path`); wrapped long `rules` strings in export_data; `classifier.py` narrows flow range None checks so Pyright is happy; added `pyrightconfig.json`, `.pylintrc`, and `.vscode/settings.json` with the logic path. Kept upstream's API warm-up `retrieve` import.
+- Why: Cursor's Problems panel showed unresolved imports (sys.path insert is runtime-only) and three optional-operand errors on the material flow margin math.
+- How: with Cursor; pulled main first and resolved the `api/app.py` conflict with Daksh's UI-test warm-up change.
+- Check: `npx pyright` clean on export_data, app, classifier; `python3 web/export_data.py` writes web/data; `python3 -m pytest -q api` 13 passed; classifier unit tests pass.
+
 ### 2026-11-15 13:20 | Daksh | README rewritten for judges, screenshots, ?ask= link, project links and page text docs
 
 - What: `README.md` rewritten in plain language (what the site does, three screenshots, how to run it, a section on getting the 3D Moon to show, data sources with links, how answers are kept honest, limits, repo map, checks, AI use, team). New `docs/screenshots/` (home, answer, chart; taken with a separate headless Chrome using a throwaway profile). `web/js/app.js`: a link like `/?ask=Will%20PMMA%20burn%20at%2030%25%20oxygen%3F` opens straight to that answer. `logic/classifier.py`: the "not known" line now says "the airflow (not given in the question)" instead of the raw field name `airflow_cm_s`; saved answers and web data regenerated.

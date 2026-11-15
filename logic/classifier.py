@@ -228,7 +228,13 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
         air_outside = False
         air_far = False
         flow_label = f"0–{AIRFLOW_MAX} cm/s"
-    elif material_flow is not None and material_flow != (None, None):
+    elif (
+        material_flow is not None
+        and material_flow[0] is not None
+        and material_flow[1] is not None
+    ):
+        # flow_range() returns (None, None) or two floats; the checks
+        # above narrow both sides so the arithmetic below is safe.
         flow_low, flow_high = material_flow
         margin = FLOW_MARGIN * (flow_high - flow_low)
         near_low = max(0.0, flow_low - margin)
