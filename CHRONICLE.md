@@ -38,3 +38,5 @@ Entries start here
 - Why: give the three lanes (data, logic, app and demo) one shared place to work, and keep a record of every change for the team and for the SI disclosure in the submission.
 - How: created the folders and files locally with Claude Code, made the first commit, created the public repository `lost-in-andromedus-flame-in-freefall` under the `dakshvk` GitHub account with the GitHub CLI, then invited the two teammates as collaborators with write access.
 - Check: opened the repository page to confirm the files are there.
+
+2026-11-14 | Jenisha (Lane A) | Added data/tests.json (200 rows), experiments.json (24), materials.json, validate.py, review files and notes (data/README_laneA.md) | Clean, sourced test data for the Evidence Map and Explorer; PSI-25 129 rows unchanged; doubtful values flagged, not fixed | Built from the real PSI CSVs, Zhao appendix, BASS-II report, Saffire IV/V and Link 2018 tables; paper rows entered twice and compared; checked by data/scripts/validate.py
