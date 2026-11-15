@@ -54,7 +54,7 @@ If either is missing, the page shows a **flat Moon** instead, and the line under
 - **Chrome:** open Settings, then System, and turn on "Use graphics acceleration when available". Restart Chrome. Then open `chrome://gpu` and check that the "WebGL" line says it is enabled.
 - **Ad blockers and firewalls:** allow `cdn.jsdelivr.net` and `unpkg.com`, or pause the blocker for localhost.
 - **Still flat?** Try another browser (Safari, Firefox, Edge) or the browser preview inside Cursor or VS Code. Open the browser's console (Cmd+Option+J in Chrome) and look for a message starting with "Moon:".
-- **The Moon does not turn by itself?** On a Mac, check System Settings, Accessibility, Display, "Reduce motion". When it is on, the site does not auto-spin the Moon. You can still drag it from anywhere on the Moon.
+- **Want the Moon to hold still?** It turns slowly on its own, even when the Mac has "Reduce motion" on. Add `?spin=off` to the address to stop it. Dragging always works.
 - To see the flat version on purpose, add `?moon=flat` to the address.
 
 ## Where the data comes from
@@ -101,7 +101,7 @@ The full list of rules and limits is in the "Limits and rules" panel on the site
 ```bash
 python3 -I data/scripts/validate.py          # data table check, should print OK
 cd logic && python3 -m pytest -q             # 102 tests
-cd .. && python3 -m pytest -q api            # 13 tests
+cd .. && python3 -m pytest -q api            # 14 tests
 ```
 
 ## Use of AI

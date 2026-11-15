@@ -35,3 +35,4 @@ One line per use. Newest at the bottom.
 | 2026-11-15 | Paridhi Singh    | Cursor                        | Cleared IDE import/type errors: logic.* imports in export_data and API, classifier flow-range None narrowing, pyright/pylint/vscode path config |
 | 2026-11-15 | Daksh            | Claude Code                   | Merged main, merged the duplicate AI log table back to one table, found and fixed double module loading from the IDE import cleanup, added a guard test |
 | 2026-11-15 | Daksh            | Claude Code                   | Drafted the NASA project page text (summary, description, data, references, SI answer) and the combined links and text Google Doc |
+| 2026-11-15 | Daksh            | Claude Code                   | Made the Moon turn on its own even with Reduce motion on, added the ?spin=off switch, updated the README line |

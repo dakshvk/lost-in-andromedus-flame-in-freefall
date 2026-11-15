@@ -345,8 +345,12 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
   items.push({ node: baseNode, button: base.button });
 
   // ---- interaction ----
+  // The slow idle turn (one lap in about 90 s) runs even when the OS asks for
+  // reduced motion: it is the only thing that shows the Moon is 3D. Add
+  // ?spin=off to the address to stop it.
+  const noSpin = new URLSearchParams(location.search).get("spin") === "off";
   const state = {
-    yaw: 0.25, pitch: 0.12, vyaw: 0, auto: !reduced, reduced,
+    yaw: 0.25, pitch: 0.12, vyaw: 0, auto: !noSpin, reduced,
     dragging: false, lastX: 0, lastY: 0, target: null, idleAt: 0, vpitch: 0,
   };
   const touch = () => { state.auto = false; state.idleAt = performance.now(); };
@@ -435,7 +439,7 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
         state.yaw += state.vyaw; state.vyaw *= 0.93;
         state.pitch = Math.min(0.9, Math.max(-0.9, state.pitch + state.vpitch)); state.vpitch *= 0.9;
       }
-      if (!state.auto && !state.reduced && now - state.idleAt > 14000 && !stage.matches(":focus-within, :hover")) state.auto = true;
+      if (!state.auto && !noSpin && now - state.idleAt > 3000) state.auto = true;
     }
     spin.rotation.y = state.yaw;
     tilt.rotation.x = state.pitch;
@@ -479,6 +483,6 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
       state.target = state.yaw + d;
     },
     pause: touch,
-    setReducedMotion(on) { state.reduced = on; if (on) { state.auto = false; state.vyaw = 0; } },
+    setReducedMotion(on) { state.reduced = on; if (on) state.vyaw = 0; },
   };
 }

@@ -26,6 +26,12 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 | Daksh Kumar | Moon turns on its own, even with Reduce motion on
+- What: `web/js/moon.js` (idle turn), `README.md` (3D Moon troubleshooting line).
+- Why: the Moon looked still on a Mac with "Reduce motion" on, and it did not restart while the mouse hovered over it, which would have hurt the demo recording.
+- How: the slow idle turn (about 90 s per lap) no longer depends on the OS setting; it restarts 3 s after a drag even while hovering; `?spin=off` stops it. Marker pulse and drag coasting still respect Reduce motion. Written with Claude Code.
+- Check: in the browser pane with Reduce motion on, all 7 markers moved over 5 s; 14 API tests pass.
+
 ### 2026-11-15 14:30 | Daksh | One Google Doc for the submission links and page text
 
 - What: the links doc and the project page text doc are now one Google Doc, "Lost in Andromedus NasaSpaceApps Hackathon Project" (title), with the subheader "Challenge: Flame in Freefall challenge", then "Links for the submission form" (repo link, demo video link still to add), then the text for every NASA project page field. The old "Project Links" doc was trashed (recoverable from Drive's Trash). The doc lives outside the repo; its address is in the wiki page flame-in-freefall.md.
