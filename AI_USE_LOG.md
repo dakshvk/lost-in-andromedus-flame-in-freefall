@@ -28,3 +28,4 @@ One line per use. Newest at the bottom.
 | 2026-11-14 | Daksh            | Claude Code           | Merged Lane B v11.1 (PR #4), regenerated saved answers and web data, 194-question oxygen and airflow sweep against the card ranges |
 | 2026-11-14 | Daksh            | Claude Code, Claude Fable 5.2 | Lane C website: Fable wrote the page (3D Moon, answer panel, map, cards, ranking, limits drawer) and Claude Code checked and finished it; NASA SVS Moon textures; page checked in the browser |
 | 2026-11-15 | Daksh            | Claude Code           | Lane C: coverage chart, decluttered scatter, guideline design tokens, outcome-basis labels, phone fixes, README |
+| 2026-11-15 | Daksh            | Claude Code           | Moon look (darker, crater relief, dimmer glow) and drag from anywhere on the Moon; Flame in Freefall wiki pages in Daksh's HQ wiki |

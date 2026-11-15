@@ -40,12 +40,14 @@ function mulberry32(seed) {
 function gradePixels(data) {
   for (let i = 0; i < data.length; i += 4) {
     const l = (0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]) / 255;
-    let v = (l - 0.43) * 2.15 + 0.44;          // contrast around mid grey
+    // Moderate contrast and a darker range so highlands stay textured
+    // instead of clipping to white (Daksh, 2026-11-15: "too white").
+    let v = (l - 0.40) * 1.9 + 0.45;
     v = Math.min(1, Math.max(0, v));
-    v = v * v * (3 - 2 * v) * 0.35 + v * 0.65; // gentle S curve
-    data[i] = Math.min(255, 255 * (0.10 + v * 0.80));
-    data[i + 1] = Math.min(255, 255 * (0.15 + v * 0.83));
-    data[i + 2] = Math.min(255, 255 * (0.27 + v * 0.80));
+    v = Math.pow(v, 1.1);                      // deepen the maria
+    data[i] = Math.min(255, 255 * (0.05 + v * 0.60));
+    data[i + 1] = Math.min(255, 255 * (0.07 + v * 0.66));
+    data[i + 2] = Math.min(255, 255 * (0.12 + v * 0.74));
   }
 }
 
@@ -224,9 +226,9 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 50);
   camera.position.set(0, 0, CAMERA_Z);
 
-  scene.add(new THREE.AmbientLight(0x9db8ff, 0.5));
-  const sun = new THREE.DirectionalLight(0xffffff, 2.3);
-  sun.position.set(-1.6, 1.1, 2.6);
+  scene.add(new THREE.AmbientLight(0x9db8ff, 0.42));
+  const sun = new THREE.DirectionalLight(0xffffff, 2.2);
+  sun.position.set(-1.9, 1.0, 2.2); // lower, more side light: crater rims cast shading
   scene.add(sun);
 
   const tilt = new THREE.Group();   // pitch from dragging
@@ -254,11 +256,13 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
   const map = new THREE.CanvasTexture(mapCanvas);
   map.colorSpace = THREE.SRGBColorSpace;
   map.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-  if (!relief) relief = new THREE.CanvasTexture(mapCanvas);
+  // Crater relief: the surface image carries the crater rims and rays at full
+  // resolution, so use it for the bump map (the elevation map is coarse).
+  relief = new THREE.CanvasTexture(mapCanvas);
 
   const moon = new THREE.Mesh(
     new THREE.SphereGeometry(1, 96, 64),
-    new THREE.MeshStandardMaterial({ map, bumpMap: relief, bumpScale: 2.2, roughness: 1, metalness: 0 }));
+    new THREE.MeshStandardMaterial({ map, bumpMap: relief, bumpScale: 3.4, roughness: 1, metalness: 0 }));
   moon.rotation.y = -Math.PI / 2; // put the map's centre (the near side) toward the camera
   spin.add(moon);
 
@@ -269,7 +273,7 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
       transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
       uniforms: { tint: { value: new THREE.Color(0x5aa6ff) } },
       vertexShader: "varying vec3 vN; varying vec3 vV; void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }",
-      fragmentShader: "uniform vec3 tint; varying vec3 vN; varying vec3 vV; void main(){ float f = pow(1.0 - max(dot(normalize(vN), normalize(vV)), 0.0), 2.6); gl_FragColor = vec4(tint * f * 1.25, f); }",
+      fragmentShader: "uniform vec3 tint; varying vec3 vN; varying vec3 vV; void main(){ float f = pow(1.0 - max(dot(normalize(vN), normalize(vV)), 0.0), 3.2); gl_FragColor = vec4(tint * f * 0.75, f * 0.7); }",
     }));
   scene.add(rim);
 
@@ -277,8 +281,8 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
   const edge = 1 / haloSize;
   const halo = new THREE.Sprite(new THREE.SpriteMaterial({
     map: glowTexture(THREE, [
-      [0, "rgba(110,175,255,0)"], [edge * 0.9, "rgba(110,175,255,0)"], [edge * 0.985, "rgba(150,200,255,0.85)"],
-      [edge * 1.06, "rgba(90,150,255,0.42)"], [edge * 1.2, "rgba(60,110,240,0.13)"], [0.98, "rgba(40,80,220,0)"], [1, "rgba(40,80,220,0)"],
+      [0, "rgba(110,175,255,0)"], [edge * 0.9, "rgba(110,175,255,0)"], [edge * 0.985, "rgba(120,175,255,0.45)"],
+      [edge * 1.06, "rgba(80,140,250,0.28)"], [edge * 1.2, "rgba(60,110,240,0.13)"], [0.98, "rgba(40,80,220,0)"], [1, "rgba(40,80,220,0)"],
     ]),
     transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending,
   }));
@@ -329,17 +333,20 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
   // ---- interaction ----
   const state = {
     yaw: 0.25, pitch: 0.12, vyaw: 0, auto: !reduced, reduced,
-    dragging: false, lastX: 0, lastY: 0, target: null, idleAt: 0,
+    dragging: false, lastX: 0, lastY: 0, target: null, idleAt: 0, vpitch: 0,
   };
   const touch = () => { state.auto = false; state.idleAt = performance.now(); };
 
-  canvas.addEventListener("pointerdown", (e) => {
-    state.dragging = true; state.lastX = e.clientX; state.lastY = e.clientY; state.vyaw = 0; state.target = null;
+  // Listen on the whole stage, so the Moon can be grabbed anywhere on it, not
+  // only where the canvas happens to be uncovered. Markers keep their clicks.
+  stage.addEventListener("pointerdown", (e) => {
+    if (e.button > 0 || e.target.closest?.(".marker, button, a")) return;
+    state.dragging = true; state.lastX = e.clientX; state.lastY = e.clientY; state.vyaw = 0; state.vpitch = 0; state.target = null;
     touch();
-    canvas.setPointerCapture?.(e.pointerId);
+    stage.setPointerCapture?.(e.pointerId);
     stage.classList.add("is-dragging");
   });
-  canvas.addEventListener("pointermove", (e) => {
+  stage.addEventListener("pointermove", (e) => {
     if (!state.dragging) return;
     const dx = e.clientX - state.lastX, dy = e.clientY - state.lastY;
     state.lastX = e.clientX; state.lastY = e.clientY;
@@ -347,12 +354,13 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
     state.yaw += dx * k;
     state.vyaw = dx * k;
     state.pitch = Math.min(0.9, Math.max(-0.9, state.pitch + dy * k));
+    state.vpitch = dy * k;
     touch();
   });
   const endDrag = () => { state.dragging = false; stage.classList.remove("is-dragging"); };
-  canvas.addEventListener("pointerup", endDrag);
-  canvas.addEventListener("pointercancel", endDrag);
-  canvas.addEventListener("lostpointercapture", endDrag);
+  stage.addEventListener("pointerup", endDrag);
+  stage.addEventListener("pointercancel", endDrag);
+  stage.addEventListener("lostpointercapture", endDrag);
 
   stage.addEventListener("keydown", (e) => {
     if (e.target !== stage) return;
@@ -405,7 +413,10 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
       state.pitch += (0.12 - state.pitch) * Math.min(1, dt * 5);
     } else if (!state.dragging) {
       if (state.auto) state.yaw += dt * 0.07;
-      else if (Math.abs(state.vyaw) > 0.0002 && !state.reduced) { state.yaw += state.vyaw; state.vyaw *= 0.93; }
+      else if (!state.reduced && (Math.abs(state.vyaw) > 0.0002 || Math.abs(state.vpitch) > 0.0002)) {
+        state.yaw += state.vyaw; state.vyaw *= 0.93;
+        state.pitch = Math.min(0.9, Math.max(-0.9, state.pitch + state.vpitch)); state.vpitch *= 0.9;
+      }
       if (!state.auto && !state.reduced && now - state.idleAt > 14000 && !stage.matches(":focus-within, :hover")) state.auto = true;
     }
     spin.rotation.y = state.yaw;

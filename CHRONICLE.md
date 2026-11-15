@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 01:00 | Daksh | Moon: darker and more textured, drag from anywhere
+
+- What: `web/js/moon.js` color grade no longer clips highlands to white (darker blue-grey range, stronger maria contrast), crater relief from the full resolution surface image (bump scale 3.4), lower side light so rims shade, dimmer limb ring and halo. Dragging now listens on the whole Moon stage with momentum on both axes; `web/css/styles.css` stops the hidden flat Moon layer from catching the pointer in 3D mode (that layer was why only the Moon's edge could be grabbed).
+- Why: Daksh said parts of the Moon were too white, wanted more craters and darker colors, and could only drag from the edge.
+- How: with Claude Code.
+- Check: in the browser the element under the Moon's center is now the 3D canvas; a drag from the center spins and tilts the Moon; the surface shows maria and craters with no white blowout; no console errors.
+
 ### 2026-11-15 00:30 | Daksh | Lane C: readable evidence chart, design guidelines, phone fixes
 
 - What: new `web/js/coverage.js` is the main evidence view (one row per material on a shared oxygen axis, one tick per test, ending at the empty 30% Moon band). The oxygen x airflow scatter moved behind a "Show every test" button and was decluttered (tests at their starting airflow, no flow-change lines, no separate no-flow strip, no pressure text). Standard material rows and graphs no longer include the low-pressure Saffire V tests (PMMA 102, matching the card). Tooltips say where each outcome was read from; the Moon caption says the view is illustrative. Design tokens follow the team's website guidelines: charcoal and graphite panels, amber for combustion, 4 to 8 px radii, monospace for measurements, smaller headline. Phone width: no sideways scroll.
