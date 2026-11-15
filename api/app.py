@@ -37,9 +37,13 @@ if ROOT not in sys.path:
 if LOGIC not in sys.path:
     sys.path.insert(0, LOGIC)
 
-from logic.answer import ask, dataset_stats_tests_json  # noqa: E402
-from logic.cards import rows_from_tests_json  # noqa: E402
-from logic.rag import _named_material, retrieve  # noqa: E402
+# Import Lane B's modules by their plain names (answer, cards, rag), exactly as
+# Lane B's own code does. Importing them as logic.answer, logic.rag and so on loads
+# every module twice, so the search model loaded at start-up is not the one real
+# questions use. The editor finds them through pyrightconfig.json and .pylintrc.
+from answer import ask, dataset_stats_tests_json  # noqa: E402
+from cards import rows_from_tests_json  # noqa: E402
+from rag import _named_material, retrieve  # noqa: E402
 
 DATA_FILES = {"tests", "cards", "experiments", "investigations",
               "limits", "demo_answers", "meta"}

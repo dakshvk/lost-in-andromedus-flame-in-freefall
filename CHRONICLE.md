@@ -26,6 +26,14 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 13:45 | Daksh | Merged Paridhi's IDE cleanup, fixed the double module loading it caused
+
+- What: merged main (Paridhi's PR #5 and "Clear IDE import and type errors"). Resolved the two log conflicts: PR #5 had put a second copy of the whole AI log table on main (55 rows, 28 distinct); the log is one table again with every distinct entry kept (29 rows), including her Cursor cleanup row. Her change made `api/app.py` and `web/export_data.py` import `logic.answer`, `logic.rag` and so on while Lane B's own code imports `answer`, `rag`; Python loaded every module twice, the search model warmed at start-up was not the copy real questions used (first text question 4.5 s instead of 0.2 s, and the API test run stalled at full CPU). Imports are plain again; her pyrightconfig.json, .pylintrc and .vscode settings stay and keep the editor happy. New test `test_lane_b_modules_are_loaded_once`.
+- Why: a teammate's tidy-up quietly undid the start-up warm-up and could have slowed the demo.
+- How: with Claude Code. Diagnosed by listing sys.modules (both `answer` and `logic.answer` present) and timing the first text question after a 25 s wait.
+- Check: 14 API tests pass in 0.3 s, 102 logic tests pass, validate.py OK, no `logic.*` copies loaded, first text question after warm-up 0.18 s.
+- Note for Paridhi: keep imports flat (as Lane B does); the editor already finds them through the config files she added.
+
 ## 2026-11-15 13:10 PT — Paridhi Singh — Clear IDE import/type errors for Lane B/C
 
 - What: `web/export_data.py` and `api/app.py` import Lane B as `logic.*` (with ROOT + LOGIC on `sys.path`); wrapped long `rules` strings in export_data; `classifier.py` narrows flow range None checks so Pyright is happy; added `pyrightconfig.json`, `.pylintrc`, and `.vscode/settings.json` with the logic path. Kept upstream's API warm-up `retrieve` import.

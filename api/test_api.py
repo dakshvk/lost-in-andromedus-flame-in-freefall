@@ -106,3 +106,10 @@ def test_ranking_keeps_reasons_and_note():
     top = exp["experiments"][0]
     assert top["psi_id"] == "PSI-25"
     assert sum(b["points"] for b in top["score_breakdown"]) == top["score"]
+
+
+def test_lane_b_modules_are_loaded_once():
+    # Importing them as logic.answer AND answer loads each twice; the search
+    # model warmed at start-up would then not be the one real questions use.
+    loaded = [m for m in sys.modules if m.startswith("logic.")]
+    assert loaded == [], loaded

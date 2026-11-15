@@ -33,13 +33,17 @@ if ROOT not in sys.path:
 if LOGIC not in sys.path:
     sys.path.insert(0, LOGIC)
 
-from logic.answer import GRAVITY_NOTE, gravity_note  # noqa: E402
-from logic.cards import (LOW_FLOW_CUTOFF_CM_S, STANDARD_PRESSURE_MIN_KPA,  # noqa: E402
-                         rows_from_tests_json)
-from logic.classifier import (AIRFLOW_MAX, FLOW_MARGIN, NEAR_AIRFLOW_MAX,  # noqa: E402
-                              NEAR_POINTS, flow_range)
-from logic.rag import CUTOFF, load_investigations  # noqa: E402
-from logic.ranking import RANKING_NOTE  # noqa: E402
+# Import Lane B's modules by their plain names (answer, cards, rag), exactly as
+# Lane B's own code does. Importing them as logic.answer, logic.rag and so on loads
+# every module twice, so the search model loaded at start-up is not the one real
+# questions use. The editor finds them through pyrightconfig.json and .pylintrc.
+from answer import GRAVITY_NOTE, gravity_note  # noqa: E402
+from cards import (LOW_FLOW_CUTOFF_CM_S, STANDARD_PRESSURE_MIN_KPA,  # noqa: E402
+                   rows_from_tests_json)
+from classifier import (AIRFLOW_MAX, FLOW_MARGIN, NEAR_AIRFLOW_MAX,  # noqa: E402
+                        NEAR_POINTS, flow_range)
+from rag import CUTOFF, load_investigations  # noqa: E402
+from ranking import RANKING_NOTE  # noqa: E402
 
 TESTS_JSON = os.path.join(DATA, "tests.json")
 OUTCOMES = ["quenched", "blow_off", "burning", "no_ignition", "ignited_only", "unknown"]
