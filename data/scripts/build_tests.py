@@ -27,14 +27,14 @@ ALLOWED = {"burning", "quenched", "blow_off", "no_ignition", "ignited_only", "un
 # ---- labels for non-SIBAL rows, from the BASS-II Appendix A note text only ----
 CLEAR = {}
 for o, ids in {
-    "quenched": "B1 B9 B10 B11 B13 B16 B17 B21 B22 F4 M2 M3 M4 M5 M8 M9 M10 M11 M13 M14 M15 M18 M19 M20 O3a O4 O8a O13a O14 O15a O15b O19 P1 P3a P9 P10 P12 P13b P14 P16 P17 P18 P19 P20 P21a P22a P22b P23 P24 P25 T7",
+    "quenched": "B9 B10 B11 B13 B16 B17 B21 B22 F4 M2 M3 M4 M5 M8 M9 M10 M11 M13 M14 M15 M18 M19 M20 O3a O4 O8a O13a O14 O15a O15b O19 P1 P3a P9 P10 P12 P13b P14 P16 P17 P18 P19 P20 P21a P22a P22b P23 P24 P25 T7",
     "blow_off": "B18 B19 O5a O7 O8b O9 O10 O11 O17",
     "no_ignition": "F1 F2 F3",   # report section 3.1: "The three Nomex samples did not ignite"
     "burning": "B6 B8 B15 B20 M6 M7 M16",
 }.items():
     for t in ids.split(): CLEAR[t] = o
 # note says nothing about what happened (colour, soot, hardware trouble, crew turned flow off) or row not in report
-UNKNOWN = set("B2 B3 B4 B5 B7 B12 M1 O1 M12 O2 O3b O6 P2 P3b P15 P21b O20 O21 O22".split())
+UNKNOWN = set("B1 B2 B3 B4 B5 B7 B12 M1 O1 M12 O2 O3b O6 P2 P3b P15 P21b O20 O21 O22".split())
 REVIEW = {  # id: (proposed label, why it is a judgement call). Final outcome stays "unknown" until a human confirms.
     "B14": ("no_ignition", "Note: 'only brief ignition, flame extinguished'. It lit briefly, so not clearly 'did not light'."),
     "M17": ("burning", "30-min burn at constant flows, then crew turned the fan to 0 to extinguish. No quench or blow-off stated."),
@@ -90,6 +90,8 @@ def shape_of(tid, raw, grp):
 FLOW_OVERRIDE = {  # hand notes where Air display has text (all flagged in flow_note, never silent)
     "T6": (5, None, "Air display '5 2 1 <1' ends in '<1' (less than 1, exact value not given), so flow_end is left empty"),
     "T21": (11, 47, "Air display '11 max(47)': 47 is in brackets after 'max'"),
+    "O5b": (5, None, "Air display '49 5 cm/s': 49 is the fan reading, 5 cm/s is the flow (pot 1.3 = 5 cm/s, 2 restrictors cap flow near 35 cm/s). Fixed after team check 2026-11-14"),
+    "O13a": (5, 0, "Air display '49 44 42 41 41 40.5 (5 2 0)': the first numbers are fan readings; bracket gives flow 5, 2, 0 cm/s, so flow falls from 5 to 0. Fixed after team check 2026-11-14"),
     "T29": (5, 2, "Air display '5 2(?)': the source itself marks the last value 2 with (?)"),
 }
 def parse_flow(raw, tid):
@@ -165,6 +167,11 @@ for r in rows:
 paper = (json.load(open(f"{D}/tests_saffire45.json")) + json.load(open(f"{D}/tests_link2018.json"))
          + json.load(open(f"{D}/tests_saffire123.json")))   # Saffire IV/V, Link 2018, Saffire I-III
 assert not ({p["id"] for p in paper} & {o["id"] for o in out}), "duplicate ids"
+LOW_FLOW_CM_S = 2   # team choice (Daksh, 2026-11-14): report says low flows have "high error bars" but gives no number
+for _r in out + paper:
+    _f = [v for v in (_r.get("flow_start"), _r.get("flow_end")) if v is not None]
+    if _f and min(_f) < LOW_FLOW_CM_S and "low_flow_uncertain" not in _r["flags"]:
+        _r["flags"].append("low_flow_uncertain")
 json.dump(out + paper, open(f"{D}/tests.json", "w"), indent=1)   # PSI-25 checks below use `out` only
 with open(f"{D}/review_needed.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(review_rows[0].keys()) + ["human_decision (fill in)"]); w.writeheader()
