@@ -1,6 +1,6 @@
-# Lane C: website data layer
+# Lane C: the website
 
-Design comes later. This folder holds only what the page needs to get its data.
+The page (`index.html`, `css/`, `js/`) and the data layer it reads (`export_data.py`, `js/data.js`, `data/`).
 
 ## Run it locally
 
@@ -37,3 +37,17 @@ Re-run `python3 web/export_data.py` whenever Lane A's `data/tests.json` or Lane 
 | `GET /api/health` | `{ok, rows, total_tests, data_exported}` |
 | `POST /api/ask` with `{"question": "..."}` | Lane B's answer: `path` (`code` or `rag`), `answer` (verdict, sentence, evidence, nearest_evidence, unknown, gravity_note, sources, number_check) or `retrieval` (match, results), plus `material` (the material named in the question, or null). Questions are limited to 300 characters. |
 | `GET /api/data/{name}` | One of the files above, by name without `.json`. |
+
+## The page
+
+| File | What it does |
+|---|---|
+| `index.html`, `css/styles.css` | One page: Moon hero with the ask box, answer panel, evidence chart, material cards, ranking, limits drawer, sources. |
+| `js/app.js` | Loads the data, wires every section together. |
+| `js/moon.js` | The 3D Moon (Three.js, pinned CDN version) with one marker per material; hover for a preview, select for the detail. |
+| `js/coverage.js` | The main evidence chart: one row per material on a shared oxygen axis, one tick per test, ending at the empty 30% Moon band. |
+| `js/chart.js` | The full oxygen x airflow scatter (behind "Show every test") and each material's own graph. |
+| `js/materials.js`, `js/answer.js`, `js/ranking.js`, `js/limits.js`, `js/dom.js` | Cards and material detail, answer panel, ranking, limits drawer, shared helpers. |
+| `assets/moon.jpg`, `assets/moon_displacement.jpg` | NASA's Scientific Visualization Studio, CGI Moon Kit (LRO data). Credited on the page. |
+
+Moon style for comparison: add `?moon=nasa` (default), `?moon=procedural`, `?moon=photo` or `?moon=illustration` to the URL. The photo and illustration options use Daksh's inspiration images: the illustration shows an "SI-generated image" label, and the photo needs a source credit before it can be used in the submission.

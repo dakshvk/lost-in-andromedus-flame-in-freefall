@@ -19,6 +19,6 @@
   "Outcomes that are not recorded are shown as unknown, never guessed."
  ],
  "ranking_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project — a team call, not NASA's.",
- "si_acknowledgment": "Data extraction, logic and code were written with SI assistance (Claude, Claude Code, Muse) and reviewed by the team. See AI_USE_LOG.md.",
+ "si_acknowledgment": "Data extraction, logic and code were written with SI assistance (Claude, Claude Code, Muse, Cursor) and reviewed by the team. See AI_USE_LOG.md.",
  "license": "PSI data is CC0 (NASA Physical Sciences Informatics)."
 }

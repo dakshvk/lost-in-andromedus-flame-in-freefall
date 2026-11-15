@@ -26,6 +26,35 @@ Rules:
 
 Entries start here
 
+## 2026-11-15 12:47 PT — Paridhi Singh — Add Cursor to SI acknowledgment
+
+- What: Added Cursor to the SI acknowledgment in web/export_data.py and regenerated web/data/limits.json; logged Cursor use in AI_USE_LOG.md.
+- Why: Cursor was used for small code edits and pushes, so the disclosure should list it alongside Claude, Claude Code, and Muse.
+- How: One-word change to the acknowledgment string; re-ran python3 web/export_data.py.
+- Check: limits.json shows "Claude, Claude Code, Muse, Cursor".
+
+### 2026-11-15 01:00 | Daksh | Moon: darker and more textured, drag from anywhere
+
+- What: `web/js/moon.js` color grade no longer clips highlands to white (darker blue-grey range, stronger maria contrast), crater relief from the full resolution surface image (bump scale 3.4), lower side light so rims shade, dimmer limb ring and halo. Dragging now listens on the whole Moon stage with momentum on both axes; `web/css/styles.css` stops the hidden flat Moon layer from catching the pointer in 3D mode (that layer was why only the Moon's edge could be grabbed).
+- Why: Daksh said parts of the Moon were too white, wanted more craters and darker colors, and could only drag from the edge.
+- How: with Claude Code.
+- Check: in the browser the element under the Moon's center is now the 3D canvas; a drag from the center spins and tilts the Moon; the surface shows maria and craters with no white blowout; no console errors.
+
+### 2026-11-15 00:30 | Daksh | Lane C: readable evidence chart, design guidelines, phone fixes
+
+- What: new `web/js/coverage.js` is the main evidence view (one row per material on a shared oxygen axis, one tick per test, ending at the empty 30% Moon band). The oxygen x airflow scatter moved behind a "Show every test" button and was decluttered (tests at their starting airflow, no flow-change lines, no separate no-flow strip, no pressure text). Standard material rows and graphs no longer include the low-pressure Saffire V tests (PMMA 102, matching the card). Tooltips say where each outcome was read from; the Moon caption says the view is illustrative. Design tokens follow the team's website guidelines: charcoal and graphite panels, amber for combustion, 4 to 8 px radii, monospace for measurements, smaller headline. Phone width: no sideways scroll.
+- Why: Daksh found the scatter "extremely messy and hard to read", asked for minimal AI slop and a page that can be demoed in 30 seconds, and shared the team's design guidelines.
+- How: with Claude Code, no Fable.
+- Check: in the browser at desktop and 375 px phone width: no console errors, no horizontal scroll, coverage rows match the cards (102, 32, 4, 4, 1, 3 = 146 tests), and the demo path works (PMMA at 30% BEYOND and opens the PMMA card; cotton at 26% shows Saffire V-2 at 70.7 kPa; smoke detection finds SAME; BASS-II tops the ranking with its reasons).
+
+### 2026-11-14 22:50 | Daksh | Lane C website built (branch lane-c-ui, CP1 to CP5) and an anti-slop pass
+
+- What: `web/index.html`, `web/css/styles.css`, `web/js/` (app, moon, chart, materials, answer, ranking, limits, dom) and `web/assets/` (NASA Moon color and elevation textures, two inspiration images). The page has the 3D Moon with material markers that spin with it, hover previews and click-through material detail, the ask box and answer panel, the evidence map, material cards, the investigation ranking and the limits drawer. Moon styles can be compared with `?moon=nasa` (default), `procedural`, `photo` and `illustration`.
+- Why: Lane C, built to Part 5 of the team doc and Daksh's design (a realistic spinning Moon with the materials on it). Daksh then asked for minimal AI slop and a page that can be demoed in 30 seconds.
+- How: a Fable agent (Claude Fable 5.2) wrote CP1 to CP4 and started CP5 before the usage limit hit; Claude Code checked and finished CP5. Daksh decided Fable is not to be used by default (it burns usage and makes slop). Anti-slop pass, checked against the public AI-slop catalogs: heading is solid white (no gradient text), the button is a solid color, the gradient bar on every card is gone, backdrop blur is down from 7 elements to 2 (header and floating button), decorative glows on dots and bars are gone, "Inter" is dropped from the font stack, and the ranking shows the top 5 with a "Show all 24" button. NASA texture: SVS CGI Moon Kit (lroc_color_2k.jpg, ldem_3_8bit.jpg), credited in the footer and limits drawer. The illustration variant carries a visible "SI-generated image" label.
+- Check: server started with `python3 -m uvicorn api.app:app --port 8000`; no console errors; "Will PMMA burn at 30% oxygen?" returns BEYOND with evidence M2, M5, M14, the Saffire V nearest evidence and the corrected gravity note, and opens the PMMA card and graph (102 tests, 76 known); no horizontal scroll at phone width; no broken images; every button named; all four `?moon=` styles load with no errors; after the anti-slop pass the page still loads clean. Logic 93 passed, API 13 passed. Not checked: hover previews by mouse, touch on a real phone, a full size look at the lower sections.
+- Open: the photo variant's source is unknown and needs a credit before it could be used in the submission; links to the exact page of each cited source are not built (the data has no page numbers); a sparkle star can overlap the caption text.
+
 ### 2026-11-14 23:40 | Daksh | Merged Lane B v11.1 (PR #4), oxygen and airflow questions checked together
 
 - What: merged Paridhi's PR #4 (v11.1: the cotton, known-outcome and no-oxygen-count fixes mirrored into the airflow-only answer) into main on top of the PR #2 merge and the gravity note fix. Regenerated logic/ask_samples.json and web/data/ so the saved answers carry the new gravity note.
