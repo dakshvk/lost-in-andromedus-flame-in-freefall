@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 00:30 | Daksh | Lane C: readable evidence chart, design guidelines, phone fixes
+
+- What: new `web/js/coverage.js` is the main evidence view (one row per material on a shared oxygen axis, one tick per test, ending at the empty 30% Moon band). The oxygen x airflow scatter moved behind a "Show every test" button and was decluttered (tests at their starting airflow, no flow-change lines, no separate no-flow strip, no pressure text). Standard material rows and graphs no longer include the low-pressure Saffire V tests (PMMA 102, matching the card). Tooltips say where each outcome was read from; the Moon caption says the view is illustrative. Design tokens follow the team's website guidelines: charcoal and graphite panels, amber for combustion, 4 to 8 px radii, monospace for measurements, smaller headline. Phone width: no sideways scroll.
+- Why: Daksh found the scatter "extremely messy and hard to read", asked for minimal AI slop and a page that can be demoed in 30 seconds, and shared the team's design guidelines.
+- How: with Claude Code, no Fable.
+- Check: in the browser at desktop and 375 px phone width: no console errors, no horizontal scroll, coverage rows match the cards (102, 32, 4, 4, 1, 3 = 146 tests), and the demo path works (PMMA at 30% BEYOND and opens the PMMA card; cotton at 26% shows Saffire V-2 at 70.7 kPa; smoke detection finds SAME; BASS-II tops the ranking with its reasons).
+
 ### 2026-11-14 22:50 | Daksh | Lane C website built (branch lane-c-ui, CP1 to CP5) and an anti-slop pass
 
 - What: `web/index.html`, `web/css/styles.css`, `web/js/` (app, moon, chart, materials, answer, ranking, limits, dom) and `web/assets/` (NASA Moon color and elevation textures, two inspiration images). The page has the 3D Moon with material markers that spin with it, hover previews and click-through material detail, the ask box and answer panel, the evidence map, material cards, the investigation ranking and the limits drawer. Moon styles can be compared with `?moon=nasa` (default), `procedural`, `photo` and `illustration`.

@@ -27,3 +27,4 @@ One line per use. Newest at the bottom.
 | 2026-11-14 | Daksh            | Claude Code           | Merged PR #2, resolved the AI log conflict, checked the Link unit against the Table S1 PDF, gravity note fix (Saffire I, II, IV/V; ISS or Cygnus), 168-question Lane A + B sweep, regenerated saved answers and web data |
 | 2026-11-14 | Daksh            | Claude Code           | Merged Lane B v11.1 (PR #4), regenerated saved answers and web data, 194-question oxygen and airflow sweep against the card ranges |
 | 2026-11-14 | Daksh            | Claude Code, Claude Fable 5.2 | Lane C website: Fable wrote the page (3D Moon, answer panel, map, cards, ranking, limits drawer) and Claude Code checked and finished it; NASA SVS Moon textures; page checked in the browser |
+| 2026-11-15 | Daksh            | Claude Code           | Lane C: coverage chart, decluttered scatter, guideline design tokens, outcome-basis labels, phone fixes, README |

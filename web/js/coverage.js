@@ -73,7 +73,7 @@ export function createCoverage(host, entries, tests, { onOpen } = {}) {
       );
     }
     svg.append(el("text", { x: m.l + pw / 2, y: H - 6, class: "axis-label", "text-anchor": "middle" },
-      "Oxygen at the start of the test (% by volume)"));
+      small ? "Starting oxygen (% by volume)" : "Oxygen at the start of the test (% by volume)"));
 
     rows.forEach((r, i) => {
       const cy = m.t + i * rowH + rowH / 2;

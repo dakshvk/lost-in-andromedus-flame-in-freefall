@@ -419,3 +419,10 @@ summary { cursor: pointer; }
 .tick, .tip-grid dd, td, .tag, .rank-num, .rank-score b, .cov-max, .stat b, .stat-value { font-family: var(--mono); }
 .basis { color: var(--muted); font-size: 0.78rem; }
 .cov-key { width: 3px; height: 12px; display: inline-block; border-radius: 1px; }
+
+/* Phone width: no sideways scroll. The nav scrolls inside itself, and the
+   Moon stage clips marker labels that drift past its edge while spinning. */
+.topbar nav { min-width: 0; }
+.topbar { min-width: 0; }
+.hero-moon { overflow: hidden; }
+@media (max-width: 560px) { .topbar nav a[href="#sources"] { display: none; } }
