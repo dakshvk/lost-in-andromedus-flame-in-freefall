@@ -1,9 +1,9 @@
 /* Written with SI assistance (Claude Code), reviewed by Daksh Kumar */
-/* Will it burn in a Moon base? Dark space theme, glass panels. */
+/* Will it burn in a Moon base? Dark space theme, flat panels. */
 
 :root {
   --bg: #050814;
-  --panel: rgba(13, 21, 46, 0.72);
+  --panel: rgba(13, 21, 46, 0.94);
   --panel-solid: #0c1430;
   --line: rgba(150, 180, 255, 0.16);
   --line-strong: rgba(150, 180, 255, 0.32);
@@ -24,7 +24,7 @@
   --oc-unknown: #95a3c4;
   --radius: 16px;
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color-scheme: dark;
 }
 
@@ -71,12 +71,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
   min-height: min(820px, calc(100vh - 56px));
 }
 .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
-h1 { font-size: clamp(2.3rem, 5.6vw, 4.4rem); font-weight: 720; background: linear-gradient(180deg, #fff 30%, #a9c6ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h1 { font-size: clamp(2.3rem, 5.6vw, 4.4rem); font-weight: 720; color: #fff; }
 .lede { margin-top: 16px; font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: var(--muted); max-width: 34em; }
 .ask {
   margin-top: 28px; display: flex; gap: 8px; padding: 8px; border-radius: 18px;
-  background: var(--panel); border: 1px solid var(--line-strong); backdrop-filter: blur(14px);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset, 0 16px 50px rgba(20, 60, 160, 0.25);
+  background: var(--panel); border: 1px solid var(--line-strong);
 }
 .ask:focus-within { border-color: var(--accent); }
 .ask input { flex: 1; min-width: 0; background: transparent; border: 0; color: var(--text); font: inherit; font-size: 1.05rem; padding: 10px 12px; }
@@ -85,7 +84,7 @@ h1 { font-size: clamp(2.3rem, 5.6vw, 4.4rem); font-weight: 720; background: line
 .ask button, .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 12px;
   padding: 10px 18px; font-weight: 650; color: #06122e;
-  background: linear-gradient(180deg, #b7d3ff, #7fb0ff); transition: transform 0.15s ease, filter 0.15s ease;
+  background: var(--accent); transition: transform 0.15s ease, filter 0.15s ease;
 }
 .ask button:hover, .btn:hover { filter: brightness(1.08); }
 .ask button:active, .btn:active { transform: translateY(1px); }
@@ -143,7 +142,7 @@ h1 { font-size: clamp(2.3rem, 5.6vw, 4.4rem); font-weight: 720; background: line
   box-shadow: 0 0 10px var(--mat); transition: transform 0.15s ease;
 }
 .stage.is-flat .marker-dot::after { background: var(--mat); }
-.marker-label { background: rgba(5, 10, 28, 0.78); border: 1px solid color-mix(in srgb, var(--mat) 55%, transparent); padding: 2px 9px; border-radius: 999px; backdrop-filter: blur(6px); }
+.marker-label { background: rgba(5, 10, 28, 0.78); border: 1px solid color-mix(in srgb, var(--mat) 55%, transparent); padding: 2px 9px; border-radius: 999px; }
 .marker:hover .marker-dot::after, .marker:focus-visible .marker-dot::after { transform: scale(1.35); }
 .marker:hover .marker-label, .marker:focus-visible .marker-label { background: color-mix(in srgb, var(--mat) 26%, #050a1c); }
 .marker.is-behind { opacity: 0; pointer-events: none; }
@@ -175,7 +174,7 @@ h1 { font-size: clamp(2.3rem, 5.6vw, 4.4rem); font-weight: 720; background: line
 .section-head { margin-bottom: 20px; max-width: 60em; }
 .section h2, .footer h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; }
 .section-sub { color: var(--muted); margin-top: 10px; }
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); backdrop-filter: blur(14px); box-shadow: var(--shadow); }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
 #map-panel { padding: clamp(12px, 2.5vw, 24px); }
 .note { margin-top: 12px; padding: 10px 14px; border-left: 3px solid var(--near); background: rgba(255, 200, 87, 0.08); border-radius: 0 10px 10px 0; color: #f3e6c4; font-size: 0.92rem; }
 .note-offline { border-left-color: var(--accent); background: rgba(143, 188, 255, 0.1); color: var(--text); }
@@ -197,7 +196,7 @@ h1 { font-size: clamp(2.3rem, 5.6vw, 4.4rem); font-weight: 720; background: line
 .verdict { display: inline-flex; align-items: center; gap: 9px; padding: 7px 14px; border-radius: 999px; border: 1px solid currentColor; font-size: 0.95rem; background: color-mix(in srgb, currentColor 12%, transparent); }
 .verdict b { letter-spacing: 0.06em; }
 .verdict span:last-child { color: var(--text); }
-.verdict-dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+.verdict-dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
 .v-inside { color: var(--ok); } .v-near { color: var(--near); } .v-beyond { color: var(--beyond); } .v-neutral { color: var(--neutral); }
 .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line-strong); }
 .badge-ok { color: var(--ok); border-color: rgba(86, 227, 154, 0.45); }
@@ -279,12 +278,11 @@ tr.is-context { color: var(--muted); }
 
 /* ---- material cards ---- */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); backdrop-filter: blur(14px); padding: 20px; display: grid; gap: 10px; align-content: start; min-width: 0; position: relative; overflow: hidden; }
-.card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--mat), transparent); }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 10px; align-content: start; min-width: 0; position: relative; overflow: hidden; }
 .card-wide { grid-column: 1 / -1; }
 .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .card-head h3 { font-size: 1.25rem; display: flex; align-items: center; gap: 10px; }
-.mat-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mat); box-shadow: 0 0 10px var(--mat); flex: none; }
+.mat-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mat); flex: none; }
 .forms { color: var(--muted); font-size: 0.9rem; }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin: 4px 0; }
 .stat { background: rgba(140, 180, 255, 0.06); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
@@ -294,7 +292,7 @@ tr.is-context { color: var(--muted); }
 .bar-title b { color: var(--text); }
 .o2bar { padding-bottom: 20px; position: relative; }
 .o2bar-track { position: relative; height: 12px; border-radius: 999px; background: rgba(150, 180, 255, 0.12); }
-.o2bar-fill { position: absolute; top: 0; bottom: 0; border-radius: 999px; background: linear-gradient(90deg, color-mix(in srgb, var(--mat, #8fbcff) 70%, #fff), var(--mat, #8fbcff)); box-shadow: 0 0 10px color-mix(in srgb, var(--mat, #8fbcff) 60%, transparent); }
+.o2bar-fill { position: absolute; top: 0; bottom: 0; border-radius: 999px; background: var(--mat, #8fbcff); }
 .o2bar-moon { position: absolute; top: -5px; bottom: -5px; width: 2px; margin-left: -1px; background: var(--moon); box-shadow: 0 0 8px var(--moon); }
 .o2bar-axis { position: absolute; left: 0; right: 0; bottom: 0; height: 16px; font-size: 0.7rem; color: var(--muted); }
 .o2bar-axis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
@@ -399,3 +397,4 @@ summary { cursor: pointer; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+.rank-more { list-style: none; padding-top: 8px; }

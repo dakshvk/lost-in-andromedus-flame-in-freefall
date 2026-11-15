@@ -10,10 +10,13 @@ export function renderRanking({ noteEl, filtersEl, listEl }, experimentsFile, in
   noteEl.textContent = experimentsFile.note;
   const fuels = [...new Set(list.map((e) => e.fuel_type))];
   let active = "all";
+  let expanded = false;
+  const TOP = 5;
 
   const draw = () => {
     clear(listEl);
-    for (const e of list.filter((x) => active === "all" || x.fuel_type === active)) {
+    const rows = list.filter((x) => active === "all" || x.fuel_type === active);
+    for (const e of expanded ? rows : rows.slice(0, TOP)) {
       const inv = investigations.find((i) => i.psi_id === e.psi_id);
       listEl.append(el("li", { class: "rank-item panel" },
         el("div", { class: "rank-num", "aria-label": `Rank ${e.rank}` }, String(e.rank)),
@@ -34,6 +37,11 @@ export function renderRanking({ noteEl, filtersEl, listEl }, experimentsFile, in
             link(e.url, `${e.psi_id} on NASA PSI`))),
         el("div", { class: "rank-score", "aria-label": `Score ${e.score}` }, el("b", {}, String(e.score)), el("span", {}, "score"))));
     }
+    if (rows.length > TOP) {
+      listEl.append(el("li", { class: "rank-more" },
+        el("button", { type: "button", class: "btn btn-small", onclick: () => { expanded = !expanded; draw(); } },
+          expanded ? `Show the top ${TOP}` : `Show all ${rows.length}`)));
+    }
   };
 
   clear(filtersEl);
@@ -41,6 +49,7 @@ export function renderRanking({ noteEl, filtersEl, listEl }, experimentsFile, in
     type: "button", class: "chip", "data-v": value, "aria-pressed": String(value === active),
     onclick: () => {
       active = value;
+      expanded = false;
       filtersEl.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === value)));
       draw();
     },
