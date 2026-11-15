@@ -109,5 +109,113 @@ class TestLowPressureRowsStayOut(unittest.TestCase):
         self.assertIn("Saffire V", answer["nearest_evidence"]["text"])
 
 
+@unittest.skipUnless(os.path.exists(TESTS_JSON), "tests.json not next to the repo")
+class TestV9Answers(unittest.TestCase):
+    """v9 (PR #1 review, Daksh, Nov 14): the combined % + airflow
+    question, the material count without Link rows, the low-flow
+    note, and the gravity note's pressure range from the data."""
+
+    def setUp(self):
+        from answer import dataset_stats_tests_json
+        from cards import rows_from_tests_json
+
+        self.rows = rows_from_tests_json(TESTS_JSON)
+        self.stats = dataset_stats_tests_json(TESTS_JSON)
+
+    def test_combined_oxygen_and_airflow_question_is_beyond(self):
+        # Daksh's case: "PMMA at 20% oxygen and 45 cm/s airflow?"
+        # must come back BEYOND — ask() used to drop the 45 cm/s
+        # entirely, so it came back INSIDE on oxygen alone.
+        from answer import ask
+
+        out = ask("PMMA at 20% oxygen and 45 cm/s airflow?",
+                  self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "BEYOND")
+        # The sentence names the airflow, not the oxygen: 20% is
+        # inside the PMMA O2 range, so "20.0% oxygen is beyond"
+        # would be false.
+        self.assertIn("45.0 cm/s airflow is beyond", answer["sentence"])
+        self.assertNotIn("20.0% oxygen is beyond", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_combined_question_at_22_cm_s_is_near(self):
+        from answer import ask
+
+        out = ask("PMMA at 20% oxygen and 22 cm/s airflow?",
+                  self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "NEAR")
+        self.assertIn("22.0 cm/s airflow is just outside", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_inside_sentence_quotes_material_count_not_200(self):
+        # The INSIDE sentence used to say "200 tests" for every
+        # material. PMMA has 154 rows, and the 52 Link rows aren't
+        # outcome evidence, so it quotes 102.
+        from answer import ask
+
+        out = ask("Is 20% oxygen inside our data for PMMA?",
+                  self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "INSIDE")
+        self.assertIn("102 tests", answer["sentence"])
+        self.assertNotIn("200 tests", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_lowest_airflow_note_says_low_readings_are_uncertain(self):
+        # "Lowest airflow for PMMA is 0.0 cm/s" — all 7 tie rows
+        # carry Lane A's low-flow flag, so the answer adds a note.
+        from answer import ask
+
+        out = ask("Which PMMA test had the lowest airflow?",
+                  self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertIn("0.0 cm/s", answer["sentence"])
+        self.assertIsNotNone(answer.get("note"))
+        self.assertIn("uncertain", answer["note"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_gravity_note_shows_pressure_range_from_the_data(self):
+        # The gravity note used to say "pressure differs" (fixed
+        # text). It now shows the recorded pressure range: 70.7
+        # (Saffire V) to 100.0 kPa (Saffire IV).
+        from answer import ask
+
+        out = ask("Is 20% oxygen inside our data for PMMA?",
+                  self.rows, stats=self.stats)
+        note = out["answer"]["gravity_note"]
+        self.assertIn("70.7–100.0 kPa", note)
+        self.assertNotIn("pressure differs", note)
+
+    def test_closest_rows_use_flow_not_just_oxygen(self):
+        # For the combined question, the evidence must be rows with
+        # flow data near 45 cm/s — not the no-flow rows (M12, O6),
+        # which used to rank first because a missing flow scored 1.0
+        # while a far flow scored more.
+        from answer import ask
+
+        out = ask("PMMA at 20% oxygen and 45 cm/s airflow?",
+                  self.rows, stats=self.stats)
+        ids = [r["test_id"] for r in out["answer"]["evidence"]]
+        self.assertNotIn("M12", ids)
+        self.assertNotIn("O6", ids)
+        self.assertTrue(all(
+            r["airflow_cm_s"] not in (None, "")
+            for r in out["answer"]["evidence"]))
+
+    def test_airflow_only_question_with_a_material_uses_its_range(self):
+        # "PMMA at 45 cm/s airflow?" (no %) is BEYOND too — the
+        # material's own flow range applies, not the hardware band.
+        from answer import ask
+
+        out = ask("PMMA at 45 cm/s airflow?",
+                  self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "BEYOND")
+        self.assertIn("PMMA airflow runs 0.0–20.0 cm/s", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+
 if __name__ == "__main__":
     unittest.main()

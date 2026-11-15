@@ -60,11 +60,33 @@ class TestTestsJsonLoader(unittest.TestCase):
         self.assertEqual(len(no_o2), 2)
         self.assertEqual({r["test_id"] for r in no_o2}, {"100-S1", "100-S2"})
 
-    def test_low_flow_flag_uses_the_2_cm_s_team_cutoff(self):
+    def test_low_flow_flag_comes_from_lane_a_not_a_recomputation(self):
+        # v9: low_flow_uncertain is Lane A's flag, not a recomputation
+        # from flow_start alone. O2 starts at 5 (not low) but ends at
+        # 0, so the start-only rule would say False; Lane A flags it
+        # (their check covers both start and end flow). B1 is not
+        # flagged either way.
         o2 = next(r for r in self.rows if r["test_id"] == "O2")
         self.assertTrue(o2["low_flow_uncertain"])
+        o13a = next(r for r in self.rows if r["test_id"] == "O13a")
+        self.assertEqual(o13a["airflow_cm_s"], 5)
+        self.assertEqual(o13a["airflow_end_cm_s"], 0)
+        self.assertTrue(o13a["low_flow_uncertain"])
         b1 = next(r for r in self.rows if r["test_id"] == "B1")
         self.assertFalse(b1["low_flow_uncertain"])
+
+    def test_pmma_card_outcome_count_excludes_link_rows(self):
+        # v9: the card's outcome count excludes Link rows — they are
+        # paper rod data, always burning, and Lane A's README says
+        # they don't count as outcomes. PMMA is 76 of 102, not 130
+        # of 154 (Daksh, Nov 14: 78 of 104 across all PMMA-material
+        # rows, 72 of 98 for BASS-II alone).
+        from cards import build_cards
+
+        cards = build_cards(self.rows)
+        pmma = next(c for c in cards if c["material"] == "PMMA")
+        self.assertIn("76 of 102 tests have a recorded outcome",
+                      pmma["not_known"])
 
     def test_link_rows_excluded_from_outcome_evidence(self):
         from answer import build_answer, dataset_stats_tests_json

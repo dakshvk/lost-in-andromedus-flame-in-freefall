@@ -85,6 +85,27 @@ class TestNumberChecker(unittest.TestCase):
             range_bounds=(16.4, 20.8))
         self.assertTrue(result["ok"])
 
+    def test_blank_oxygen_in_evidence_does_not_crash(self):
+        # v9: the two context-only Saffire III rows (100-S1, 100-S2)
+        # have flow 30 cm/s but no oxygen recorded. float("") used
+        # to raise ValueError in o2_values and in rule 1's per-row
+        # check. A sentence with only valid numbers must pass.
+        evidence = EVIDENCE + [
+            {"test_id": "100-S1", "material": "SIBAL", "oxygen_pct": "",
+             "airflow_cm_s": "30", "airflow_end_cm_s": "30"},
+            {"test_id": "100-S2", "material": "SIBAL", "oxygen_pct": "",
+             "airflow_cm_s": "30", "airflow_end_cm_s": "30"},
+        ]
+        sentence = "30.0 cm/s airflow is beyond the tested range."
+        result = check_answer_numbers(
+            sentence, evidence, STATS, question_flow=30.0)
+        self.assertTrue(result["ok"])
+        # And a % attached to the blank-oxygen row is skipped, not a
+        # crash (there is no oxygen to contradict).
+        sentence = "100-S1 at 22.2% oxygen burned well."
+        result = check_answer_numbers(sentence, evidence, STATS)
+        self.assertTrue(result["ok"])
+
 
 if __name__ == "__main__":
     unittest.main()

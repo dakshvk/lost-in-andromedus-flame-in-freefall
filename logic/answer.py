@@ -8,6 +8,27 @@
     Sources: links, kept small.
     Gravity note: every answer says the tests were in microgravity.
 
+v9 changes (PR #1 review, Daksh, Nov 14):
+- ask() now forwards the airflow in a % question to build_answer:
+  "PMMA at 20% oxygen and 45 cm/s airflow?" used to drop the
+  45 cm/s entirely, so it came back INSIDE on oxygen alone. The
+  per-material flow range in classify() (v9) now sees it: BEYOND.
+- closest_rows() ranks by oxygen AND flow when an airflow is given
+  (doc Step 1): each distance is scaled by its range in the pool,
+  and the two are added. A test whose flow changed covers its whole
+  span, so a target flow inside that span is distance 0 for that row.
+- The INSIDE sentence quotes the material's own test count, without
+  Link rows (Link rows are paper rod data, always burning, and the
+  README says they don't count as outcomes): PMMA is 102, not 200.
+- answer_lowest_airflow() adds a note when every test at the lowest
+  airflow carries Lane A's low-flow flag: low readings are uncertain.
+- gravity_note() is now a function of the rows: the pressure range
+  comes from the data (the recorded pressure_kPa values,
+  70.7–100.0 kPa), not fixed text.
+- build_airflow_answer() takes a material: with one, the verdict
+  uses that material's own flow range with the 25% margin; without
+  one, the BASS-II hardware band (0–55 cm/s) as before.
+
 v7 changes (Lane A swap, Nov 14):
 - Lane B now reads Lane A's data/tests.json (200 rows) when it sits
   next to the repo: dataset_stats_tests_json() (total 200, O2
@@ -64,7 +85,10 @@ v6 changes (PR #1 review, Daksh, Nov 14):
 import csv
 import re
 
-from classifier import classify, dataset_range, material_ranges, _same_material, AIRFLOW_MAX
+from classifier import (
+    classify, dataset_range, material_ranges, _same_material,
+    AIRFLOW_MAX, flow_range, FLOW_MARGIN,
+)
 from number_checker import allowed_numbers_from_rows, check_answer_numbers
 
 PSI_25_URL = "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
@@ -73,6 +97,26 @@ GRAVITY_NOTE = (
     "one-sixth Earth's gravity, and pressure differs, so a Moon-base "
     "condition is not covered by these tests."
 )
+
+
+def gravity_note(rows=None):
+    """The gravity note. The pressure range comes from the data (the
+    recorded pressure_kPa values), not fixed text — most rows are at
+    standard cabin pressure and record no value, so the range is the
+    recorded Saffire IV/V pressures (70.7–100.0 kPa). With no rows,
+    or no recorded pressures, the base text is used."""
+    if not rows:
+        return GRAVITY_NOTE
+    pressures = [float(r["pressure_kPa"]) for r in rows
+                 if r.get("pressure_kPa") is not None]
+    if not pressures:
+        return GRAVITY_NOTE
+    return (
+        "These tests were in microgravity on the ISS. The Moon is about "
+        "one-sixth Earth's gravity. Pressures recorded in the data run "
+        f"{min(pressures)}–{max(pressures)} kPa, so a Moon-base condition "
+        "is not covered by these tests."
+    )
 
 
 def load_rows(path):
@@ -189,7 +233,7 @@ def answer_highest_oxygen(rows, stats=None):
             "evidence": [],
             "nearest_evidence": None,
             "unknown": ["oxygen_pct"],
-            "gravity_note": GRAVITY_NOTE,
+            "gravity_note": gravity_note(rows),
             "sources": [PSI_25_URL],
             "number_check": {"ok": True, "unverified": []},
         }
@@ -210,7 +254,7 @@ def answer_highest_oxygen(rows, stats=None):
         "evidence": evidence,
         "nearest_evidence": None,
         "unknown": [],
-        "gravity_note": GRAVITY_NOTE,
+        "gravity_note": gravity_note(rows),
         "sources": [PSI_25_URL],
         "number_check": check,
     }
@@ -331,7 +375,7 @@ def _extreme_answer(question, label, value, ties, rows, stats, material=None, no
             "nearest_evidence": None,
             "note": note,
             "unknown": ["oxygen_pct"],
-            "gravity_note": GRAVITY_NOTE,
+            "gravity_note": gravity_note(rows),
             "sources": [PSI_25_URL],
             "number_check": {"ok": True, "unverified": []},
         }
@@ -354,7 +398,7 @@ def _extreme_answer(question, label, value, ties, rows, stats, material=None, no
         "nearest_evidence": None,
         "note": note,
         "unknown": [],
-        "gravity_note": GRAVITY_NOTE,
+        "gravity_note": gravity_note(rows),
         "sources": [PSI_25_URL],
         "number_check": check,
     }
@@ -377,11 +421,23 @@ def answer_lowest_oxygen(rows, stats=None, material=None):
 
 
 def answer_lowest_airflow(rows, stats=None, material=None):
-    """Answer 'lowest airflow tested?' with code, all ties."""
+    """Answer 'lowest airflow tested?' with code, all ties. When every
+    test at the lowest airflow carries Lane A's low-flow flag, the
+    note says low readings are uncertain (the report says low flows
+    have high error bars; the team's cutoff is 2 cm/s)."""
     result = min_airflow(rows)
+    note = None
+    ties = [r for r in rows if r.get("test_id") in result["test_ids"]]
+    if ties and all(r.get("low_flow_uncertain") for r in ties):
+        note = (
+            "All tests at the lowest airflow carry the low-flow flag — "
+            "low readings are uncertain (flows below 2 cm/s have high "
+            "error bars), so this is a low reading, not an exact flow."
+        )
     return _extreme_answer(
         "What is the lowest airflow tested?", "lowest airflow tested",
-        result["min_airflow"], result, rows, stats, material=material)
+        result["min_airflow"], result, rows, stats, material=material,
+        note=note)
 
 
 def answer_highest_airflow(rows, stats=None, material=None):
@@ -402,32 +458,56 @@ def _material_rows(rows, material):
             or (material == "PMMA" and r.get("material") == "PMMA / other")]
 
 
-def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
+def build_airflow_answer(question, airflow_cm_s, rows, stats=None, material=None):
     """Answer an airflow-only question ("Is 10 cm/s inside our
     data?"). Verdict from the BASS-II airflow band in the report
-    (0–55 cm/s INSIDE, 55–65 NEAR, above BEYOND); the sentence quotes
-    the dataset's observed flow range (low/high across start and end
-    flows)."""
+    (0–55 cm/s INSIDE, 55–65 NEAR, above BEYOND) — or, when a material
+    is given, from that material's own tested flow range with the 25%
+    margin (doc Step 1 items 3 and 4). The sentence quotes the
+    observed flow range (low/high across start and end flows)."""
+    # The gravity note's pressure range comes from the data BEFORE
+    # the standard-pressure filter below (as in build_answer).
+    note = gravity_note(rows)
     # Same pressure filter as build_answer: the low-pressure Saffire
     # V rows never join the evidence pool or the observed flow range.
     rows = [r for r in rows if _standard_pressure(r)]
     stats = stats or {"total_tests": len(rows), "o2_min": 13.6, "o2_max": 22.2, "rows_above_21": 0}
-    lows = [f for f in (_flow_low(r) for r in rows) if f is not None]
-    highs = [f for f in (_flow_high(r) for r in rows) if f is not None]
+    pool = _material_rows(rows, material) if material else rows
+    lows = [f for f in (_flow_low(r) for r in pool) if f is not None]
+    highs = [f for f in (_flow_high(r) for r in pool) if f is not None]
     low, high = (min(lows), max(highs)) if lows and highs else (0.0, 0.0)
-    if airflow_cm_s <= 55:
-        verdict, word = "INSIDE", "inside"
-    elif airflow_cm_s <= 65:
-        verdict, word = "NEAR", "just outside"
+    # The count is for this material, without Link rows (as in
+    # build_answer) — or the whole dataset when no material is given.
+    count = (sum(1 for r in pool if "link" not in (r.get("source") or "").lower())
+             if material else stats["total_tests"])
+    if material and lows and highs:
+        # The material's own range with the 25% margin.
+        margin = FLOW_MARGIN * (high - low)
+        near_low = max(0.0, low - margin)
+        near_high = high + margin
+        if low <= airflow_cm_s <= high:
+            verdict, word = "INSIDE", "inside"
+        elif near_low <= airflow_cm_s <= near_high:
+            verdict, word = "NEAR", "just outside"
+        else:
+            verdict, word = "BEYOND", "beyond"
+        range_text = f"{material} airflow runs {low}–{high} cm/s in {count} tests"
     else:
-        verdict, word = "BEYOND", "beyond"
+        if airflow_cm_s <= 55:
+            verdict, word = "INSIDE", "inside"
+        elif airflow_cm_s <= 65:
+            verdict, word = "NEAR", "just outside"
+        else:
+            verdict, word = "BEYOND", "beyond"
+        range_text = (f"airflow in the {stats['total_tests']} tests runs "
+                      f"{low}–{high} cm/s, and the BASS-II duct goes to "
+                      "about 55 cm/s")
     sentence = (
         f"{airflow_cm_s} cm/s airflow is {word} the tested range "
-        f"(airflow in the {stats['total_tests']} tests runs {low}–{high} cm/s, and the "
-        f"BASS-II duct goes to about 55 cm/s), so the rows below are "
+        f"({range_text}), so the rows below are "
         f"{'direct evidence' if verdict == 'INSIDE' else 'the closest evidence we have'}."
     )
-    evidence = sorted(rows, key=lambda r: abs((_airflow_value(r) if _airflow_value(r) is not None else float("inf")) - airflow_cm_s))[:3]
+    evidence = sorted(pool, key=lambda r: abs((_airflow_value(r) if _airflow_value(r) is not None else float("inf")) - airflow_cm_s))[:3]
     evidence_out = [{
         "test_id": r.get("test_id"), "material": r.get("material"),
         "material_form": r.get("material_form"), "oxygen_pct": r.get("oxygen_pct"),
@@ -439,7 +519,8 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
     check = check_answer_numbers(sentence, evidence_out, stats,
                                  flow_bounds=(low, high),
                                  question_flow=airflow_cm_s,
-                                 extra_flows={AIRFLOW_MAX})
+                                 extra_flows={AIRFLOW_MAX},
+                                 extra_allowed={float(count)})
     unknown = []
     if any(not r.get("outcome") for r in evidence):
         unknown.append("outcome (not recorded for some evidence rows — not guessed)")
@@ -447,7 +528,7 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
         "question": question, "verdict": verdict, "sentence": sentence,
         "evidence": evidence_out, "nearest_evidence": None,
         "unknown": unknown,
-        "gravity_note": GRAVITY_NOTE, "sources": [PSI_25_URL],
+        "gravity_note": note, "sources": [PSI_25_URL],
         "number_check": check,
     }
 
@@ -472,25 +553,36 @@ def ask(question, rows, stats=None):
     words = set(re.findall(r"[a-z]+", q))
     material = _named_material(question)
     pool = _material_rows(rows, material)
+    # The gravity note's pressure range comes from the FULL dataset,
+    # not the material pool: the pool for a PMMA question holds only
+    # 100.0 kPa (Saffire IV), so a note computed from it would read
+    # "100.0–100.0 kPa" and hide the Saffire V low-pressure tests
+    # (70.7–72.6 kPa). The builders compute their own note from the
+    # pool; this overrides it with the dataset-wide one.
+    note = gravity_note(rows)
+
+    def code_result(answer):
+        if answer is not None:
+            answer["gravity_note"] = note
+        return {"path": "code", "answer": answer,
+                "retrieval": None, "reason": routing["reason"]}
+
     high = bool(words & {"highest", "maximum", "most", "higher", "greater"})
     low = bool(words & {"lowest", "minimum", "least", "lower", "smaller"})
     about_oxygen = "oxygen" in words
     about_flow = "airflow" in words or "flow" in words
 
     if high and about_oxygen:
-        return {"path": "code", "answer": answer_highest_oxygen(pool, stats=stats),
-                "retrieval": None, "reason": routing["reason"]}
+        return code_result(answer_highest_oxygen(pool, stats=stats))
     if low and about_oxygen:
-        return {"path": "code", "answer": answer_lowest_oxygen(pool, stats=stats, material=material),
-                "retrieval": None, "reason": routing["reason"]}
+        return code_result(answer_lowest_oxygen(pool, stats=stats, material=material))
     if high and about_flow:
-        return {"path": "code", "answer": answer_highest_airflow(pool, stats=stats, material=material),
-                "retrieval": None, "reason": routing["reason"]}
+        return code_result(answer_highest_airflow(pool, stats=stats, material=material))
     if low and about_flow:
-        return {"path": "code", "answer": answer_lowest_airflow(pool, stats=stats, material=material),
-                "retrieval": None, "reason": routing["reason"]}
+        return code_result(answer_lowest_airflow(pool, stats=stats, material=material))
 
     pct = re.search(r"(\d+(?:\.\d+)?)\s*%", q)
+    flow = re.search(r"(\d+(?:\.\d+)?)\s*cm/s", q)
     if pct:
         # Pass the material through: build_answer's classify matches
         # "PMMA" against the full data's "PMMA / other" via
@@ -499,19 +591,17 @@ def ask(question, rows, stats=None):
         # material=None here used to make the sentence quote the
         # overall range while the verdict used the material's range
         # (e.g. 14% for Wax: BEYOND, but the sentence said the tests
-        # cover 13.6–22.2% — self-contradictory).
-        return {"path": "code",
-                "answer": build_answer(question, float(pct.group(1)), pool,
-                                       material=material, stats=stats),
-                "retrieval": None, "reason": routing["reason"]}
-    flow = re.search(r"(\d+(?:\.\d+)?)\s*cm/s", q)
+        # cover 13.6–22.2% — self-contradictory). The airflow is
+        # forwarded too: a question like "PMMA at 20% and 45 cm/s"
+        # used to drop the 45 cm/s entirely, so it came back INSIDE
+        # on oxygen alone — the per-material flow range never saw it.
+        return code_result(build_answer(question, float(pct.group(1)), pool,
+                                        airflow_cm_s=(float(flow.group(1)) if flow else None),
+                                        material=material, stats=stats))
     if flow:
-        return {"path": "code",
-                "answer": build_airflow_answer(question, float(flow.group(1)), rows, stats=stats),
-                "retrieval": None, "reason": routing["reason"]}
-    return {"path": "code",
-            "answer": build_answer(question, None, rows, material=material, stats=stats),
-            "retrieval": None, "reason": routing["reason"]}
+        return code_result(build_airflow_answer(question, float(flow.group(1)), rows,
+                                                stats=stats, material=material))
+    return code_result(build_answer(question, None, rows, material=material, stats=stats))
 
 
 def _is_outcome_question(question):
@@ -536,9 +626,13 @@ def rows_for_outcome_question(rows, question):
     return [r for r in rows if "link" not in (r.get("source") or "").lower()]
 
 
-def closest_rows(rows, oxygen_pct, limit=3, material=None):
-    """Up to `limit` rows closest in O2. When a material is given,
-    only rows for that material are considered first."""
+def closest_rows(rows, oxygen_pct, limit=3, material=None, airflow_cm_s=None):
+    """Up to `limit` rows closest to the question. When an airflow is
+    given, rows rank by oxygen AND flow (doc Step 1): each distance is
+    scaled by its range in the pool, and the two are added. A test
+    whose flow changed covers its whole span, so a target flow inside
+    that span is distance 0 for that row. With no airflow, oxygen
+    alone decides (as before)."""
     def o2(row):
         try:
             return float(row["oxygen_pct"])
@@ -550,11 +644,42 @@ def closest_rows(rows, oxygen_pct, limit=3, material=None):
         same_material = [r for r in rows if r.get("material") == material]
         if same_material:
             pool = same_material
-    return sorted(pool, key=lambda r: abs(o2(r) - oxygen_pct))[:limit]
+    if airflow_cm_s is None:
+        return sorted(pool, key=lambda r: abs(o2(r) - oxygen_pct))[:limit]
+
+    o2_vals = [o2(r) for r in pool if o2(r) != float("inf")]
+    o2_span = (max(o2_vals) - min(o2_vals)) if o2_vals else 0.0
+    flow_low, flow_high = flow_range(pool)
+    flow_span = (flow_high - flow_low) if flow_low is not None else 0.0
+
+    def score(row):
+        total = 0.0
+        if o2_span:
+            total += abs(o2(row) - oxygen_pct) / o2_span
+        if flow_span:
+            lo, hi = _flow_low(row), _flow_high(row)
+            if lo is None:
+                # No flow recorded: this row has no flow evidence, so
+                # it ranks below any row with a flow (10 is far above
+                # any normalised flow distance in the pool).
+                total += 10.0
+            elif lo <= airflow_cm_s <= hi:
+                pass  # target flow is inside this test's span
+            else:
+                total += min(abs(airflow_cm_s - lo),
+                             abs(airflow_cm_s - hi)) / flow_span
+        return total
+
+    return sorted(pool, key=score)[:limit]
 
 
 def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, stats=None):
     """Build one guarded answer. Returns a dict the website can render."""
+    # The gravity note's pressure range comes from the data BEFORE the
+    # standard-pressure filter below: the filter drops the Saffire V
+    # rows (70.7–72.6 kPa), leaving only 100.0 kPa, so a note computed
+    # after the filter would read "100.0–100.0 kPa".
+    note = gravity_note(rows)
     # The low-pressure Saffire V rows (~71 kPa) stay labeled by
     # pressure and never join the normal ranges or the evidence pool.
     # Left in, they stretch the overall oxygen range to 26.2% — so
@@ -574,7 +699,7 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             "sentence": "I need an oxygen value to answer that — what oxygen level are you asking about?",
             "evidence": [],
             "unknown": ["oxygen_pct"],
-            "gravity_note": GRAVITY_NOTE,
+            "gravity_note": note,
             "sources": [PSI_25_URL],
             "number_check": {"ok": True, "unverified": []},
         }
@@ -586,13 +711,14 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             "sentence": result["reason"],
             "evidence": [],
             "unknown": [],
-            "gravity_note": GRAVITY_NOTE,
+            "gravity_note": note,
             "sources": [PSI_25_URL],
             "number_check": {"ok": True, "unverified": []},
         }
 
     evidence = closest_rows(
-        rows_for_outcome_question(rows, question), oxygen_pct, material=material)
+        rows_for_outcome_question(rows, question), oxygen_pct,
+        material=material, airflow_cm_s=airflow_cm_s)
     stats_from_sample = stats is None
     stats = stats or {
         "total_tests": len(rows),
@@ -605,6 +731,7 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     }
     o2_min, o2_max = stats["o2_min"], stats["o2_max"]
     total = stats["total_tests"]
+    count = total
 
     # When a material is given, the sentence must quote THAT material's
     # tested range — quoting the overall range would contradict the verdict
@@ -617,6 +744,13 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             r_min, r_max = per_material[matched]
             range_text = f"{material} {r_min}–{r_max}% oxygen"
             range_bounds = (r_min, r_max)
+            # The count is for THIS material, without Link rows — Link
+            # rows are paper rod data, always burning, and the README
+            # says they don't count as outcomes (Daksh, Nov 14).
+            # PMMA: 102 (154 minus 52 Link), not 200.
+            count = sum(1 for r in rows
+                        if _same_material(r.get("material"), material)
+                        and "link" not in (r.get("source") or "").lower())
         else:
             range_text = f"{o2_min}–{o2_max}% oxygen"
             range_bounds = None
@@ -624,22 +758,66 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
         range_text = f"{o2_min}–{o2_max}% oxygen"
         range_bounds = None
 
+    # The material's flow range, for the sentence when the verdict is
+    # driven by airflow (below): the sentence must name the airflow,
+    # not the oxygen, when the oxygen is inside and the airflow is
+    # what is outside. Flow bounds go to the number checker too.
+    flow_range_text = None
+    flow_bounds = None
+    if material and rows:
+        pool = [r for r in rows if _same_material(r.get("material"), material)]
+        flo, fhi = flow_range(pool)
+        if flo is not None:
+            flow_range_text = f"{material} {flo}–{fhi} cm/s"
+            flow_bounds = (flo, fhi)
+
+    drivers = result.get("drivers", [])
+    air_driven = "airflow" in drivers
+    o2_driven = "oxygen" in drivers
     if verdict == "BEYOND":
-        sentence = (
-            f"NASA's tests cover {range_text}, so "
-            f"{oxygen_pct}% oxygen is beyond what was tested — "
-            "we can only show the closest tests, not an answer for that condition."
-        )
+        if air_driven and not o2_driven:
+            sentence = (
+                f"{airflow_cm_s} cm/s airflow is beyond what was tested "
+                f"({flow_range_text or 'the BASS-II duct goes to about 55 cm/s'}), so "
+                "we can only show the closest tests, not an answer for that condition."
+            )
+        elif o2_driven and not air_driven:
+            sentence = (
+                f"NASA's tests cover {range_text}, so "
+                f"{oxygen_pct}% oxygen is beyond what was tested — "
+                "we can only show the closest tests, not an answer for that condition."
+            )
+        else:
+            sentence = (
+                f"{oxygen_pct}% oxygen and {airflow_cm_s} cm/s airflow are both "
+                f"beyond what was tested ({range_text}), so we can only show "
+                "the closest tests, not an answer for that condition."
+            )
     elif verdict == "NEAR":
-        sentence = (
-            f"{oxygen_pct}% oxygen is just outside the tested range "
-            f"({range_text}), so the closest tested rows are the best "
-            "evidence we have — treat them as near, not exact."
-        )
+        if air_driven and not o2_driven:
+            sentence = (
+                f"{airflow_cm_s} cm/s airflow is just outside the tested range "
+                f"({flow_range_text or 'the BASS-II duct goes to about 55 cm/s'}), so "
+                "the closest tested rows are the best evidence we have — "
+                "treat them as near, not exact."
+            )
+        elif o2_driven and not air_driven:
+            sentence = (
+                f"{oxygen_pct}% oxygen is just outside the tested range "
+                f"({range_text}), so the closest tested rows are the best "
+                "evidence we have — treat them as near, not exact."
+            )
+        else:
+            sentence = (
+                f"{oxygen_pct}% oxygen and {airflow_cm_s} cm/s airflow are both "
+                f"just outside the tested range ({range_text}), so the closest "
+                "tested rows are the best evidence we have — treat them as "
+                "near, not exact."
+            )
     else:
         sentence = (
             f"{oxygen_pct}% oxygen is inside the tested range "
-            f"({range_text}, {total} tests), so the rows below "
+            f"({range_text}, {count} tests), so the rows below "
             "are direct evidence for this condition."
         )
 
@@ -696,13 +874,15 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
         "evidence": evidence_out,
         "nearest_evidence": nearest_evidence,
         "unknown": sorted(set(unknown)),
-        "gravity_note": GRAVITY_NOTE,
+        "gravity_note": note,
         "sources": [PSI_25_URL],
     }
 
     answer["number_check"] = check_answer_numbers(
         sentence, evidence_out, stats, question_oxygen=oxygen_pct,
-        range_bounds=range_bounds,
+        range_bounds=range_bounds, extra_allowed={float(count)},
+        question_flow=airflow_cm_s, flow_bounds=flow_bounds,
+        extra_flows={AIRFLOW_MAX},
     )
     if not answer["number_check"]["ok"]:
         answer["sentence"] += (
@@ -752,6 +932,7 @@ if __name__ == "__main__":
     # ask(): the website's single call — route + answer.
     for q in [
         "Is 30% oxygen inside our data for PMMA?",
+        "PMMA at 20% oxygen and 45 cm/s airflow?",
         "What is the highest oxygen for SIBAL?",
         "Which SIBAL test had the lowest airflow?",
         "What is the lowest oxygen tested?",

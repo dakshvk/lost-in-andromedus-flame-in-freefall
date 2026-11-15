@@ -2,6 +2,14 @@
 """Lane B number checker — numbers must belong to the row and unit
 they are attached to, not just exist somewhere in the dataset.
 
+v9 changes (PR #1 review, Daksh, Nov 14):
+- Blank oxygen no longer crashes the checker: the two context-only
+  Saffire III rows (100-S1, 100-S2) have flow 30 cm/s but no oxygen
+  recorded, and float("") raised ValueError. They are now skipped in
+  o2_values and in rule 1's per-row check (as the airflow values
+  already were). This surfaced because the 45 cm/s question's
+  closest evidence is those two rows plus M2.
+
 v7 changes (Lane A swap, Nov 14):
 - Test-ID patterns now swallow suffixed IDs from tests.json:
   B13a-1 (Link replicates), 2-7-PMMA (Saffire II split rows),
@@ -89,7 +97,13 @@ def check_answer_numbers(sentence, evidence, stats, question_oxygen=None, extra_
     """
     unverified = []
     by_id = {row["test_id"]: row for row in evidence}
-    o2_values = {float(r["oxygen_pct"]) for r in evidence}
+    # Blank oxygen is skipped: the two context-only Saffire III rows
+    # (100-S1, 100-S2) have flow 30 cm/s but no oxygen recorded, and
+    # float("") crashed the checker (v9: the 45 cm/s question's
+    # closest evidence is those two rows plus M2 — with Jenisha's
+    # fixed data, O5b/O13a at 5 cm/s, they are the closest by flow).
+    o2_values = {float(r["oxygen_pct"]) for r in evidence
+                 if r.get("oxygen_pct") not in (None, "")}
     # Airflow values live in BOTH columns: a test's lowest/highest flow
     # can be its flow_end (T4 ends at 1 cm/s, T17 ends at 53 cm/s).
     flow_values = {
@@ -104,7 +118,7 @@ def check_answer_numbers(sentence, evidence, stats, question_oxygen=None, extra_
         row = by_id.get(test_id)
         if row is None:
             continue  # test ID not in this answer's evidence; not our claim
-        if unit == "%" and float(value) != float(row["oxygen_pct"]):
+        if unit == "%" and row.get("oxygen_pct") not in (None, "") and float(value) != float(row["oxygen_pct"]):
             unverified.append(
                 f"{test_id} is {row['oxygen_pct']}% oxygen, not {value}%"
             )

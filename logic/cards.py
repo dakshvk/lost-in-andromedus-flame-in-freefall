@@ -1,6 +1,16 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B material cards — one card per material, four lines, no more.
 
+v9 changes (PR #1 review, Daksh, Nov 14):
+- rows_from_tests_json() now takes low_flow_uncertain from Lane A's
+  flags instead of computing it: Lane A's check covers both start
+  and end flow, so a row that ends at 0 cm/s (O13a, O15a, O15b) is
+  flagged even when it starts at 5. The CSV fallback computes it
+  from both start and end (same rule, no Lane A flags on that path).
+- build_card() outcome counts exclude Link rows: they are paper rod
+  data, always burning, and Lane A's README says they don't count as
+  outcomes. PMMA is 76 of 102, not 130 of 154.
+
 v7 changes (Lane A swap, Nov 14):
 - New rows_from_tests_json(): converts Lane A's data/tests.json
   (200 rows) into Lane B rows. Saffire V rows at 70.7–72.6 kPa stay
@@ -214,10 +224,11 @@ def rows_from_tests_json(path):
       have no O2 or outcome) becomes blank, Lane B's "unknown".
     - flow_start/flow_end are numbers or None; O12 and 7 other
       PSI-25 rows have no flow number at all.
-    - low_flow_uncertain is True when flow_start is below 2 cm/s
-      (team cutoff). Spread rates are carried through but their unit
-      is unresolved in Lane A's README — do not build spread-rate
-      answers from them yet.
+    - low_flow_uncertain comes from Lane A's flags (their check
+      covers both start and end flow — a row that ends at 0 cm/s is
+      flagged even when it starts at 5, e.g. O13a). Spread rates are
+      carried through but their unit is unresolved in Lane A's
+      README — do not build spread-rate answers from them yet.
     """
     with open(path, encoding="utf-8") as f:
         tests = json.load(f)
@@ -255,8 +266,10 @@ def rows_from_tests_json(path):
             "spread_rate": t.get("spread_rate"),
             "direction": t.get("direction") or "",
             "flags": list(t.get("flags") or []),
-            "low_flow_uncertain": bool(
-                flow_start is not None and flow_start < LOW_FLOW_CUTOFF_CM_S),
+            # Lane A's own flag, not a recomputation: theirs checks
+            # both start and end flow, so a row that ends at 0 cm/s
+            # (O13a, O15a, O15b) is flagged even when it starts at 5.
+            "low_flow_uncertain": "low_flow_uncertain" in (t.get("flags") or []),
         })
         raw_sources.append(t.get("source"))
     # Disambiguate test IDs that collide across sources (PSI-98:S1 and
@@ -294,6 +307,12 @@ def rows_from_full_csv(path):
                 "source": "PSI-25",
                 "source_url": PSI_25_URL,
                 "notes": "",
+                # No Lane A flags on this path (raw CSV), so compute it
+                # the same way: below the 2 cm/s team cutoff at start
+                # OR end (a test that ends at 0 is uncertain too).
+                "low_flow_uncertain": bool(
+                    (flow_start is not None and flow_start < LOW_FLOW_CUTOFF_CM_S)
+                    or (flow_end is not None and flow_end < LOW_FLOW_CUTOFF_CM_S)),
             })
     return rows
 
@@ -410,16 +429,22 @@ def build_card(material, rows, dataset_max_o2=None):
             "Check the cited source for each test for its outcome."
         )
 
-    known = sum(1 for r in rows if r.get("outcome"))
-    if known == n:
+    # Outcome counts exclude Link rows: they are paper rod data,
+    # always burning, and Lane A's README says they don't count as
+    # outcomes. PMMA is 76 of 102, not 130 of 154 (Daksh, Nov 14).
+    outcome_rows = [r for r in rows
+                    if "link" not in (r.get("source") or "").lower()]
+    known = sum(1 for r in outcome_rows if r.get("outcome"))
+    n_outcome = len(outcome_rows)
+    if n_outcome and known == n_outcome:
         not_known = (
-            "The test has a recorded outcome in the dataset." if n == 1
-            else f"All {n} tests have a recorded outcome in the dataset."
+            "The test has a recorded outcome in the dataset." if n_outcome == 1
+            else f"All {n_outcome} tests have a recorded outcome in the dataset."
         )
     elif known:
         not_known = (
-            f"{known} of {n} {tests} have a recorded outcome; "
-            f"{n - known} do not, and are not guessed."
+            f"{known} of {n_outcome} {tests} have a recorded outcome; "
+            f"{n_outcome - known} do not, and are not guessed."
         )
     else:
         not_known = (

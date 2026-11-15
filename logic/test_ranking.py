@@ -132,5 +132,42 @@ class TestRankingOrder(unittest.TestCase):
         self.assertEqual([e["score"] for e in ranked], [11, 11, 11])
 
 
+class TestRankingDoesNotModifyLaneAFile(unittest.TestCase):
+    def test_main_leaves_experiments_json_untouched(self):
+        # v9: the scores live in logic/ranked_experiments.json and
+        # the web lane reads that file. main() must not write the
+        # scores back into Lane A's experiments.json — it is Jenisha's
+        # file, and every Lane B run would otherwise change it.
+        import json
+        import os
+        import tempfile
+        import ranking
+
+        with tempfile.TemporaryDirectory() as tmp:
+            experiments_path = os.path.join(tmp, "experiments.json")
+            ranked_path = os.path.join(tmp, "ranked_experiments.json")
+            with open(experiments_path, "w", encoding="utf-8") as f:
+                json.dump([BASS_II], f, indent=2)
+            with open(experiments_path, encoding="utf-8") as f:
+                before = f.read()
+            old_exp, old_ranked = ranking.EXPERIMENTS_PATH, ranking.RANKED_PATH
+            ranking.EXPERIMENTS_PATH, ranking.RANKED_PATH = (
+                experiments_path, ranked_path)
+            try:
+                ranking.main()
+            finally:
+                ranking.EXPERIMENTS_PATH, ranking.RANKED_PATH = (
+                    old_exp, old_ranked)
+            with open(experiments_path, encoding="utf-8") as f:
+                after = f.read()
+            self.assertEqual(before, after)
+            self.assertTrue(os.path.exists(ranked_path))
+            with open(ranked_path, encoding="utf-8") as f:
+                ranked = json.load(f)
+            self.assertEqual(ranked[0]["psi_id"], "PSI-25")
+            self.assertEqual(ranked[0]["score"], 12)
+            self.assertEqual(ranked[0]["rank"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()

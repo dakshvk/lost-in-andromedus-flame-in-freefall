@@ -15,6 +15,12 @@ Ties break by test count, then alphabetically (by title).
 The ranking is the team's judgement, not NASA's — the page must say so.
 If a field is missing, give 0 and note "missing", never guess.
 
+v9 changes (PR #1 review, Daksh, Nov 14):
+- main() no longer writes the scores back into Lane A's
+  experiments.json. The scores live in logic/ranked_experiments.json
+  and the web lane reads that file; writing back made every Lane B
+  run a change to a file Jenisha owns.
+
 v8 change (PR #1 review, Daksh, Nov 14): the fire-safety +3 is a
 team call, not an exact-text match. It goes to any sub-research area
 that mentions "fire" (so "Spacecraft Fire, Smoke Distribution" and
@@ -26,9 +32,10 @@ RANKING_NOTE, next to the judgement line, so the page shows it.
 Run from inside logic/:
     python3 ranking.py
 Reads ../data/experiments.json (Lane A's file — its score fields are
-left blank "for Lane B to score"), fills in score / score_breakdown /
-score_note for every row, writes the file back, and writes
-ranked_experiments.json (sorted, with rank) for the website.
+left blank "for Lane B to score") and writes ranked_experiments.json
+(sorted, with rank) for the website. Lane A's file is NOT modified:
+the scores live in logic/ranked_experiments.json, and the web lane
+reads that file (Daksh, Nov 14).
 """
 
 import json
@@ -141,9 +148,10 @@ def score_experiment(exp):
 def rank_experiments(experiments):
     """Score every experiment and return them sorted: score desc,
     test count desc (missing counts last), title A–Z. The returned
-    dicts carry a "rank" field; the experiments.json write-back in
-    main() strips it, so Lane A's file keeps its own order with the
-    scores filled in."""
+    dicts carry a "rank" field; they are written to
+    ranked_experiments.json by main() — Lane A's experiments.json is
+    never modified (its score fields stay blank; the web lane reads
+    the ranked file)."""
     scored = []
     for exp in experiments:
         score, breakdown, notes = score_experiment(exp)
@@ -176,17 +184,12 @@ def main():
     with open(EXPERIMENTS_PATH, encoding="utf-8") as f:
         experiments = json.load(f)
     ranked = rank_experiments(experiments)
-    # Write the scores back into Lane A's file in its original order
-    # (its score fields were left blank for Lane B), and write the
-    # sorted list with ranks for the site.
-    by_id = {e["psi_id"]: e for e in ranked}
-    scored_in_order = []
-    for exp in experiments:
-        updated = dict(by_id[exp["psi_id"]])
-        updated.pop("rank", None)
-        scored_in_order.append(updated)
-    with open(EXPERIMENTS_PATH, "w", encoding="utf-8") as f:
-        json.dump(scored_in_order, f, indent=2)
+    # Only the ranked file is written. Lane A's experiments.json is
+    # read-only here — its score fields stay blank, and the web lane
+    # reads logic/ranked_experiments.json for the scores (Daksh,
+    # Nov 14). Writing the scores back into Lane A's file would make
+    # every Lane B run a change to a file Jenisha owns, and merge
+    # against her updates.
     with open(RANKED_PATH, "w", encoding="utf-8") as f:
         json.dump(ranked, f, indent=2)
     print(f"{RANKING_NOTE}\n")

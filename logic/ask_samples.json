@@ -1,5 +1,5 @@
 {
- "note": "Sample ask() responses for the web lane, one per answer type. Generated from the 200-row tests.json (Lane A) with v8 code, Nov 14, 2026. RAG samples use the keyword fallback in this file (no model installed here); on a machine with sentence-transformers installed the same ask() call returns embedding retrieval instead.",
+ "note": "Sample ask() responses for the web lane, one per answer type. Generated from the 200-row tests.json (Lane A) with v9 code, Nov 14, 2026. RAG samples use the keyword fallback in this file (no model installed here); on a machine with sentence-transformers installed the same ask() call returns embedding retrieval instead.",
  "samples": [
   {
    "question": "What about 20% oxygen?",
@@ -47,7 +47,7 @@
     "unknown": [
      "airflow_cm_s (not given for this question)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -74,7 +74,7 @@
       "oxygen_pct": 22.2,
       "airflow_cm_s": 5,
       "airflow_end_cm_s": 5,
-      "outcome": "quenched",
+      "outcome": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
@@ -118,7 +118,63 @@
      "airflow_cm_s (not given for this question)",
      "outcome (not recorded for some evidence rows \u2014 not guessed)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question has a number with a unit (%, cm/s, psi, kPa) \u2014 that goes to code, not to embeddings."
+  },
+  {
+   "question": "PMMA at 20% oxygen and 45 cm/s airflow?",
+   "path": "code",
+   "answer": {
+    "question": "PMMA at 20% oxygen and 45 cm/s airflow?",
+    "verdict": "BEYOND",
+    "sentence": "45.0 cm/s airflow is beyond what was tested (PMMA 0.0\u201320.0 cm/s), so we can only show the closest tests, not an answer for that condition.",
+    "evidence": [
+     {
+      "test_id": "M3",
+      "material": "PMMA",
+      "material_form": "sheet",
+      "oxygen_pct": 20.8,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": 18,
+      "outcome": "quenched",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "IV-2",
+      "material": "PMMA",
+      "material_form": "slab",
+      "oxygen_pct": 22.0,
+      "airflow_cm_s": 20,
+      "airflow_end_cm_s": 5,
+      "outcome": "burning",
+      "source": "Saffire IV/V (ICES 2021)",
+      "source_url": "https://ntrs.nasa.gov/citations/20210011521"
+     },
+     {
+      "test_id": "2-9",
+      "material": "PMMA",
+      "material_form": "slab",
+      "oxygen_pct": 22.0,
+      "airflow_cm_s": 20.0,
+      "airflow_end_cm_s": 20.0,
+      "outcome": "burning",
+      "source": "PSI-99 (SAFFIRE-II)",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
+     }
+    ],
+    "nearest_evidence": null,
+    "unknown": [],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -141,7 +197,7 @@
     "unknown": [
      "oxygen_pct"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -168,8 +224,8 @@
       "oxygen_pct": 22.2,
       "airflow_cm_s": 5,
       "airflow_end_cm_s": 5,
-      "outcome": "quenched",
-      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test B1, GMT 050; oxygen and flow from PSI-25",
+      "outcome": "",
+      "outcome_source": "",
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
       "notes": "Ignited very quickly, turned flow off after spread halfway; flame extinguished very quickly; and sooty with blue leading edge",
@@ -418,9 +474,10 @@
       "spread_rate": null,
       "direction": "unknown",
       "flags": [
-       "outcome_from_report_notes"
+       "outcome_from_report_notes",
+       "low_flow_uncertain"
       ],
-      "low_flow_uncertain": false
+      "low_flow_uncertain": true
      },
      {
       "test_id": "O2",
@@ -438,14 +495,15 @@
       "spread_rate": null,
       "direction": "unknown",
       "flags": [
-       "outcome_from_report_notes"
+       "outcome_from_report_notes",
+       "low_flow_uncertain"
       ],
       "low_flow_uncertain": true
      }
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -489,7 +547,7 @@
     "nearest_evidence": null,
     "note": "O12, the lowest-oxygen test at 13.6%, never ignited \u2014 the PSI-25 CSV's Air display for O12 reads 'no ign at any flow'.",
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -533,7 +591,7 @@
     "nearest_evidence": null,
     "note": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -569,9 +627,10 @@
       "spread_rate": null,
       "direction": "concurrent",
       "flags": [
-       "outcome_from_zhao"
+       "outcome_from_zhao",
+       "low_flow_uncertain"
       ],
-      "low_flow_uncertain": false
+      "low_flow_uncertain": true
      },
      {
       "test_id": "T5",
@@ -588,8 +647,10 @@
       "pressure_kPa": null,
       "spread_rate": null,
       "direction": "concurrent",
-      "flags": [],
-      "low_flow_uncertain": false
+      "flags": [
+       "low_flow_uncertain"
+      ],
+      "low_flow_uncertain": true
      },
      {
       "test_id": "T13",
@@ -607,15 +668,16 @@
       "spread_rate": null,
       "direction": "concurrent",
       "flags": [
-       "outcome_from_zhao"
+       "outcome_from_zhao",
+       "low_flow_uncertain"
       ],
-      "low_flow_uncertain": false
+      "low_flow_uncertain": true
      }
     ],
     "nearest_evidence": null,
-    "note": null,
+    "note": "All tests at the lowest airflow carry the low-flow flag \u2014 low readings are uncertain (flows below 2 cm/s have high error bars), so this is a low reading, not an exact flow.",
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -671,7 +733,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -692,27 +754,15 @@
     "results": [
      {
       "entry": {
-       "id": "SAME-R",
-       "psi_id": "PSI-101",
+       "id": "BASS",
+       "psi_id": "PSI-26",
        "kind": "investigation",
-       "text": "SAME-R \u2014 Smoke Aerosol Measurement Experiment - Reflight (PSI-101): Repeat and extend the smoke detection measurements. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Reflight of SAME with more runs and conditions.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
-       "source_notes": "Objective and sensor text: PSI investigation page summary"
+       "text": "BASS \u2014 Burning and Suppression of Solids (PSI-26): How solid fuels burn in microgravity in a flow duct the first version of this experiment. Fuels: Thin and thick flat samples, acrylic spheres, and candles. Conditions: Microgravity wind tunnel in the Microgravity Science Glovebox on the ISS with airflow up to 40 cm/s. Sensors: Video camera with data overlay and 35-mm still camera. How it differs: The original BASS experiment; BASS-II (PSI-25) is its follow-up with more tests and lower oxygen levels.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (BASS hardware section) and PSI page"
       },
-      "score": 0.477524071931839,
-      "method": "embedding"
-     },
-     {
-      "entry": {
-       "id": "SAME",
-       "psi_id": "PSI-102",
-       "kind": "investigation",
-       "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
-       "source_notes": "Objective and sensor text: PSI investigation page summary"
-      },
-      "score": 0.4568689465522766,
-      "method": "embedding"
+      "score": 2.0,
+      "method": "keyword"
      },
      {
       "entry": {
@@ -723,12 +773,24 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
        "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
       },
-      "score": 0.4508100748062134,
-      "method": "embedding"
+      "score": 2.0,
+      "method": "keyword"
+     },
+     {
+      "entry": {
+       "id": "SAME",
+       "psi_id": "PSI-102",
+       "kind": "investigation",
+       "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+       "source_notes": "Objective and sensor text: PSI investigation page summary"
+      },
+      "score": 2.0,
+      "method": "keyword"
      }
     ],
-    "method": "embedding",
-    "best_score": 0.477524071931839
+    "method": "keyword",
+    "best_score": 2.0
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -785,8 +847,8 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.6087582111358643,
-      "method": "embedding"
+      "score": 2.0,
+      "method": "keyword"
      },
      {
       "entry": {
@@ -797,24 +859,24 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.5411369800567627,
-      "method": "embedding"
+      "score": 2.0,
+      "method": "keyword"
      },
      {
       "entry": {
-       "id": "SAFFIRE-II",
-       "psi_id": "PSI-99",
+       "id": "BASS-II",
+       "psi_id": "PSI-25",
        "kind": "investigation",
-       "text": "SAFFIRE-II \u2014 Saffire II (PSI-99): How different materials spread fire side by side in a large volume. Fuels: Several material samples burned at once in an uncrewed Cygnus vehicle. Conditions: Large-scale fire in a spacecraft cabin volume in microgravity. Sensors: Video and still cameras; temperature and gas sensors in the vehicle. How it differs: Compares materials in the same fire instead of one material per test.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
-       "source_notes": "Objective and sensor text: PSI investigation page summary"
+       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
       },
-      "score": 0.3237680494785309,
-      "method": "embedding"
+      "score": 1.0,
+      "method": "keyword"
      }
     ],
-    "method": "embedding",
-    "best_score": 0.6087582111358643
+    "method": "keyword",
+    "best_score": 2.0
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -825,8 +887,8 @@
    "retrieval": {
     "match": false,
     "results": [],
-    "method": "embedding",
-    "best_score": 0.12889380753040314
+    "method": "keyword",
+    "best_score": 0.0
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   }

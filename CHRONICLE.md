@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-14 19:40 PT — Paridhi Singh — Lane B v9: per-material flow range, material counts, Lane A flag
+
+- **What:** Per-material flow range with the 25% margin in classify() (PMMA 45 cm/s → BEYOND); ask() forwards the airflow in % questions; closest rows rank by oxygen + flow; INSIDE sentence quotes the material's count without Link rows (PMMA 102, not 200); lowest-airflow note when all tie rows carry the low-flow flag; gravity note shows the pressure range from the data (70.7–100.0 kPa); cards use Lane A's low_flow_uncertain flag and exclude Link rows from outcome counts (PMMA 76 of 102); number checker no longer crashes on blank oxygen; ranking.py no longer writes scores into data/experiments.json (web lane reads logic/ranked_experiments.json).
+- **Why:** PR #1 review (Daksh, Nov 14): the classifier checked every material against the hardware limit (55 cm/s), and ask() dropped the airflow, so "PMMA at 20% and 45 cm/s" came back INSIDE. Daksh corrected his v7 note: the 49 cm/s rows were not the cause.
+- **How:** classifier.py (FLOW_MARGIN = 0.25, material_flow_range()), answer.py (ask/closest_rows/build_answer/build_airflow_answer/gravity_note), cards.py, number_checker.py, ranking.py; 22 new/updated tests; demo_answers.json + ask_samples.json regenerated (13 samples).
+- **Check:** 76 tests pass in the sandbox with Jenisha's fixed main data (including the 2-restrictor test, now green); number checks failing: 0; answer.py **main** runs clean.
+
 ## 2026-11-14 18:50 PT — Paridhi Singh — answer.py demo uses the full dataset; Saffire V rows stay out of the evidence pool
 
 - What: two fixes found in the v8 Mac run. (1) answer.py's **main** demo questions used the 6-row sample while the stats came from tests.json, so "14% oxygen for SIBAL?" quoted the sample's SIBAL range (18.5–20.8%) next to the full 200-test stats. The demo now loads the full rows (tests.json, else the PSI CSV, else the sample) and uses them for every question. (2) build_answer and build_airflow_answer now use only standard-pressure rows for the verdict, ranges, and evidence: the low-pressure Saffire V rows (~71 kPa) had stretched the overall oxygen range to 26.2%, so 24% oxygen read INSIDE and the 30% Moon-base answer cited the Saffire V rows as its evidence. Now 24% is BEYOND, the 30% evidence is B1/B2/B3 (22.2%), and Saffire V is cited only in nearest_evidence. Three new tests lock this in (24% BEYOND, 25.4% BEYOND, 30% evidence is B1/B2/B3 with Saffire V in nearest_evidence). demo_answers.json regenerated (Q1 evidence is now B1/B2/B3); 53 of 54 tests pass, the 1 failure is the 2-restrictor data test by design.

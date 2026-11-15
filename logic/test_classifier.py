@@ -109,6 +109,90 @@ class TestFlowRange(unittest.TestCase):
         self.assertEqual(flow_range(rows), (None, None))
 
 
+@unittest.skipUnless(
+    os.path.exists("../data/tests.json"),
+    "tests.json not next to the repo",
+)
+class TestMaterialFlowRange(unittest.TestCase):
+    """v9: classify() uses each material's own tested flow range with
+    a 25% margin (doc Step 1 items 3 and 4), not the hardware limit
+    for every material. PMMA was tested at 0–20 cm/s, so 45 cm/s for
+    PMMA is BEYOND; the hardware band (0–55, NEAR to 65) is only the
+    fallback when no material is given."""
+
+    @classmethod
+    def setUpClass(cls):
+        from answer import _standard_pressure
+        from cards import rows_from_tests_json
+
+        # As in build_answer: the standard-pressure filter first, so
+        # the Saffire V rows never join the ranges.
+        all_rows = rows_from_tests_json("../data/tests.json")
+        cls.rows = [r for r in all_rows if _standard_pressure(r)]
+
+    def test_pmma_flow_range_is_0_to_20(self):
+        from classifier import material_flow_range
+
+        self.assertEqual(material_flow_range(self.rows, "PMMA"), (0.0, 20.0))
+
+    def test_sibal_flow_range_is_1_to_53(self):
+        from classifier import material_flow_range
+
+        self.assertEqual(material_flow_range(self.rows, "SIBAL"), (1.0, 53.0))
+
+    def test_pmma_at_45_cm_s_is_beyond(self):
+        # Daksh's case (PR #1 review, Nov 14): PMMA was only tested
+        # to 20 cm/s, so 45 cm/s is beyond even the 25% margin (25).
+        result = classify(20.0, 45.0, material="PMMA", rows=self.rows)
+        self.assertEqual(result["verdict"], "BEYOND")
+        self.assertIn("45.0 cm/s airflow", result["reason"])
+
+    def test_pmma_at_20_cm_s_is_inside(self):
+        result = classify(20.0, 20.0, material="PMMA", rows=self.rows)
+        self.assertEqual(result["verdict"], "INSIDE")
+
+    def test_pmma_at_22_cm_s_is_near(self):
+        # 22 is past PMMA's 20 max but inside the 25% margin (25).
+        result = classify(20.0, 22.0, material="PMMA", rows=self.rows)
+        self.assertEqual(result["verdict"], "NEAR")
+
+    def test_pmma_at_25_cm_s_is_near_at_the_margin_edge(self):
+        result = classify(20.0, 25.0, material="PMMA", rows=self.rows)
+        self.assertEqual(result["verdict"], "NEAR")
+
+    def test_pmma_at_26_cm_s_is_beyond(self):
+        result = classify(20.0, 26.0, material="PMMA", rows=self.rows)
+        self.assertEqual(result["verdict"], "BEYOND")
+
+    def test_sibal_at_60_cm_s_is_near(self):
+        # SIBAL runs 1–53, margin 13, so NEAR up to 66.
+        result = classify(20.0, 60.0, material="SIBAL", rows=self.rows)
+        self.assertEqual(result["verdict"], "NEAR")
+
+    def test_sibal_at_70_cm_s_is_beyond(self):
+        result = classify(20.0, 70.0, material="SIBAL", rows=self.rows)
+        self.assertEqual(result["verdict"], "BEYOND")
+
+    def test_nomex_at_22_cm_s_is_near(self):
+        # Nomex runs 8–20, margin 3, so NEAR up to 23.
+        result = classify(21.0, 22.0, material="Nomex", rows=self.rows)
+        self.assertEqual(result["verdict"], "NEAR")
+
+    def test_nomex_at_24_cm_s_is_beyond(self):
+        result = classify(21.0, 24.0, material="Nomex", rows=self.rows)
+        self.assertEqual(result["verdict"], "BEYOND")
+
+    def test_no_material_uses_the_hardware_band(self):
+        # No material given: 45 cm/s is inside the BASS-II duct's
+        # 0–55 cm/s band, 60 is NEAR (to 65), 70 is BEYOND.
+        self.assertEqual(
+            classify(20.0, 45.0, rows=self.rows)["verdict"], "INSIDE")
+        self.assertEqual(
+            classify(20.0, 60.0, rows=self.rows)["verdict"], "NEAR")
+        self.assertEqual(
+            classify(20.0, 70.0, rows=self.rows)["verdict"], "BEYOND")
+
+
 class TestFullDataset(unittest.TestCase):
     """Locks in the corrected airflow numbers on the real dataset
     (Lane A's tests.json, 200 rows, once it lands; the PSI-25 CSV

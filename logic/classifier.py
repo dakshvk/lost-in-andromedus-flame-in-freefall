@@ -1,6 +1,17 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B classifier — INSIDE / NEAR / BEYOND what NASA tested.
 
+v9 changes (PR #1 review, Daksh, Nov 14):
+- classify() now uses each material's own tested flow range with a
+  25% margin (doc Step 1 items 3 and 4), not the hardware limit for
+  every material. PMMA was tested at 0–20 cm/s, so 45 cm/s for PMMA
+  is BEYOND (the margin runs to 25 cm/s); the hardware band
+  (0–55 cm/s, NEAR up to 65) is only the fallback when no material
+  is given or the material has no flow data. The margin is 25% of
+  the range width, on both sides (low side clamped at 0).
+- flow_range() is now used by classify() (it had no production
+  caller) via the new material_flow_range() helper.
+
 v8 changes (PR #1 review, Daksh, Nov 14):
 - flow_range() now uses the whole span: a test whose flow changed
   covers its whole span, so each row contributes the lower and higher
@@ -42,6 +53,9 @@ DEFAULT_O2_MAX = 22.2
 AIRFLOW_MAX = 55.0
 NEAR_AIRFLOW_MAX = 65.0
 NEAR_POINTS = 1.0
+# The doc's margin on a material's tested flow range (Step 1 items 3
+# and 4): 25% of the range width, on both sides.
+FLOW_MARGIN = 0.25
 
 
 def _o2(row):
@@ -111,6 +125,13 @@ def _same_material(a, b):
     return {a, b} == {"PMMA", "PMMA / other"}
 
 
+def material_flow_range(rows, material):
+    """(low, high) flow for one material, whole span (start+end).
+    Returns (None, None) when no row for the material has a flow."""
+    pool = [r for r in rows if _same_material(r.get("material"), material)]
+    return flow_range(pool)
+
+
 def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
     """Return a dict with verdict, reason, and what is unknown.
 
@@ -148,6 +169,9 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
         if matched is not None:
             o2_min, o2_max = per_material[matched]
             range_label = f"{material} {o2_min}–{o2_max}% O2"
+            # The material's own tested flow range, for the airflow
+            # verdict below (doc Step 1 items 3 and 4).
+            material_flow = material_flow_range(rows, material)
             # Fewer than 3 rows for a material means extrapolated,
             # not covered — but only on a real dataset (20+ rows).
             # The 6-row sample is explicitly a sample, so the rule
@@ -169,9 +193,11 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
     elif rows:
         o2_min, o2_max = dataset_range(rows)
         range_label = f"{o2_min}–{o2_max}% O2"
+        material_flow = None
     else:
         o2_min, o2_max = DEFAULT_O2_MIN, DEFAULT_O2_MAX
         range_label = f"{o2_min}–{o2_max}% O2"
+        material_flow = None
 
     unknown = []
     if airflow_cm_s is None:
@@ -179,10 +205,32 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
 
     o2_far = oxygen_pct < o2_min - NEAR_POINTS or oxygen_pct > o2_max + NEAR_POINTS
     o2_outside = oxygen_pct < o2_min or oxygen_pct > o2_max
-    air_outside = airflow_cm_s is not None and (
-        float(airflow_cm_s) < 0 or float(airflow_cm_s) > AIRFLOW_MAX
-    )
-    air_far = airflow_cm_s is not None and float(airflow_cm_s) > NEAR_AIRFLOW_MAX
+    # Airflow: each material's own tested flow range with a 25%
+    # margin (doc Step 1 items 3 and 4). The margin is 25% of the
+    # range width, on both sides (low side clamped at 0 — airflow
+    # cannot be negative). No material, or a material with no flow
+    # data, falls back to the BASS-II hardware band (0–55 cm/s,
+    # NEAR up to 65).
+    if airflow_cm_s is None:
+        air_outside = False
+        air_far = False
+        flow_label = f"0–{AIRFLOW_MAX} cm/s"
+    elif material_flow is not None and material_flow != (None, None):
+        flow_low, flow_high = material_flow
+        margin = FLOW_MARGIN * (flow_high - flow_low)
+        near_low = max(0.0, flow_low - margin)
+        near_high = flow_high + margin
+        flow = float(airflow_cm_s)
+        air_outside = flow < flow_low or flow > flow_high
+        air_far = flow < near_low or flow > near_high
+        flow_label = (
+            f"{material} {flow_low}–{flow_high} cm/s (25% margin)"
+        )
+    else:
+        flow = float(airflow_cm_s)
+        air_outside = flow < 0 or flow > AIRFLOW_MAX
+        air_far = flow > NEAR_AIRFLOW_MAX
+        flow_label = f"0–{AIRFLOW_MAX} cm/s"
 
     if o2_far or air_far:
         verdict = "BEYOND"
@@ -190,7 +238,7 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
             reason = (
                 f"{oxygen_pct}% O2 and {airflow_cm_s} cm/s airflow are both "
                 f"clearly outside the tested range ({range_label}, "
-                f"0–{AIRFLOW_MAX} cm/s)."
+                f"{flow_label})."
             )
         elif o2_far:
             reason = (
@@ -199,8 +247,8 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
             )
         else:
             reason = (
-                f"{airflow_cm_s} cm/s airflow is clearly above the tested "
-                f"maximum of ~{AIRFLOW_MAX} cm/s."
+                f"{airflow_cm_s} cm/s airflow is clearly outside the tested "
+                f"range ({flow_label})."
             )
     elif o2_outside or air_outside:
         verdict = "NEAR"
@@ -208,7 +256,7 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
             reason = (
                 f"{oxygen_pct}% O2 and {airflow_cm_s} cm/s airflow are both "
                 f"just outside the tested range ({range_label}, "
-                f"0–{AIRFLOW_MAX} cm/s)."
+                f"{flow_label})."
             )
         elif o2_outside:
             reason = (
@@ -217,8 +265,8 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
             )
         else:
             reason = (
-                f"{airflow_cm_s} cm/s airflow is just above the tested maximum "
-                f"of ~{AIRFLOW_MAX} cm/s."
+                f"{airflow_cm_s} cm/s airflow is just outside the tested "
+                f"range ({flow_label})."
             )
     else:
         verdict = "INSIDE"
@@ -226,4 +274,16 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
             f"{oxygen_pct}% O2 is inside the tested range ({range_label})."
         )
 
-    return {"verdict": verdict, "reason": reason, "unknown": unknown}
+    # Which dimension(s) drove the verdict, for the answer sentence:
+    # build_answer's BEYOND/NEAR sentence must name the airflow when
+    # the airflow (not the oxygen) is what is outside — otherwise it
+    # says "20.0% oxygen is beyond what was tested" for a 45 cm/s
+    # airflow question, which is false (20% is inside the O2 range).
+    drivers = []
+    if o2_far or o2_outside:
+        drivers.append("oxygen")
+    if air_far or air_outside:
+        drivers.append("airflow")
+
+    return {"verdict": verdict, "reason": reason, "unknown": unknown,
+            "drivers": drivers}
