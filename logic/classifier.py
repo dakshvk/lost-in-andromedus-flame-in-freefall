@@ -1,6 +1,14 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B classifier — INSIDE / NEAR / BEYOND what NASA tested.
 
+v10 changes (PR #1 review, Daksh, Nov 14):
+- The too-few-rows and no-rows BEYOND returns now carry a "coverage"
+  key, so build_answer can use the coverage sentence instead of the
+  generic "both beyond" one (which would name an airflow that was
+  never given, "None cm/s").
+- The 25% margin definition (25% of the range width, both sides, low
+  clamped at 0) is now CONFIRMED by Daksh — no longer a proposal.
+
 v9 changes (PR #1 review, Daksh, Nov 14):
 - classify() now uses each material's own tested flow range with a
   25% margin (doc Step 1 items 3 and 4), not the hardware limit for
@@ -175,7 +183,10 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
             # Fewer than 3 rows for a material means extrapolated,
             # not covered — but only on a real dataset (20+ rows).
             # The 6-row sample is explicitly a sample, so the rule
-            # does not apply to it.
+            # does not apply to it. The "coverage" key tells
+            # build_answer to use the coverage sentence (not the
+            # generic "both beyond" one, which would name an airflow
+            # that was never given).
             if len(rows) >= 20:
                 count = sum(1 for r in rows if _same_material(r.get("material"), material))
                 if count < 3:
@@ -183,12 +194,14 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
                         "verdict": "BEYOND",
                         "reason": f"Only {count} {material} row(s) in the dataset — fewer than 3, so this is extrapolated, not covered.",
                         "unknown": [f"more {material} rows"],
+                        "coverage": "too_few",
                     }
         else:
             return {
                 "verdict": "BEYOND",
                 "reason": f"No {material} rows in the dataset, so this cannot be classified from the data.",
                 "unknown": [f"rows for {material}"],
+                "coverage": "no_rows",
             }
     elif rows:
         o2_min, o2_max = dataset_range(rows)

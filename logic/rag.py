@@ -1,6 +1,12 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B retrieval (RAG) v5 — router reorder + exact lookup + text corpus.
 
+v10 changes (PR #1 review, Daksh, Nov 14):
+- MATERIAL_NAMES now includes "silicone" (one of tests.json's
+  materials: 4 Saffire II rows, all no_ignition) and "candle" (the
+  Japan Wax candle, F4 → Wax). Without these, "Silicone at 22%" and
+  "a candle at 17%" fell through to the no-material answer.
+
 v7 changes (Lane A swap, Nov 14):
 - No code change: the card corpus now builds from the 200-row
   tests.json when it is next to the repo (cards carry real outcomes
@@ -81,7 +87,12 @@ PSI_ID_RE = re.compile(r"psi-(\d+)", re.IGNORECASE)
 # Material names (whole-word, case-insensitive) — used for exact lookup
 # of cards and for ask()'s material filter, NEVER for the router's
 # name check: a material name must not force a question to RAG.
-MATERIAL_NAMES = {"nomex": "Nomex", "sibal": "SIBAL", "pmma": "PMMA", "wax": "Wax"}
+# "silicone" is one of tests.json's materials (4 Saffire II rows, all
+# no_ignition); "candle" is the Japan Wax candle (F4), so it maps to
+# Wax. Without these, "Silicone at 22%" and "a candle at 17%" fell
+# through to the no-material answer (v10).
+MATERIAL_NAMES = {"nomex": "Nomex", "sibal": "SIBAL", "pmma": "PMMA",
+                  "wax": "Wax", "silicone": "Silicone", "candle": "Wax"}
 # highest/lowest are numeric ONLY with oxygen or airflow in the question.
 COMPARATIVE_WORDS = {"highest", "lowest", "maximum", "minimum", "most", "least",
                      "greater", "smaller", "higher", "lower"}

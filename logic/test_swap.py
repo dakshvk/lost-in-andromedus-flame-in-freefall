@@ -107,6 +107,23 @@ class TestTestsJsonLoader(unittest.TestCase):
         self.assertEqual(stats["o2_max"], 22.2)
         self.assertEqual(stats["rows_above_21"], 32)
 
+    def test_material_names_are_canonical_case(self):
+        # v10: tests.json records "wax" and "silicone" in lowercase,
+        # but the CSV path and the question matcher use "Wax" and
+        # "Silicone". Without canonicalisation, ask() matched "Wax"
+        # against rows that say "wax" and found nothing, so "Will wax
+        # burn at 17%?" came back INSIDE with an empty evidence list.
+        materials = {r["material"] for r in self.rows}
+        self.assertIn("Wax", materials)
+        self.assertIn("Silicone", materials)
+        self.assertNotIn("wax", materials)
+        self.assertNotIn("silicone", materials)
+        f4 = next(r for r in self.rows if r["test_id"] == "F4")
+        self.assertEqual(f4["material"], "Wax")
+        silicone = [r for r in self.rows if r["material"] == "Silicone"]
+        self.assertEqual(len(silicone), 4)
+        self.assertTrue(all(r["outcome"] == "no_ignition" for r in silicone))
+
     def test_no_two_restrictor_psi25_row_has_flow_above_35(self):
         # The BASS-II report caps 2-restrictor flow at about 35 cm/s
         # ("~35 cm/s with two [flow restrictors]"). Lane A's

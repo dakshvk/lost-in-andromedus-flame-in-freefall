@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-14 20:04 PT — Paridhi Singh — Lane B v10: material names, no-material count, gravity note
+
+- **What:** Material names canonicalised (tests.json "wax"/"silicone" → "Wax"/"Silicone") and the matcher extended (silicone, candle → Wax), so "Silicone at 22%" and "a candle at 17%" are recognised; ask() passes the full rows to build_answer so classify's too-few-rows rule fires (wax: BEYOND, "Only 1 Wax test"); no-material count drops Link rows (145, not 200); INSIDE sentence names the airflow too when one was given; gravity note says pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa) and the BASS-II tables give none; closest_rows matches with \_same_material (PMMA ≡ "PMMA / other" on the CSV path).
+- **Why:** PR #1 review (Daksh, Nov 14 — v9 is "the strongest round yet", merges cleanly, all 76 tests pass). The wax bug had two causes: the case mismatch (matcher "Wax" vs rows "wax") and ask() passing the 1-row pool, so the too-few-rows rule never saw a real dataset.
+- **How:** cards.py (\_canonical_material), rag.py (MATERIAL_NAMES + silicone/candle), answer.py (ask full rows, count, INSIDE sentence, gravity_note, build_airflow_answer count), classifier.py ("coverage" key on the too-few/no-rows BEYOND); 10 new tests; demo_answers.json + ask_samples.json regenerated (17 samples).
+- **Check:** 86 tests pass in the sandbox with the fixed main data; number checks failing: 0; answer.py **main** runs clean; ranking.py leaves data/experiments.json untouched. Margin definition CONFIRMED by Daksh: 25% of the range width, both sides, low clamped at 0.
+
 ## 2026-11-14 19:40 PT — Paridhi Singh — Lane B v9: per-material flow range, material counts, Lane A flag
 
 - **What:** Per-material flow range with the 25% margin in classify() (PMMA 45 cm/s → BEYOND); ask() forwards the airflow in % questions; closest rows rank by oxygen + flow; INSIDE sentence quotes the material's count without Link rows (PMMA 102, not 200); lowest-airflow note when all tie rows carry the low-flow flag; gravity note shows the pressure range from the data (70.7–100.0 kPa); cards use Lane A's low_flow_uncertain flag and exclude Link rows from outcome counts (PMMA 76 of 102); number checker no longer crashes on blank oxygen; ranking.py no longer writes scores into data/experiments.json (web lane reads logic/ranked_experiments.json).

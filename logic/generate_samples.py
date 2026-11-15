@@ -35,6 +35,10 @@ SAMPLE_QUESTIONS = [
     "What about 20% oxygen?",
     "Is 30% oxygen inside our data for PMMA?",
     "PMMA at 20% oxygen and 45 cm/s airflow?",
+    "PMMA at 20% oxygen and 10 cm/s airflow?",
+    "Will wax burn at 17% oxygen?",
+    "Silicone at 22%",
+    "a candle at 17%",
     "What about oxygen with no value given?",
     "Which material was tested at the highest oxygen?",
     "What is the lowest oxygen tested?",
@@ -92,7 +96,7 @@ def main():
             sibal_max, full_rows, material="SIBAL", stats=stats),
     }
     demo = {
-        "note": ("Demo answers, generated from the code (v9, Nov 14, 2026) "
+        "note": ("Demo answers, generated from the code (v10, Nov 14, 2026) "
                  f"— not typed by hand. All six use {label}."),
         "answers": [
             q1, q2, q3,
@@ -105,7 +109,7 @@ def main():
         json.dump(demo, f, indent=1)
     samples = {
         "note": ("Sample ask() responses for the web lane, one per answer "
-                 f"type. Generated from {label} with v9 code, Nov 14, 2026. "
+                 f"type. Generated from {label} with v10 code, Nov 14, 2026. "
                  "RAG samples use the keyword fallback in this file (no "
                  "model installed here); on a machine with "
                  "sentence-transformers installed the same ask() call "

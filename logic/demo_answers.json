@@ -1,5 +1,5 @@
 {
- "note": "Demo answers, generated from the code (v9, Nov 14, 2026) \u2014 not typed by hand. All six use the 200-row tests.json (Lane A).",
+ "note": "Demo answers, generated from the code (v10, Nov 14, 2026) \u2014 not typed by hand. All six use the 200-row tests.json (Lane A).",
  "answers": [
   {
    "question": "A Moon base runs at 30% oxygen. What does NASA testing cover?",
@@ -13,7 +13,7 @@
      "oxygen_pct": 22.2,
      "airflow_cm_s": 5,
      "airflow_end_cm_s": 5,
-     "outcome": null,
+     "outcome": "quenched",
      "source": "PSI-25",
      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     },
@@ -57,7 +57,7 @@
     "airflow_cm_s (not given for this question)",
     "outcome (not recorded for some evidence rows \u2014 not guessed)"
    ],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -69,7 +69,7 @@
   {
    "question": "Do materials burn as well in microgravity as on Earth?",
    "verdict": "INSIDE",
-   "sentence": "21.0% oxygen is inside the tested range (13.6\u201322.2% oxygen, 200 tests), so the rows below are direct evidence for this condition.",
+   "sentence": "21.0% oxygen is inside the tested range (13.6\u201322.2% oxygen, 145 tests), so the rows below are direct evidence for this condition.",
    "evidence": [
     {
      "test_id": "B6",
@@ -109,7 +109,7 @@
    "unknown": [
     "airflow_cm_s (not given for this question)"
    ],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -132,7 +132,7 @@
       "oxygen_pct": 22.2,
       "airflow_cm_s": 5,
       "airflow_end_cm_s": 5,
-      "outcome": null,
+      "outcome": "quenched",
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
@@ -164,7 +164,7 @@
      "airflow_cm_s (not given for this question)",
      "outcome (not recorded for some evidence rows \u2014 not guessed)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -216,7 +216,7 @@
     "unknown": [
      "airflow_cm_s (not given for this question)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -238,8 +238,8 @@
      "oxygen_pct": 22.2,
      "airflow_cm_s": 5,
      "airflow_end_cm_s": 5,
-     "outcome": "",
-     "outcome_source": "",
+     "outcome": "quenched",
+     "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test B1, GMT 050; oxygen and flow from PSI-25",
      "source": "PSI-25",
      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
      "notes": "Ignited very quickly, turned flow off after spread halfway; flame extinguished very quickly; and sooty with blue leading edge",
@@ -488,10 +488,9 @@
      "spread_rate": null,
      "direction": "unknown",
      "flags": [
-      "outcome_from_report_notes",
-      "low_flow_uncertain"
+      "outcome_from_report_notes"
      ],
-     "low_flow_uncertain": true
+     "low_flow_uncertain": false
     },
     {
      "test_id": "O2",
@@ -509,15 +508,14 @@
      "spread_rate": null,
      "direction": "unknown",
      "flags": [
-      "outcome_from_report_notes",
-      "low_flow_uncertain"
+      "outcome_from_report_notes"
      ],
-     "low_flow_uncertain": true
+     "low_flow_uncertain": false
     }
    ],
    "nearest_evidence": null,
    "unknown": [],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -555,7 +553,7 @@
    "nearest_evidence": null,
    "note": "O12, the lowest-oxygen test at 13.6%, never ignited \u2014 the PSI-25 CSV's Air display for O12 reads 'no ign at any flow'.",
    "unknown": [],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -593,7 +591,7 @@
    "nearest_evidence": null,
    "note": null,
    "unknown": [],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressures recorded in the data run 70.7\u2013100.0 kPa, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],

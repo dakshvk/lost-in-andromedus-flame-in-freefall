@@ -8,6 +8,29 @@
     Sources: links, kept small.
     Gravity note: every answer says the tests were in microgravity.
 
+v10 changes (PR #1 review, Daksh, Nov 14 — v9 is "the strongest round yet"):
+- ask() now passes the FULL rows to build_answer, not the material
+  pool: classify's too-few-rows rule needs the full dataset size, and
+  with the pool it saw only 1 Wax row (len < 20), so "Will wax burn
+  at 17%?" never hit the rule and came back INSIDE with an empty
+  evidence list. Wax now hits the rule: BEYOND, "Only 1 Wax test".
+- Material names canonicalised (cards.py) and the matcher extended
+  (rag.py: silicone, candle → Wax), so "Silicone at 22%" and "a
+  candle at 17%" are recognised as materials. Silicone's 4 rows are
+  all no_ignition, and the answer now shows them.
+- The no-material count drops Link rows (145, not 200) in build_answer
+  and build_airflow_answer.
+- The INSIDE sentence names the airflow too when one was given and
+  it is inside ("20.0% oxygen and 10.0 cm/s airflow are inside...").
+- gravity_note() now says pressure was recorded only for the 5
+  Saffire IV/V tests (70.7–100.0 kPa) and the BASS-II tables give
+  none — the old "pressures run 70.7–100.0 kPa" read as if every test
+  recorded one.
+- closest_rows() matches materials with _same_material, so PMMA also
+  matches "PMMA / other" on the CSV fallback path.
+- The 25% margin definition (25% of the range width, both sides, low
+  clamped at 0) is now CONFIRMED by Daksh — no longer a proposal.
+
 v9 changes (PR #1 review, Daksh, Nov 14):
 - ask() now forwards the airflow in a % question to build_answer:
   "PMMA at 20% oxygen and 45 cm/s airflow?" used to drop the
@@ -100,22 +123,30 @@ GRAVITY_NOTE = (
 
 
 def gravity_note(rows=None):
-    """The gravity note. The pressure range comes from the data (the
-    recorded pressure_kPa values), not fixed text — most rows are at
-    standard cabin pressure and record no value, so the range is the
-    recorded Saffire IV/V pressures (70.7–100.0 kPa). With no rows,
-    or no recorded pressures, the base text is used."""
+    """The gravity note. Pressure is recorded only for the Saffire
+    IV/V rows (ICES 2021 paper) — the PSI tables record none — so the
+    note says that, with the count and range from the data, not fixed
+    text. With no rows, or no recorded pressures, the base text is
+    used."""
     if not rows:
         return GRAVITY_NOTE
-    pressures = [float(r["pressure_kPa"]) for r in rows
-                 if r.get("pressure_kPa") is not None]
-    if not pressures:
+    pressured = [r for r in rows if r.get("pressure_kPa") is not None]
+    if not pressured:
         return GRAVITY_NOTE
+    pressures = [float(r["pressure_kPa"]) for r in pressured]
+    # Name the rows that record pressure from their source, dropping
+    # the "(ICES 2021)" parenthetical: "Saffire IV/V (ICES 2021)"
+    # becomes "Saffire IV/V".
+    sources = sorted({(r.get("source") or "").split(" (")[0]
+                      for r in pressured} - {""})
+    source_text = " and ".join(sources) if sources else "Saffire IV/V"
     return (
         "These tests were in microgravity on the ISS. The Moon is about "
-        "one-sixth Earth's gravity. Pressures recorded in the data run "
-        f"{min(pressures)}–{max(pressures)} kPa, so a Moon-base condition "
-        "is not covered by these tests."
+        "one-sixth Earth's gravity. Pressure was recorded only for "
+        f"the {len(pressured)} {source_text} tests "
+        f"({min(pressures)}–{max(pressures)} kPa); the BASS-II tables "
+        "give none, so a Moon-base condition is not covered by these "
+        "tests."
     )
 
 
@@ -477,9 +508,9 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None, material=None
     highs = [f for f in (_flow_high(r) for r in pool) if f is not None]
     low, high = (min(lows), max(highs)) if lows and highs else (0.0, 0.0)
     # The count is for this material, without Link rows (as in
-    # build_answer) — or the whole dataset when no material is given.
-    count = (sum(1 for r in pool if "link" not in (r.get("source") or "").lower())
-             if material else stats["total_tests"])
+    # build_answer) — or the whole dataset, without Link rows, when
+    # no material is given (145, not 200 — v10, Daksh).
+    count = sum(1 for r in pool if "link" not in (r.get("source") or "").lower())
     if material and lows and highs:
         # The material's own range with the 25% margin.
         margin = FLOW_MARGIN * (high - low)
@@ -499,7 +530,7 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None, material=None
             verdict, word = "NEAR", "just outside"
         else:
             verdict, word = "BEYOND", "beyond"
-        range_text = (f"airflow in the {stats['total_tests']} tests runs "
+        range_text = (f"airflow in the {count} tests runs "
                       f"{low}–{high} cm/s, and the BASS-II duct goes to "
                       "about 55 cm/s")
     sentence = (
@@ -584,18 +615,17 @@ def ask(question, rows, stats=None):
     pct = re.search(r"(\d+(?:\.\d+)?)\s*%", q)
     flow = re.search(r"(\d+(?:\.\d+)?)\s*cm/s", q)
     if pct:
-        # Pass the material through: build_answer's classify matches
-        # "PMMA" against the full data's "PMMA / other" via
-        # _same_material, and closest_rows falls back to the
-        # pre-filtered pool when its exact match fails. Passing
-        # material=None here used to make the sentence quote the
-        # overall range while the verdict used the material's range
-        # (e.g. 14% for Wax: BEYOND, but the sentence said the tests
-        # cover 13.6–22.2% — self-contradictory). The airflow is
-        # forwarded too: a question like "PMMA at 20% and 45 cm/s"
-        # used to drop the 45 cm/s entirely, so it came back INSIDE
-        # on oxygen alone — the per-material flow range never saw it.
-        return code_result(build_answer(question, float(pct.group(1)), pool,
+        # Pass the FULL rows, not the material pool: build_answer
+        # filters by material itself (closest_rows, the range/count
+        # block), and classify's too-few-rows rule needs the full
+        # dataset size to fire — with the pool it saw only 1 Wax row
+        # and len(rows) < 20, so "Will wax burn at 17%?" never hit
+        # the rule and came back INSIDE with an empty evidence list
+        # (v10). The airflow is forwarded too: a question like
+        # "PMMA at 20% and 45 cm/s" used to drop the 45 cm/s
+        # entirely, so it came back INSIDE on oxygen alone — the
+        # per-material flow range never saw it.
+        return code_result(build_answer(question, float(pct.group(1)), rows,
                                         airflow_cm_s=(float(flow.group(1)) if flow else None),
                                         material=material, stats=stats))
     if flow:
@@ -641,7 +671,8 @@ def closest_rows(rows, oxygen_pct, limit=3, material=None, airflow_cm_s=None):
 
     pool = rows
     if material:
-        same_material = [r for r in rows if r.get("material") == material]
+        same_material = [r for r in rows
+                         if _same_material(r.get("material"), material)]
         if same_material:
             pool = same_material
     if airflow_cm_s is None:
@@ -731,7 +762,13 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     }
     o2_min, o2_max = stats["o2_min"], stats["o2_max"]
     total = stats["total_tests"]
-    count = total
+    # The count is the rows the answer is about, without Link rows
+    # (paper rod data, always burning, not outcome evidence). With a
+    # material it is that material's non-Link count (PMMA: 102);
+    # without one it is the whole dataset's non-Link count over the
+    # standard-pressure rows (145, not 200 — v10, Daksh).
+    count = sum(1 for r in rows
+                if "link" not in (r.get("source") or "").lower())
 
     # When a material is given, the sentence must quote THAT material's
     # tested range — quoting the overall range would contradict the verdict
@@ -758,24 +795,48 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
         range_text = f"{o2_min}–{o2_max}% oxygen"
         range_bounds = None
 
-    # The material's flow range, for the sentence when the verdict is
-    # driven by airflow (below): the sentence must name the airflow,
-    # not the oxygen, when the oxygen is inside and the airflow is
-    # what is outside. Flow bounds go to the number checker too.
+    # The flow range, for the sentence when the verdict is driven by
+    # airflow (below) and for the INSIDE sentence when an airflow is
+    # given: the sentence must name the airflow, not the oxygen, when
+    # the oxygen is inside and the airflow is what is outside. With
+    # a material it is that material's range; without one it is the
+    # overall range over the standard-pressure rows (0.0–53.0 cm/s).
+    # Flow bounds go to the number checker too.
     flow_range_text = None
     flow_bounds = None
-    if material and rows:
-        pool = [r for r in rows if _same_material(r.get("material"), material)]
-        flo, fhi = flow_range(pool)
+    if rows:
+        flow_pool = ([r for r in rows if _same_material(r.get("material"), material)]
+                     if material else rows)
+        flo, fhi = flow_range(flow_pool)
         if flo is not None:
-            flow_range_text = f"{material} {flo}–{fhi} cm/s"
+            flow_range_text = (f"{material} {flo}–{fhi} cm/s" if material
+                               else f"{flo}–{fhi} cm/s")
             flow_bounds = (flo, fhi)
 
     drivers = result.get("drivers", [])
     air_driven = "airflow" in drivers
     o2_driven = "oxygen" in drivers
     if verdict == "BEYOND":
-        if air_driven and not o2_driven:
+        # A coverage BEYOND (too few rows for the material, or none
+        # at all) is not about the oxygen or the airflow being out of
+        # range — it is about the material itself. Say so, using the
+        # count (which is the material's non-Link row count). The
+        # generic "both beyond" sentence below would name an airflow
+        # that was never given ("None cm/s").
+        if result.get("coverage") == "too_few":
+            sentence = (
+                f"Only {count} {material} test{'s' if count != 1 else ''} "
+                "in the dataset — too few to cover this condition, so "
+                "this is extrapolated, not covered. We can only show "
+                "the closest tests, not an answer for this condition."
+            )
+        elif result.get("coverage") == "no_rows":
+            sentence = (
+                f"No {material} tests are in the dataset, so this cannot "
+                "be answered from the data. We can only show the "
+                "closest tests, not an answer for this condition."
+            )
+        elif air_driven and not o2_driven:
             sentence = (
                 f"{airflow_cm_s} cm/s airflow is beyond what was tested "
                 f"({flow_range_text or 'the BASS-II duct goes to about 55 cm/s'}), so "
@@ -815,11 +876,30 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
                 "near, not exact."
             )
     else:
-        sentence = (
-            f"{oxygen_pct}% oxygen is inside the tested range "
-            f"({range_text}, {count} tests), so the rows below "
-            "are direct evidence for this condition."
-        )
+        # INSIDE: both the oxygen and the airflow (when given) are
+        # inside. Name both — the old sentence only mentioned the
+        # oxygen, so "PMMA at 20% and 10 cm/s" never said the airflow
+        # was inside (v10, Daksh). The flow range is quoted as bare
+        # numbers (no material repeat: range_text already names it).
+        if airflow_cm_s is not None and flow_bounds is not None:
+            sentence = (
+                f"{oxygen_pct}% oxygen and {airflow_cm_s} cm/s airflow "
+                f"are inside the tested range ({range_text}, "
+                f"{flow_bounds[0]}–{flow_bounds[1]} cm/s, {count} tests), "
+                "so the rows below are direct evidence for this condition."
+            )
+        elif airflow_cm_s is not None:
+            sentence = (
+                f"{oxygen_pct}% oxygen and {airflow_cm_s} cm/s airflow "
+                f"are inside the tested range ({range_text}, {count} tests), "
+                "so the rows below are direct evidence for this condition."
+            )
+        else:
+            sentence = (
+                f"{oxygen_pct}% oxygen is inside the tested range "
+                f"({range_text}, {count} tests), so the rows below "
+                "are direct evidence for this condition."
+            )
 
     # Nearest evidence beyond BASS-II, for Moon-cabin conditions.
     # CORRECTION (Daksh, Nov 14): the Saffire V numbers come from the

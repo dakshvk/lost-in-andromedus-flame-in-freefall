@@ -1,6 +1,14 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B material cards — one card per material, four lines, no more.
 
+v10 changes (PR #1 review, Daksh, Nov 14):
+- rows_from_tests_json() now canonicalises material names: Lane A's
+  tests.json records "wax" and "silicone" in lowercase, but the CSV
+  path and the question matcher use "Wax" and "Silicone" — without
+  this, ask() matched "Wax" against rows that say "wax" and found
+  nothing, so "Will wax burn at 17%?" came back INSIDE with an empty
+  evidence list.
+
 v9 changes (PR #1 review, Daksh, Nov 14):
 - rows_from_tests_json() now takes low_flow_uncertain from Lane A's
   flags instead of computing it: Lane A's check covers both start
@@ -207,6 +215,20 @@ LOW_FLOW_CUTOFF_CM_S = 2.0
 STANDARD_PRESSURE_MIN_KPA = 90.0
 
 
+# Canonical material names. Lane A's tests.json records "wax" and
+# "silicone" in lowercase, but the CSV path (group_name) and the
+# question matcher (rag.MATERIAL_NAMES) use "Wax" and "Silicone" —
+# without this, ask() matched "Wax" against rows that say "wax" and
+# found nothing (v10: "Will wax burn at 17%?" came back INSIDE with
+# an empty evidence list). "other" is the one Saffire V cotton row
+# (V-2, low pressure); it is left as recorded.
+MATERIAL_CANONICAL = {"wax": "Wax", "silicone": "Silicone"}
+
+
+def _canonical_material(material):
+    return MATERIAL_CANONICAL.get((material or "").lower(), material or "unknown")
+
+
 def rows_from_tests_json(path):
     """Convert Lane A's data/tests.json (200 rows) into Lane B rows
     (same schema as sample_data.csv, plus pressure_kPa, spread_rate,
@@ -240,7 +262,7 @@ def rows_from_tests_json(path):
         suffix = t.get("id", "").split(":", 1)[-1]
         gmt = re.match(r"GMT\d+-(.+)$", suffix)
         test_id = gmt.group(1) if gmt else suffix
-        material = t.get("material") or "unknown"
+        material = _canonical_material(t.get("material"))
         pressure = t.get("pressure_kPa")
         if pressure is not None and pressure < STANDARD_PRESSURE_MIN_KPA:
             material = f"{material} (Saffire V, {pressure} kPa)"

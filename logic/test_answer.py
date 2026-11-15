@@ -217,5 +217,116 @@ class TestV9Answers(unittest.TestCase):
         self.assertTrue(answer["number_check"]["ok"])
 
 
+@unittest.skipUnless(os.path.exists(TESTS_JSON), "tests.json not next to the repo")
+class TestV10Answers(unittest.TestCase):
+    """v10 (PR #1 review, Daksh, Nov 14 — v9 is "the strongest round
+    yet"): material names recognised (wax, silicone, candle), the
+    no-material count without Link rows, the INSIDE sentence naming
+    the airflow, and the gravity note naming the Saffire IV/V rows."""
+
+    def setUp(self):
+        from answer import dataset_stats_tests_json
+        from cards import rows_from_tests_json
+
+        self.rows = rows_from_tests_json(TESTS_JSON)
+        self.stats = dataset_stats_tests_json(TESTS_JSON)
+
+    def test_wax_question_hits_the_too_few_rows_rule(self):
+        # Daksh's bug: "Will wax burn at 17% oxygen?" came back
+        # INSIDE with "(13.6–22.2% oxygen, 200 tests)" and an empty
+        # evidence list. Wax has 1 row (F4), so it hits the
+        # fewer-than-3 rule: BEYOND, with F4 as the closest evidence.
+        from answer import ask
+
+        out = ask("Will wax burn at 17% oxygen?",
+                  self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "BEYOND")
+        self.assertIn("Only 1 Wax test", answer["sentence"])
+        self.assertNotIn("None cm/s", answer["sentence"])
+        self.assertEqual([r["test_id"] for r in answer["evidence"]], ["F4"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_candle_means_wax(self):
+        # "a candle at 17%" is the Japan Wax candle (F4) — the same
+        # too-few-rows BEYOND as the wax question.
+        from answer import ask
+
+        out = ask("a candle at 17%?", self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "BEYOND")
+        self.assertIn("Only 1 Wax test", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_silicone_question_is_about_silicone(self):
+        # Daksh's bug: "Silicone at 22%" came back INSIDE with the
+        # overall range and generic (SIBAL/PMMA) evidence. Silicone
+        # has 4 rows, 21.5–22.1%, all no_ignition — the answer must
+        # quote the silicone range and show silicone rows.
+        from answer import ask
+
+        out = ask("Silicone at 22%", self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "INSIDE")
+        self.assertIn("Silicone 21.5–22.1% oxygen, 4 tests", answer["sentence"])
+        self.assertNotIn("200 tests", answer["sentence"])
+        self.assertTrue(all(r["material"] == "Silicone"
+                            for r in answer["evidence"]))
+        self.assertTrue(all(r["outcome"] == "no_ignition"
+                            for r in answer["evidence"]))
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_inside_sentence_names_the_airflow_too(self):
+        # Daksh's small fix 1: when an airflow is given and it is
+        # inside, the INSIDE sentence only mentioned the oxygen.
+        from answer import ask
+
+        out = ask("PMMA at 20% oxygen and 10 cm/s airflow?",
+                  self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "INSIDE")
+        self.assertIn("20.0% oxygen and 10.0 cm/s airflow are inside",
+                      answer["sentence"])
+        self.assertIn("0.0–20.0 cm/s", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_no_material_count_drops_link_rows(self):
+        # Daksh's follow-on: the no-material fallback sentence still
+        # said "200 tests". Without Link rows it is 145 (200 minus
+        # 52 Link, minus the 3 low-pressure Saffire V rows, which the
+        # standard-pressure range does not cover).
+        from answer import ask
+
+        out = ask("What about 20% oxygen?", self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(answer["verdict"], "INSIDE")
+        self.assertIn("145 tests", answer["sentence"])
+        self.assertNotIn("200 tests", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_gravity_note_names_the_pressured_rows(self):
+        # Daksh's small fix 2: "Pressures recorded in the data run
+        # 70.7–100.0 kPa" read as if every test recorded one. Only
+        # the 5 Saffire IV/V tests do; the BASS-II tables give none.
+        from answer import ask
+
+        out = ask("Is 20% oxygen inside our data for PMMA?",
+                  self.rows, stats=self.stats)
+        note = out["answer"]["gravity_note"]
+        self.assertIn("Pressure was recorded only for the 5 Saffire IV/V tests",
+                      note)
+        self.assertIn("70.7–100.0 kPa", note)
+        self.assertIn("the BASS-II tables give none", note)
+        self.assertNotIn("Pressures recorded in the data run", note)
+
+    def test_material_matcher_recognises_silicone_and_candle(self):
+        from rag import _named_material
+
+        self.assertEqual(_named_material("Silicone at 22%"), "Silicone")
+        self.assertEqual(_named_material("a candle at 17%"), "Wax")
+        self.assertEqual(_named_material("Will wax burn at 17% oxygen?"), "Wax")
+        self.assertEqual(_named_material("What about 20% oxygen?"), None)
+
+
 if __name__ == "__main__":
     unittest.main()

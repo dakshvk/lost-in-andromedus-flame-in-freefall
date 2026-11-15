@@ -192,6 +192,24 @@ class TestMaterialFlowRange(unittest.TestCase):
         self.assertEqual(
             classify(20.0, 70.0, rows=self.rows)["verdict"], "BEYOND")
 
+    def test_wax_hits_the_too_few_rows_rule(self):
+        # v10: Wax has 1 row (F4), so it is extrapolated, not covered.
+        # The "coverage" key tells build_answer to use the coverage
+        # sentence instead of the generic "both beyond" one (which
+        # would name an airflow that was never given).
+        result = classify(17.0, None, material="Wax", rows=self.rows)
+        self.assertEqual(result["verdict"], "BEYOND")
+        self.assertEqual(result.get("coverage"), "too_few")
+
+    def test_margin_definition_is_team_confirmed(self):
+        # v10: Daksh confirmed the 25% margin is 25% of the range
+        # width, on both sides, low clamped at 0. FLOW_MARGIN is
+        # that fraction; the PMMA 25 cm/s edge test above pins the
+        # arithmetic (20 + 25% of 20 = 25).
+        from classifier import FLOW_MARGIN
+
+        self.assertEqual(FLOW_MARGIN, 0.25)
+
 
 class TestFullDataset(unittest.TestCase):
     """Locks in the corrected airflow numbers on the real dataset
