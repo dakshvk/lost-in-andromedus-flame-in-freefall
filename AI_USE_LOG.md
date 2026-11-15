@@ -10,3 +10,5 @@ One line per use. Newest at the bottom.
 2026-11-14 | Jenisha (Lane A) | Claude (AI assistant) | Extracted and structured rows from PSI tables and papers, wrote the build and validation scripts, proposed outcome labels (17 judgement calls accepted by the Lane A owner, second-person check pending) and wrote experiment summaries from PSI page text.
 
 2026-11-14 | Jenisha (Lane A) | Claude (AI assistant) | Applied the team review: Claude proposed the rule that operator-forced extinction is unknown (B1 changed) and edited build_tests.py for the O5b/O13a flow fixes and the 2 cm/s low-flow flag; validate.py prints OK (200 rows).
+
+2026-11-14 | Jenisha (Lane A) | Claude (AI assistant) | Second-person check of the 17 judgement calls by Daksh Kumar: all confirmed, no changes. Claude inferred the Link spread-rate unit (cm/s x10^-3), filled Saffire I-II pressure from ICES Table 2 and removed an always-true check in validate.py.
