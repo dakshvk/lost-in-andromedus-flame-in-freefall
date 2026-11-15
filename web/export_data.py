@@ -196,8 +196,8 @@ def export_limits(rows):
         ],
         "ranking_note": RANKING_NOTE,
         "si_acknowledgment": ("Data extraction, logic and code were written with SI assistance "
-                              "(Claude, Claude Code, Muse) and reviewed by the team. "
-                              "See AI_USE_LOG.md."),
+                      "(Claude, Claude Code, Muse, Cursor) and reviewed by the team. "
+                      "See AI_USE_LOG.md."),
         "license": "PSI data is CC0 (NASA Physical Sciences Informatics).",
     }
 

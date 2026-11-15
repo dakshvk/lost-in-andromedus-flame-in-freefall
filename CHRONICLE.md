@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-15 12:47 PT — Paridhi Singh — Add Cursor to SI acknowledgment
+
+- What: Added Cursor to the SI acknowledgment in web/export_data.py and regenerated web/data/limits.json; logged Cursor use in AI_USE_LOG.md.
+- Why: Cursor was used for small code edits and pushes, so the disclosure should list it alongside Claude, Claude Code, and Muse.
+- How: One-word change to the acknowledgment string; re-ran python3 web/export_data.py.
+- Check: limits.json shows "Claude, Claude Code, Muse, Cursor".
+
 ### 2026-11-15 11:30 | Daksh | UI test round: 24 questions typed into the page, fixes, Moon labels, flat view
 
 - What: (1) Cut-off marker labels (reported by Paridhi in Chrome: PMMA and Wax cut): my phone fix put `overflow: hidden` on `.hero-moon` at every width; now it applies only at phone width, where labels face inward (`sideLabels` in app.js, flip in `place()` in moon.js). (2) Paridhi's Chrome showed the flat Moon fallback (no 3D): moon.js now tries a second source (unpkg) for Three.js, records why 3D did not start, and the page says why in the caption; the flat Moon now uses the NASA map instead of a pale disc with big circles; `?moon=flat` previews it on any machine. (3) Highest/lowest answers get `kind: "extreme"` and a neutral RESULT badge instead of "Inside the tested range". (4) "Will it burn?", "Will PMMA burn?", "Is nomex flammable?" now ask for the missing oxygen level (`_asks_will_it_burn`) instead of showing an unrelated investigation; badge reads MORE INFO and the unknown line is in words, not `oxygen_pct`. (5) New `answer_tested_range`: "What oxygen range was SIBAL tested at?" answers "SIBAL was tested at 16.4 to 22.1% oxygen and 1.0 to 53.0 cm/s airflow (32 tests, at normal pressure)", number checked. (6) Retrieval: material notes now come from tests.json (they came from the raw PSI-25 CSV and said "PMMA / other ... highest oxygen in the full dataset"); small word-overlap bonus so "What sensors measured oxygen?" ranks BASS-II first; removed the unverified phrase "no oxygen sensor" from SAME and SAME-R in investigations.csv (Paridhi to confirm). (7) The first text question took 10.6 s (language model load): the API now loads it in the background at start-up (0.19 s after).
