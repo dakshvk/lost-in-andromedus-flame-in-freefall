@@ -1,6 +1,11 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B retrieval (RAG) v5 — router reorder + exact lookup + text corpus.
 
+v7 changes (Lane A swap, Nov 14):
+- No code change: the card corpus now builds from the 200-row
+  tests.json when it is next to the repo (cards carry real outcomes
+  and sources), so the RAG text for materials is real, not sample.
+
 v5 changes (Daksh, PR #1, third RAG review):
 - ROUTER REORDERED. The name check used to run first, so "Is 30%
   oxygen inside our data for PMMA?", "What is the highest oxygen
@@ -81,6 +86,14 @@ MATERIAL_NAMES = {"nomex": "Nomex", "sibal": "SIBAL", "pmma": "PMMA", "wax": "Wa
 COMPARATIVE_WORDS = {"highest", "lowest", "maximum", "minimum", "most", "least",
                      "greater", "smaller", "higher", "lower"}
 RANGE_WORDS = {"inside", "outside", "beyond", "range", "limit"}
+# Words that make an oxygen/airflow question a meaning question
+# ("What sensors measured oxygen?" goes to RAG; "What about oxygen
+# with no value given?" goes to code and asks for a value).
+MEANING_WORDS = {"sensor", "sensors", "objective", "objectives",
+                 "investigation", "investigations", "differ", "differs",
+                 "difference", "fuel", "fuels", "condition", "conditions",
+                 "smoke", "detection", "detect", "detected", "study",
+                 "studies", "experiment", "experiments"}
 
 # Cache for the model and for encoded corpus vectors.
 _MODEL_CACHE = None
@@ -202,6 +215,11 @@ def route(question):
         return {
             "path": "code",
             "reason": "The question asks about the tested range for oxygen or airflow — that goes to code (classify).",
+        }
+    if ("oxygen" in words or "airflow" in words or "flow" in words) and not (words & MEANING_WORDS):
+        return {
+            "path": "code",
+            "reason": "The question is about oxygen or airflow but gives no value — code asks for one (NEED_OXYGEN) instead of guessing from text.",
         }
     if _named_investigations(question):
         return {

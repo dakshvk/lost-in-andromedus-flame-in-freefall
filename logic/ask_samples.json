@@ -1,830 +1,834 @@
 {
-  "note": "Sample ask() responses for the web lane, one per answer type. Generated from the full 129-row PSI-25 CSV with v5 code, Nov 14, 2026. RAG samples use the keyword fallback in this file (no model installed here); on a machine with sentence-transformers installed the same ask() call returns embedding retrieval instead.",
-  "samples": [
-    {
-      "question": "What about 20% oxygen?",
-      "path": "code",
-      "reason": "The question has a number with a unit (%, cm/s, psi, kPa) \u2014 that goes to code, not to embeddings.",
-      "answer": {
-        "question": "What about 20% oxygen?",
-        "verdict": "INSIDE",
-        "sentence": "20.0% oxygen is inside the tested range (13.6\u201322.2% oxygen, 129 BASS-II tests), so the rows below are direct evidence for this condition.",
-        "evidence": [
-          {
-            "test_id": "M11",
-            "material": "PMMA / other",
-            "material_form": "slab",
-            "oxygen_pct": "20",
-            "airflow_cm_s": "10",
-            "airflow_end_cm_s": "20",
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          },
-          {
-            "test_id": "P18",
-            "material": "PMMA / other",
-            "material_form": "rod",
-            "oxygen_pct": "20",
-            "airflow_cm_s": "2",
-            "airflow_end_cm_s": "0",
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          },
-          {
-            "test_id": "P22b",
-            "material": "PMMA / other",
-            "material_form": "rod",
-            "oxygen_pct": "20",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": null,
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          }
-        ],
-        "nearest_evidence": null,
-        "unknown": [
-          "airflow_cm_s (not given for this question)",
-          "outcome (not in the PSI-25 CSV \u2014 only in the BASS-II report Appendix A)"
-        ],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": true,
-          "unverified": []
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "Is 30% oxygen inside our data for PMMA?",
-      "path": "code",
-      "reason": "The question has a number with a unit (%, cm/s, psi, kPa) \u2014 that goes to code, not to embeddings.",
-      "answer": {
-        "question": "Is 30% oxygen inside our data for PMMA?",
-        "verdict": "BEYOND",
-        "sentence": "NASA's BASS-II tests cover 13.6\u201322.2% oxygen, so 30.0% oxygen is beyond what was tested \u2014 we can only show the closest tests, not an answer for that condition.",
-        "evidence": [
-          {
-            "test_id": "B1",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": null,
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          },
-          {
-            "test_id": "B2",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": null,
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          },
-          {
-            "test_id": "B3",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "2",
-            "airflow_end_cm_s": null,
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          }
-        ],
-        "nearest_evidence": {
-          "text": "Nearest evidence beyond BASS-II: Saffire V tests V-2 to V-4, 25.4\u201326.2% oxygen at 70.7\u201372.6 kPa and 20 cm/s flow \u2014 still below a 30%+ oxygen Moon cabin at 10.2 psi or less.",
-          "source": "Urban et al., ICES 2021, Saffire IV/V paper, Table 1 (NTRS 20210011521)",
-          "numbers": [
-            25.4,
-            26.2,
-            70.7,
-            72.6,
-            20.0,
-            30.0,
-            10.2
-          ]
-        },
-        "unknown": [
-          "airflow_cm_s (not given for this question)",
-          "outcome (not in the PSI-25 CSV \u2014 only in the BASS-II report Appendix A)"
-        ],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": true,
-          "unverified": []
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "What about oxygen with no value given?",
-      "path": "code",
-      "reason": "The question is about oxygen or airflow but gives no value \u2014 code asks for one (NEED_OXYGEN) instead of guessing from text.",
-      "answer": {
-        "question": "What about oxygen with no value given?",
-        "verdict": "NEED_OXYGEN",
-        "sentence": "I need an oxygen value to answer that \u2014 what oxygen level are you asking about?",
-        "evidence": [],
-        "unknown": [
-          "oxygen_pct"
-        ],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": true,
-          "unverified": []
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "Which material was tested at the highest oxygen?",
-      "path": "code",
-      "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min.",
-      "answer": {
-        "question": "Which material was tested at the highest oxygen?",
-        "verdict": "INSIDE",
-        "sentence": "The highest oxygen tested is 22.2%, in 14 tests (B1, B2, B3, B4, B5, B7, B12, F1, M1, M2, M5, M14, O1, O2) \u2014 materials: Nomex, PMMA / other.",
-        "evidence": [
-          {
-            "test_id": "B1",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "B2",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "B3",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "2",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "B4",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "B5",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "B7",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "2",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "B12",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "2",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "F1",
-            "material": "Nomex",
-            "material_form": "cloth",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "9.5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "M1",
-            "material": "PMMA / other",
-            "material_form": "slab",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "10",
-            "airflow_end_cm_s": "8",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "M2",
-            "material": "PMMA / other",
-            "material_form": "slab",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "20",
-            "airflow_end_cm_s": "15",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "M5",
-            "material": "PMMA / other",
-            "material_form": "slab",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "20",
-            "airflow_end_cm_s": "13",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "M14",
-            "material": "PMMA / other",
-            "material_form": "slab",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "10",
-            "airflow_end_cm_s": "8",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "O1",
-            "material": "PMMA / other",
-            "material_form": "rod",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "20",
-            "airflow_end_cm_s": "10",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "O2",
-            "material": "PMMA / other",
-            "material_form": "rod",
-            "oxygen_pct": "22.2",
-            "airflow_cm_s": "0",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          }
-        ],
-        "nearest_evidence": null,
-        "unknown": [],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": true,
-          "unverified": []
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "What is the lowest oxygen tested?",
-      "path": "code",
-      "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min.",
-      "answer": {
-        "question": "What is the lowest oxygen tested?",
-        "verdict": "INSIDE",
-        "sentence": "The lowest oxygen tested is 13.6%, in 1 test (O12) \u2014 materials: PMMA / other.",
-        "evidence": [
-          {
-            "test_id": "O12",
-            "material": "PMMA / other",
-            "material_form": "rod",
-            "oxygen_pct": "13.6",
-            "airflow_cm_s": "",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          }
-        ],
-        "nearest_evidence": null,
-        "unknown": [],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": true,
-          "unverified": []
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "What is the highest airflow tested?",
-      "path": "code",
-      "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min.",
-      "answer": {
-        "question": "What is the highest airflow tested?",
-        "verdict": "INSIDE",
-        "sentence": "The highest airflow tested is 49.0 cm/s, in 2 tests (O5b, O13a) \u2014 materials: PMMA / other.",
-        "evidence": [
-          {
-            "test_id": "O5b",
-            "material": "PMMA / other",
-            "material_form": "rod",
-            "oxygen_pct": "14.2",
-            "airflow_cm_s": "49",
-            "airflow_end_cm_s": "5",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "O13a",
-            "material": "PMMA / other",
-            "material_form": "rod",
-            "oxygen_pct": "15.9",
-            "airflow_cm_s": "49",
-            "airflow_end_cm_s": "44",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          }
-        ],
-        "nearest_evidence": null,
-        "unknown": [],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": true,
-          "unverified": []
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "Which SIBAL test had the lowest airflow?",
-      "path": "code",
-      "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min.",
-      "answer": {
-        "question": "What is the lowest airflow tested?",
-        "verdict": "INSIDE",
-        "sentence": "The lowest airflow tested is 5.0 cm/s, in 14 tests (T6, T10, T11, T12, T13, T14, T16, T18, T25, T26, T27, T28a, T28b, T29) \u2014 materials: SIBAL.",
-        "evidence": [
-          {
-            "test_id": "T6",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "18.8",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "2",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T10",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "16.4",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T11",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "17.1",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T12",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "16.8",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T13",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "17.5",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "1",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T14",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "16.9",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "3",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T16",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "17.6",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "3",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T18",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "17.4",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "2",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T25",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "20.8",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "2.5",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T26",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "20.8",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "2.5",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T27",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "20.7",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "2",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T28a",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "20.7",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T28b",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "20.7",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          },
-          {
-            "test_id": "T29",
-            "material": "SIBAL",
-            "material_form": "cloth",
-            "oxygen_pct": "20.7",
-            "airflow_cm_s": "5",
-            "airflow_end_cm_s": "2",
-            "outcome": "",
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-            "notes": ""
-          }
-        ],
-        "nearest_evidence": null,
-        "unknown": [],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": true,
-          "unverified": []
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "Is 10 cm/s airflow inside our data?",
-      "path": "code",
-      "reason": "The question has a number with a unit (%, cm/s, psi, kPa) \u2014 that goes to code, not to embeddings.",
-      "answer": {
-        "question": "Is 10 cm/s airflow inside our data?",
-        "verdict": "INSIDE",
-        "sentence": "10.0 cm/s airflow is inside the tested range (airflow in the 129 tests runs 0.0\u201349.0 cm/s, and the BASS-II duct goes to about 55 cm/s), so the rows below are direct evidence.",
-        "evidence": [
-          {
-            "test_id": "B8",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "21",
-            "airflow_cm_s": "10",
-            "airflow_end_cm_s": null,
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          },
-          {
-            "test_id": "B13",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "21",
-            "airflow_cm_s": "10",
-            "airflow_end_cm_s": "5",
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          },
-          {
-            "test_id": "B15",
-            "material": "PMMA / other",
-            "material_form": "film",
-            "oxygen_pct": "21",
-            "airflow_cm_s": "10",
-            "airflow_end_cm_s": null,
-            "outcome": null,
-            "source": "PSI-25",
-            "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-          }
-        ],
-        "nearest_evidence": null,
-        "unknown": [
-          "outcome (not in the PSI-25 CSV \u2014 only in the BASS-II report Appendix A)"
-        ],
-        "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
-        "sources": [
-          "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-        ],
-        "number_check": {
-          "ok": false,
-          "unverified": [
-            "49.0 cm/s is not an airflow value in the evidence rows",
-            "55 cm/s is not an airflow value in the evidence rows"
-          ]
-        }
-      },
-      "retrieval": null
-    },
-    {
-      "question": "What sensors measured oxygen?",
-      "path": "rag",
-      "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval.",
-      "answer": null,
-      "retrieval": {
-        "match": true,
-        "results": [
-          {
-            "entry": {
-              "id": "BASS",
-              "psi_id": "PSI-26",
-              "kind": "investigation",
-              "text": "BASS \u2014 Burning and Suppression of Solids (PSI-26): How solid fuels burn in microgravity in a flow duct the first version of this experiment. Fuels: Thin and thick flat samples, acrylic spheres, and candles. Conditions: Microgravity wind tunnel in the Microgravity Science Glovebox on the ISS with airflow up to 40 cm/s. Sensors: Video camera with data overlay and 35-mm still camera. How it differs: The original BASS experiment; BASS-II (PSI-25) is its follow-up with more tests and lower oxygen levels.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
-              "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (BASS hardware section) and PSI page"
-            },
-            "score": 2.0,
-            "method": "keyword"
-          },
-          {
-            "entry": {
-              "id": "BASS-II",
-              "psi_id": "PSI-25",
-              "kind": "investigation",
-              "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-              "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
-            },
-            "score": 2.0,
-            "method": "keyword"
-          },
-          {
-            "entry": {
-              "id": "SAME",
-              "psi_id": "PSI-102",
-              "kind": "investigation",
-              "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
-              "source_notes": "Objective and sensor text: PSI investigation page summary"
-            },
-            "score": 2.0,
-            "method": "keyword"
-          }
-        ],
-        "method": "keyword",
-        "best_score": 2.0
-      }
-    },
-    {
-      "question": "How does BASS differ from BASS-II?",
-      "path": "rag",
-      "reason": "The question names an investigation (PSI ID or name) \u2014 that is a meaning question, answered from the text corpus.",
-      "answer": null,
-      "retrieval": {
-        "match": true,
-        "results": [
-          {
-            "entry": {
-              "id": "BASS",
-              "psi_id": "PSI-26",
-              "kind": "investigation",
-              "text": "BASS \u2014 Burning and Suppression of Solids (PSI-26): How solid fuels burn in microgravity in a flow duct the first version of this experiment. Fuels: Thin and thick flat samples, acrylic spheres, and candles. Conditions: Microgravity wind tunnel in the Microgravity Science Glovebox on the ISS with airflow up to 40 cm/s. Sensors: Video camera with data overlay and 35-mm still camera. How it differs: The original BASS experiment; BASS-II (PSI-25) is its follow-up with more tests and lower oxygen levels.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
-              "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (BASS hardware section) and PSI page"
-            },
-            "score": 1.0,
-            "method": "exact"
-          },
-          {
-            "entry": {
-              "id": "BASS-II",
-              "psi_id": "PSI-25",
-              "kind": "investigation",
-              "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-              "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
-            },
-            "score": 1.0,
-            "method": "exact"
-          }
-        ],
-        "method": "exact",
-        "best_score": 1.0
-      }
-    },
-    {
-      "question": "Which investigation studies smoke detection?",
-      "path": "rag",
-      "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval.",
-      "answer": null,
-      "retrieval": {
-        "match": true,
-        "results": [
-          {
-            "entry": {
-              "id": "SAME",
-              "psi_id": "PSI-102",
-              "kind": "investigation",
-              "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
-              "source_notes": "Objective and sensor text: PSI investigation page summary"
-            },
-            "score": 2.0,
-            "method": "keyword"
-          },
-          {
-            "entry": {
-              "id": "SAME-R",
-              "psi_id": "PSI-101",
-              "kind": "investigation",
-              "text": "SAME-R \u2014 Smoke Aerosol Measurement Experiment - Reflight (PSI-101): Repeat and extend the smoke detection measurements. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Reflight of SAME with more runs and conditions.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
-              "source_notes": "Objective and sensor text: PSI investigation page summary"
-            },
-            "score": 2.0,
-            "method": "keyword"
-          },
-          {
-            "entry": {
-              "id": "BASS-II",
-              "psi_id": "PSI-25",
-              "kind": "investigation",
-              "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
-              "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-              "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
-            },
-            "score": 1.0,
-            "method": "keyword"
-          }
-        ],
-        "method": "keyword",
-        "best_score": 2.0
-      }
-    },
-    {
-      "question": "What is the best pizza topping?",
-      "path": "rag",
-      "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval.",
-      "answer": null,
-      "retrieval": {
-        "match": false,
-        "results": [],
-        "method": "keyword",
-        "best_score": 0.0
-      }
+ "note": "Sample ask() responses for the web lane, one per answer type. Generated from the 200-row tests.json (Lane A) with v7 code, Nov 14, 2026. RAG samples use the keyword fallback in this file (no model installed here); on a machine with sentence-transformers installed the same ask() call returns embedding retrieval instead.",
+ "samples": [
+  {
+   "question": "What about 20% oxygen?",
+   "path": "code",
+   "answer": {
+    "question": "What about 20% oxygen?",
+    "verdict": "INSIDE",
+    "sentence": "20.0% oxygen is inside the tested range (13.6\u201322.2% oxygen, 200 tests), so the rows below are direct evidence for this condition.",
+    "evidence": [
+     {
+      "test_id": "M11",
+      "material": "PMMA",
+      "material_form": "sheet",
+      "oxygen_pct": 20.0,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": 12,
+      "outcome": "quenched",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "P18",
+      "material": "PMMA",
+      "material_form": "rod",
+      "oxygen_pct": 20.0,
+      "airflow_cm_s": 2,
+      "airflow_end_cm_s": null,
+      "outcome": "quenched",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "P22b",
+      "material": "PMMA",
+      "material_form": "rod",
+      "oxygen_pct": 20.0,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": null,
+      "outcome": "quenched",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     }
+    ],
+    "nearest_evidence": null,
+    "unknown": [
+     "airflow_cm_s (not given for this question)"
+    ],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
     }
-  ]
+   },
+   "retrieval": null,
+   "reason": "The question has a number with a unit (%, cm/s, psi, kPa) \u2014 that goes to code, not to embeddings."
+  },
+  {
+   "question": "Is 30% oxygen inside our data for PMMA?",
+   "path": "code",
+   "answer": {
+    "question": "Is 30% oxygen inside our data for PMMA?",
+    "verdict": "BEYOND",
+    "sentence": "NASA's tests cover PMMA 13.6\u201322.2% oxygen, so 30.0% oxygen is beyond what was tested \u2014 we can only show the closest tests, not an answer for that condition.",
+    "evidence": [
+     {
+      "test_id": "B1",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": 5,
+      "outcome": "quenched",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "B2",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": 5,
+      "outcome": null,
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "B3",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 2,
+      "airflow_end_cm_s": 2,
+      "outcome": null,
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     }
+    ],
+    "nearest_evidence": {
+     "text": "Nearest evidence beyond BASS-II: Saffire V tests V-2 to V-4, 25.4\u201326.2% oxygen at 70.7\u201372.6 kPa and 20 cm/s flow \u2014 still below a 30%+ oxygen Moon cabin at 10.2 psi or less.",
+     "source": "Urban et al., ICES 2021, Saffire IV/V paper, Table 1 (NTRS 20210011521)",
+     "numbers": [
+      25.4,
+      26.2,
+      70.7,
+      72.6,
+      20.0,
+      30.0,
+      10.2
+     ]
+    },
+    "unknown": [
+     "airflow_cm_s (not given for this question)",
+     "outcome (not recorded for some evidence rows \u2014 not guessed)"
+    ],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question has a number with a unit (%, cm/s, psi, kPa) \u2014 that goes to code, not to embeddings."
+  },
+  {
+   "question": "What about oxygen with no value given?",
+   "path": "code",
+   "answer": {
+    "question": "What about oxygen with no value given?",
+    "verdict": "NEED_OXYGEN",
+    "sentence": "I need an oxygen value to answer that \u2014 what oxygen level are you asking about?",
+    "evidence": [],
+    "unknown": [
+     "oxygen_pct"
+    ],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question is about oxygen or airflow but gives no value \u2014 code asks for one (NEED_OXYGEN) instead of guessing from text."
+  },
+  {
+   "question": "Which material was tested at the highest oxygen?",
+   "path": "code",
+   "answer": {
+    "question": "Which material was tested at the highest oxygen?",
+    "verdict": "INSIDE",
+    "sentence": "The highest oxygen tested is 22.2%, in 14 tests (B1, B2, B3, B4, B5, B7, B12, F1, M1, M2, M5, M14, O1, O2) \u2014 materials: Nomex, PMMA.",
+    "evidence": [
+     {
+      "test_id": "B1",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": 5,
+      "outcome": "quenched",
+      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test B1, GMT 050; oxygen and flow from PSI-25",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Ignited very quickly, turned flow off after spread halfway; flame extinguished very quickly; and sooty with blue leading edge",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "B2",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": 5,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "No stills taken, cable came loose; not quite a straight on edge view",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "o2_end_suspect",
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "B3",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 2,
+      "airflow_end_cm_s": 2,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Probably 20.6 O2 to start; lower flow flames much more blue overall; still some soot though",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "B4",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": 5,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Bubble layer thickness increases with sample thickness",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "B5",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": 5,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Repeat of B2 test conditions, to get top view images; question the 20.9 reading; all others were 20.6 this day",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "B7",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 2,
+      "airflow_end_cm_s": 2,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Very long bubble layer",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "B12",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 2,
+      "airflow_end_cm_s": 2,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Mostly blue, soot only on bottom",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "F1",
+      "material": "Nomex",
+      "material_form": "unknown",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 9.5,
+      "airflow_end_cm_s": 9.5,
+      "outcome": "no_ignition",
+      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test F1, GMT 050; oxygen and flow from PSI-25",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Ignited briefly but did not spread at all and extinguished while the igniter was still on",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "concurrent",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "M1",
+      "material": "PMMA",
+      "material_form": "sheet",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": 8,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Prolonged ignition, flame initially on both sides, after igniter off and flame moved away from end, bottom flame died and top flame became all blue and small; very slow propagation; changed flow from 10 to 8 cm/s and flame shrank to a circle; spread just over 1/3 of sample when we ran out of camera card, and put flame out by turning off flow",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "M2",
+      "material": "PMMA",
+      "material_form": "sheet",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 20,
+      "airflow_end_cm_s": 14,
+      "outcome": "quenched",
+      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test M2, GMT 51; oxygen and flow from PSI-25",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Ignite at 20 cm/s, turn down to 15 cm/s after spread away from igniter; seemed steady, so turned down to 13 cm/s; flame got very dim, so increased flow to 14 cm/s, but it self- extinguished",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "M5",
+      "material": "PMMA",
+      "material_form": "sheet",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 20,
+      "airflow_end_cm_s": 5,
+      "outcome": "quenched",
+      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test M5, GMT 51; oxygen and flow from PSI-25",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Rick ignited while we were loss of signal and out of contact with ISS, unfortunately; ignition was ~3 min per his verbal call down when we came back; flame already burning ~1/3 of sample, both sides, long and sooty; more vapor jetting on bottom due to molten ball attached there, visible when lights on to change camera card; turned down to 10 cm/s, then further down in increments to 5 cm/s; extinguished at 5 cm/s after prolonged flashing; during soot cleaning, Rick noticed damage to front door corner by the switches; He sent pictures down for us to evaluate for damage; CO reading posttest was off-scale; came back during purge reading 500",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "M14",
+      "material": "PMMA",
+      "material_form": "sheet",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": "",
+      "outcome": "quenched",
+      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test M14, GMT 51; oxygen and flow from PSI-25",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Prolonged ignition, followed by flow reduction after flame moved away from igniter region and spread steadily; flame self-extinguished at an air reading of 9 cm/s.",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "opposed",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "O1",
+      "material": "PMMA",
+      "material_form": "rod",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 20,
+      "airflow_end_cm_s": 1,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Bracket test with decreasing flows; very sooty long flame at high flows; rod very thinned out and was wobbling due to vapor jetting later in test; Rick broke it off holder during readjustments",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "unknown",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "O2",
+      "material": "PMMA",
+      "material_form": "rod",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 0,
+      "airflow_end_cm_s": 0,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Ignited at 2 cm/s, and got dim flame that got sooty with lots of vapor jetting, reduced flow to 1.5 pot and got less vapor jetting test; still sooty at these low flows",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "unknown",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": true
+     }
+    ],
+    "nearest_evidence": null,
+    "unknown": [],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min."
+  },
+  {
+   "question": "What is the lowest oxygen tested?",
+   "path": "code",
+   "answer": {
+    "question": "What is the lowest oxygen tested?",
+    "verdict": "INSIDE",
+    "sentence": "The lowest oxygen tested is 13.6%, in 1 test (O12) \u2014 materials: PMMA.",
+    "evidence": [
+     {
+      "test_id": "O12",
+      "material": "PMMA",
+      "material_form": "rod",
+      "oxygen_pct": 13.6,
+      "airflow_cm_s": "",
+      "airflow_end_cm_s": "",
+      "outcome": "no_ignition",
+      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test O12, GMT 189; oxygen and flow from PSI-25",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "No sustained flame at any flow, flame with igniter but died immediately upon igniter removal, HCL 12.3",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "unknown",
+      "flags": [
+       "outcome_from_report_notes"
+      ],
+      "low_flow_uncertain": false
+     }
+    ],
+    "nearest_evidence": null,
+    "note": "O12, the lowest-oxygen test at 13.6%, never ignited \u2014 the PSI-25 CSV's Air display for O12 reads 'no ign at any flow'.",
+    "unknown": [],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min."
+  },
+  {
+   "question": "What is the highest airflow tested?",
+   "path": "code",
+   "answer": {
+    "question": "What is the highest airflow tested?",
+    "verdict": "INSIDE",
+    "sentence": "The highest airflow tested is 53.0 cm/s, in 1 test (T17) \u2014 materials: SIBAL.",
+    "evidence": [
+     {
+      "test_id": "T17",
+      "material": "SIBAL",
+      "material_form": "cloth",
+      "oxygen_pct": 16.9,
+      "airflow_cm_s": 6,
+      "airflow_end_cm_s": 53,
+      "outcome": "burning",
+      "outcome_source": "Zhao et al. 2015, NASA 20150008962, Appendix, GMT178-T17; oxygen and flow from PSI-25 test T17",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "No Blow-off",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "concurrent",
+      "flags": [
+       "outcome_from_zhao"
+      ],
+      "low_flow_uncertain": false
+     }
+    ],
+    "nearest_evidence": null,
+    "note": null,
+    "unknown": [],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min."
+  },
+  {
+   "question": "Which SIBAL test had the lowest airflow?",
+   "path": "code",
+   "answer": {
+    "question": "What is the lowest airflow tested?",
+    "verdict": "INSIDE",
+    "sentence": "The lowest airflow tested for SIBAL is 1.0 cm/s, in 3 tests (T4, T5, T13) \u2014 materials: SIBAL.",
+    "evidence": [
+     {
+      "test_id": "T4",
+      "material": "SIBAL",
+      "material_form": "cloth",
+      "oxygen_pct": 18.7,
+      "airflow_cm_s": 9,
+      "airflow_end_cm_s": 1,
+      "outcome": "quenched",
+      "outcome_source": "Zhao et al. 2015, NASA 20150008962, Appendix, GMT45-T4; oxygen and flow from PSI-25 test T4",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Quenched",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "concurrent",
+      "flags": [
+       "outcome_from_zhao"
+      ],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "T5",
+      "material": "SIBAL",
+      "material_form": "cloth",
+      "oxygen_pct": 18.8,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": 1,
+      "outcome": "",
+      "outcome_source": "",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "concurrent",
+      "flags": [],
+      "low_flow_uncertain": false
+     },
+     {
+      "test_id": "T13",
+      "material": "SIBAL",
+      "material_form": "cloth",
+      "oxygen_pct": 17.5,
+      "airflow_cm_s": 5,
+      "airflow_end_cm_s": 1,
+      "outcome": "quenched",
+      "outcome_source": "Zhao et al. 2015, NASA 20150008962, Appendix, GMT100-T13; oxygen and flow from PSI-25 test T13",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "notes": "Quenched",
+      "pressure_kPa": null,
+      "spread_rate": null,
+      "direction": "concurrent",
+      "flags": [
+       "outcome_from_zhao"
+      ],
+      "low_flow_uncertain": false
+     }
+    ],
+    "nearest_evidence": null,
+    "note": null,
+    "unknown": [],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question compares oxygen or airflow (highest/lowest) \u2014 that goes to code, which can actually compute a max or min."
+  },
+  {
+   "question": "Is 10 cm/s airflow inside our data?",
+   "path": "code",
+   "answer": {
+    "question": "Is 10 cm/s airflow inside our data?",
+    "verdict": "INSIDE",
+    "sentence": "10.0 cm/s airflow is inside the tested range (airflow in the 200 tests runs 0.0\u201353.0 cm/s, and the BASS-II duct goes to about 55 cm/s), so the rows below are direct evidence.",
+    "evidence": [
+     {
+      "test_id": "B8",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 21.0,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": null,
+      "outcome": "burning",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "B13",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 21.0,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": 1,
+      "outcome": "quenched",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "B15",
+      "material": "PMMA",
+      "material_form": "film",
+      "oxygen_pct": 21.0,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": null,
+      "outcome": "burning",
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     }
+    ],
+    "nearest_evidence": null,
+    "unknown": [],
+    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+    "sources": [
+     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    ],
+    "number_check": {
+     "ok": true,
+     "unverified": []
+    }
+   },
+   "retrieval": null,
+   "reason": "The question has a number with a unit (%, cm/s, psi, kPa) \u2014 that goes to code, not to embeddings."
+  },
+  {
+   "question": "What sensors measured oxygen?",
+   "path": "rag",
+   "answer": null,
+   "retrieval": {
+    "match": true,
+    "results": [
+     {
+      "entry": {
+       "id": "BASS",
+       "psi_id": "PSI-26",
+       "kind": "investigation",
+       "text": "BASS \u2014 Burning and Suppression of Solids (PSI-26): How solid fuels burn in microgravity in a flow duct the first version of this experiment. Fuels: Thin and thick flat samples, acrylic spheres, and candles. Conditions: Microgravity wind tunnel in the Microgravity Science Glovebox on the ISS with airflow up to 40 cm/s. Sensors: Video camera with data overlay and 35-mm still camera. How it differs: The original BASS experiment; BASS-II (PSI-25) is its follow-up with more tests and lower oxygen levels.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (BASS hardware section) and PSI page"
+      },
+      "score": 2.0,
+      "method": "keyword"
+     },
+     {
+      "entry": {
+       "id": "BASS-II",
+       "psi_id": "PSI-25",
+       "kind": "investigation",
+       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
+      },
+      "score": 2.0,
+      "method": "keyword"
+     },
+     {
+      "entry": {
+       "id": "SAME",
+       "psi_id": "PSI-102",
+       "kind": "investigation",
+       "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+       "source_notes": "Objective and sensor text: PSI investigation page summary"
+      },
+      "score": 2.0,
+      "method": "keyword"
+     }
+    ],
+    "method": "keyword",
+    "best_score": 2.0
+   },
+   "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
+  },
+  {
+   "question": "How does BASS differ from BASS-II?",
+   "path": "rag",
+   "answer": null,
+   "retrieval": {
+    "match": true,
+    "results": [
+     {
+      "entry": {
+       "id": "BASS",
+       "psi_id": "PSI-26",
+       "kind": "investigation",
+       "text": "BASS \u2014 Burning and Suppression of Solids (PSI-26): How solid fuels burn in microgravity in a flow duct the first version of this experiment. Fuels: Thin and thick flat samples, acrylic spheres, and candles. Conditions: Microgravity wind tunnel in the Microgravity Science Glovebox on the ISS with airflow up to 40 cm/s. Sensors: Video camera with data overlay and 35-mm still camera. How it differs: The original BASS experiment; BASS-II (PSI-25) is its follow-up with more tests and lower oxygen levels.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (BASS hardware section) and PSI page"
+      },
+      "score": 1.0,
+      "method": "exact"
+     },
+     {
+      "entry": {
+       "id": "BASS-II",
+       "psi_id": "PSI-25",
+       "kind": "investigation",
+       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
+      },
+      "score": 1.0,
+      "method": "exact"
+     }
+    ],
+    "method": "exact",
+    "best_score": 1.0
+   },
+   "reason": "The question names an investigation (PSI ID or name) \u2014 that is a meaning question, answered from the text corpus."
+  },
+  {
+   "question": "Which investigation studies smoke detection?",
+   "path": "rag",
+   "answer": null,
+   "retrieval": {
+    "match": true,
+    "results": [
+     {
+      "entry": {
+       "id": "SAME",
+       "psi_id": "PSI-102",
+       "kind": "investigation",
+       "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+       "source_notes": "Objective and sensor text: PSI investigation page summary"
+      },
+      "score": 2.0,
+      "method": "keyword"
+     },
+     {
+      "entry": {
+       "id": "SAME-R",
+       "psi_id": "PSI-101",
+       "kind": "investigation",
+       "text": "SAME-R \u2014 Smoke Aerosol Measurement Experiment - Reflight (PSI-101): Repeat and extend the smoke detection measurements. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Reflight of SAME with more runs and conditions.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+       "source_notes": "Objective and sensor text: PSI investigation page summary"
+      },
+      "score": 2.0,
+      "method": "keyword"
+     },
+     {
+      "entry": {
+       "id": "BASS-II",
+       "psi_id": "PSI-25",
+       "kind": "investigation",
+       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
+      },
+      "score": 1.0,
+      "method": "keyword"
+     }
+    ],
+    "method": "keyword",
+    "best_score": 2.0
+   },
+   "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
+  },
+  {
+   "question": "What is the best pizza topping?",
+   "path": "rag",
+   "answer": null,
+   "retrieval": {
+    "match": false,
+    "results": [],
+    "method": "keyword",
+    "best_score": 0.0
+   },
+   "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
+  }
+ ]
 }

@@ -1,0 +1,1287 @@
+[
+  {
+    "psi_id": "PSI-117",
+    "title": "Effect of External Thermo-Convective Perturbation on Cool Flame Dynamics: A Multidimensional Multi-Physics CFD Analysis",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-117",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Ground Investigation",
+    "fuel_type": "liquid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "ground",
+    "is_flight": false,
+    "has_data_table": false,
+    "has_data_table_note": "page says 'No associated Experimental Table' (pasted page text)",
+    "test_count": null,
+    "test_count_source": "not counted (no table of ours for this id)",
+    "summary": "Uses NASA's FLEX flight data to build 3-D computer models of how outside heat and airflow disturbances change cool flames around fuel droplets in microgravity.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 0,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is liquid, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Droplet, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "no data table",
+        "points": 0
+      },
+      {
+        "reason": "not a flight experiment",
+        "points": 0
+      },
+      {
+        "reason": "gravity is ground, not microgravity",
+        "points": 0
+      },
+      {
+        "reason": "test count missing",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-117",
+    "sub_research_area": "Droplet",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/gz0q-b577",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-69, PSI-142",
+    "page_released": "10-Jun-2026"
+  },
+  {
+    "psi_id": "PSI-159",
+    "title": "Advanced Combustion via Microgravity Experiments / Cool Flames Investigation with Gases (ACME CFI-G)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-159",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 1016,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 1016' (not counted by us; the page count may include one extra line)",
+    "summary": "Flies spherical gas flames on the space station to find when cool diffusion flames burn propane, n-butane and n-pentane, to test models of cool-flame chemistry.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 6,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Flames of Gaseous Fuels, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "1016 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-159",
+    "sub_research_area": "Flames of Gaseous Fuels",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/cyt1-kh64",
+    "license": "CC0-1.0",
+    "sponsor": "NSF / CASIS",
+    "page_released": "20-Nov-2025"
+  },
+  {
+    "psi_id": "PSI-10",
+    "title": "Advanced Combustion via Microgravity Experiments / Flame Design (ACME/Flame Design)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 121,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 121' (not counted by us; the page count may include one extra line)",
+    "summary": "Finds when spherical gas flames (ethylene and methane) start making soot or go out in microgravity, as flow, dilution and pressure change.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 6,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Flames of Gaseous Fuels, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "121 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-10",
+    "sub_research_area": "Flames of Gaseous Fuels",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/w4zy-bt45",
+    "sponsor": "NASA",
+    "page_released": "20-Nov-2025"
+  },
+  {
+    "psi_id": "PSI-62",
+    "title": "Concurrent Flame Spread Modeling using Flamelet Generated Manifolds in Microgravity with Comparison to BASS Experiments using Two-Color Tomography",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-62",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Ground Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "ground",
+    "is_flight": false,
+    "has_data_table": false,
+    "has_data_table_note": "page says 'No associated Experimental Table' (pasted page text)",
+    "test_count": null,
+    "test_count_source": "not counted (no table of ours for this id)",
+    "summary": "Builds and tests computer models of flame spread in the same direction as the airflow in microgravity, using BASS and BASS-II results as the benchmark, to predict flammability limits of spacecraft materials.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 6,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "no data table",
+        "points": 0
+      },
+      {
+        "reason": "not a flight experiment",
+        "points": 0
+      },
+      {
+        "reason": "gravity is ground, not microgravity",
+        "points": 0
+      },
+      {
+        "reason": "test count missing",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-62",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/e9xp-ex83",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-25, PSI-26",
+    "sponsor": "NASA, PSI grant",
+    "page_released": "14-Nov-2025"
+  },
+  {
+    "psi_id": "PSI-60",
+    "title": "Computational and Experimental Analysis of SPICE Data Sets",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-60",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Ground Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "ground",
+    "is_flight": false,
+    "has_data_table": false,
+    "has_data_table_note": "page says 'No associated Experimental Table' (pasted page text)",
+    "test_count": null,
+    "test_count_source": "not counted (no table of ours for this id)",
+    "summary": "Re-analyzes over 1600 SPICE flame images with soot models to understand why soot forms differently in normal gravity and microgravity flames.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 0,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Gaseous, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "no data table",
+        "points": 0
+      },
+      {
+        "reason": "not a flight experiment",
+        "points": 0
+      },
+      {
+        "reason": "gravity is ground, not microgravity",
+        "points": 0
+      },
+      {
+        "reason": "test count missing",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-60",
+    "sub_research_area": "Gaseous",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/mzjm-yv57",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-107",
+    "sponsor": "NASA, PSI grant",
+    "page_released": "30-Sep-2025"
+  },
+  {
+    "psi_id": "PSI-142",
+    "title": "Quantitative Studies of Cool Flame Transitions at Radiation / Stretch Extinction Using Counterflow Flames",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-142",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Ground Investigation",
+    "fuel_type": "liquid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "ground",
+    "is_flight": false,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 9,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 9'; it is a data summary table (data sets and figures), not a list of burn tests",
+    "summary": "Uses FLEX flight data plus new simulations and ground counterflow flame tests to map when cool flames can and cannot burn.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 5,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is liquid, not solid",
+        "points": 0
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "not a flight experiment",
+        "points": 0
+      },
+      {
+        "reason": "gravity is ground, not microgravity",
+        "points": 0
+      },
+      {
+        "reason": "only 9 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-142",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/80qf-vj95",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-69",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-101",
+    "title": "Smoke Aerosol Measurement Experiment-Reflight (SAME-R)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "other",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 110,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 110'; the page text also says 66 flight test points were completed (not reconciled)",
+    "summary": "Reflew SAME on the space station to measure how big smoke particles from heated materials get in low gravity, with a new fire-retardant foam and wider test conditions.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 9,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is other, not solid",
+        "points": 0
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "110 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Test count 110 differs from the page's '66 test points' (not reconciled).",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-101",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/2np7-jv14",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-102",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-115",
+    "title": "Utilization of the Smoke Aerosol Measurement Experiment Data for Advanced Modeling and Simulation of Smoke Generation in Micro-Gravity",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-115",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Ground Investigation",
+    "fuel_type": "other",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "ground",
+    "is_flight": false,
+    "has_data_table": false,
+    "has_data_table_note": "page says 'No associated Experimental Table' (pasted page text)",
+    "test_count": null,
+    "test_count_source": "not counted (no table of ours for this id)",
+    "summary": "Simulates how smoke particles form and grow in Earth gravity and in microgravity to explain the differences.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 0,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is other, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Smoke Aerosol, Combustion Simulation, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "no data table",
+        "points": 0
+      },
+      {
+        "reason": "not a flight experiment",
+        "points": 0
+      },
+      {
+        "reason": "gravity is ground, not microgravity",
+        "points": 0
+      },
+      {
+        "reason": "test count missing",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-115",
+    "sub_research_area": "Smoke Aerosol, Combustion Simulation",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/q0v5-1v28",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-102",
+    "sponsor": "NASA, PSI grant",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-98",
+    "title": "Spacecraft Fire Safety Experiment-I (SAFFIRE-I)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text); matches our 2 rows",
+    "test_count": 2,
+    "test_count_source": "our PSI-98 table, counted by code",
+    "summary": "Burned a large SIBAL fabric sample on a Cygnus spacecraft at 20 cm/s to see how fast a big fire grows in low gravity and how its flammability limit compares to NASA's normal-gravity test.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 8,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "sub-research area is Spacecraft Fire, Smoke Distribution, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 2 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98",
+    "sub_research_area": "Spacecraft Fire, Smoke Distribution",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/0t15-1z43",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-99, PSI-100, PSI-26",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-39",
+    "title": "Cool Flames Investigation (CFI)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-39",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "liquid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 88,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 88' (not counted by us)",
+    "summary": "Burns n-dodecane and related fuel droplets on the space station at 0.25 to 5 atmospheres to study cool-flame behavior, helium dilution and extinction.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 6,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is liquid, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Droplets, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "88 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-39",
+    "sub_research_area": "Droplets",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/m6pj-a914",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-69",
+    "sponsor": "ISS National Lab / NSF",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-102",
+    "title": "Smoke and Aerosol Measurement Experiment (SAME)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "other",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 9,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 9' (not counted by us)",
+    "summary": "Measured how big smoke particles from overheated spacecraft materials get in low gravity, so smoke detectors can be designed for it.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 8,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is other, not solid",
+        "points": 0
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 9 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-102",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/gd4k-8h62",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-101",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-106",
+    "title": "Structure and Liftoff In Combustion Experiment (SLICE)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-106",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 13,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 13'; the page text also says 13 testing experiments (not counted by us)",
+    "summary": "Studies the shape and stability of small laminar gas diffusion flames, and the flow speed at which they lift off, in microgravity.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 5,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area missing",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 13 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: sub_research_area missing.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-106",
+    "sub_research_area": null,
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/pm12-rg61",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-107",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-99",
+    "title": "Spacecraft Fire Experiment-II (SAFFIRE-II)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text); the page count '1 - 5 of 16' includes note and camera lines; our 10 rows come from the 9 sample rows (2-7 split in two)",
+    "test_count": 10,
+    "test_count_source": "our PSI-99 table, counted by code (one sample row split in two)",
+    "summary": "Second Cygnus fire experiment: burned nine 5 cm by 29 cm samples (SIBAL, silicone and PMMA types, PMMA with Nomex) to measure fire growth and flammability limits in low gravity.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 8,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "sub-research area is Surface Combustion, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 10 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-99",
+    "sub_research_area": "Surface Combustion",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/2chp-m469",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-107",
+    "title": "Smoke Point In Co-flow Experiment (SPICE)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": false,
+    "has_data_table_note": "Experimental Table tab on the page shows '0 of 0' rows (pasted page text), although the file list mentions an experimental table",
+    "test_count": null,
+    "test_count_source": "not counted (no table of ours for this id)",
+    "summary": "Finds the smoke point of small gas jet flames (ethylene, propane, propylene) in microgravity, 526 flames in all according to the page.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 3,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Fire Safety, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "no data table",
+        "points": 0
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "test count missing",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-107",
+    "sub_research_area": "Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/9kbh-e962",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-100",
+    "title": "Spacecraft Fire Experiment-III (SAFFIRE-III)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text); matches our 2 rows",
+    "test_count": 2,
+    "test_count_source": "our PSI-100 table, counted by code",
+    "summary": "Third Cygnus fire experiment: burned SIBAL fabric at 30 cm/s, once with concurrent and once with opposed flow, to measure fire growth and flammability limits.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 11,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 2 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-100",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/040q-4h36",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-99, PSI-98",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024"
+  },
+  {
+    "psi_id": "PSI-21",
+    "title": "Advanced Combustion via Microgravity Experiments / Coflow Laminar Diffusion Flame (ACME CLD Flame)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-21",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 32,
+    "test_count_source": "our PSI-21 CSV: 32 test-day summary rows (PSI page shows 33); rows are days, not single burns",
+    "summary": "Measures weak and sooty methane and ethylene coflow flames in microgravity, as dilution and velocity change, to test computer models.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 6,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Flames of gaseous fuel, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "32 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Test count is day summaries, not single burns (see test_count_source).",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-21",
+    "sub_research_area": "Flames of gaseous fuel",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/23e1-9950",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "15-Sep-2023"
+  },
+  {
+    "psi_id": "PSI-25",
+    "title": "Burning and Suppression of Solids - II (BASS-II)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table '1 - 5 of 130'; our table has 129 data rows (the page count is one more, as the plan warned)",
+    "test_count": 129,
+    "test_count_source": "our PSI-25 table, counted by code",
+    "summary": "Burns solid samples such as fabric, plastic rods and films in a space station wind tunnel, at flows up to 40 cm/s and oxygen below 21%, to study ignition, spread and extinction for fire-safety models.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 12,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "129 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-25",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/4qc4-de67",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "related_investigation": "PSI-26",
+    "page_released": "31-Dec-2022"
+  },
+  {
+    "psi_id": "PSI-20",
+    "title": "Advanced Combustion via Microgravity Experiments - Burning Rate Emulator (ACME BRE)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-20",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 18,
+    "test_count_source": "our PSI-20 CSV: 18 day-summary rows (PSI page shows 19); rows are days, not single burns",
+    "summary": "Uses a porous gas burner to imitate a burning solid, so the burning rate and extinction in still microgravity air can be tied to material properties.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 5,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Flames of Gaseous Fuels, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 18 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Test count is day summaries, not single burns (see test_count_source).",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-20",
+    "sub_research_area": "Flames of Gaseous Fuels",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/vb93-3y72",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "15-Sep-2022"
+  },
+  {
+    "psi_id": "PSI-68",
+    "title": "Flame Extinguishment Experiment - 2 (FLEX-2)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-68",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "liquid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 9,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 9'; it is a grid of fuels and conditions, not single tests (not counted by us)",
+    "summary": "Burns single and mixed-fuel liquid droplets on the space station at 0.5 to 3 atmospheres and 10 to 40% oxygen to study extinction and soot.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 8,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is liquid, not solid",
+        "points": 0
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 9 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-68",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/byp8-h018",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "30-Sep-2019"
+  },
+  {
+    "psi_id": "PSI-22",
+    "title": "Advanced Combustion via Microgravity Experiments Electric-Field Effects on Laminar Diffusion Flames (ACME E-FIELD Flames)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-22",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 33,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 33'; it lists test days with flames ignited per day (not counted by us)",
+    "summary": "Studies how electric fields change small methane and ethylene gas diffusion flames, their soot and their ion current in microgravity.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 6,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Laminar Flames, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "33 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-22",
+    "sub_research_area": "Laminar Flames",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/se5a-8c73",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "related_investigation": "PSI-23",
+    "page_released": "15-Apr-2019"
+  },
+  {
+    "psi_id": "PSI-23",
+    "title": "Advanced Combustion via Microgravity Experiments - Structure and Response of Spherical Diffusion Flames (ACME s-Flame)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-23",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 19,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 19'; it lists test days with flames ignited per day (not counted by us)",
+    "summary": "Burns hydrogen, methane and ethylene mixtures from a spherical burner to test flame structure and extinction against detailed simulations.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 5,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area is Flames of gaseous fuels, not spacecraft fire safety",
+        "points": 0
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 19 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-23",
+    "sub_research_area": "Flames of gaseous fuels",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/k57n-p030",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "05-Apr-2018"
+  },
+  {
+    "psi_id": "PSI-69",
+    "title": "Flame Extinguishment Experiment (FLEX)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "liquid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 275,
+    "test_count_source": "PSI page shows the table as '1 - 5 of 275' (not counted by us)",
+    "summary": "Maps the flammability limits of burning liquid fuel droplets in microgravity and tests how well suppressant gases such as CO2, helium and SF6 work.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 9,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is liquid, not solid",
+        "points": 0
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "275 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-69",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/mbq8-0451",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "31-Jul-2016"
+  },
+  {
+    "psi_id": "PSI-26",
+    "title": "Burning and Suppression of Solids (BASS)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text)",
+    "test_count": 122,
+    "test_count_source": "our PSI-26 CSV: 122 table lines, of which 1 is a 'SOOT Cleaning' line and 121 are tests (PSI page shows 123)",
+    "summary": "Burned SIBAL fabric, PMMA spheres and other samples on the space station at flows up to 40 cm/s to link NASA's standard flammability test to real microgravity burning, and tested nitrogen as an extinguisher.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 12,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "122 tests (20 or more)",
+        "points": 1
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-26",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/58h4-dy80",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "related_investigation": "PSI-107, PSI-25",
+    "page_released": "30-Jun-2013"
+  },
+  {
+    "psi_id": "PSI-47",
+    "title": "Dust and Aerosol Measurement Feasibility Test / Dust and Aerosol Measurement Feasibility Test-2 (DAFT / DAFT-2)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-47",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-47",
+    "url_note": "page opened by the Lane A owner (screenshot, 2026-11-14)",
+    "research_area": "Combustion Science",
+    "sub_research_area": "Spacecraft Fire Safety",
+    "sub_research_area_note": "read from the PSI-47 page (screenshot)",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "other",
+    "fuel_type_basis": "judgement: smoke and aerosol measurement test, not a fuel burn",
+    "gravity": "micro",
+    "is_flight": true,
+    "flight_platform": "International Space Station (ISS)",
+    "has_data_table": true,
+    "has_data_table_note": "page has an Experimental Table tab (screenshot); our CSV not counted",
+    "test_count": 2,
+    "test_count_source": "our PSI-47 CSV: 2 dust-measurement sessions (D1, D2 on 2005 GMT 54 and 63); not burns",
+    "summary": "Tested whether smoke particle measuring instruments could work in microgravity, to reduce the risk for the SAME smoke experiment.",
+    "summary_basis": "written by us from the first lines of the Objectives text on the PSI-47 page (screenshot; text cut off)",
+    "doi": "10.60555/ztgj-d202",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-102",
+    "in_search_page_1": false,
+    "score": 8,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is other, not solid",
+        "points": 0
+      },
+      {
+        "reason": "research area is spacecraft fire safety",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 2 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's."
+  }
+]

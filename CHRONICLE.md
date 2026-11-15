@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-14 17:45 PT — Paridhi Singh — Ranking + swap Lane B to tests.json (v7)
+
+- What: Scored all 24 experiments in data/experiments.json with the Step 2 rules (solid +3, spacecraft fire safety +3, table +2, flight +2, microgravity +1, 20+ tests +1); ties by test count then title. Top: BASS-II 12, BASS 12, SAFFIRE-III 11. Lane B now reads data/tests.json (200 rows) via cards.rows_from_tests_json(): stats 200 tests, O2 13.6–22.2% at standard pressure, 32 rows above 21%. Saffire V rows stay labeled by pressure ("PMMA (Saffire V, 71.3 kPa)") and are excluded from extremes, so the highest oxygen tested stays 22.2% (14 tests). SIBAL range is now 16.4–22.1% (Saffire II joins at standard pressure). SIBAL lowest airflow is now 1.0 cm/s in 3 tests (T4, T5, T13) — T6 has no end flow recorded in tests.json for its "5 2 1 <1" Air display. Correction to the v5 entry above: highest airflow is 53.0 cm/s (T17), not 49.0 — O5b/O13a's 49 was a fan reading, not a flow (parser fix, v6). 45 unit tests pass; demo answers + ask samples regenerated, 0 number checks failing.
+- Why: Daksh's status check on main — ranking (Step 2) was the top remaining item, plus the swap to Lane A's tests.json once it landed, and the v5 review's airflow parser fix.
+- How: Written with SI assistance (Muse), reviewed by Paridhi Singh. Ranking computed from data/experiments.json; swap verified against the cloned repo (validate.py OK, 200 rows). Tested in the VM (keyword fallback for RAG): all 45 tests pass; embedding ranking to be confirmed on the Mac with the real model.
+- Check: python3 -m unittest test_classifier test_number_checker test_answer test_ranking test_swap -v; python3 ranking.py; python3 generate_samples.py; python3 answer.py; python3 rag.py.
+
 ## 2026-11-14 16:55 PT — Paridhi Singh — Address third RAG review (v5)
 
 - What: Router reordered (unit numbers and highest/lowest checked first, name check for investigations only); whole-word case-aware name matching (lowercase "same" and "flexible" no longer match SAME/FLEX); exact lookup returns every investigation named (BASS + BASS-II, all three Saffire, both ACME); added min_oxygen() (13.6%, O12), min_airflow() (0.0 cm/s, O2) and max_airflow() (49.0 cm/s, O5b and O13a) over the full 129 rows with all ties, number-checked; added ask(question) as the website's single call; demo_answers.json now has 6 answers (Q5 lowest oxygen, Q6 highest airflow).

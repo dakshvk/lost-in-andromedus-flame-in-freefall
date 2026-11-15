@@ -8,13 +8,45 @@
     Sources: links, kept small.
     Gravity note: every answer says the tests were in microgravity.
 
-v5 changes (PR #1 review, Daksh):
-- Min oxygen and min/max airflow now exist alongside max oxygen:
-  min_oxygen() (13.6%, test O12), min_airflow() (0.0 cm/s, test O2)
-  and max_airflow() (49.0 cm/s, tests O5b and O13a) over the full
-  129 rows, all ties returned, number-checked. Airflow uses
-  flow_start (first number in Air display); flow_end can run higher
-  (P14 ends at 85 cm/s) and is noted, not used for the max.
+v7 changes (Lane A swap, Nov 14):
+- Lane B now reads Lane A's data/tests.json (200 rows) when it sits
+  next to the repo: dataset_stats_tests_json() (total 200, O2
+  13.6–22.2% at standard pressure, 32 rows above 21%), and the
+  highest/lowest answers run over those rows. The PSI-25 CSV is the
+  fallback; the 6-row sample is the last resort.
+- Sentences say "NASA's tests" and "200 tests", not "BASS-II tests":
+  the dataset now spans BASS-II, Saffire I–III, Saffire IV/V and
+  Link et al. 2018.
+- Highest/lowest oxygen and airflow exclude the low-pressure
+  Saffire V rows (~71 kPa): the highest oxygen tested is 22.2%
+  (14 tests), not 26.2%. Those rows stay labeled by pressure and
+  are cited separately as nearest evidence for Moon-cabin questions.
+- build_airflow_answer quotes stats["total_tests"] instead of a
+  hard-coded 129, and its outcome unknown is conditional now.
+- "in 1 tests" fixed in answer_highest_oxygen.
+
+v6 changes (PR #1 review, Daksh, Nov 14):
+- Airflow parser fixed: the Air display column mixes transducer
+  readings (cm/s) with fan-pot settings (~0.3–2.7, after "pot" or
+  in parentheses: P14 ".85", P3b "0.85", P15 "0.36") and fan
+  readings (40–62: O5a "(49, 62, 49, 44, 42)", O5b "49", O13a
+  "49, 44, 42, ..."). The old parser took the first number, so
+  "highest airflow 49 cm/s (O5b, O13a)" and "P14 ends at 85 cm/s"
+  were pot/fan readings, not flows. cards._parse_air_display now
+  cuts at "pot", drops pot-sized parenthesised groups, and drops
+  numbers above the restrictor cap (35 cm/s with two restrictors,
+  55 otherwise). O5b's real flow is 5 cm/s (report: "Fan pot 1.3
+  (5 cm/s)"); O13a's real flows are (5, 2, 0).
+- Min/max airflow now use the lower of start/end (lowest) and the
+  higher of start/end (highest) per test, not start only: T25 and
+  T26 dropped to 2.5 cm/s during the test. Lowest-airflow answers
+  name the material ("for SIBAL"). Lowest oxygen (13.6%, O12)
+  notes that O12 never ignited (PSI-25 CSV Air display: "no ign
+  at any flow").
+- classify() now returns INVALID for oxygen outside 0–100%, and
+  BEYOND for a material with fewer than 3 rows on a real dataset
+  (20+ rows) — the "fewer than 3 rows means extrapolated" rule;
+  it does not apply to the 6-row sample.
 - ask(question, rows, stats=None) is the website's single call: it
   routes with rag.route() and returns the answer — code answers from
   classify()/max/min functions, RAG answers from retrieve().
@@ -30,8 +62,9 @@ v5 changes (PR #1 review, Daksh):
 """
 
 import csv
+import re
 
-from classifier import classify, dataset_range, material_ranges
+from classifier import classify, dataset_range, material_ranges, _same_material, AIRFLOW_MAX
 from number_checker import allowed_numbers_from_rows, check_answer_numbers
 
 PSI_25_URL = "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
@@ -46,6 +79,37 @@ def load_rows(path):
     """Load the frozen sample/full dataset. Blank = unknown, never guessed."""
     with open(path, encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
+
+
+def dataset_stats_tests_json(path):
+    """Derive the dataset stats from Lane A's data/tests.json (200 rows).
+
+    Returns {"total_tests", "o2_min", "o2_max", "rows_above_21"}.
+    o2_min/o2_max and rows_above_21 are computed over standard-pressure
+    rows only: the three Saffire V rows at 70.7–72.6 kPa stay labeled
+    by pressure and never join the normal ranges (open team decision).
+    The two context-only PSI-100 rows have no O2 and are skipped for
+    the range, but they count in total_tests (they are rows in the file).
+    Read the real file — do not type these numbers in.
+    """
+    import json
+
+    with open(path, encoding="utf-8") as f:
+        tests = json.load(f)
+    o2 = []
+    for t in tests:
+        pressure = t.get("pressure_kPa")
+        if pressure is not None and pressure < 90.0:
+            continue
+        value = t.get("o2_start")
+        if value is not None:
+            o2.append(float(value))
+    return {
+        "total_tests": len(tests),
+        "o2_min": min(o2),
+        "o2_max": max(o2),
+        "rows_above_21": sum(1 for v in o2 if v > 21.0),
+    }
 
 
 def dataset_stats(full_csv_path):
@@ -70,15 +134,30 @@ def dataset_stats(full_csv_path):
     }
 
 
+def _standard_pressure(row):
+    """True unless the row is a low-pressure Saffire V row (~71 kPa):
+    those stay labeled by pressure and never join the normal extremes
+    or ranges (open team decision, Nov 14). Rows from the PSI CSV or
+    the sample carry no pressure_kPa and count as standard pressure."""
+    pressure = row.get("pressure_kPa")
+    return pressure is None or pressure >= 90.0
+
+
 def max_oxygen(rows):
-    """The highest oxygen tested, over the rows given, with ALL ties.
+    """The highest oxygen tested, over the standard-pressure rows
+    given, with ALL ties.
 
     Returns {"max_oxygen": float, "test_ids": [...], "materials": [...]}.
-    Use the full 129 rows, not the 6-row sample: the sample's max is
+    Use the full dataset, not the 6-row sample: the sample's max is
     also 22.2%, but it only shows 3 of the 14 tests at that level.
+    The Saffire V rows (25.4–26.2% at ~71 kPa) are NOT counted here —
+    they stay labeled by pressure, and the nearest-evidence field
+    cites them separately for Moon-cabin questions.
     """
     best = None
     for row in rows:
+        if not _standard_pressure(row):
+            continue
         try:
             value = float(row["oxygen_pct"])
         except (KeyError, TypeError, ValueError):
@@ -87,7 +166,7 @@ def max_oxygen(rows):
             best = value
     if best is None:
         return {"max_oxygen": None, "test_ids": [], "materials": []}
-    ties = [r for r in rows if r.get("oxygen_pct") not in (None, "") and float(r["oxygen_pct"]) == best]
+    ties = [r for r in rows if _standard_pressure(r) and r.get("oxygen_pct") not in (None, "") and float(r["oxygen_pct"]) == best]
     return {
         "max_oxygen": best,
         "test_ids": [r["test_id"] for r in ties],
@@ -116,7 +195,8 @@ def answer_highest_oxygen(rows, stats=None):
     n = len(result["test_ids"])
     tests = ", ".join(result["test_ids"])
     sentence = (
-        f"The highest oxygen tested is {result['max_oxygen']}%, in {n} tests "
+        f"The highest oxygen tested is {result['max_oxygen']}%, in {n} "
+        f"test{'s' if n != 1 else ''} "
         f"({tests}) — materials: {', '.join(result['materials'])}."
     )
     evidence = [r for r in rows if r.get("test_id") in result["test_ids"]]
@@ -136,10 +216,12 @@ def answer_highest_oxygen(rows, stats=None):
 
 
 def min_oxygen(rows):
-    """The lowest oxygen tested, over the rows given, with ALL ties.
-    Full 129 rows: 13.6%, test O12 only."""
+    """The lowest oxygen tested, over the standard-pressure rows
+    given, with ALL ties. Full dataset: 13.6%, test O12 only."""
     best = None
     for row in rows:
+        if not _standard_pressure(row):
+            continue
         try:
             value = float(row["oxygen_pct"])
         except (KeyError, TypeError, ValueError):
@@ -148,7 +230,7 @@ def min_oxygen(rows):
             best = value
     if best is None:
         return {"min_oxygen": None, "test_ids": [], "materials": []}
-    ties = [r for r in rows if r.get("oxygen_pct") not in (None, "") and float(r["oxygen_pct"]) == best]
+    ties = [r for r in rows if _standard_pressure(r) and r.get("oxygen_pct") not in (None, "") and float(r["oxygen_pct"]) == best]
     return {
         "min_oxygen": best,
         "test_ids": [r["test_id"] for r in ties],
@@ -164,19 +246,45 @@ def _airflow_value(row):
         return None
 
 
+def _airflow_end(row):
+    """flow_end as a float, or None when the row has no second flow."""
+    try:
+        return float(row["airflow_end_cm_s"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def _flow_low(row):
+    """The lowest airflow a test actually saw: the lower of
+    flow_start and flow_end. T25 and T26 dropped to 2.5 cm/s during
+    the test, so their lowest is 2.5, not the 5.0 they started at."""
+    values = [v for v in (_airflow_value(row), _airflow_end(row)) if v is not None]
+    return min(values) if values else None
+
+
+def _flow_high(row):
+    """The highest airflow a test actually saw: the higher of
+    flow_start and flow_end."""
+    values = [v for v in (_airflow_value(row), _airflow_end(row)) if v is not None]
+    return max(values) if values else None
+
+
 def min_airflow(rows):
-    """The lowest airflow tested (flow_start), over the rows given,
-    with ALL ties. Full 129 rows: 0.0 cm/s, test O2 only."""
+    """The lowest airflow tested (lower of start/end per test), over
+    the standard-pressure rows given, with ALL ties. Rows with no flow
+    number at all (O12) are skipped."""
     best = None
     for row in rows:
-        value = _airflow_value(row)
+        if not _standard_pressure(row):
+            continue
+        value = _flow_low(row)
         if value is None:
             continue
         if best is None or value < best:
             best = value
     if best is None:
         return {"min_airflow": None, "test_ids": [], "materials": []}
-    ties = [r for r in rows if _airflow_value(r) == best]
+    ties = [r for r in rows if _standard_pressure(r) and _flow_low(r) == best]
     return {
         "min_airflow": best,
         "test_ids": [r["test_id"] for r in ties],
@@ -185,20 +293,22 @@ def min_airflow(rows):
 
 
 def max_airflow(rows):
-    """The highest airflow tested (flow_start), over the rows given,
-    with ALL ties. Full 129 rows: 49.0 cm/s, tests O5b and O13a.
-    flow_end can run higher (P14 ends at 85 cm/s) — that is a ramp
-    inside one test, not the starting airflow, so it is not the max."""
+    """The highest airflow tested (higher of start/end per test),
+    over the standard-pressure rows given, with ALL ties. After the
+    parser fix (v6), pot settings and fan readings are no longer
+    stored as airflow, so the old 49.0 cm/s (O5b, O13a) is gone."""
     best = None
     for row in rows:
-        value = _airflow_value(row)
+        if not _standard_pressure(row):
+            continue
+        value = _flow_high(row)
         if value is None:
             continue
         if best is None or value > best:
             best = value
     if best is None:
         return {"max_airflow": None, "test_ids": [], "materials": []}
-    ties = [r for r in rows if _airflow_value(r) == best]
+    ties = [r for r in rows if _standard_pressure(r) and _flow_high(r) == best]
     return {
         "max_airflow": best,
         "test_ids": [r["test_id"] for r in ties],
@@ -206,8 +316,11 @@ def max_airflow(rows):
     }
 
 
-def _extreme_answer(question, label, value, ties, rows, stats):
-    """One number-checked answer for a highest/lowest question."""
+def _extreme_answer(question, label, value, ties, rows, stats, material=None, note=None):
+    """One number-checked answer for a highest/lowest question.
+    When a material is named, the sentence says so ("lowest airflow
+    tested for SIBAL"). A note (e.g. O12 never ignited) is returned
+    as its own field, not folded into the sentence."""
     if value is None:
         return {
             "question": question,
@@ -215,6 +328,7 @@ def _extreme_answer(question, label, value, ties, rows, stats):
             "sentence": "No values for that are in the rows I was given.",
             "evidence": [],
             "nearest_evidence": None,
+            "note": note,
             "unknown": ["oxygen_pct"],
             "gravity_note": GRAVITY_NOTE,
             "sources": [PSI_25_URL],
@@ -222,8 +336,9 @@ def _extreme_answer(question, label, value, ties, rows, stats):
         }
     n = len(ties["test_ids"])
     tests = ", ".join(ties["test_ids"])
+    for_material = f" for {material}" if material else ""
     sentence = (
-        f"The {label} is {value}{'%' if 'oxygen' in label else ' cm/s'}, in {n} "
+        f"The {label}{for_material} is {value}{'%' if 'oxygen' in label else ' cm/s'}, in {n} "
         f"test{'s' if n != 1 else ''} ({tests}) — materials: "
         f"{', '.join(ties['materials'])}."
     )
@@ -236,6 +351,7 @@ def _extreme_answer(question, label, value, ties, rows, stats):
         "sentence": sentence,
         "evidence": evidence,
         "nearest_evidence": None,
+        "note": note,
         "unknown": [],
         "gravity_note": GRAVITY_NOTE,
         "sources": [PSI_25_URL],
@@ -243,28 +359,36 @@ def _extreme_answer(question, label, value, ties, rows, stats):
     }
 
 
-def answer_lowest_oxygen(rows, stats=None):
-    """Answer 'lowest oxygen tested?' with code, all ties."""
+def answer_lowest_oxygen(rows, stats=None, material=None):
+    """Answer 'lowest oxygen tested?' with code, all ties. When the
+    lowest test is O12 (13.6%), note that O12 never ignited — the
+    PSI-25 CSV's Air display for O12 reads 'no ign at any flow'."""
     result = min_oxygen(rows)
+    note = None
+    if "O12" in result["test_ids"]:
+        note = ("O12, the lowest-oxygen test at 13.6%, never ignited — "
+                "the PSI-25 CSV's Air display for O12 reads "
+                "'no ign at any flow'.")
     return _extreme_answer(
         "What is the lowest oxygen tested?", "lowest oxygen tested",
-        result["min_oxygen"], result, rows, stats)
+        result["min_oxygen"], result, rows, stats,
+        material=material, note=note)
 
 
-def answer_lowest_airflow(rows, stats=None):
+def answer_lowest_airflow(rows, stats=None, material=None):
     """Answer 'lowest airflow tested?' with code, all ties."""
     result = min_airflow(rows)
     return _extreme_answer(
         "What is the lowest airflow tested?", "lowest airflow tested",
-        result["min_airflow"], result, rows, stats)
+        result["min_airflow"], result, rows, stats, material=material)
 
 
-def answer_highest_airflow(rows, stats=None):
+def answer_highest_airflow(rows, stats=None, material=None):
     """Answer 'highest airflow tested?' with code, all ties."""
     result = max_airflow(rows)
     return _extreme_answer(
         "What is the highest airflow tested?", "highest airflow tested",
-        result["max_airflow"], result, rows, stats)
+        result["max_airflow"], result, rows, stats, material=material)
 
 
 def _material_rows(rows, material):
@@ -281,10 +405,12 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
     """Answer an airflow-only question ("Is 10 cm/s inside our
     data?"). Verdict from the BASS-II airflow band in the report
     (0–55 cm/s INSIDE, 55–65 NEAR, above BEYOND); the sentence quotes
-    the dataset's observed flow range (0–49 cm/s flow_start)."""
+    the dataset's observed flow range (low/high across start and end
+    flows)."""
     stats = stats or {"total_tests": len(rows), "o2_min": 13.6, "o2_max": 22.2, "rows_above_21": 0}
-    flows = [f for f in (_airflow_value(r) for r in rows) if f is not None]
-    low, high = (min(flows), max(flows)) if flows else (0.0, 0.0)
+    lows = [f for f in (_flow_low(r) for r in rows) if f is not None]
+    highs = [f for f in (_flow_high(r) for r in rows) if f is not None]
+    low, high = (min(lows), max(highs)) if lows and highs else (0.0, 0.0)
     if airflow_cm_s <= 55:
         verdict, word = "INSIDE", "inside"
     elif airflow_cm_s <= 65:
@@ -293,7 +419,7 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
         verdict, word = "BEYOND", "beyond"
     sentence = (
         f"{airflow_cm_s} cm/s airflow is {word} the tested range "
-        f"(airflow in the 129 tests runs {low}–{high} cm/s, and the "
+        f"(airflow in the {stats['total_tests']} tests runs {low}–{high} cm/s, and the "
         f"BASS-II duct goes to about 55 cm/s), so the rows below are "
         f"{'direct evidence' if verdict == 'INSIDE' else 'the closest evidence we have'}."
     )
@@ -306,11 +432,17 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
         "outcome": r.get("outcome") or None, "source": r.get("source"),
         "source_url": r.get("source_url"),
     } for r in evidence]
-    check = check_answer_numbers(sentence, evidence_out, stats)
+    check = check_answer_numbers(sentence, evidence_out, stats,
+                                 flow_bounds=(low, high),
+                                 question_flow=airflow_cm_s,
+                                 extra_flows={AIRFLOW_MAX})
+    unknown = []
+    if any(not r.get("outcome") for r in evidence):
+        unknown.append("outcome (not recorded for some evidence rows — not guessed)")
     return {
         "question": question, "verdict": verdict, "sentence": sentence,
         "evidence": evidence_out, "nearest_evidence": None,
-        "unknown": ["outcome (not in the PSI-25 CSV — only in the BASS-II report Appendix A)"],
+        "unknown": unknown,
         "gravity_note": GRAVITY_NOTE, "sources": [PSI_25_URL],
         "number_check": check,
     }
@@ -345,23 +477,28 @@ def ask(question, rows, stats=None):
         return {"path": "code", "answer": answer_highest_oxygen(pool, stats=stats),
                 "retrieval": None, "reason": routing["reason"]}
     if low and about_oxygen:
-        return {"path": "code", "answer": answer_lowest_oxygen(pool, stats=stats),
+        return {"path": "code", "answer": answer_lowest_oxygen(pool, stats=stats, material=material),
                 "retrieval": None, "reason": routing["reason"]}
     if high and about_flow:
-        return {"path": "code", "answer": answer_highest_airflow(pool, stats=stats),
+        return {"path": "code", "answer": answer_highest_airflow(pool, stats=stats, material=material),
                 "retrieval": None, "reason": routing["reason"]}
     if low and about_flow:
-        return {"path": "code", "answer": answer_lowest_airflow(pool, stats=stats),
+        return {"path": "code", "answer": answer_lowest_airflow(pool, stats=stats, material=material),
                 "retrieval": None, "reason": routing["reason"]}
 
     pct = re.search(r"(\d+(?:\.\d+)?)\s*%", q)
     if pct:
-        # pool is already filtered to the named material, so pass
-        # material=None here: build_answer's own filter matches the
-        # sample's "PMMA" but not the full data's "PMMA / other".
+        # Pass the material through: build_answer's classify matches
+        # "PMMA" against the full data's "PMMA / other" via
+        # _same_material, and closest_rows falls back to the
+        # pre-filtered pool when its exact match fails. Passing
+        # material=None here used to make the sentence quote the
+        # overall range while the verdict used the material's range
+        # (e.g. 14% for Wax: BEYOND, but the sentence said the tests
+        # cover 13.6–22.2% — self-contradictory).
         return {"path": "code",
                 "answer": build_answer(question, float(pct.group(1)), pool,
-                                       material=None, stats=stats),
+                                       material=material, stats=stats),
                 "retrieval": None, "reason": routing["reason"]}
     flow = re.search(r"(\d+(?:\.\d+)?)\s*cm/s", q)
     if flow:
@@ -371,6 +508,28 @@ def ask(question, rows, stats=None):
     return {"path": "code",
             "answer": build_answer(question, None, rows, material=material, stats=stats),
             "retrieval": None, "reason": routing["reason"]}
+
+
+def _is_outcome_question(question):
+    """True when the question asks about an outcome (burned, ignited,
+    extinguished, how long a flame lasted). Outcomes come only from
+    the BASS-II report Appendix A — never from Link et al. rows,
+    which are rod data from the paper, not BASS-II tests."""
+    words = set(re.findall(r"[a-z]+", (question or "").lower()))
+    return bool(words & {
+        "outcome", "outcomes", "burn", "burned", "burning", "ignite",
+        "ignited", "ignition", "extinguish", "extinguished", "flame",
+        "spread", "last", "lasted",
+    })
+
+
+def rows_for_outcome_question(rows, question):
+    """Evidence pool for an outcome question: Link et al. rows are
+    never in it. For any other question the rows pass through
+    unchanged."""
+    if not _is_outcome_question(question):
+        return rows
+    return [r for r in rows if "link" not in (r.get("source") or "").lower()]
 
 
 def closest_rows(rows, oxygen_pct, limit=3, material=None):
@@ -407,7 +566,20 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             "number_check": {"ok": True, "unverified": []},
         }
 
-    evidence = closest_rows(rows, oxygen_pct, material=material)
+    if verdict == "INVALID":
+        return {
+            "question": question,
+            "verdict": verdict,
+            "sentence": result["reason"],
+            "evidence": [],
+            "unknown": [],
+            "gravity_note": GRAVITY_NOTE,
+            "sources": [PSI_25_URL],
+            "number_check": {"ok": True, "unverified": []},
+        }
+
+    evidence = closest_rows(
+        rows_for_outcome_question(rows, question), oxygen_pct, material=material)
     stats_from_sample = stats is None
     stats = stats or {
         "total_tests": len(rows),
@@ -427,17 +599,21 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     # whose tested range is 16.4–20.8% in the full data).
     if material and rows:
         per_material = material_ranges(rows)
-        if material in per_material:
-            r_min, r_max = per_material[material]
+        matched = next((k for k in per_material if _same_material(k, material)), None)
+        if matched is not None:
+            r_min, r_max = per_material[matched]
             range_text = f"{material} {r_min}–{r_max}% oxygen"
+            range_bounds = (r_min, r_max)
         else:
             range_text = f"{o2_min}–{o2_max}% oxygen"
+            range_bounds = None
     else:
         range_text = f"{o2_min}–{o2_max}% oxygen"
+        range_bounds = None
 
     if verdict == "BEYOND":
         sentence = (
-            f"NASA's BASS-II tests cover {range_text}, so "
+            f"NASA's tests cover {range_text}, so "
             f"{oxygen_pct}% oxygen is beyond what was tested — "
             "we can only show the closest tests, not an answer for that condition."
         )
@@ -450,7 +626,7 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     else:
         sentence = (
             f"{oxygen_pct}% oxygen is inside the tested range "
-            f"({range_text}, {total} BASS-II tests), so the rows below "
+            f"({range_text}, {total} tests), so the rows below "
             "are direct evidence for this condition."
         )
 
@@ -479,12 +655,12 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
 
     unknown = list(result["unknown"])
     if stats_from_sample:
-        unknown.append("dataset stats are from the 6-row sample only — the full 129-test CSV was not loaded, so do not quote these as dataset numbers")
+        unknown.append("dataset stats are from the 6-row sample only — the full dataset (tests.json) was not loaded, so do not quote these as dataset numbers")
     # Only claim airflow is unknown when the evidence rows really lack it.
     if any(not row.get("airflow_cm_s") for row in evidence):
-        unknown.append("airflow in cm/s for some evidence rows (no Air display value in the CSV)")
+        unknown.append("airflow in cm/s for some evidence rows (no flow value recorded for those rows)")
     if any(not row.get("outcome") for row in evidence):
-        unknown.append("outcome (not in the PSI-25 CSV — only in the BASS-II report Appendix A)")
+        unknown.append("outcome (not recorded for some evidence rows — not guessed)")
 
     evidence_out = []
     for row in evidence:
@@ -512,7 +688,8 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     }
 
     answer["number_check"] = check_answer_numbers(
-        sentence, evidence_out, stats, question_oxygen=oxygen_pct
+        sentence, evidence_out, stats, question_oxygen=oxygen_pct,
+        range_bounds=range_bounds,
     )
     if not answer["number_check"]["ok"]:
         answer["sentence"] += (
@@ -525,15 +702,19 @@ if __name__ == "__main__":
     import os
 
     rows = load_rows("sample_data.csv")
-    # Full stats come from the real PSI file when it is next to the repo;
+    # Full stats come from Lane A's tests.json when it is next to the
+    # repo (200 rows, with outcomes); otherwise the real PSI file;
     # otherwise fall back to the sample rows and say so.
+    tests_json = os.path.join(os.path.dirname(__file__), "..", "data", "tests.json")
     full_csv = os.path.join(os.path.dirname(__file__), "..", "data", "raw",
                             "PSI-25_Experimental table_BASS-II.csv")
-    if os.path.exists(full_csv):
+    if os.path.exists(tests_json):
+        stats = dataset_stats_tests_json(tests_json)
+    elif os.path.exists(full_csv):
         stats = dataset_stats(full_csv)
     else:
         stats = None
-        print("(full PSI CSV not found next to the repo — stats from the 6-row sample)")
+        print("(neither tests.json nor the full PSI CSV was found next to the repo — stats from the 6-row sample)")
     for q, o2, mat in [
         ("A Moon base runs at 30% oxygen. What does NASA's testing cover?", 30.0, None),
         ("What about 20% oxygen?", 20.0, None),
@@ -544,8 +725,12 @@ if __name__ == "__main__":
         print(build_answer(q, o2, rows, material=mat, stats=stats))
         print()
 
-    # Highest/lowest questions: computed over the full 129 rows, not the sample.
-    if os.path.exists(full_csv):
+    # Highest/lowest questions: computed over the full dataset, not the
+    # sample — tests.json (200 rows) when present, else the PSI CSV.
+    if os.path.exists(tests_json):
+        from cards import rows_from_tests_json
+        full_rows = rows_from_tests_json(tests_json)
+    elif os.path.exists(full_csv):
         from cards import rows_from_full_csv
         full_rows = rows_from_full_csv(full_csv)
     else:

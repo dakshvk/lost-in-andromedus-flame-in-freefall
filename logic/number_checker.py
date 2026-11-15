@@ -2,6 +2,12 @@
 """Lane B number checker — numbers must belong to the row and unit
 they are attached to, not just exist somewhere in the dataset.
 
+v7 changes (Lane A swap, Nov 14):
+- Test-ID patterns now swallow suffixed IDs from tests.json:
+  B13a-1 (Link replicates), 2-7-PMMA (Saffire II split rows),
+  98-S1 / 100-S1 (disambiguated Saffire I/III rows). Without this,
+  their digits leaked out as numbers.
+
 v2 changes (PR #1 review, Daksh):
 - The old check passed "T25 at 22.2%" (T25 is 20.8%) and "22.2 cm/s"
   (22.2 is an O2 value, not an airflow). Both are now caught:
@@ -18,10 +24,16 @@ import re
 
 NUMBER_RE = re.compile(r"\d+(?:\.\d+)?")
 # Test IDs like B1, T25, F2, P22a, T28a are identifiers, not quantities.
-TEST_ID_RE = re.compile(r"\b[A-Za-z]+\d+[a-z]?\b")
+# Once Lane A's tests.json lands there are also B13a-1 (Link replicates),
+# 2-7-PMMA (Saffire II split rows) and 98-S1 / 100-S1 (Saffire I/III
+# rows disambiguated across sources) — the pattern must swallow the
+# whole ID, or its digits leak out as numbers ("B13a-1" would leave a
+# stray "1").
+TEST_ID_RE = re.compile(
+    r"\b(?:[A-Za-z]+\d+[a-z]?(?:-\d+)?|\d+-\d+-[A-Za-z]+|\d+-[A-Za-z]+\d+[a-z]?)\b")
 # "T25 at 22.2%" or "B1 at 22.2% oxygen" — a number attached to a test ID.
 ROW_NUMBER_RE = re.compile(
-    r"\b([A-Za-z]+\d+[a-z]?)\b[^.]{0,40}?(\d+(?:\.\d+)?)\s*(%|cm/s)?"
+    r"\b((?:[A-Za-z]+\d+[a-z]?(?:-\d+)?|\d+-\d+-[A-Za-z]+|\d+-[A-Za-z]+\d+[a-z]?))\b[^.]{0,40}?(\d+(?:\.\d+)?)\s*(%|cm/s)?"
 )
 PERCENT_RE = re.compile(r"(\d+(?:\.\d+)?)\s*%")
 AIRFLOW_RE = re.compile(r"(\d+(?:\.\d+)?)\s*cm/s")
@@ -57,7 +69,7 @@ def allowed_numbers_from_rows(rows):
     return allowed
 
 
-def check_answer_numbers(sentence, evidence, stats, question_oxygen=None, extra_allowed=None):
+def check_answer_numbers(sentence, evidence, stats, question_oxygen=None, extra_allowed=None, range_bounds=None, flow_bounds=None, question_flow=None, extra_flows=None):
     """Row+unit-aware check of one answer sentence.
 
     evidence: the evidence rows the answer cites (dicts with test_id,
@@ -67,15 +79,24 @@ def check_answer_numbers(sentence, evidence, stats, question_oxygen=None, extra_
     question_oxygen: the O2 value from the question itself.
     extra_allowed: numbers derived from the data for this answer only
         (e.g. the count of tests tied at the max oxygen).
+    range_bounds: the (low, high) of the oxygen range the sentence
+        quotes for a material (e.g. SIBAL 16.4–20.8%) — a range bound
+        is an allowed number even when the bound row is not in the
+        evidence.
+    flow_bounds: the (low, high) of the airflow range the sentence
+        quotes (e.g. 0.0–53.0 cm/s) — same rule for airflow.
     Returns {"ok": bool, "unverified": [str, ...]} with a reason per item.
     """
     unverified = []
     by_id = {row["test_id"]: row for row in evidence}
     o2_values = {float(r["oxygen_pct"]) for r in evidence}
+    # Airflow values live in BOTH columns: a test's lowest/highest flow
+    # can be its flow_end (T4 ends at 1 cm/s, T17 ends at 53 cm/s).
     flow_values = {
-        float(r["airflow_cm_s"])
+        float(r[key])
         for r in evidence
-        if r.get("airflow_cm_s") not in (None, "")
+        for key in ("airflow_cm_s", "airflow_end_cm_s")
+        if r.get(key) not in (None, "")
     }
 
     # 1. A number attached to a test ID must match that row's O2.
@@ -92,15 +113,27 @@ def check_answer_numbers(sentence, evidence, stats, question_oxygen=None, extra_
 
     # 2. Every "%" number must be the question O2, a range bound, or a row O2.
     allowed_pct = set(o2_values) | {stats["o2_min"], stats["o2_max"]}
+    if range_bounds:
+        allowed_pct |= {float(range_bounds[0]), float(range_bounds[1])}
     if question_oxygen is not None:
         allowed_pct.add(float(question_oxygen))
     for value in PERCENT_RE.findall(sentence or ""):
         if float(value) not in allowed_pct:
             unverified.append(f"{value}% is not an oxygen value in the data or the question")
 
-    # 3. Every "cm/s" number must be an airflow value in the evidence rows.
+    # 3. Every "cm/s" number must be an airflow value in the evidence
+    #    rows, the question's own airflow, a quoted range bound, or a
+    #    report number passed in for this answer (e.g. the BASS-II
+    #    duct max of about 55 cm/s).
+    allowed_flows = set(flow_values)
+    if question_flow is not None:
+        allowed_flows.add(float(question_flow))
+    if flow_bounds:
+        allowed_flows |= {float(flow_bounds[0]), float(flow_bounds[1])}
+    if extra_flows:
+        allowed_flows |= {float(v) for v in extra_flows}
     for value in AIRFLOW_RE.findall(sentence or ""):
-        if float(value) not in flow_values:
+        if float(value) not in allowed_flows:
             unverified.append(f"{value} cm/s is not an airflow value in the evidence rows")
 
     # 4. A bare count is only allowed as "129 BASS-II tests" (the full

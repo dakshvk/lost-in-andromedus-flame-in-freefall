@@ -1,20 +1,32 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B classifier — INSIDE / NEAR / BEYOND what NASA tested.
 
-v2 changes (PR #1 review, Daksh):
-- Airflow is NOT unknown: the PSI-25 CSV column "Air display" is the
-  transducer reading in cm/s (BASS-II report NASA/TM-20210011385).
-  Sample flow_start values come from the first number in that column.
-- Ranges are per material, computed from the rows — never hard-coded.
-  From the full 129-row dataset: SIBAL 16.4–20.8%, Nomex 21.0–22.2%,
-  wax (F4, Japan Wax candle) 17.4% only. Overall: 13.6–22.2%.
-- NEAR band is 1.0 point (per the doc Daksh cited; team decision,
-  to be written in the limits drawer). That makes 24% O2 BEYOND,
-  not NEAR — it was NEAR under the old 25.0 band.
-- A missing oxygen value no longer returns BEYOND. It returns
-  NEED_OXYGEN, so the answer asks for a value instead of answering.
-- Airflow: 0–55 cm/s INSIDE (report max ~55, ~35 with two restrictors).
-  55–65 cm/s is NEAR; above 65 is BEYOND.
+v7 changes (Lane A swap, Nov 14):
+- No code change needed for the swap: the pressure-labeled Saffire V
+  rows ("PMMA (Saffire V, 71.3 kPa)") form their own material groups,
+  so they never join the plain PMMA range; the too-few-rows rule
+  marks them extrapolated (1 row each).
+
+v6 changes (PR #1 review, Daksh, Nov 14):
+- Airflow parser (cards._parse_air_display): the Air display column
+  mixes transducer readings with fan-pot settings and fan readings.
+  Pot settings (~0.3–2.7) appear after "pot"/"pots", as "0.5 pot",
+  or in parentheses (P14 ".85", P3b "0.85", P15 "0.36"); fan
+  readings are 40–62 (O5a "(49, 62, 49, 44, 42)", O5b "49", O13a
+  "49, 44, 42, ..."). With two restrictors the duct caps at about
+  35 cm/s, with fewer at about 55, so numbers above the cap are fan
+  readings. The old parser took the first number, so "highest
+  airflow 49 cm/s (O5b, O13a)" and "P14 ends at 85 cm/s" were pot
+  and fan readings, not flows. O5b's real flow is 5 cm/s (report:
+  "Fan pot 1.3 (5 cm/s)"); O13a's real flows are (5, 2, 0). T21's
+  "11 to 47" and T17's "6 to 53" are real flows (report Table 7.1).
+  flow_end is now the LAST number in the sequence (a ramp like B10
+  "5 4 3 2 1" ends at 1, not 4).
+- classify(): oxygen outside 0–100% returns INVALID (not a possible
+  oxygen level); a material with fewer than 3 rows on a real dataset
+  (20+ rows) returns BEYOND (extrapolated) — the rule does not apply
+  to the 6-row sample. flow_range() returns the (min, max) flow_start
+  across rows, skipping rows with no numeric flow_start (O12).
 """
 
 # Fallbacks only — used when no rows are passed in. Real ranges always
@@ -61,6 +73,29 @@ def dataset_range(rows):
     return (min(values), max(values))
 
 
+def flow_range(rows):
+    """(min, max) flow_start across rows, skipping rows with no
+    numeric flow_start (e.g. O12, "no ign at any flow"). Returns
+    (None, None) when no row has one."""
+    values = []
+    for row in rows:
+        try:
+            values.append(float(row["airflow_cm_s"]))
+        except (KeyError, TypeError, ValueError):
+            continue
+    if not values:
+        return (None, None)
+    return (min(values), max(values))
+
+
+def _same_material(a, b):
+    """"PMMA" and "PMMA / other" are the same group (the full-data
+    grouping); other names match exactly."""
+    if a == b:
+        return True
+    return {a, b} == {"PMMA", "PMMA / other"}
+
+
 def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
     """Return a dict with verdict, reason, and what is unknown.
 
@@ -81,11 +116,35 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
     oxygen_pct = float(oxygen_pct)
     rows = rows or []
 
+    # Oxygen outside 0–100% is not a possible oxygen level at all —
+    # it is invalid input, not a point beyond the tested range.
+    if oxygen_pct < 0 or oxygen_pct > 100:
+        return {
+            "verdict": "INVALID",
+            "reason": f"{oxygen_pct}% oxygen is not a possible oxygen level — oxygen must be between 0 and 100%.",
+            "unknown": [],
+        }
+
     if material and rows:
         per_material = material_ranges(rows)
-        if material in per_material:
-            o2_min, o2_max = per_material[material]
+        # "PMMA" and "PMMA / other" are the same group, so match
+        # with _same_material rather than an exact key lookup.
+        matched = next((k for k in per_material if _same_material(k, material)), None)
+        if matched is not None:
+            o2_min, o2_max = per_material[matched]
             range_label = f"{material} {o2_min}–{o2_max}% O2"
+            # Fewer than 3 rows for a material means extrapolated,
+            # not covered — but only on a real dataset (20+ rows).
+            # The 6-row sample is explicitly a sample, so the rule
+            # does not apply to it.
+            if len(rows) >= 20:
+                count = sum(1 for r in rows if _same_material(r.get("material"), material))
+                if count < 3:
+                    return {
+                        "verdict": "BEYOND",
+                        "reason": f"Only {count} {material} row(s) in the dataset — fewer than 3, so this is extrapolated, not covered.",
+                        "unknown": [f"more {material} rows"],
+                    }
         else:
             return {
                 "verdict": "BEYOND",
