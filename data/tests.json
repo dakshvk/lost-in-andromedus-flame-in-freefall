@@ -10,7 +10,7 @@
   "flow_start": 5,
   "flow_end": 5,
   "direction": "opposed",
-  "outcome": "quenched",
+  "outcome": "unknown",
   "outcome_note": "Ignited very quickly, turned flow off after spread halfway; flame extinguished very quickly; and sooty with blue leading edge",
   "gravity": "micro",
   "pressure_kPa": null,
@@ -316,7 +316,8 @@
   "sample_id": "173m",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test B10, GMT 188; oxygen and flow from PSI-25",
   "raw_date": "7/7/2014",
@@ -415,7 +416,8 @@
   "sample_id": "162m",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test B13, GMT 188; oxygen and flow from PSI-25",
   "raw_date": "7/7/2014",
@@ -712,7 +714,8 @@
   "sample_id": "176m",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test B22, GMT 216; oxygen and flow from PSI-25",
   "raw_date": "8/4/2014",
@@ -1042,7 +1045,8 @@
   "sample_id": "163m",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test M6, GMT 212; oxygen and flow from PSI-25",
   "raw_date": "7/31/2014",
@@ -1537,7 +1541,8 @@
   "sample_id": "207",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test O1, GMT 49; oxygen and flow from PSI-25",
   "raw_date": "2/18/2014",
@@ -1570,7 +1575,8 @@
   "sample_id": "204",
   "flow_note": "Air display reads 0 as recorded; see outcome_note",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test O2, GMT 49; oxygen and flow from PSI-25",
   "raw_date": "2/18/2014",
@@ -1636,7 +1642,8 @@
   "sample_id": "205M",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test O3b, GMT 164; oxygen and flow from PSI-25",
   "raw_date": "6/13/2014",
@@ -1724,7 +1731,7 @@
   "shape": "rod, 1/2 inch clear",
   "o2_start": 14.2,
   "o2_end": 14.1,
-  "flow_start": 49,
+  "flow_start": 5,
   "flow_end": null,
   "direction": "concurrent",
   "outcome": "no_ignition",
@@ -1733,7 +1740,7 @@
   "pressure_kPa": null,
   "spread_rate": null,
   "sample_id": "220m",
-  "flow_note": "Air display has text or bracketed numbers ('49   5 cm/s'); flow_end left empty, original kept in raw_air_display",
+  "flow_note": "Air display '49 5 cm/s': 49 is the fan reading, 5 cm/s is the flow (pot 1.3 = 5 cm/s, 2 restrictors cap flow near 35 cm/s). Fixed after team check 2026-11-14",
   "flags": [
    "outcome_from_report_notes"
   ],
@@ -2021,8 +2028,8 @@
   "shape": "rod, 1/2 inch clear",
   "o2_start": 15.9,
   "o2_end": 14.6,
-  "flow_start": 49,
-  "flow_end": null,
+  "flow_start": 5,
+  "flow_end": 0,
   "direction": "concurrent",
   "outcome": "quenched",
   "outcome_note": "Ignited and burned at 5 pot settings, flame self-extinguished after 3+ min at pot 0.31",
@@ -2030,9 +2037,10 @@
   "pressure_kPa": null,
   "spread_rate": null,
   "sample_id": "221m",
-  "flow_note": "Air display has text or bracketed numbers ('49  44  42  41  41  40.5 (5   2   0)'); flow_end left empty, original kept in raw_air_display",
+  "flow_note": "Air display '49 44 42 41 41 40.5 (5 2 0)': the first numbers are fan readings; bracket gives flow 5, 2, 0 cm/s, so flow falls from 5 to 0. Fixed after team check 2026-11-14",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test O13a, GMT 202; oxygen and flow from PSI-25",
   "raw_date": "7/21/2014",
@@ -2131,7 +2139,8 @@
   "sample_id": "218m",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test O15a, GMT 209; oxygen and flow from PSI-25",
   "raw_date": "7/28/2014",
@@ -2164,7 +2173,8 @@
   "sample_id": "218m",
   "flow_note": "",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test O15b, GMT 209; oxygen and flow from PSI-25",
   "raw_date": "7/28/2014",
@@ -2263,7 +2273,8 @@
   "sample_id": "212m",
   "flow_note": "flow went up to 11 in between",
   "flags": [
-   "outcome_from_report_notes"
+   "outcome_from_report_notes",
+   "low_flow_uncertain"
   ],
   "citation": "BASS-II report NASA/TM-20210011385, Appendix A, test O18, GMT 209; oxygen and flow from PSI-25",
   "raw_date": "7/28/2014",
@@ -3414,7 +3425,8 @@
   "sample_id": "130",
   "flow_note": "Zhao appendix gives 10 to 2.2 cm/s",
   "flags": [
-   "outcome_from_zhao"
+   "outcome_from_zhao",
+   "low_flow_uncertain"
   ],
   "citation": "Zhao et al. 2015, NASA 20150008962, Appendix, GMT45-T4; oxygen and flow from PSI-25 test T4",
   "raw_date": "2/14/2014",
@@ -3446,7 +3458,9 @@
   "spread_rate": null,
   "sample_id": "131",
   "flow_note": "Zhao appendix gives 10 to 2.4 cm/s",
-  "flags": [],
+  "flags": [
+   "low_flow_uncertain"
+  ],
   "citation": "Zhao et al. 2015, NASA 20150008962, Appendix, GMT100-T5; oxygen and flow from PSI-25 test T5",
   "raw_date": "4/10/2014",
   "raw_material": "2 cm SIBAL",
@@ -3672,7 +3686,8 @@
   "sample_id": "137",
   "flow_note": "Zhao appendix gives 4 to 2.2 cm/s",
   "flags": [
-   "outcome_from_zhao"
+   "outcome_from_zhao",
+   "low_flow_uncertain"
   ],
   "citation": "Zhao et al. 2015, NASA 20150008962, Appendix, GMT100-T13; oxygen and flow from PSI-25 test T13",
   "raw_date": "4/10/2014",
@@ -4389,7 +4404,8 @@
   "sample_id": "B13a",
   "flow_note": "Flow step 1 of this sample, lasted 184 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4415,7 +4431,8 @@
   "sample_id": "B13a",
   "flow_note": "Flow step 2 of this sample, lasted 232 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4441,7 +4458,8 @@
   "sample_id": "B13a",
   "flow_note": "Flow step 3 of this sample, lasted 239 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4467,7 +4485,8 @@
   "sample_id": "B13a",
   "flow_note": "Flow step 4 of this sample, lasted 238 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4493,7 +4512,8 @@
   "sample_id": "B13b",
   "flow_note": "Flow step 1 of this sample, lasted 159 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13b, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4519,7 +4539,8 @@
   "sample_id": "B13b",
   "flow_note": "Flow step 2 of this sample, lasted 179 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13b, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4545,7 +4566,8 @@
   "sample_id": "B5",
   "flow_note": "Flow step 1 of this sample, lasted 192 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B5, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4571,7 +4593,8 @@
   "sample_id": "B5",
   "flow_note": "Flow step 2 of this sample, lasted 241 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B5, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4597,7 +4620,8 @@
   "sample_id": "B9",
   "flow_note": "Flow step 1 of this sample, lasted 147 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4623,7 +4647,8 @@
   "sample_id": "B9",
   "flow_note": "Flow step 2 of this sample, lasted 76 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4649,7 +4674,8 @@
   "sample_id": "B9",
   "flow_note": "Flow step 3 of this sample, lasted 154 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4675,7 +4701,8 @@
   "sample_id": "B9",
   "flow_note": "Flow step 4 of this sample, lasted 112 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4701,7 +4728,8 @@
   "sample_id": "C25",
   "flow_note": "Flow step 1 of this sample, lasted 115 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C25, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4727,7 +4755,8 @@
   "sample_id": "C25",
   "flow_note": "Flow step 2 of this sample, lasted 169 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C25, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4753,7 +4782,8 @@
   "sample_id": "C25",
   "flow_note": "Flow step 3 of this sample, lasted 181 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C25, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4779,7 +4809,8 @@
   "sample_id": "B22",
   "flow_note": "Flow step 1 of this sample, lasted 123 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4805,7 +4836,8 @@
   "sample_id": "B22",
   "flow_note": "Flow step 2 of this sample, lasted 79 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4831,7 +4863,8 @@
   "sample_id": "B22",
   "flow_note": "Flow step 3 of this sample, lasted 120 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4857,7 +4890,8 @@
   "sample_id": "B22",
   "flow_note": "Flow step 4 of this sample, lasted 146 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4909,7 +4943,8 @@
   "sample_id": "B4",
   "flow_note": "Flow step 2 of this sample, lasted 131 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B4, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4935,7 +4970,8 @@
   "sample_id": "B4",
   "flow_note": "Flow step 3 of this sample, lasted 145 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B4, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4961,7 +4997,8 @@
   "sample_id": "B12",
   "flow_note": "Flow step 1 of this sample, lasted 121 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -4987,7 +5024,8 @@
   "sample_id": "B12",
   "flow_note": "Flow step 2 of this sample, lasted 134 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -5013,7 +5051,8 @@
   "sample_id": "B12",
   "flow_note": "Flow step 3 of this sample, lasted 129 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -5039,7 +5078,8 @@
   "sample_id": "B12",
   "flow_note": "Flow step 4 of this sample, lasted 158 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
@@ -5091,7 +5131,8 @@
   "sample_id": "B6",
   "flow_note": "Flow step 2 of this sample, lasted 121 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B6, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5117,7 +5158,8 @@
   "sample_id": "B6",
   "flow_note": "Flow step 3 of this sample, lasted 93 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B6, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5169,7 +5211,8 @@
   "sample_id": "B14",
   "flow_note": "Flow step 1 of this sample, lasted 384 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B14, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5221,7 +5264,8 @@
   "sample_id": "B16",
   "flow_note": "Flow step 2 of this sample, lasted 139 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B16, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5247,7 +5291,8 @@
   "sample_id": "B16",
   "flow_note": "Flow step 3 of this sample, lasted 198 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B16, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5273,7 +5318,8 @@
   "sample_id": "B16",
   "flow_note": "Flow step 4 of this sample, lasted 170 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B16, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5429,7 +5475,8 @@
   "sample_id": "B19",
   "flow_note": "Flow step 2 of this sample, lasted 128 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B19, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5455,7 +5502,8 @@
   "sample_id": "B19",
   "flow_note": "Flow step 3 of this sample, lasted 189 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B19, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5481,7 +5529,8 @@
   "sample_id": "B19",
   "flow_note": "Flow step 4 of this sample, lasted 200 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B19, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5559,7 +5608,8 @@
   "sample_id": "C3b",
   "flow_note": "Flow step 1 of this sample, lasted 109 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C3b, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5611,7 +5661,8 @@
   "sample_id": "B10",
   "flow_note": "Flow step 2 of this sample, lasted 104 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B10, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5637,7 +5688,8 @@
   "sample_id": "B10",
   "flow_note": "Flow step 3 of this sample, lasted 148 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B10, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5663,7 +5715,8 @@
   "sample_id": "P17",
   "flow_note": "Flow step 1 of this sample, lasted 123 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample P17, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5689,7 +5742,8 @@
   "sample_id": "P17",
   "flow_note": "Flow step 2 of this sample, lasted 187 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample P17, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
@@ -5715,7 +5769,8 @@
   "sample_id": "P17",
   "flow_note": "Flow step 3 of this sample, lasted 65 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
   "flags": [
-   "hand_entered"
+   "hand_entered",
+   "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample P17, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
