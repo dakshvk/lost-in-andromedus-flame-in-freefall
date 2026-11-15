@@ -122,8 +122,16 @@ AI tools helped write code, data tooling, tests and documentation: Claude and Cl
 
 The default site has no AI-generated images. One optional comparison view (`?moon=illustration`) shows an AI-generated Moon image with a visible label.
 
+
+
 ## Team
 
-**Lost in Andromedus:** Daksh Kumar (website), Jenisha Subedi (data), Paridhi Jay Singh (logic).
+Lost in Andromedus
+
+| Name | What they worked on | Links |
+|---|---|---|
+| Daksh Kumar | Website | [GitHub](https://github.com/dakshvk) · [LinkedIn](ADD-LINK) |
+| Jenisha Subedi | Data | [GitHub](https://github.com/jenishasubedi05) · [LinkedIn](https://linkedin.com/in/jenisha-subedi9911) |
+| Paridhi Jay Singh | Logic | [GitHub](https://github.com/paridhijsingh) · [LinkedIn](ADD-LINK) |
 
 The demo video is linked on our NASA Space Apps project page.
