@@ -48,7 +48,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [
-     "airflow_cm_s (not given for this question)"
+     "the airflow (not given in the question)"
     ],
     "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
@@ -121,7 +121,7 @@
      ]
     },
     "unknown": [
-     "airflow_cm_s (not given for this question)"
+     "the airflow (not given in the question)"
     ],
     "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
@@ -337,7 +337,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [
-     "airflow_cm_s (not given for this question)"
+     "the airflow (not given in the question)"
     ],
     "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [

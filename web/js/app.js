@@ -209,6 +209,9 @@ async function main() {
     demo.answers.find((a) => /lowest oxygen/i.test(a.question))?.question,
   ].filter(Boolean);
   add($("ask-chips"), examples.map((q) => el("button", { type: "button", class: "chip", onclick: () => fillAsk(q, true) }, q)));
+  // A link like /?ask=Will%20PMMA%20burn%20at%2030%25%20oxygen%3F opens straight to that answer.
+  const preset = new URLSearchParams(location.search).get("ask");
+  if (preset && preset.trim()) fillAsk(preset.trim().slice(0, 300), true);
 
   // ---- map, cards, ranking, limits, footer ----
   const plotted = mapPoints(tests);

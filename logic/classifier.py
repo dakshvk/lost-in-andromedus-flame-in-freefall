@@ -214,7 +214,7 @@ def classify(oxygen_pct, airflow_cm_s=None, material=None, rows=None):
 
     unknown = []
     if airflow_cm_s is None:
-        unknown.append("airflow_cm_s (not given for this question)")
+        unknown.append("the airflow (not given in the question)")
 
     o2_far = oxygen_pct < o2_min - NEAR_POINTS or oxygen_pct > o2_max + NEAR_POINTS
     o2_outside = oxygen_pct < o2_min or oxygen_pct > o2_max

@@ -26,6 +26,14 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 13:20 | Daksh | README rewritten for judges, screenshots, ?ask= link, project links and page text docs
+
+- What: `README.md` rewritten in plain language (what the site does, three screenshots, how to run it, a section on getting the 3D Moon to show, data sources with links, how answers are kept honest, limits, repo map, checks, AI use, team). New `docs/screenshots/` (home, answer, chart; taken with a separate headless Chrome using a throwaway profile). `web/js/app.js`: a link like `/?ask=Will%20PMMA%20burn%20at%2030%25%20oxygen%3F` opens straight to that answer. `logic/classifier.py`: the "not known" line now says "the airflow (not given in the question)" instead of the raw field name `airflow_cm_s`; saved answers and web data regenerated.
+- Why: the NASA project page grades mostly on the submission page; judges are unlikely to run code, so the repo front page has to explain itself and show the result. The raw field name appeared on the exact demo question.
+- How: with Claude Code. Two Google Docs were also created in the team folder: "Project Links" (repo link now, video link to add) and "Project Page Text (for the submission form)" (the text for each form field). Both are private until shared.
+- Check: all four NASA and DOI links in the README return pages; `validate.py` OK; 102 logic tests and 13 API tests pass; the screenshots come from the running site.
+- Open: add the demo video link to the Project Links doc and the project page; make the two docs public ("anyone with the link can view") before submitting.
+
 ## 2026-11-15 12:47 PT — Paridhi Singh — Add Cursor to SI acknowledgment
 
 - What: Added Cursor to the SI acknowledgment in web/export_data.py and regenerated web/data/limits.json; logged Cursor use in AI_USE_LOG.md.
