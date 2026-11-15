@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+### 2026-11-14 16:00 | Paridhi | Revised RAG for Daksh's review: router, text corpus, embedding cache, score cutoff, Saffire V nearest evidence
+
+- What: `logic/rag.py` (router + text corpus + embedding cache + 0.30 score cutoff + source citations), `logic/investigations.csv` (8 investigations), `logic/answer.py` (nearest_evidence field for 30%+ O2), `logic/demo_answers.json` (regenerated, Q1 carries the Saffire V note).
+- Why: Daksh's PR #1 RAG review: numeric questions must go to code not embeddings, RAG must read investigation text not the 6 sample rows, off-topic questions must say "no match in our data", and 30% O2 Moon-cabin answers must name Saffire V as nearest evidence.
+- How: revised the files with SI assistance (Muse) from the review comments, then ran `python3 rag.py` and `python3 answer.py` in `logic/`.
+- Check: router sends highest/lowest/inside questions to code and meaning questions to RAG; smoke-detection question returns SAME with its PSI source; "best pizza topping" returns no match; 30% O2 returns BEYOND with Saffire V (about 26% O2, about 71 kPa) cited to NASA's notes. Saffire V numbers come from NASA's challenge notes per Daksh, not from PSI data.
+
 ### 2026-11-14 14:04 | Paridhi | Correction: filename in the first CHRONICLE entry
 
 - What: corrects the first entry (2026-11-14, PSI-25 CSV). The file is `data/raw/PSI-25_Experimental table_BASS-II.csv` — with a space, not underscores.
