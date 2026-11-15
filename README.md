@@ -130,8 +130,8 @@ Lost in Andromedus
 
 | Name | What they worked on | Links |
 |---|---|---|
-| Daksh Kumar | Website | [GitHub](https://github.com/dakshvk) · [LinkedIn](ADD-LINK) |
+| Daksh Kumar | Website | [GitHub](https://github.com/dakshvk) · [LinkedIn](https://www.linkedin.com/in/daksh-kumar-b60433345/) |
 | Jenisha Subedi | Data | [GitHub](https://github.com/jenishasubedi05) · [LinkedIn](https://linkedin.com/in/jenisha-subedi9911) |
-| Paridhi Jay Singh | Logic | [GitHub](https://github.com/paridhijsingh) · [LinkedIn](ADD-LINK) |
+| Paridhi Jay Singh | Logic | [GitHub](https://github.com/paridhijsingh) · [LinkedIn](https://www.linkedin.com/in/paridhijsingh/) |
 
 The demo video is linked on our NASA Space Apps project page.
