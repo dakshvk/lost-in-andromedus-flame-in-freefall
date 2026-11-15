@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 14:10 | Daksh | README: plain text only
+
+- What: `README.md` has no emoji and no special symbols now (the two middle dot separators in the title line became commas); every character in the file is plain ASCII.
+- Why: Daksh asked for no emojis in the README.
+- How: with Claude Code, checked every character by code.
+- Check: a scan of the file finds 0 non-ASCII characters.
+
 ### 2026-11-15 13:45 | Daksh | Merged Paridhi's IDE cleanup, fixed the double module loading it caused
 
 - What: merged main (Paridhi's PR #5 and "Clear IDE import and type errors"). Resolved the two log conflicts: PR #5 had put a second copy of the whole AI log table on main (55 rows, 28 distinct); the log is one table again with every distinct entry kept (29 rows), including her Cursor cleanup row. Her change made `api/app.py` and `web/export_data.py` import `logic.answer`, `logic.rag` and so on while Lane B's own code imports `answer`, `rag`; Python loaded every module twice, the search model warmed at start-up was not the copy real questions used (first text question 4.5 s instead of 0.2 s, and the API test run stalled at full CPU). Imports are plain again; her pyrightconfig.json, .pylintrc and .vscode settings stay and keep the editor happy. New test `test_lane_b_modules_are_loaded_once`.

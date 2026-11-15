@@ -1,6 +1,6 @@
 # Will it burn in a Moon base?
 
-**Flame in Freefall** · NASA Space Apps Challenge 2026 · Team **Lost in Andromedus**
+**Flame in Freefall**, NASA Space Apps Challenge 2026, Team **Lost in Andromedus**
 
 A Moon base is expected to run at about **30% oxygen or more**. NASA's burn tests from space never went that high. This website shows exactly what has been tested, what happened, and where the evidence stops.
 
