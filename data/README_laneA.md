@@ -54,3 +54,11 @@ Update 18:30: PSI-26 and PSI-20 CSVs received. Rows built by `build_context_rows
 Update 18:35: PSI-21 CSV received: 32 test-day summary rows (page shows 33, one more). Used only for experiments.json test_count; no rows built (not in the plan's list of row sources; it is a day summary with no oxygen, airflow or outcome). Its "Fuel Bottle" column reads like "40% CH5, 40% CH6, ..." (looks like bottle numbering, probably not real fuel names); kept raw, not interpreted.
 
 Update 18:40: PSI-47 CSV received: 2 sessions (D1 GMT 54 2005, D2 GMT 63 2005) testing aerosol instruments with Arizona Road Dust. Not burns, no rows built. experiments.json test_count for PSI-47 = 2 (our CSV). All 8 table CSVs in the plan are now received.
+
+## Team decisions, 2026-11-14 (Daksh's check)
+- Low-flow cutoff: `low_flow_uncertain` is set when flow_start or flow_end is under 2 cm/s. The BASS-II report says low flows have "high error bars" but gives no number, so 2 cm/s is a team choice (set in build_tests.py as LOW_FLOW_CM_S; show it in the limits drawer). 54 rows carry the flag.
+- SIBAL flow on the map: use the PSI-25 value (same scale as PMMA); show Zhao's flow in the tooltip (stored in flow_note).
+- Context-only rows (PSI-26, PSI-20): NOT merged into tests.json. They stay in tests_context_only.json for test counts and the compare view.
+- Flow fixes: O5b flow_start 49 -> 5 (49 was the fan reading; "49 5 cm/s", pot 1.3 = 5 cm/s). O13a flow 49 -> 5, flow_end 0 (bracket "5 2 0").
+- Rule for "flow turned off, then flame went out": that is an operator action, not a quench, so the outcome is `unknown`. Applied to B1, P6, P13a, P5, M17 (B1 changed from quenched to unknown). P13b stays quenched (flame went out with the pot still at 0.32).
+- Blind check of 20 rows by Daksh: all 20 matched (18 quenched, 2 burning; blow-off, no ignition and unknown were not in the sample). His file is blind_check_20_daksh.csv.
