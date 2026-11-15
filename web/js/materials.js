@@ -71,8 +71,10 @@ export function entryForMaterial(entries, cardsFile, material) {
   return entries.find((e) => e.cards.includes(card)) || null;
 }
 
-function entryPoints(entry, tests) {
-  if (entry.kind === "standard") return pointsForMaterial(tests, entry.name);
+export function entryPoints(entry, tests) {
+  // Low-pressure Saffire V tests belong to the low-pressure entry only, as on
+  // the cards (PMMA: 102 tests at normal pressure, not 104).
+  if (entry.kind === "standard") return pointsForMaterial(tests, entry.name).filter((p) => !p.low_pressure);
   const seen = new Set();
   return entry.cards.flatMap((c) => pointsForMaterial(tests, c.material)).filter((p) => !seen.has(p.id) && seen.add(p.id));
 }

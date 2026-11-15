@@ -7,6 +7,7 @@ import {
 import { el, add, clear, pct, scrollToEl, reducedMotion, MOON_O2 } from "./dom.js";
 import { renderAnswer, renderLoading } from "./answer.js";
 import { createChart } from "./chart.js";
+import { createCoverage } from "./coverage.js";
 import {
   buildEntries, entryForMaterial, renderCards, previewContent, openMaterialDetail, materialAside,
 } from "./materials.js";
@@ -200,11 +201,26 @@ async function main() {
   const plotted = mapPoints(tests);
   const counted = plotted.filter((p) => !p.is_link2018);
   const top = Math.max(...counted.map((p) => p.o2_start));
+  const topStd = Math.max(...counted.filter((p) => !p.low_pressure).map((p) => p.o2_start));
   const atMoon = plotted.filter((p) => p.o2_start >= MOON_O2).length;
   $("map-sub").textContent =
-    `${tests.length} tests in the data, ${plotted.length} with an oxygen value. The highest oxygen tested is ${pct(top)}. ` +
+    `${counted.length} tests with an oxygen value. At normal cabin pressure the highest oxygen tested is ${pct(topStd)}; ` +
+    `the low-pressure Saffire V tests reach ${pct(top)}. ` +
     `${atMoon === 0 ? "No test reaches" : `${atMoon} tests reach`} the ${MOON_O2}% a Moon cabin would run at.`;
-  createChart($("map-panel"), tests, { filters: true, label: "Evidence map" });
+  // Main view: how far each material's tested oxygen reaches (readable in a
+  // glance). The full oxygen x airflow scatter is one click away.
+  createCoverage($("map-panel"), entries, tests, { onOpen: openEntry });
+  const fullHost = el("div", { class: "panel", id: "map-full", hidden: true });
+  const fullBtn = el("button", { type: "button", class: "btn btn-small", "aria-expanded": "false", "aria-controls": "map-full" }, "Show every test by oxygen and airflow");
+  let fullDrawn = false;
+  fullBtn.addEventListener("click", () => {
+    const open = fullHost.hidden;
+    fullHost.hidden = !open;
+    fullBtn.setAttribute("aria-expanded", String(open));
+    fullBtn.textContent = open ? "Hide the full scatter" : "Show every test by oxygen and airflow";
+    if (open && !fullDrawn) { createChart(fullHost, tests, { filters: true, label: "Every test" }); fullDrawn = true; }
+  });
+  $("map-panel").after(el("p", { class: "map-more" }, fullBtn), fullHost);
 
   $("mat-sub").textContent = cardsFile.counting_rule;
   renderCards($("cards"), entries, { onAsk: fillAsk, onOpen: openEntry });
