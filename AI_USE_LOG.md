@@ -18,3 +18,5 @@ One line per use. Newest at the bottom.
 
 - 2026-11-14 — Muse (Light) — Revised rag.py, answer.py, number_checker.py, cards.py, investigations.csv and demo_answers.json for the second RAG review on PR #1 (router fix, max-oxygen code, Saffire V citation correction, full-data cards, exact lookup, BASS + ACME PSI-20/21). Reviewed by Paridhi Singh.
 - 2026-11-14 — sentence-transformers / all-MiniLM-L6-v2 — Embedding model used by rag.py for retrieval over the investigations table and material cards. Free, local, no API key. (For References on the project page.)
+  | 2026-11-14 | Muse (Light) | RAG v4 and v5 revisions for the second and third PR reviews (router reorder, max/min oxygen and airflow code, ask(), Saffire V citation correction, full-data cards, exact lookup, BASS + ACME PSI-20/21) |
+  | 2026-11-14 | sentence-transformers / all-MiniLM-L6-v2 | Embedding model used by rag.py for retrieval over the investigations table and material cards (for References) |

@@ -8,12 +8,18 @@
     Sources: links, kept small.
     Gravity note: every answer says the tests were in microgravity.
 
-v4 changes (PR #1 review, Daksh):
-- answer_highest_oxygen(): the router says "code" for highest/lowest
-  questions, so there is now code behind it — max over the full 129
-  rows, all 14 ties returned (B1, B2, B3, B4, B5, B7, B12, F1, M1,
-  M2, M5, M14, O1, O2), number-checked with the tie count (14)
-  allowed as a derived count.
+v5 changes (PR #1 review, Daksh):
+- Min oxygen and min/max airflow now exist alongside max oxygen:
+  min_oxygen() (13.6%, test O12), min_airflow() (0.0 cm/s, test O2)
+  and max_airflow() (49.0 cm/s, tests O5b and O13a) over the full
+  129 rows, all ties returned, number-checked. Airflow uses
+  flow_start (first number in Air display); flow_end can run higher
+  (P14 ends at 85 cm/s) and is noted, not used for the max.
+- ask(question, rows, stats=None) is the website's single call: it
+  routes with rag.route() and returns the answer — code answers from
+  classify()/max/min functions, RAG answers from retrieve().
+  A material named in the question filters the code answers
+  (e.g. "highest oxygen for SIBAL", "lowest airflow for SIBAL").
 - Saffire V nearest evidence: corrected citation — the numbers come
   from the ICES 2021 Saffire IV/V paper, Table 1 (NTRS 20210011521):
   V-2 cotton 26.2% O2 at 70.7 kPa, V-3 PMMA 25.4% at 71.3 kPa,
@@ -127,6 +133,244 @@ def answer_highest_oxygen(rows, stats=None):
         "sources": [PSI_25_URL],
         "number_check": check,
     }
+
+
+def min_oxygen(rows):
+    """The lowest oxygen tested, over the rows given, with ALL ties.
+    Full 129 rows: 13.6%, test O12 only."""
+    best = None
+    for row in rows:
+        try:
+            value = float(row["oxygen_pct"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if best is None or value < best:
+            best = value
+    if best is None:
+        return {"min_oxygen": None, "test_ids": [], "materials": []}
+    ties = [r for r in rows if r.get("oxygen_pct") not in (None, "") and float(r["oxygen_pct"]) == best]
+    return {
+        "min_oxygen": best,
+        "test_ids": [r["test_id"] for r in ties],
+        "materials": sorted({r["material"] for r in ties}),
+    }
+
+
+def _airflow_value(row):
+    """flow_start as a float, or None when the row has no numeric airflow."""
+    try:
+        return float(row["airflow_cm_s"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def min_airflow(rows):
+    """The lowest airflow tested (flow_start), over the rows given,
+    with ALL ties. Full 129 rows: 0.0 cm/s, test O2 only."""
+    best = None
+    for row in rows:
+        value = _airflow_value(row)
+        if value is None:
+            continue
+        if best is None or value < best:
+            best = value
+    if best is None:
+        return {"min_airflow": None, "test_ids": [], "materials": []}
+    ties = [r for r in rows if _airflow_value(r) == best]
+    return {
+        "min_airflow": best,
+        "test_ids": [r["test_id"] for r in ties],
+        "materials": sorted({r["material"] for r in ties}),
+    }
+
+
+def max_airflow(rows):
+    """The highest airflow tested (flow_start), over the rows given,
+    with ALL ties. Full 129 rows: 49.0 cm/s, tests O5b and O13a.
+    flow_end can run higher (P14 ends at 85 cm/s) — that is a ramp
+    inside one test, not the starting airflow, so it is not the max."""
+    best = None
+    for row in rows:
+        value = _airflow_value(row)
+        if value is None:
+            continue
+        if best is None or value > best:
+            best = value
+    if best is None:
+        return {"max_airflow": None, "test_ids": [], "materials": []}
+    ties = [r for r in rows if _airflow_value(r) == best]
+    return {
+        "max_airflow": best,
+        "test_ids": [r["test_id"] for r in ties],
+        "materials": sorted({r["material"] for r in ties}),
+    }
+
+
+def _extreme_answer(question, label, value, ties, rows, stats):
+    """One number-checked answer for a highest/lowest question."""
+    if value is None:
+        return {
+            "question": question,
+            "verdict": "NEED_OXYGEN",
+            "sentence": "No values for that are in the rows I was given.",
+            "evidence": [],
+            "nearest_evidence": None,
+            "unknown": ["oxygen_pct"],
+            "gravity_note": GRAVITY_NOTE,
+            "sources": [PSI_25_URL],
+            "number_check": {"ok": True, "unverified": []},
+        }
+    n = len(ties["test_ids"])
+    tests = ", ".join(ties["test_ids"])
+    sentence = (
+        f"The {label} is {value}{'%' if 'oxygen' in label else ' cm/s'}, in {n} "
+        f"test{'s' if n != 1 else ''} ({tests}) — materials: "
+        f"{', '.join(ties['materials'])}."
+    )
+    evidence = [r for r in rows if r.get("test_id") in ties["test_ids"]]
+    stats = stats or {"total_tests": len(rows), "o2_min": 13.6, "o2_max": 22.2, "rows_above_21": 0}
+    check = check_answer_numbers(sentence, evidence, stats, extra_allowed={float(n)})
+    return {
+        "question": question,
+        "verdict": "INSIDE",
+        "sentence": sentence,
+        "evidence": evidence,
+        "nearest_evidence": None,
+        "unknown": [],
+        "gravity_note": GRAVITY_NOTE,
+        "sources": [PSI_25_URL],
+        "number_check": check,
+    }
+
+
+def answer_lowest_oxygen(rows, stats=None):
+    """Answer 'lowest oxygen tested?' with code, all ties."""
+    result = min_oxygen(rows)
+    return _extreme_answer(
+        "What is the lowest oxygen tested?", "lowest oxygen tested",
+        result["min_oxygen"], result, rows, stats)
+
+
+def answer_lowest_airflow(rows, stats=None):
+    """Answer 'lowest airflow tested?' with code, all ties."""
+    result = min_airflow(rows)
+    return _extreme_answer(
+        "What is the lowest airflow tested?", "lowest airflow tested",
+        result["min_airflow"], result, rows, stats)
+
+
+def answer_highest_airflow(rows, stats=None):
+    """Answer 'highest airflow tested?' with code, all ties."""
+    result = max_airflow(rows)
+    return _extreme_answer(
+        "What is the highest airflow tested?", "highest airflow tested",
+        result["max_airflow"], result, rows, stats)
+
+
+def _material_rows(rows, material):
+    """Rows for one material. "PMMA" also matches "PMMA / other"
+    (the full-data grouping); other names match exactly."""
+    if not material:
+        return rows
+    return [r for r in rows
+            if r.get("material") == material
+            or (material == "PMMA" and r.get("material") == "PMMA / other")]
+
+
+def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
+    """Answer an airflow-only question ("Is 10 cm/s inside our
+    data?"). Verdict from the BASS-II airflow band in the report
+    (0–55 cm/s INSIDE, 55–65 NEAR, above BEYOND); the sentence quotes
+    the dataset's observed flow range (0–49 cm/s flow_start)."""
+    stats = stats or {"total_tests": len(rows), "o2_min": 13.6, "o2_max": 22.2, "rows_above_21": 0}
+    flows = [f for f in (_airflow_value(r) for r in rows) if f is not None]
+    low, high = (min(flows), max(flows)) if flows else (0.0, 0.0)
+    if airflow_cm_s <= 55:
+        verdict, word = "INSIDE", "inside"
+    elif airflow_cm_s <= 65:
+        verdict, word = "NEAR", "just outside"
+    else:
+        verdict, word = "BEYOND", "beyond"
+    sentence = (
+        f"{airflow_cm_s} cm/s airflow is {word} the tested range "
+        f"(airflow in the 129 tests runs {low}–{high} cm/s, and the "
+        f"BASS-II duct goes to about 55 cm/s), so the rows below are "
+        f"{'direct evidence' if verdict == 'INSIDE' else 'the closest evidence we have'}."
+    )
+    evidence = sorted(rows, key=lambda r: abs((_airflow_value(r) if _airflow_value(r) is not None else float("inf")) - airflow_cm_s))[:3]
+    evidence_out = [{
+        "test_id": r.get("test_id"), "material": r.get("material"),
+        "material_form": r.get("material_form"), "oxygen_pct": r.get("oxygen_pct"),
+        "airflow_cm_s": r.get("airflow_cm_s") or None,
+        "airflow_end_cm_s": r.get("airflow_end_cm_s") or None,
+        "outcome": r.get("outcome") or None, "source": r.get("source"),
+        "source_url": r.get("source_url"),
+    } for r in evidence]
+    check = check_answer_numbers(sentence, evidence_out, stats)
+    return {
+        "question": question, "verdict": verdict, "sentence": sentence,
+        "evidence": evidence_out, "nearest_evidence": None,
+        "unknown": ["outcome (not in the PSI-25 CSV — only in the BASS-II report Appendix A)"],
+        "gravity_note": GRAVITY_NOTE, "sources": [PSI_25_URL],
+        "number_check": check,
+    }
+
+
+def ask(question, rows, stats=None):
+    """The website's single call: route the question and return the answer.
+
+    Returns {"path": "code"|"rag", "answer": dict|None,
+    "retrieval": dict|None, "reason": str}. Code answers come from
+    classify()/max/min functions; RAG answers from retrieve().
+    A material named in the question filters the code answers.
+    """
+    import re
+    from rag import route, retrieve, _named_material
+
+    routing = route(question)
+    if routing["path"] == "rag":
+        return {"path": "rag", "answer": None,
+                "retrieval": retrieve(question, rows), "reason": routing["reason"]}
+
+    q = (question or "").lower()
+    words = set(re.findall(r"[a-z]+", q))
+    material = _named_material(question)
+    pool = _material_rows(rows, material)
+    high = bool(words & {"highest", "maximum", "most", "higher", "greater"})
+    low = bool(words & {"lowest", "minimum", "least", "lower", "smaller"})
+    about_oxygen = "oxygen" in words
+    about_flow = "airflow" in words or "flow" in words
+
+    if high and about_oxygen:
+        return {"path": "code", "answer": answer_highest_oxygen(pool, stats=stats),
+                "retrieval": None, "reason": routing["reason"]}
+    if low and about_oxygen:
+        return {"path": "code", "answer": answer_lowest_oxygen(pool, stats=stats),
+                "retrieval": None, "reason": routing["reason"]}
+    if high and about_flow:
+        return {"path": "code", "answer": answer_highest_airflow(pool, stats=stats),
+                "retrieval": None, "reason": routing["reason"]}
+    if low and about_flow:
+        return {"path": "code", "answer": answer_lowest_airflow(pool, stats=stats),
+                "retrieval": None, "reason": routing["reason"]}
+
+    pct = re.search(r"(\d+(?:\.\d+)?)\s*%", q)
+    if pct:
+        # pool is already filtered to the named material, so pass
+        # material=None here: build_answer's own filter matches the
+        # sample's "PMMA" but not the full data's "PMMA / other".
+        return {"path": "code",
+                "answer": build_answer(question, float(pct.group(1)), pool,
+                                       material=None, stats=stats),
+                "retrieval": None, "reason": routing["reason"]}
+    flow = re.search(r"(\d+(?:\.\d+)?)\s*cm/s", q)
+    if flow:
+        return {"path": "code",
+                "answer": build_airflow_answer(question, float(flow.group(1)), rows, stats=stats),
+                "retrieval": None, "reason": routing["reason"]}
+    return {"path": "code",
+            "answer": build_answer(question, None, rows, material=material, stats=stats),
+            "retrieval": None, "reason": routing["reason"]}
 
 
 def closest_rows(rows, oxygen_pct, limit=3, material=None):
@@ -300,7 +544,7 @@ if __name__ == "__main__":
         print(build_answer(q, o2, rows, material=mat, stats=stats))
         print()
 
-    # Highest-oxygen question: computed over the full 129 rows, not the sample.
+    # Highest/lowest questions: computed over the full 129 rows, not the sample.
     if os.path.exists(full_csv):
         from cards import rows_from_full_csv
         full_rows = rows_from_full_csv(full_csv)
@@ -308,3 +552,22 @@ if __name__ == "__main__":
         full_rows = rows
     print(answer_highest_oxygen(full_rows, stats=stats))
     print()
+
+    # ask(): the website's single call — route + answer.
+    for q in [
+        "Is 30% oxygen inside our data for PMMA?",
+        "What is the highest oxygen for SIBAL?",
+        "Which SIBAL test had the lowest airflow?",
+        "What is the lowest oxygen tested?",
+        "What is the highest airflow tested?",
+        "How does BASS differ from BASS-II?",
+        "What is the same hardware used in these tests?",
+        "What about flexible tubing?",
+    ]:
+        out = ask(q, full_rows, stats=stats)
+        print(f"ask({q!r}) -> path={out['path']}")
+        if out["answer"] is not None:
+            print(" ", out["answer"]["sentence"], "| check:", out["answer"]["number_check"])
+        else:
+            print("  retrieval:", [(r["entry"]["id"], r["method"]) for r in out["retrieval"]["results"]] if out["retrieval"]["match"] else "no match")
+        print()

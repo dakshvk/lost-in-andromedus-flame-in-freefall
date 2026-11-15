@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-14 16:55 PT — Paridhi Singh — Address third RAG review (v5)
+
+- What: Router reordered (unit numbers and highest/lowest checked first, name check for investigations only); whole-word case-aware name matching (lowercase "same" and "flexible" no longer match SAME/FLEX); exact lookup returns every investigation named (BASS + BASS-II, all three Saffire, both ACME); added min_oxygen() (13.6%, O12), min_airflow() (0.0 cm/s, O2) and max_airflow() (49.0 cm/s, O5b and O13a) over the full 129 rows with all ties, number-checked; added ask(question) as the website's single call; demo_answers.json now has 6 answers (Q5 lowest oxygen, Q6 highest airflow).
+- Why: Daksh's third RAG review on PR #1 — one blocker (material names sent number questions to RAG) plus smaller items, and the AI log table fix.
+- How: Written with SI assistance (Muse), reviewed by Paridhi Singh. Min/max values computed from the full PSI-25 CSV. Tested in the VM (keyword fallback): all three blocker questions route to code with correct answers; BASS/BASS-II, Saffire I/II/III and pizza cases all pass; embedding ranking to be confirmed on the Mac with the real model.
+- Check: python3 rag.py, python3 answer.py run clean.
+
 ## 2026-11-14 16:35 PT — Paridhi Singh — Address second RAG review (v4)
 
 - What: Router fix (numbers count only with a unit; PSI IDs and investigation names are meaning questions; highest/lowest numeric only with oxygen/airflow); added max_oxygen()/answer_highest_oxygen() over the full 129 rows (22.2%, 14 ties, number-checked); corrected the Saffire V citation to Urban et al., ICES 2021, Table 1 (NTRS 20210011521), ranges 25.4–26.2% O2 at 70.7–72.6 kPa, 20 cm/s flow; rebuilt material cards from the full CSV (PMMA/other 98, Nomex 3, SIBAL 27, Wax 1) with tied highest-oxygen wording; added exact PSI-ID/name lookup before embeddings; added BASS (PSI-26) and replaced ACME PSI-10 with PSI-20/PSI-21, with a source_notes column per row.
