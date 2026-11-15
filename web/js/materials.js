@@ -125,7 +125,7 @@ function cardFacts(c) {
     stat("Tests", String(c.test_count)),
     stat("Known outcomes", String(c.known_outcomes)),
     stat("Airflow", range(c.airflow_range_cm_s, " cm/s")),
-    c.pressure_kPa && c.pressure_kPa.length ? stat("Pressure", `${c.pressure_kPa.map(num).join(", ")} kPa`) : null);
+    c.pressure_kPa && c.pressure_kPa.length ? stat("Pressure, where recorded", `${c.pressure_kPa.map(num).join(", ")} kPa`) : null);
 }
 
 const askQuestion = (name) => `Will ${name === "PMMA" || name === "SIBAL" ? name : name.toLowerCase()} burn at ${MOON_O2}% oxygen?`;
@@ -188,7 +188,7 @@ export function previewContent(entry, onOpen) {
     el("p", { class: "preview-line" }, "Oxygen ", el("b", {}, range(c.oxygen_range_pct, "", pct))),
     o2Bar(c.oxygen_range_pct, { compact: true }),
     el("p", { class: "preview-line" }, "Airflow ", el("b", {}, range(c.airflow_range_cm_s, " cm/s")),
-      c.pressure_kPa && c.pressure_kPa.length ? [" at ", el("b", {}, `${range([c.pressure_kPa[0], c.pressure_kPa[c.pressure_kPa.length - 1]], " kPa")}`)] : null),
+      entry.kind === "low_pressure" && c.pressure_kPa.length ? [" at ", el("b", {}, `${range([c.pressure_kPa[0], c.pressure_kPa[c.pressure_kPa.length - 1]], " kPa")}`)] : null),
     outcomeBar(c.outcomes, { compact: true }),
     el("button", { type: "button", class: "btn btn-small", tabindex: "-1", onclick: () => onOpen(entry) }, "Open all tests"),
   ];

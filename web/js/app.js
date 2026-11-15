@@ -64,9 +64,10 @@ function drawStars() {
 
 const preview = { el: null, key: null, timer: 0 };
 
-function showPreview(key, anchor, content) {
+function showPreview(key, anchor, content, color) {
   clearTimeout(preview.timer);
   const box = preview.el;
+  box.style.setProperty("--mat", color);
   add(clear(box), content);
   box.hidden = false;
   preview.key = key;
@@ -91,12 +92,12 @@ function markerButton({ key, label, color, cls, content, onOpen, onFocus }) {
   const btn = el("button", {
     type: "button", class: `marker ${cls || ""}`, style: { "--mat": color },
     onpointerdown: (e) => { pointer = e.pointerType; },
-    onpointerenter: (e) => { if (e.pointerType === "mouse") showPreview(key, btn, content()); },
+    onpointerenter: (e) => { if (e.pointerType === "mouse") showPreview(key, btn, content(), color); },
     onpointerleave: (e) => { if (e.pointerType === "mouse") hidePreview(160); },
-    onfocus: () => { onFocus?.(); if (btn.matches(":focus-visible")) showPreview(key, btn, content()); },
+    onfocus: () => { onFocus?.(); if (btn.matches(":focus-visible")) showPreview(key, btn, content(), color); },
     onblur: () => hidePreview(160),
     onclick: () => {
-      if (pointer === "touch" && preview.key !== key) { showPreview(key, btn, content()); return; }
+      if (pointer === "touch" && preview.key !== key) { showPreview(key, btn, content(), color); return; }
       hidePreview();
       onOpen();
     },

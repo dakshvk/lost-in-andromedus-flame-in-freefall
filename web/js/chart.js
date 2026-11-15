@@ -147,7 +147,7 @@ export function createChart(host, points, opts = {}) {
       el("text", { x: m.l + pw / 2, y: H - 6, class: "axis-label", "text-anchor": "middle" }, "Oxygen at the start of the test (%)"),
       el("text", { x: 12, y: m.t + ph / 2, class: "axis-label", "text-anchor": "middle", transform: `rotate(-90 12 ${m.t + ph / 2})` }, "Airflow (cm/s)"),
       el("text", { x: m.l + pw, y: m.t - 10, class: "moon-label", "text-anchor": "end" }, `Moon cabin (${MOON_O2}%+ O2)`),
-      el("text", { x: x(MOON_O2) + (x(xMax) - x(MOON_O2)) / 2, y: m.t + ph / 2, class: "moon-empty", "text-anchor": "middle", transform: small ? `rotate(-90 ${x(MOON_O2) + (x(xMax) - x(MOON_O2)) / 2} ${m.t + ph / 2})` : null },
+      el("text", { x: x(MOON_O2) + (x(xMax) - x(MOON_O2)) / 2, y: m.t + ph / 2, class: "moon-empty", "text-anchor": "middle", transform: small || x(xMax) - x(MOON_O2) < 120 ? `rotate(-90 ${x(MOON_O2) + (x(xMax) - x(MOON_O2)) / 2} ${m.t + ph / 2})` : null },
         moonCount === 0 ? "No tests here" : `${moonCount} tests here`),
     );
 
