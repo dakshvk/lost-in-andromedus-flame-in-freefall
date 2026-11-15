@@ -26,6 +26,12 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 | Daksh Kumar | 7 slide demo deck with GIFs, and takeover instructions
+- What: `docs/demo/` (new): `lost-in-andromedus-demo.pptx`, `s1.gif` to `s7.gif`, `bg.png`, and the scripts `build_deck.py`, `make_bg.py`, `cut.sh`, `demo_helper.js`. `.gitignore` ignores `docs/demo/raw/`. README repo map has a row for it. The planning Google Doc has "Takeover instructions" at the end of the Lane C section.
+- Why: NASA accepts 7 slides instead of a 30 second video, and Paridhi and Jenisha need to be able to finish the submission if Daksh runs out of Claude usage.
+- How: recorded 7 scenes of the real site in headless-free Chrome (typed questions, cursor, click rings), cut each into a GIF with ffmpeg, then built a space themed deck with python-pptx (one GIF and four numbered steps per slide). Done with Claude Code.
+- Check: every verdict shown (INSIDE at 20%, NEAR at 23%, BEYOND at 30%, cotton at 26%) was read back from the page during recording; the deck was rebuilt from the repo copy of the scripts; layout checked in an HTML copy because no PowerPoint was available (GIF animation in PowerPoint itself not tested).
+
 ### 2026-11-15 | Daksh Kumar | Explain INSIDE, NEAR, BEYOND and the other labels in plain words
 - What: `README.md` (new "How to read an answer" section). The same text was added to the combined submission Google Doc.
 - Why: judges and readers would see BEYOND and other labels without knowing what they mean.

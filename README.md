@@ -104,7 +104,7 @@ The full list of rules and limits is in the "Limits and rules" panel on the site
 | `logic/` | The code that sorts INSIDE, NEAR and BEYOND, checks numbers, searches, and ranks. |
 | `api/` | The small server that connects the logic to the website. |
 | `web/` | The website. |
-| `docs/` | Screenshots used in this file. |
+| `docs/` | Screenshots used in this file, and `docs/demo/` with the 7 slide demo deck (`lost-in-andromedus-demo.pptx`), its GIFs and the scripts that build it. |
 
 `CHRONICLE.md` is a log of every change (who, what, why, how). `AI_USE_LOG.md` is a log of every use of AI.
 

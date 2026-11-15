@@ -37,3 +37,4 @@ One line per use. Newest at the bottom.
 | 2026-11-15 | Daksh            | Claude Code                   | Drafted the NASA project page text (summary, description, data, references, SI answer) and the combined links and text Google Doc |
 | 2026-11-15 | Daksh            | Claude Code                   | Made the Moon turn on its own even with Reduce motion on, added the ?spin=off switch, updated the README line |
 | 2026-11-15 | Daksh            | Claude Code                   | Wrote the plain-words explanation of the verdicts and outcome words for the README and the submission doc |
+| 2026-11-15 | Daksh            | Claude Code                   | Recorded the demo GIFs of the site, built the 7 slide space themed deck and its scripts, wrote the takeover instructions in the planning doc |
