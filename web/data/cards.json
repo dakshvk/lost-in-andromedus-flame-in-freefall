@@ -1,0 +1,500 @@
+{
+ "cards": [
+  {
+   "id": "nomex",
+   "material": "Nomex",
+   "group": "standard",
+   "forms": [
+    "cloth",
+    "unknown"
+   ],
+   "test_count": 4,
+   "known_outcomes": 4,
+   "outcomes": {
+    "quenched": 0,
+    "blow_off": 0,
+    "burning": 0,
+    "no_ignition": 4,
+    "ignited_only": 0,
+    "unknown": 0
+   },
+   "oxygen_range_pct": [
+    21.0,
+    22.2
+   ],
+   "airflow_range_cm_s": [
+    8.0,
+    20.0
+   ],
+   "pressure_kPa": [],
+   "too_few": false,
+   "low_flow_uncertain_tests": 0,
+   "link2018_rows": 0,
+   "test_ids": [
+    "F1",
+    "F2",
+    "F3",
+    "2-7-Nomex"
+   ],
+   "sources": [
+    {
+     "name": "PSI-25",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    },
+    {
+     "name": "PSI-99 (SAFFIRE-II)",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
+    }
+   ]
+  },
+  {
+   "id": "pmma",
+   "material": "PMMA",
+   "group": "standard",
+   "forms": [
+    "film",
+    "rod",
+    "sheet",
+    "slab",
+    "sphere"
+   ],
+   "test_count": 102,
+   "known_outcomes": 76,
+   "outcomes": {
+    "quenched": 50,
+    "blow_off": 9,
+    "burning": 11,
+    "no_ignition": 6,
+    "ignited_only": 0,
+    "unknown": 26
+   },
+   "oxygen_range_pct": [
+    13.6,
+    22.2
+   ],
+   "airflow_range_cm_s": [
+    0.0,
+    20.0
+   ],
+   "pressure_kPa": [
+    100.0
+   ],
+   "too_few": false,
+   "low_flow_uncertain_tests": 11,
+   "link2018_rows": 52,
+   "test_ids": [
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8",
+    "B9",
+    "B10",
+    "B11",
+    "B12",
+    "B13",
+    "B14",
+    "B15",
+    "B16",
+    "B17",
+    "B18",
+    "B19",
+    "B20",
+    "B21",
+    "B22",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7",
+    "M8",
+    "M9",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "M15",
+    "M16",
+    "M17",
+    "M18",
+    "M19",
+    "M20",
+    "O1",
+    "O2",
+    "O3a",
+    "O3b",
+    "O4",
+    "O5a",
+    "O5b",
+    "O6",
+    "O7",
+    "O8a",
+    "O8b",
+    "O9",
+    "O10",
+    "O11",
+    "O12",
+    "O13a",
+    "O13b",
+    "O14",
+    "O15a",
+    "O15b",
+    "O16",
+    "O17",
+    "O18",
+    "O19",
+    "O20",
+    "O21",
+    "O22",
+    "P1",
+    "P2",
+    "P3a",
+    "P3b",
+    "P4",
+    "P5",
+    "P6",
+    "P8",
+    "P9",
+    "P10",
+    "P12",
+    "P13a",
+    "P13b",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P21a",
+    "P21b",
+    "P22a",
+    "P22b",
+    "P23",
+    "P24",
+    "P25",
+    "T3",
+    "T7",
+    "IV-2",
+    "2-7-PMMA",
+    "2-8",
+    "2-9"
+   ],
+   "sources": [
+    {
+     "name": "PSI-25",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    },
+    {
+     "name": "PSI-99 (SAFFIRE-II)",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
+    },
+    {
+     "name": "Saffire IV/V (ICES 2021)",
+     "url": "https://ntrs.nasa.gov/citations/20210011521"
+    }
+   ]
+  },
+  {
+   "id": "sibal",
+   "material": "SIBAL",
+   "group": "standard",
+   "forms": [
+    "cloth"
+   ],
+   "test_count": 32,
+   "known_outcomes": 23,
+   "outcomes": {
+    "quenched": 6,
+    "blow_off": 1,
+    "burning": 6,
+    "no_ignition": 6,
+    "ignited_only": 4,
+    "unknown": 9
+   },
+   "oxygen_range_pct": [
+    16.4,
+    22.1
+   ],
+   "airflow_range_cm_s": [
+    1.0,
+    53.0
+   ],
+   "pressure_kPa": [
+    100.0
+   ],
+   "too_few": false,
+   "low_flow_uncertain_tests": 3,
+   "link2018_rows": 0,
+   "test_ids": [
+    "T1",
+    "T2",
+    "T4",
+    "T5",
+    "T6",
+    "T9",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17",
+    "T18",
+    "T19",
+    "T20",
+    "T21",
+    "T22",
+    "T23",
+    "T24",
+    "T25",
+    "T26",
+    "T27",
+    "T28a",
+    "T28b",
+    "T29",
+    "IV-1",
+    "98-S1",
+    "98-S2",
+    "2-5",
+    "2-6"
+   ],
+   "sources": [
+    {
+     "name": "PSI-25",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    },
+    {
+     "name": "PSI-98 (SAFFIRE-I)",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98"
+    },
+    {
+     "name": "PSI-99 (SAFFIRE-II)",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
+    },
+    {
+     "name": "Saffire IV/V (ICES 2021)",
+     "url": "https://ntrs.nasa.gov/citations/20210011521"
+    }
+   ]
+  },
+  {
+   "id": "silicone",
+   "material": "Silicone",
+   "group": "standard",
+   "forms": [
+    "sheet"
+   ],
+   "test_count": 4,
+   "known_outcomes": 4,
+   "outcomes": {
+    "quenched": 0,
+    "blow_off": 0,
+    "burning": 0,
+    "no_ignition": 4,
+    "ignited_only": 0,
+    "unknown": 0
+   },
+   "oxygen_range_pct": [
+    21.5,
+    22.1
+   ],
+   "airflow_range_cm_s": [
+    20.0,
+    20.0
+   ],
+   "pressure_kPa": [],
+   "too_few": false,
+   "low_flow_uncertain_tests": 0,
+   "link2018_rows": 0,
+   "test_ids": [
+    "2-1",
+    "2-2",
+    "2-3",
+    "2-4"
+   ],
+   "sources": [
+    {
+     "name": "PSI-99 (SAFFIRE-II)",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
+    }
+   ]
+  },
+  {
+   "id": "wax",
+   "material": "Wax",
+   "group": "standard",
+   "forms": [
+    "candle"
+   ],
+   "test_count": 1,
+   "known_outcomes": 1,
+   "outcomes": {
+    "quenched": 1,
+    "blow_off": 0,
+    "burning": 0,
+    "no_ignition": 0,
+    "ignited_only": 0,
+    "unknown": 0
+   },
+   "oxygen_range_pct": [
+    17.4,
+    17.4
+   ],
+   "airflow_range_cm_s": [
+    3.0,
+    3.0
+   ],
+   "pressure_kPa": [],
+   "too_few": true,
+   "low_flow_uncertain_tests": 0,
+   "link2018_rows": 0,
+   "test_ids": [
+    "F4"
+   ],
+   "sources": [
+    {
+     "name": "PSI-25",
+     "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    }
+   ]
+  }
+ ],
+ "low_pressure_group": {
+  "title": "Low-pressure tests (Saffire V)",
+  "note": "These tests ran at about 71 kPa, not normal cabin pressure, so they are kept out of every standard range.",
+  "cards": [
+   {
+    "id": "cotton-saffire-v-70-7-kpa",
+    "material": "Cotton (Saffire V, 70.7 kPa)",
+    "group": "low_pressure",
+    "forms": [
+     "cloth"
+    ],
+    "test_count": 1,
+    "known_outcomes": 1,
+    "outcomes": {
+     "quenched": 0,
+     "blow_off": 0,
+     "burning": 1,
+     "no_ignition": 0,
+     "ignited_only": 0,
+     "unknown": 0
+    },
+    "oxygen_range_pct": [
+     26.2,
+     26.2
+    ],
+    "airflow_range_cm_s": [
+     20.0,
+     20.0
+    ],
+    "pressure_kPa": [
+     70.7
+    ],
+    "too_few": true,
+    "low_flow_uncertain_tests": 0,
+    "link2018_rows": 0,
+    "test_ids": [
+     "V-2"
+    ],
+    "sources": [
+     {
+      "name": "Saffire IV/V (ICES 2021)",
+      "url": "https://ntrs.nasa.gov/citations/20210011521"
+     }
+    ]
+   },
+   {
+    "id": "pmma-saffire-v-71-3-kpa",
+    "material": "PMMA (Saffire V, 71.3 kPa)",
+    "group": "low_pressure",
+    "forms": [
+     "slab"
+    ],
+    "test_count": 1,
+    "known_outcomes": 1,
+    "outcomes": {
+     "quenched": 1,
+     "blow_off": 0,
+     "burning": 0,
+     "no_ignition": 0,
+     "ignited_only": 0,
+     "unknown": 0
+    },
+    "oxygen_range_pct": [
+     25.4,
+     25.4
+    ],
+    "airflow_range_cm_s": [
+     5.0,
+     20.0
+    ],
+    "pressure_kPa": [
+     71.3
+    ],
+    "too_few": true,
+    "low_flow_uncertain_tests": 0,
+    "link2018_rows": 0,
+    "test_ids": [
+     "V-3"
+    ],
+    "sources": [
+     {
+      "name": "Saffire IV/V (ICES 2021)",
+      "url": "https://ntrs.nasa.gov/citations/20210011521"
+     }
+    ]
+   },
+   {
+    "id": "pmma-saffire-v-72-6-kpa",
+    "material": "PMMA (Saffire V, 72.6 kPa)",
+    "group": "low_pressure",
+    "forms": [
+     "slab"
+    ],
+    "test_count": 1,
+    "known_outcomes": 1,
+    "outcomes": {
+     "quenched": 1,
+     "blow_off": 0,
+     "burning": 0,
+     "no_ignition": 0,
+     "ignited_only": 0,
+     "unknown": 0
+    },
+    "oxygen_range_pct": [
+     25.7,
+     25.7
+    ],
+    "airflow_range_cm_s": [
+     5.0,
+     20.0
+    ],
+    "pressure_kPa": [
+     72.6
+    ],
+    "too_few": true,
+    "low_flow_uncertain_tests": 0,
+    "link2018_rows": 0,
+    "test_ids": [
+     "V-4"
+    ],
+    "sources": [
+     {
+      "name": "Saffire IV/V (ICES 2021)",
+      "url": "https://ntrs.nasa.gov/citations/20210011521"
+     }
+    ]
+   }
+  ]
+ },
+ "counting_rule": "Counts and ranges exclude Link et al. 2018 rows (paper rod data, different flow calibration, not outcome evidence) and rows with no oxygen value."
+}

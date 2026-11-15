@@ -1,0 +1,9 @@
+# API (Lane C, option A)
+fastapi>=0.110
+uvicorn>=0.29
+# Tests
+pytest>=8
+httpx>=0.27
+# Optional: better retrieval for text questions. Without it, logic/rag.py
+# uses its keyword fallback, which keeps the free hosting tier small.
+# sentence-transformers>=2.7

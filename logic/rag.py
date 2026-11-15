@@ -59,6 +59,7 @@ still runs on a keyword fallback so you can test the shape of it:
 
 import csv
 import math
+import os
 import re
 
 from answer import load_rows
@@ -259,9 +260,15 @@ def row_text(row):
     return ", ".join(p for p in parts if p) + "."
 
 
-def load_investigations(path="investigations.csv"):
+INVESTIGATIONS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "investigations.csv")
+
+
+def load_investigations(path=INVESTIGATIONS_PATH):
     """Load the investigations table (objective, fuels, conditions,
-    sensors, how each investigation differs, and source_notes)."""
+    sensors, how each investigation differs, and source_notes).
+    The default path is next to this file, so it works no matter
+    which folder the API is started from (Lane C, Nov 14)."""
     with open(path, encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
 

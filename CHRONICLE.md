@@ -26,6 +26,14 @@ Rules:
 
 Entries start here
 
+### 2026-11-14 20:55 | Daksh | Merged Lane B, tested everything together, Lane C data layer and API
+
+- What: merged PR #1 (Lane B) into main. New: `web/export_data.py` (builds `web/data/*.json` for the site), `web/data/` (tests, cards, experiments, investigations, limits, demo_answers, meta), `web/js/data.js` (the page's data module, with offline fallback), `api/app.py` (FastAPI: `/api/health`, `/api/ask`, `/api/data/{name}`, serves `web/`), `api/test_api.py` (13 tests), `web/README.md`, `requirements.txt`. Changed: `logic/rag.py` loads `investigations.csv` from next to the file, so the API works from any folder.
+- Why: Lane C, option A (Python API plus static site). Design comes later; this is only the data the page will read, built from Lane A's data through Lane B's code so the site and the answers can never disagree.
+- How: written with Claude Code. Cards count and range only rows that are not Link et al. and have an oxygen value, the same rule the answers use. Hardware groups in investigations.json are copied from NASA's challenge notes (source in the file).
+- Check: `data/scripts/validate.py` prints OK; `python3 -m pytest -q logic` gives 89 passed; `python3 -m pytest -q api` gives 13 passed; 21 questions through ask() all pass the number checker; a real `uvicorn api.app:app` run answered "Will PMMA burn at 30% oxygen?" with BEYOND and served the cards and `js/data.js`. Card numbers match the answers (PMMA 102 tests, 76 known; SIBAL 32, 23 known).
+- Open: "Will it burn?" (no material, no oxygen) goes to retrieval and returns ACME instead of asking for a material and oxygen. The cards.py text fields contradict themselves (PMMA "154 tests" next to "76 of 102"), so the export uses structured numbers only.
+
 ### 2026-11-14 20:30 | Daksh | Lane B v11: cotton, known-outcome evidence, counts without blank oxygen
 
 - What: `logic/cards.py` names the Saffire V-2 cotton jersey "Cotton" (Lane A records it as "other"); `logic/rag.py` adds "cotton" to the material matcher; `logic/answer.py`: closest_rows prefers rows with a known outcome, a material that exists only at low pressure (Cotton) shows its own Saffire V rows as evidence and nearest evidence instead of other materials' rows, the INSIDE/BEYOND count skips rows with no oxygen value, and evidence rows carry pressure_kPa; tests updated and 3 new tests added; demo answers and ask samples regenerated.

@@ -1,0 +1,24 @@
+{
+ "near_margin_oxygen_points": 1.0,
+ "near_margin_flow_fraction": 0.25,
+ "low_flow_cutoff_cm_s": 2.0,
+ "standard_pressure_min_kPa": 90.0,
+ "duct_airflow_max_cm_s": 55.0,
+ "duct_airflow_near_max_cm_s": 65.0,
+ "rag_score_cutoff": 0.3,
+ "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+ "gravity_note_short": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+ "rules": [
+  "A test whose flow changed covers its whole span, from start to end flow.",
+  "NEAR means just outside the tested range: 1.0 oxygen point, or 25% of the material's flow range.",
+  "Fewer than 3 tests for a material means extrapolated, not covered.",
+  "Flows under 2 cm/s are flagged as uncertain (team choice: the BASS-II report says low flows have high error bars but gives no number).",
+  "If the crew turned the flow off and the flame went out, the outcome is unknown, not quenched.",
+  "Saffire V tests (about 71 kPa) are kept out of the standard ranges and shown by pressure.",
+  "Link et al. 2018 rows are paper rod data: not outcome evidence, different flow calibration.",
+  "Outcomes that are not recorded are shown as unknown, never guessed."
+ ],
+ "ranking_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project — a team call, not NASA's.",
+ "si_acknowledgment": "Data extraction, logic and code were written with SI assistance (Claude, Claude Code, Muse) and reviewed by the team. See AI_USE_LOG.md.",
+ "license": "PSI data is CC0 (NASA Physical Sciences Informatics)."
+}

@@ -1,0 +1,12 @@
+{
+ "tests": 200,
+ "cards": 5,
+ "low_pressure_cards": 3,
+ "experiments": 24,
+ "investigations": 10,
+ "demo_answers": 6,
+ "built_from": [
+  "data/tests.json (Lane A)",
+  "logic/ (Lane B)"
+ ]
+}
