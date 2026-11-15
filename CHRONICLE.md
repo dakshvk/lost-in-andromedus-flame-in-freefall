@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-15 12:47 PT — Paridhi Singh — Add Cursor to SI acknowledgment
+
+- What: Added Cursor to the SI acknowledgment in web/export_data.py and regenerated web/data/limits.json; logged Cursor use in AI_USE_LOG.md.
+- Why: Cursor was used for small code edits and pushes, so the disclosure should list it alongside Claude, Claude Code, and Muse.
+- How: One-word change to the acknowledgment string; re-ran python3 web/export_data.py.
+- Check: limits.json shows "Claude, Claude Code, Muse, Cursor".
+
 ### 2026-11-15 01:00 | Daksh | Moon: darker and more textured, drag from anywhere
 
 - What: `web/js/moon.js` color grade no longer clips highlands to white (darker blue-grey range, stronger maria contrast), crater relief from the full resolution surface image (bump scale 3.4), lower side light so rims shade, dimmer limb ring and halo. Dragging now listens on the whole Moon stage with momentum on both axes; `web/css/styles.css` stops the hidden flat Moon layer from catching the pointer in 3D mode (that layer was why only the Moon's edge could be grabbed).
