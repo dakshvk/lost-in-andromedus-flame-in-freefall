@@ -26,6 +26,12 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 | Daksh Kumar | Demo slideshow on Google Slides, tests for the deck, name and links
+- What: Google Slides copy of the deck in the team folder (public link, replaces the MP4); `docs/demo/test_deck.py` (new, 59 checks); lighter GIFs `s1_lite.gif` to `s7_lite.gif` and `lost-in-andromedus-demo-lite.pptx`; `cut.sh` and `build_deck.py` take size options; deck footers now name the team, slide 7 credits NASA PSI and discloses AI use, speaker notes lengthened. README team table now says "Paridhi Singh" and has Daksh's LinkedIn; the demo line points to the slideshow.
+- Why: the demo is now the GIF slideshow, not an MP4, so it must open publicly with no login, and every point we need to make has to be on a slide or in its notes.
+- How: the Drive upload limit is about 7 MB of file, so the Slides copy was uploaded with light GIFs (800 px, 6 fps, 72 colors), then each picture was replaced in Slides with the full quality GIF from the public GitHub repo (Format, Image, Replace image, By URL). Test run first on the old deck found thin notes and missing data credit, AI disclosure and team names; all fixed. Done with Claude Code.
+- Check: `python3 docs/demo/test_deck.py` passes on the full deck, and `GIF_SUFFIX=_lite python3 docs/demo/test_deck.py docs/demo/lost-in-andromedus-demo-lite.pptx` passes on the light deck. The Slides link answers 200 with no login. Not tested in PowerPoint or Keynote.
+
 ### 2026-11-15 | Daksh Kumar | 7 slide demo deck with GIFs, and takeover instructions
 - What: `docs/demo/` (new): `lost-in-andromedus-demo.pptx`, `s1.gif` to `s7.gif`, `bg.png`, and the scripts `build_deck.py`, `make_bg.py`, `cut.sh`, `demo_helper.js`. `.gitignore` ignores `docs/demo/raw/`. README repo map has a row for it. The planning Google Doc has "Takeover instructions" at the end of the Lane C section.
 - Why: NASA accepts 7 slides instead of a 30 second video, and Paridhi and Jenisha need to be able to finish the submission if Daksh runs out of Claude usage.

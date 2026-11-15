@@ -15,6 +15,12 @@ from pptx.util import Emu, Inches, Pt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEMO = HERE
+SUFFIX = os.environ.get("GIF_SUFFIX", "")  # "_lite" builds the small deck used for Google Slides
+
+
+def gif_size(path):
+    h = open(path, "rb").read(10)
+    return int.from_bytes(h[6:8], "little"), int.from_bytes(h[8:10], "little")
 
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 BODY = RGBColor(0xC9, 0xD6, 0xEE)
@@ -39,7 +45,7 @@ SLIDES = [
             "The Moon is a map. Each dot is a material NASA tested, and you can drag it to spin.",
             "Our question: <a>did any test ever reach 30%?</a>",
         ],
-        "notes": "A Moon base will likely run at 30 percent oxygen or more. NASA's burn tests flew in orbit. Did any of them reach that level? This site answers that, and shows exactly where the evidence stops.",
+        "notes": "A Moon base is expected to run at about 30 percent oxygen or more. NASA's burn tests flew in orbit, in microgravity, and none were on the Moon. The Moon you see is a map: each dot is a material NASA tested, and you can drag it. Our question is whether any test ever reached 30 percent, and this site shows exactly where the evidence stops. Team Lost in Andromedus.",
     },
     {
         "title": "Ask a question, get an answer with its evidence",
@@ -52,7 +58,7 @@ SLIDES = [
             "The three closest real tests are listed, all at 22.2% oxygen. <w>Quenched</w> means the flame went out on its own.",
             "A check confirms <g>every number</g> in the answer is in the data.",
         ],
-        "notes": "We type a question. The answer is BEYOND, which means nobody tested PMMA that high. The closest tests are shown, and every number is checked against the data.",
+        "notes": "We type a question in plain words: will PMMA burn at 30 percent oxygen. PMMA is a clear plastic NASA uses as a standard test fuel. The verdict is BEYOND, which means NASA never tested PMMA that high. It does not say PMMA will or will not burn. The three closest real tests are shown, all at 22.2 percent, and every number in the answer is checked against the data. Code writes the answer, never an AI.",
     },
     {
         "title": "What INSIDE, NEAR and BEYOND mean",
@@ -65,7 +71,7 @@ SLIDES = [
             "<r>BEYOND</r> (30% oxygen): outside everything tested, so no test can say what happens.",
             "The highest PMMA test was <w>22.2% oxygen</w>.",
         ],
-        "notes": "Three typed questions. At 20 percent we are inside the tested range. At 23 we are just outside, so near. At 30 we are beyond anything tested.",
+        "notes": "Three typed questions about PMMA. At 20 percent oxygen the verdict is INSIDE: real tests exist there. At 23 percent it is NEAR: just outside the tested range, within one oxygen point. At 30 percent it is BEYOND: outside everything tested, so no test can say what happens. The highest PMMA test was 22.2 percent oxygen, which is why 30 is far outside.",
     },
     {
         "title": "The evidence chart: where NASA's tests stop",
@@ -78,7 +84,7 @@ SLIDES = [
             "The shaded band on the right is the <a>30% Moon base</a> level.",
             "<r>No test is in the band.</r> The best low pressure test stops at 26.2%.",
         ],
-        "notes": "Every tick is a real NASA test. All of them stop before the shaded Moon base band. That empty band is the main finding.",
+        "notes": "Each row is a material and each tick is one real NASA test, colored by how it ended. Hover a row for its test count: PMMA has 102 tests and its last tick is at 22.2 percent. The shaded band on the right is the 30 percent Moon base level, and no test is in it. The best low pressure test stops at 26.2 percent. This empty band is the main finding.",
     },
     {
         "title": "Materials, and how each test ended",
@@ -91,7 +97,7 @@ SLIDES = [
             "<w>Quenched</w>: the flame went out on its own. <w>Blow off</w>: the airflow pushed it off. <w>No ignition</w>: it never lit.",
             "If the notes do not say how a test ended, we write <w>unknown</w>. We never guess.",
         ],
-        "notes": "Each material has a card with its tests, outcomes and oxygen range. The outcome words are read from NASA's crew notes.",
+        "notes": "Click a material on the Moon to open its card. PMMA has 102 tests, 76 with a known outcome, between 13.6 and 22.2 percent oxygen. SIBAL, a cotton and fiberglass fabric, has 32 tests. Nomex, silicone and wax have only 4, 4 and 1. Quenched means the flame went out on its own, blow off means the airflow pushed it off, and no ignition means it never lit. If the NASA notes do not say how a test ended, we write unknown and never guess.",
     },
     {
         "title": "The closest evidence to a Moon base",
@@ -104,7 +110,7 @@ SLIDES = [
             "Saffire V flew in a cargo spacecraft at low pressure (70.7 kPa). At <a>26.2% oxygen</a> the cotton kept burning.",
             "It is the closest NASA data to 30%, shown <w>separately</w> from the normal pressure tests.",
         ],
-        "notes": "Cotton at 26 percent is also beyond the normal tests. The one low pressure Saffire V test is the closest evidence, and it is shown on its own.",
+        "notes": "We type: will cotton burn at 26 percent oxygen. The verdict is BEYOND again, because no cotton test exists at normal pressure. The only one is Saffire V test V-2, flown in a cargo spacecraft at low pressure, 70.7 kilopascals. At 26.2 percent oxygen the cotton kept burning. It is the closest NASA data to 30 percent, and we show it separately from the normal pressure tests.",
     },
     {
         "title": "Ranking, limits and honesty",
@@ -112,12 +118,13 @@ SLIDES = [
         "gif": "s7.gif",
         "typed": False,
         "steps": [
-            "We rank all 24 experiments. <w>BASS-II is first</w>, with a reason for every point. The ranking is <a>our judgment, not NASA's</a>.",
+            "We rank all 24 experiments. <w>BASS-II is first</w>. The ranking is <a>our judgment, not NASA's</a>.",
             "<w>Open details</w> shows an experiment's objective, fuels, conditions and sensors.",
             "The <w>Limits and rules</w> panel lists every threshold the site uses.",
             "<r>All tests were in microgravity.</r> The Moon has about one sixth of Earth's gravity.",
+            "Data: <w>NASA Physical Sciences Informatics</w>. <w>AI tools helped write the code</w>; they are disclosed in our repo.",
         ],
-        "notes": "We rank the 24 NASA experiments and show the reason for every point. The limits panel lists every rule. Every test was in microgravity, which is not the Moon's gravity.",
+        "notes": "We rank all 24 NASA combustion experiments for fire safety in a habitat, with a reason for every point. BASS-II is first. The ranking is our judgment, not NASA's, and the page says so. Open details shows an experiment's objective, fuels, conditions and sensors. The Limits and rules panel lists every threshold. All tests were in microgravity, and the Moon has about one sixth of Earth's gravity. Data comes from NASA Physical Sciences Informatics; AI tools helped write the code and are disclosed in our repo.",
     },
 ]
 
@@ -187,7 +194,7 @@ def build(only=None, out="deck.pptx"):
         # GIF frame and picture (GIF is 960x549).
         fx, fy, fw = 0.6, 2.1, 7.75
         pw = fw - 0.14
-        ph = pw * 549 / 960
+        ph = pw * 549 / 960  # the GIFs are cut at the site's 2560x1464 ratio (about 1.75)
         fh = ph + 0.14
         frame = sl.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(fx), Inches(fy), Inches(fw), Inches(fh))
         frame.adjustments[0] = 0.015
@@ -196,7 +203,9 @@ def build(only=None, out="deck.pptx"):
         frame.line.color.rgb = EDGE
         frame.line.width = Pt(1.5)
         frame.shadow.inherit = False
-        pic = sl.shapes.add_picture(os.path.join(DEMO, s["gif"]), Inches(fx + 0.07), Inches(fy + 0.07), Inches(pw), Inches(ph))
+        gpath = os.path.join(DEMO, s["gif"].replace(".gif", SUFFIX + ".gif"))
+        gw, gh = gif_size(gpath)
+        pic = sl.shapes.add_picture(gpath, Inches(fx + 0.07), Inches(fy + 0.07), Inches(pw), Inches(ph))
         pic._element.nvPicPr.cNvPr.set("descr", f"Screen recording for slide {idx}: {s['title']}")
 
         _, tf = textbox(sl, fx, fy + fh + 0.1, fw, 0.3)
@@ -229,12 +238,12 @@ def build(only=None, out="deck.pptx"):
             dr.text = str(n)
             style(dr, 12, WHITE, bold=True)
             _, ttf = textbox(sl, 9.32, y, 3.5, step_h - 0.08)
-            add_runs(ttf.paragraphs[0], text, 13, BODY)
+            add_runs(ttf.paragraphs[0], text, 12 if len(s["steps"]) > 4 else 13, BODY)
             y += step_h
 
-        _, tf = textbox(sl, 0.6, 7.02, 10, 0.25)
+        _, tf = textbox(sl, 0.6, 7.02, 11.0, 0.25)
         r = tf.paragraphs[0].add_run()
-        r.text = "TEAM LOST IN ANDROMEDUS   /   NASA SPACE APPS 2026"
+        r.text = "TEAM LOST IN ANDROMEDUS: DAKSH KUMAR, PARIDHI SINGH, JENISHA SUBEDI   /   NASA SPACE APPS 2026"
         style(r, 10, MUTED, font="Courier New")
         _, tf = textbox(sl, 11.7, 7.02, 1.1, 0.25)
         tf.paragraphs[0].alignment = PP_ALIGN.RIGHT
