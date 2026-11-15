@@ -81,6 +81,12 @@ for r in read("PSI-99_Experimental_table_SAFFIRE-2.csv")[1:]:
         fn = (f"Burn time {r[9]}; micro-g burn length {r[11]}. " + ("Material cell is blank in PSI-99; taken as PMMA (the ICES-2021-266 paper says Saffire II had two PMMA samples). " if not material_cell else "") + approx + ground)
     rows.append(base(f"PSI-99:{sid}", "psi-99", mat, shape, o2s, o2e, num(r[5]), d, outcome, onote, cite, fn, raw))
 
+# Pressure: ICES-2021-266 Table 2 lists 100 kPa for Saffire samples I-1, II-5, II-6, III-1. Only rows whose sample matches by name are filled
+# (PSI-98 S1 = I-1, PSI-99 2-5 = II-5, 2-6 = II-6). Other rows (including PSI-100, whose PSI flow of 30 cm/s differs from III-1's 25) stay null.
+for _r in rows:
+    if _r["id"] in ("PSI-98:S1", "PSI-99:2-5", "PSI-99:2-6"):
+        _r["pressure_kPa"] = 100
+        _r["flow_note"] += " Pressure 100 kPa from ICES-2021-266 Table 2 (matched by sample name), not from the PSI table."
 json.dump(rows, open(f"{D}/tests_saffire123.json", "w"), indent=1)
 with open(f"{D}/review_saffire123.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(review[0].keys())); w.writeheader(); w.writerows(review)

@@ -52,7 +52,7 @@ REVIEW = {  # id: (proposed label, why it is a judgement call). Final outcome st
 }
 
 # Decisions on the 13 judgement calls. Source: Claude's suggestion, accepted by the Lane A owner on 2026-11-14
-# (not independently re-read by a second person yet). Basis: plan rule "label only what the note says";
+# (second-person check by Daksh Kumar, 2026-11-14: no changes). Basis: plan rule "label only what the note says";
 # precedent: Zhao labels T9/T10 ("Brief ignition but flame extinguished...") and T28a ("only briefly flashed then went out") as no ignition.
 DECISION = {"B14": "no_ignition", "O5b": "no_ignition", "O12": "no_ignition", "O16": "no_ignition", "P8": "no_ignition",
             "T3": "no_ignition", "M17": "unknown", "P4": "unknown", "P5": "unknown", "P6": "unknown", "P13a": "unknown",
@@ -175,7 +175,7 @@ for _r in out + paper:
 json.dump(out + paper, open(f"{D}/tests.json", "w"), indent=1)   # PSI-25 checks below use `out` only
 with open(f"{D}/review_needed.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(review_rows[0].keys()) + ["human_decision (fill in)"]); w.writeheader()
-    for x in review_rows: w.writerow({**x, "human_decision (fill in)": "default: Claude suggestion accepted by Lane A owner, 2026-11-14; second-person check pending"})
+    for x in review_rows: w.writerow({**x, "human_decision (fill in)": "default: Claude suggestion accepted by Lane A owner, 2026-11-14; second-person check by Daksh Kumar 2026-11-14: confirmed, no changes"})
 
 # blind relabel sample for the second-person check (note text only, no label)
 random.seed(14)

@@ -20,7 +20,7 @@ for x in t:
     need(set(x["flags"]) <= FLG, f"{i}: bad flag")
     need(x["o2_start"] is not None or "context_only" in x["flags"], f"{i}: o2_start null without context_only")
     if x["source_type"] == "paper": need("hand_entered" in x["flags"], f"{i}: paper row not hand_entered")
-    if x["outcome"] != "unknown" and x["source"] == "psi-25": need(x["outcome_note"] or "outcome_from_report_notes" in x["flags"] or "outcome_from_zhao" in x["flags"] or True, "")
+    if x["outcome"] != "unknown" and x["source"] == "psi-25": need(x["outcome_note"] or "outcome_from_report_notes" in x["flags"] or "outcome_from_zhao" in x["flags"], f"{i}: PSI-25 row has a known outcome but no note or outcome flag")
 c = collections.Counter(x["source"] for x in t)
 need(c["psi-25"] == 129, f"psi-25 rows {c['psi-25']} != 129")
 need(c["paper-link2018"] == 52, "link2018 != 52")
