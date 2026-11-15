@@ -15,6 +15,14 @@ Ties break by test count, then alphabetically (by title).
 The ranking is the team's judgement, not NASA's — the page must say so.
 If a field is missing, give 0 and note "missing", never guess.
 
+v8 change (PR #1 review, Daksh, Nov 14): the fire-safety +3 is a
+team call, not an exact-text match. It goes to any sub-research area
+that mentions "fire" (so "Spacecraft Fire, Smoke Distribution" and
+"Fire Safety" count), plus all three Saffire experiments (PSI-98,
+PSI-99, PSI-100) as one NASA project — Saffire II's page says
+"Surface Combustion", which mentions no fire. The rule is written in
+RANKING_NOTE, next to the judgement line, so the page shows it.
+
 Run from inside logic/:
     python3 ranking.py
 Reads ../data/experiments.json (Lane A's file — its score fields are
@@ -30,10 +38,16 @@ EXPERIMENTS_PATH = os.path.join(
     os.path.dirname(__file__), "..", "data", "experiments.json")
 RANKED_PATH = os.path.join(os.path.dirname(__file__), "ranked_experiments.json")
 
-FIRE_SAFETY = "Spacecraft Fire Safety"
+# The three Saffire experiments are one NASA project; they get the
+# fire-safety +3 even when their sub-area does not mention fire
+# (Saffire II's page says "Surface Combustion"). Team call, Nov 14.
+SAFFIRE_IDS = {"PSI-98", "PSI-99", "PSI-100"}
 RANKING_NOTE = (
     "Scored by Lane B (Paridhi Singh), Nov 14, 2026. "
-    "This ranking is the team's judgement, not NASA's."
+    "This ranking is the team's judgement, not NASA's. "
+    "Fire-safety +3 goes to any sub-area mentioning 'fire', plus all "
+    "three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA "
+    "project — a team call, not NASA's."
 )
 
 
@@ -59,19 +73,20 @@ def score_experiment(exp):
     else:
         breakdown.append({"reason": f"fuel type is {fuel}, not solid", "points": 0})
 
-    # 2. Research area is spacecraft fire safety +3. The rule is
-    #    applied to the sub-area as stored: only the exact wording
-    #    "Spacecraft Fire Safety" counts. Near misses ("Spacecraft
-    #    Fire, Smoke Distribution", "Fire Safety", "Surface
-    #    Combustion") do not — the team can overrule that call.
+    # 2. Research area is spacecraft fire safety +3. Team call
+    #    (Nov 14): the +3 goes to any sub-area that mentions "fire",
+    #    plus all three Saffire experiments as one NASA project.
+    #    "Flames ..." does not contain "fire", so ACME stays at 0.
     sub = exp.get("sub_research_area")
-    if sub == FIRE_SAFETY:
-        breakdown.append({"reason": "research area is spacecraft fire safety", "points": 3})
+    if sub is not None and "fire" in sub.lower():
+        breakdown.append({"reason": "sub-research area mentions fire", "points": 3})
+    elif exp.get("psi_id") in SAFFIRE_IDS:
+        breakdown.append({"reason": "Saffire experiment — one NASA project", "points": 3})
     elif sub is None:
         breakdown.append({"reason": "sub-research area missing", "points": 0})
         notes.append("sub_research_area missing")
     else:
-        breakdown.append({"reason": f"sub-research area is {sub}, not spacecraft fire safety", "points": 0})
+        breakdown.append({"reason": f"sub-research area is {sub}, not fire-related", "points": 0})
 
     # 3. Has a data table +2.
     table = exp.get("has_data_table")

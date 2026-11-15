@@ -1,6 +1,12 @@
 # Written with SI assistance (Muse), reviewed by Paridhi Singh
 """Lane B classifier — INSIDE / NEAR / BEYOND what NASA tested.
 
+v8 changes (PR #1 review, Daksh, Nov 14):
+- flow_range() now uses the whole span: a test whose flow changed
+  covers its whole span, so each row contributes the lower and higher
+  of its flow_start and flow_end (rows with no numeric flow_start,
+  e.g. O12, are still skipped).
+
 v7 changes (Lane A swap, Nov 14):
 - No code change needed for the swap: the pressure-labeled Saffire V
   rows ("PMMA (Saffire V, 71.3 kPa)") form their own material groups,
@@ -74,18 +80,27 @@ def dataset_range(rows):
 
 
 def flow_range(rows):
-    """(min, max) flow_start across rows, skipping rows with no
-    numeric flow_start (e.g. O12, "no ign at any flow"). Returns
-    (None, None) when no row has one."""
-    values = []
+    """(min, max) flow across rows. A test whose flow changed covers
+    its whole span, so a row contributes the lower and higher of its
+    flow_start and flow_end. Rows with no numeric flow_start (e.g.
+    O12, "no ign at any flow") are skipped. Returns (None, None)
+    when no row has one."""
+    lows, highs = [], []
     for row in rows:
         try:
-            values.append(float(row["airflow_cm_s"]))
+            start = float(row["airflow_cm_s"])
         except (KeyError, TypeError, ValueError):
             continue
-    if not values:
+        values = [start]
+        try:
+            values.append(float(row["airflow_end_cm_s"]))
+        except (KeyError, TypeError, ValueError):
+            pass
+        lows.append(min(values))
+        highs.append(max(values))
+    if not lows:
         return (None, None)
-    return (min(values), max(values))
+    return (min(lows), max(highs))
 
 
 def _same_material(a, b):

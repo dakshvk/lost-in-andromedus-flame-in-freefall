@@ -23,7 +23,7 @@
         "points": 3
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -43,7 +43,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-25",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -78,7 +78,7 @@
         "points": 3
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -98,7 +98,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-26",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -108,6 +108,60 @@
     "related_investigation": "PSI-107, PSI-25",
     "page_released": "30-Jun-2013",
     "rank": 2
+  },
+  {
+    "psi_id": "PSI-99",
+    "title": "Spacecraft Fire Experiment-II (SAFFIRE-II)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text); the page count '1 - 5 of 16' includes note and camera lines; our 10 rows come from the 9 sample rows (2-7 split in two)",
+    "test_count": 10,
+    "test_count_source": "our PSI-99 table, counted by code (one sample row split in two)",
+    "summary": "Second Cygnus fire experiment: burned nine 5 cm by 29 cm samples (SIBAL, silicone and PMMA types, PMMA with Nomex) to measure fire growth and flammability limits in low gravity.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 11,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "Saffire experiment \u2014 one NASA project",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 10 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-99",
+    "sub_research_area": "Surface Combustion",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/2chp-m469",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024",
+    "rank": 3
   },
   {
     "psi_id": "PSI-100",
@@ -133,7 +187,7 @@
         "points": 3
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -153,7 +207,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-100",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -162,7 +216,62 @@
     "related_investigation": "PSI-99, PSI-98",
     "sponsor": "NASA",
     "page_released": "18-Sep-2024",
-    "rank": 3
+    "rank": 4
+  },
+  {
+    "psi_id": "PSI-98",
+    "title": "Spacecraft Fire Safety Experiment-I (SAFFIRE-I)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "solid",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": true,
+    "has_data_table_note": "page shows an Experimental Table (pasted page text); matches our 2 rows",
+    "test_count": 2,
+    "test_count_source": "our PSI-98 table, counted by code",
+    "summary": "Burned a large SIBAL fabric sample on a Cygnus spacecraft at 20 cm/s to see how fast a big fire grows in low gravity and how its flammability limit compares to NASA's normal-gravity test.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 11,
+    "score_breakdown": [
+      {
+        "reason": "solid fuel",
+        "points": 3
+      },
+      {
+        "reason": "sub-research area mentions fire",
+        "points": 3
+      },
+      {
+        "reason": "has a data table",
+        "points": 2
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "only 2 tests (fewer than 20)",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98",
+    "sub_research_area": "Spacecraft Fire, Smoke Distribution",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/0t15-1z43",
+    "license": "CC0-1.0",
+    "related_investigation": "PSI-99, PSI-100, PSI-26",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024",
+    "rank": 5
   },
   {
     "psi_id": "PSI-69",
@@ -188,7 +297,7 @@
         "points": 0
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -208,7 +317,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-69",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -216,7 +325,7 @@
     "license": "CC0-1.0",
     "sponsor": "NASA",
     "page_released": "31-Jul-2016",
-    "rank": 4
+    "rank": 6
   },
   {
     "psi_id": "PSI-101",
@@ -242,7 +351,7 @@
         "points": 0
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -262,7 +371,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Test count 110 differs from the page's '66 test points' (not reconciled).",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Test count 110 differs from the page's '66 test points' (not reconciled).",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-101",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -271,61 +380,7 @@
     "related_investigation": "PSI-102",
     "sponsor": "NASA",
     "page_released": "18-Sep-2024",
-    "rank": 5
-  },
-  {
-    "psi_id": "PSI-99",
-    "title": "Spacecraft Fire Experiment-II (SAFFIRE-II)",
-    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
-    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
-    "research_area": "Combustion Science",
-    "project_type": "Microgravity Investigation",
-    "fuel_type": "solid",
-    "fuel_type_basis": "judgement from title and objective text",
-    "gravity": "micro",
-    "is_flight": true,
-    "has_data_table": true,
-    "has_data_table_note": "page shows an Experimental Table (pasted page text); the page count '1 - 5 of 16' includes note and camera lines; our 10 rows come from the 9 sample rows (2-7 split in two)",
-    "test_count": 10,
-    "test_count_source": "our PSI-99 table, counted by code (one sample row split in two)",
-    "summary": "Second Cygnus fire experiment: burned nine 5 cm by 29 cm samples (SIBAL, silicone and PMMA types, PMMA with Nomex) to measure fire growth and flammability limits in low gravity.",
-    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
-    "score": 8,
-    "score_breakdown": [
-      {
-        "reason": "solid fuel",
-        "points": 3
-      },
-      {
-        "reason": "sub-research area is Surface Combustion, not spacecraft fire safety",
-        "points": 0
-      },
-      {
-        "reason": "has a data table",
-        "points": 2
-      },
-      {
-        "reason": "flight experiment",
-        "points": 2
-      },
-      {
-        "reason": "microgravity",
-        "points": 1
-      },
-      {
-        "reason": "only 10 tests (fewer than 20)",
-        "points": 0
-      }
-    ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
-    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-99",
-    "sub_research_area": "Surface Combustion",
-    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
-    "doi": "10.60555/2chp-m469",
-    "license": "CC0-1.0",
-    "sponsor": "NASA",
-    "page_released": "18-Sep-2024",
-    "rank": 6
+    "rank": 7
   },
   {
     "psi_id": "PSI-68",
@@ -351,7 +406,7 @@
         "points": 0
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -371,7 +426,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-68",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -379,7 +434,7 @@
     "license": "CC0-1.0",
     "sponsor": "NASA",
     "page_released": "30-Sep-2019",
-    "rank": 7
+    "rank": 8
   },
   {
     "psi_id": "PSI-102",
@@ -405,7 +460,7 @@
         "points": 0
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -425,7 +480,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-102",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -434,7 +489,7 @@
     "related_investigation": "PSI-101",
     "sponsor": "NASA",
     "page_released": "18-Sep-2024",
-    "rank": 8
+    "rank": 9
   },
   {
     "psi_id": "PSI-47",
@@ -468,7 +523,7 @@
         "points": 0
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -488,62 +543,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
-    "rank": 9
-  },
-  {
-    "psi_id": "PSI-98",
-    "title": "Spacecraft Fire Safety Experiment-I (SAFFIRE-I)",
-    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
-    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
-    "research_area": "Combustion Science",
-    "project_type": "Microgravity Investigation",
-    "fuel_type": "solid",
-    "fuel_type_basis": "judgement from title and objective text",
-    "gravity": "micro",
-    "is_flight": true,
-    "has_data_table": true,
-    "has_data_table_note": "page shows an Experimental Table (pasted page text); matches our 2 rows",
-    "test_count": 2,
-    "test_count_source": "our PSI-98 table, counted by code",
-    "summary": "Burned a large SIBAL fabric sample on a Cygnus spacecraft at 20 cm/s to see how fast a big fire grows in low gravity and how its flammability limit compares to NASA's normal-gravity test.",
-    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
-    "score": 8,
-    "score_breakdown": [
-      {
-        "reason": "solid fuel",
-        "points": 3
-      },
-      {
-        "reason": "sub-research area is Spacecraft Fire, Smoke Distribution, not spacecraft fire safety",
-        "points": 0
-      },
-      {
-        "reason": "has a data table",
-        "points": 2
-      },
-      {
-        "reason": "flight experiment",
-        "points": 2
-      },
-      {
-        "reason": "microgravity",
-        "points": 1
-      },
-      {
-        "reason": "only 2 tests (fewer than 20)",
-        "points": 0
-      }
-    ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
-    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98",
-    "sub_research_area": "Spacecraft Fire, Smoke Distribution",
-    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
-    "doi": "10.60555/0t15-1z43",
-    "license": "CC0-1.0",
-    "related_investigation": "PSI-99, PSI-100, PSI-26",
-    "sponsor": "NASA",
-    "page_released": "18-Sep-2024",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "rank": 10
   },
   {
@@ -570,7 +570,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Flames of Gaseous Fuels, not spacecraft fire safety",
+        "reason": "sub-research area is Flames of Gaseous Fuels, not fire-related",
         "points": 0
       },
       {
@@ -590,7 +590,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-159",
     "sub_research_area": "Flames of Gaseous Fuels",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -624,7 +624,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Flames of Gaseous Fuels, not spacecraft fire safety",
+        "reason": "sub-research area is Flames of Gaseous Fuels, not fire-related",
         "points": 0
       },
       {
@@ -644,7 +644,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-10",
     "sub_research_area": "Flames of Gaseous Fuels",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -677,7 +677,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Droplets, not spacecraft fire safety",
+        "reason": "sub-research area is Droplets, not fire-related",
         "points": 0
       },
       {
@@ -697,7 +697,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-39",
     "sub_research_area": "Droplets",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -732,7 +732,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Laminar Flames, not spacecraft fire safety",
+        "reason": "sub-research area is Laminar Flames, not fire-related",
         "points": 0
       },
       {
@@ -752,7 +752,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-22",
     "sub_research_area": "Laminar Flames",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -787,7 +787,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Flames of gaseous fuel, not spacecraft fire safety",
+        "reason": "sub-research area is Flames of gaseous fuel, not fire-related",
         "points": 0
       },
       {
@@ -807,7 +807,7 @@
         "points": 1
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Test count is day summaries, not single burns (see test_count_source).",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Test count is day summaries, not single burns (see test_count_source).",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-21",
     "sub_research_area": "Flames of gaseous fuel",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -841,7 +841,7 @@
         "points": 3
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -861,7 +861,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Missing fields: test_count missing.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-62",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -871,6 +871,60 @@
     "sponsor": "NASA, PSI grant",
     "page_released": "14-Nov-2025",
     "rank": 16
+  },
+  {
+    "psi_id": "PSI-107",
+    "title": "Smoke Point In Co-flow Experiment (SPICE)",
+    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",
+    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
+    "research_area": "Combustion Science",
+    "project_type": "Microgravity Investigation",
+    "fuel_type": "gas",
+    "fuel_type_basis": "judgement from title and objective text",
+    "gravity": "micro",
+    "is_flight": true,
+    "has_data_table": false,
+    "has_data_table_note": "Experimental Table tab on the page shows '0 of 0' rows (pasted page text), although the file list mentions an experimental table",
+    "test_count": null,
+    "test_count_source": "not counted (no table of ours for this id)",
+    "summary": "Finds the smoke point of small gas jet flames (ethylene, propane, propylene) in microgravity, 526 flames in all according to the page.",
+    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
+    "score": 6,
+    "score_breakdown": [
+      {
+        "reason": "fuel type is gas, not solid",
+        "points": 0
+      },
+      {
+        "reason": "sub-research area mentions fire",
+        "points": 3
+      },
+      {
+        "reason": "no data table",
+        "points": 0
+      },
+      {
+        "reason": "flight experiment",
+        "points": 2
+      },
+      {
+        "reason": "microgravity",
+        "points": 1
+      },
+      {
+        "reason": "test count missing",
+        "points": 0
+      }
+    ],
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Missing fields: test_count missing.",
+    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-107",
+    "sub_research_area": "Fire Safety",
+    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
+    "doi": "10.60555/9kbh-e962",
+    "license": "CC0-1.0",
+    "sponsor": "NASA",
+    "page_released": "18-Sep-2024",
+    "rank": 17
   },
   {
     "psi_id": "PSI-23",
@@ -896,7 +950,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Flames of gaseous fuels, not spacecraft fire safety",
+        "reason": "sub-research area is Flames of gaseous fuels, not fire-related",
         "points": 0
       },
       {
@@ -916,7 +970,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-23",
     "sub_research_area": "Flames of gaseous fuels",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -924,7 +978,7 @@
     "license": "CC0-1.0",
     "sponsor": "NASA",
     "page_released": "05-Apr-2018",
-    "rank": 17
+    "rank": 18
   },
   {
     "psi_id": "PSI-20",
@@ -950,7 +1004,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Flames of Gaseous Fuels, not spacecraft fire safety",
+        "reason": "sub-research area is Flames of Gaseous Fuels, not fire-related",
         "points": 0
       },
       {
@@ -970,7 +1024,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Test count is day summaries, not single burns (see test_count_source).",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Test count is day summaries, not single burns (see test_count_source).",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-20",
     "sub_research_area": "Flames of Gaseous Fuels",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -978,7 +1032,7 @@
     "license": "CC0-1.0",
     "sponsor": "NASA",
     "page_released": "15-Sep-2022",
-    "rank": 18
+    "rank": 19
   },
   {
     "psi_id": "PSI-106",
@@ -1024,7 +1078,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: sub_research_area missing.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Missing fields: sub_research_area missing.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-106",
     "sub_research_area": null,
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -1033,7 +1087,7 @@
     "related_investigation": "PSI-107",
     "sponsor": "NASA",
     "page_released": "18-Sep-2024",
-    "rank": 19
+    "rank": 20
   },
   {
     "psi_id": "PSI-142",
@@ -1059,7 +1113,7 @@
         "points": 0
       },
       {
-        "reason": "research area is spacecraft fire safety",
+        "reason": "sub-research area mentions fire",
         "points": 3
       },
       {
@@ -1079,67 +1133,13 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-142",
     "sub_research_area": "Spacecraft Fire Safety",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
     "doi": "10.60555/80qf-vj95",
     "license": "CC0-1.0",
     "related_investigation": "PSI-69",
-    "sponsor": "NASA",
-    "page_released": "18-Sep-2024",
-    "rank": 20
-  },
-  {
-    "psi_id": "PSI-107",
-    "title": "Smoke Point In Co-flow Experiment (SPICE)",
-    "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",
-    "url_note": "page address pattern taken from the PSI-47 link the Lane A owner supplied; same pattern applied to every id (not opened for each)",
-    "research_area": "Combustion Science",
-    "project_type": "Microgravity Investigation",
-    "fuel_type": "gas",
-    "fuel_type_basis": "judgement from title and objective text",
-    "gravity": "micro",
-    "is_flight": true,
-    "has_data_table": false,
-    "has_data_table_note": "Experimental Table tab on the page shows '0 of 0' rows (pasted page text), although the file list mentions an experimental table",
-    "test_count": null,
-    "test_count_source": "not counted (no table of ours for this id)",
-    "summary": "Finds the smoke point of small gas jet flames (ethylene, propane, propylene) in microgravity, 526 flames in all according to the page.",
-    "summary_basis": "written by us from the Objectives text on the PSI page (pasted page text)",
-    "score": 3,
-    "score_breakdown": [
-      {
-        "reason": "fuel type is gas, not solid",
-        "points": 0
-      },
-      {
-        "reason": "sub-research area is Fire Safety, not spacecraft fire safety",
-        "points": 0
-      },
-      {
-        "reason": "no data table",
-        "points": 0
-      },
-      {
-        "reason": "flight experiment",
-        "points": 2
-      },
-      {
-        "reason": "microgravity",
-        "points": 1
-      },
-      {
-        "reason": "test count missing",
-        "points": 0
-      }
-    ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
-    "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-107",
-    "sub_research_area": "Fire Safety",
-    "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
-    "doi": "10.60555/9kbh-e962",
-    "license": "CC0-1.0",
     "sponsor": "NASA",
     "page_released": "18-Sep-2024",
     "rank": 21
@@ -1168,7 +1168,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Gaseous, not spacecraft fire safety",
+        "reason": "sub-research area is Gaseous, not fire-related",
         "points": 0
       },
       {
@@ -1188,7 +1188,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Missing fields: test_count missing.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-60",
     "sub_research_area": "Gaseous",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -1223,7 +1223,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Droplet, not spacecraft fire safety",
+        "reason": "sub-research area is Droplet, not fire-related",
         "points": 0
       },
       {
@@ -1243,7 +1243,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Missing fields: test_count missing.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-117",
     "sub_research_area": "Droplet",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",
@@ -1277,7 +1277,7 @@
         "points": 0
       },
       {
-        "reason": "sub-research area is Smoke Aerosol, Combustion Simulation, not spacecraft fire safety",
+        "reason": "sub-research area is Smoke Aerosol, Combustion Simulation, not fire-related",
         "points": 0
       },
       {
@@ -1297,7 +1297,7 @@
         "points": 0
       }
     ],
-    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Missing fields: test_count missing.",
+    "score_note": "Scored by Lane B (Paridhi Singh), Nov 14, 2026. This ranking is the team's judgement, not NASA's. Fire-safety +3 goes to any sub-area mentioning 'fire', plus all three Saffire experiments (PSI-98, PSI-99, PSI-100) as one NASA project \u2014 a team call, not NASA's. Missing fields: test_count missing.",
     "url_record_json": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-115",
     "sub_research_area": "Smoke Aerosol, Combustion Simulation",
     "sub_research_area_note": "read from the PSI page text pasted by the Lane A owner",

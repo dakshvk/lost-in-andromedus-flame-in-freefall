@@ -85,6 +85,30 @@ class TestTestsJsonLoader(unittest.TestCase):
         self.assertEqual(stats["o2_max"], 22.2)
         self.assertEqual(stats["rows_above_21"], 32)
 
+    def test_no_two_restrictor_psi25_row_has_flow_above_35(self):
+        # The BASS-II report caps 2-restrictor flow at about 35 cm/s
+        # ("~35 cm/s with two [flow restrictors]"). Lane A's
+        # flow_start still has 49 for O5b and O13a — a fan reading,
+        # not a flow (their Air display reads "49, 5 cm/s" and
+        # "49 44 42 ... (5 2 0)"). This test FAILS until Lane A
+        # fixes those rows; it guards the PMMA card range and any
+        # per-material flow logic against the same bad value.
+        import json
+
+        with open(TESTS_JSON, encoding="utf-8") as f:
+            tests = json.load(f)
+        bad = []
+        for t in tests:
+            if t.get("source") != "psi-25":
+                continue
+            if str(t.get("raw_flow_restrictor")) != "2":
+                continue
+            for key in ("flow_start", "flow_end"):
+                value = t.get(key)
+                if value is not None and value > 35:
+                    bad.append((t["id"], key, value))
+        self.assertEqual(bad, [], f"2-restrictor rows above 35 cm/s: {bad}")
+
 
 @unittest.skipUnless(os.path.exists(TESTS_JSON), "tests.json not next to the repo")
 class TestSuffixedTestIds(unittest.TestCase):

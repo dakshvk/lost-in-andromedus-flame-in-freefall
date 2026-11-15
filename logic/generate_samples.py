@@ -24,7 +24,7 @@ from answer import (
     load_rows,
 )
 from cards import rows_from_full_csv, rows_from_tests_json
-from classifier import material_ranges
+from classifier import _same_material, material_ranges
 
 HERE = os.path.dirname(__file__)
 TESTS_JSON = os.path.join(HERE, "..", "data", "tests.json")
@@ -61,6 +61,15 @@ def load_full_rows():
     return sample, None, "the 6-row sample only"
 
 
+def range_for(ranges, material):
+    """The (low, high) range for a material, matching "PMMA" and
+    "PMMA / other" as the same group. The full-CSV loader groups
+    them as "PMMA / other", so a plain ranges["PMMA"] lookup would
+    crash on the CSV fallback path (KeyError: 'PMMA')."""
+    key = next((k for k in ranges if _same_material(k, material)), None)
+    return ranges[key] if key is not None else (None, None)
+
+
 def main():
     full_rows, stats, label = load_full_rows()
     ranges = material_ranges(full_rows)
@@ -70,8 +79,8 @@ def main():
     q2 = build_answer(
         "Do materials burn as well in microgravity as on Earth?",
         21.0, full_rows, stats=stats)
-    pmma_max = ranges["PMMA"][1]
-    sibal_max = ranges["SIBAL"][1]
+    pmma_max = range_for(ranges, "PMMA")[1]
+    sibal_max = range_for(ranges, "SIBAL")[1]
     q3 = {
         "question": "Compare PMMA film with SIBAL cloth.",
         "pmma": build_answer(
@@ -82,7 +91,7 @@ def main():
             sibal_max, full_rows, material="SIBAL", stats=stats),
     }
     demo = {
-        "note": ("Demo answers, generated from the code (v7, Nov 14, 2026) "
+        "note": ("Demo answers, generated from the code (v8, Nov 14, 2026) "
                  f"— not typed by hand. All six use {label}."),
         "answers": [
             q1, q2, q3,
@@ -95,7 +104,7 @@ def main():
         json.dump(demo, f, indent=1)
     samples = {
         "note": ("Sample ask() responses for the web lane, one per answer "
-                 f"type. Generated from {label} with v7 code, Nov 14, 2026. "
+                 f"type. Generated from {label} with v8 code, Nov 14, 2026. "
                  "RAG samples use the keyword fallback in this file (no "
                  "model installed here); on a machine with "
                  "sentence-transformers installed the same ask() call "

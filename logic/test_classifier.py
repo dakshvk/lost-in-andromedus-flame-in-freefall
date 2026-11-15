@@ -84,13 +84,25 @@ class TestClassifierRanges(unittest.TestCase):
 class TestFlowRange(unittest.TestCase):
     def test_null_flow_start_is_skipped(self):
         # O12 has no flow number at all ("no ign at any flow"); it
-        # must not break the range or count as 0.
+        # must not break the range or count as 0. T25's end (2.5)
+        # now counts — a test whose flow changed covers its whole
+        # span — so the range is (2.5, 5.0), not (5.0, 5.0).
         rows = [
             {"test_id": "O12", "material": "PMMA", "oxygen_pct": "13.6", "airflow_cm_s": ""},
             {"test_id": "B1", "material": "PMMA", "oxygen_pct": "22.2", "airflow_cm_s": "5"},
-            {"test_id": "T25", "material": "SIBAL", "oxygen_pct": "20.8", "airflow_cm_s": "5"},
+            {"test_id": "T25", "material": "SIBAL", "oxygen_pct": "20.8", "airflow_cm_s": "5", "airflow_end_cm_s": "2.5"},
         ]
-        self.assertEqual(flow_range(rows), (5.0, 5.0))
+        self.assertEqual(flow_range(rows), (2.5, 5.0))
+
+    def test_flow_range_uses_the_whole_span(self):
+        # T17 ramps 6 -> 53 and T25 drops 5 -> 2.5: the range covers
+        # the full span of every test, not just the starting flows.
+        rows = [
+            {"test_id": "B1", "material": "PMMA", "oxygen_pct": "22.2", "airflow_cm_s": "5"},
+            {"test_id": "T25", "material": "SIBAL", "oxygen_pct": "20.8", "airflow_cm_s": "5", "airflow_end_cm_s": "2.5"},
+            {"test_id": "T17", "material": "SIBAL", "oxygen_pct": "20.0", "airflow_cm_s": "6", "airflow_end_cm_s": "53"},
+        ]
+        self.assertEqual(flow_range(rows), (2.5, 53.0))
 
     def test_flow_range_empty_when_no_row_has_a_flow(self):
         rows = [{"test_id": "O12", "material": "PMMA", "oxygen_pct": "13.6", "airflow_cm_s": ""}]

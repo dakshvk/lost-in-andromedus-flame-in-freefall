@@ -1,5 +1,5 @@
 {
- "note": "Sample ask() responses for the web lane, one per answer type. Generated from the 200-row tests.json (Lane A) with v7 code, Nov 14, 2026. RAG samples use the keyword fallback in this file (no model installed here); on a machine with sentence-transformers installed the same ask() call returns embedding retrieval instead.",
+ "note": "Sample ask() responses for the web lane, one per answer type. Generated from the 200-row tests.json (Lane A) with v8 code, Nov 14, 2026. RAG samples use the keyword fallback in this file (no model installed here); on a machine with sentence-transformers installed the same ask() call returns embedding retrieval instead.",
  "samples": [
   {
    "question": "What about 20% oxygen?",
@@ -692,27 +692,15 @@
     "results": [
      {
       "entry": {
-       "id": "BASS",
-       "psi_id": "PSI-26",
+       "id": "SAME-R",
+       "psi_id": "PSI-101",
        "kind": "investigation",
-       "text": "BASS \u2014 Burning and Suppression of Solids (PSI-26): How solid fuels burn in microgravity in a flow duct the first version of this experiment. Fuels: Thin and thick flat samples, acrylic spheres, and candles. Conditions: Microgravity wind tunnel in the Microgravity Science Glovebox on the ISS with airflow up to 40 cm/s. Sensors: Video camera with data overlay and 35-mm still camera. How it differs: The original BASS experiment; BASS-II (PSI-25) is its follow-up with more tests and lower oxygen levels.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
-       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (BASS hardware section) and PSI page"
+       "text": "SAME-R \u2014 Smoke Aerosol Measurement Experiment - Reflight (PSI-101): Repeat and extend the smoke detection measurements. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Reflight of SAME with more runs and conditions.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+       "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 2.0,
-      "method": "keyword"
-     },
-     {
-      "entry": {
-       "id": "BASS-II",
-       "psi_id": "PSI-25",
-       "kind": "investigation",
-       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
-      },
-      "score": 2.0,
-      "method": "keyword"
+      "score": 0.477524071931839,
+      "method": "embedding"
      },
      {
       "entry": {
@@ -723,12 +711,24 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 2.0,
-      "method": "keyword"
+      "score": 0.4568689465522766,
+      "method": "embedding"
+     },
+     {
+      "entry": {
+       "id": "BASS-II",
+       "psi_id": "PSI-25",
+       "kind": "investigation",
+       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
+      },
+      "score": 0.4508100748062134,
+      "method": "embedding"
      }
     ],
-    "method": "keyword",
-    "best_score": 2.0
+    "method": "embedding",
+    "best_score": 0.477524071931839
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -785,8 +785,8 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 2.0,
-      "method": "keyword"
+      "score": 0.6087582111358643,
+      "method": "embedding"
      },
      {
       "entry": {
@@ -797,24 +797,24 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 2.0,
-      "method": "keyword"
+      "score": 0.5411369800567627,
+      "method": "embedding"
      },
      {
       "entry": {
-       "id": "BASS-II",
-       "psi_id": "PSI-25",
+       "id": "SAFFIRE-II",
+       "psi_id": "PSI-99",
        "kind": "investigation",
-       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
+       "text": "SAFFIRE-II \u2014 Saffire II (PSI-99): How different materials spread fire side by side in a large volume. Fuels: Several material samples burned at once in an uncrewed Cygnus vehicle. Conditions: Large-scale fire in a spacecraft cabin volume in microgravity. Sensors: Video and still cameras; temperature and gas sensors in the vehicle. How it differs: Compares materials in the same fire instead of one material per test.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+       "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 1.0,
-      "method": "keyword"
+      "score": 0.3237680494785309,
+      "method": "embedding"
      }
     ],
-    "method": "keyword",
-    "best_score": 2.0
+    "method": "embedding",
+    "best_score": 0.6087582111358643
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -825,8 +825,8 @@
    "retrieval": {
     "match": false,
     "results": [],
-    "method": "keyword",
-    "best_score": 0.0
+    "method": "embedding",
+    "best_score": 0.12889380753040314
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   }

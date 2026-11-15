@@ -136,9 +136,10 @@ def dataset_stats(full_csv_path):
 
 def _standard_pressure(row):
     """True unless the row is a low-pressure Saffire V row (~71 kPa):
-    those stay labeled by pressure and never join the normal extremes
-    or ranges (open team decision, Nov 14). Rows from the PSI CSV or
-    the sample carry no pressure_kPa and count as standard pressure."""
+    those stay labeled by pressure and never join the normal extremes,
+    ranges, or the evidence pool (open team decision, Nov 14). Rows
+    from the PSI CSV or the sample carry no pressure_kPa and count as
+    standard pressure."""
     pressure = row.get("pressure_kPa")
     return pressure is None or pressure >= 90.0
 
@@ -407,6 +408,9 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None):
     (0–55 cm/s INSIDE, 55–65 NEAR, above BEYOND); the sentence quotes
     the dataset's observed flow range (low/high across start and end
     flows)."""
+    # Same pressure filter as build_answer: the low-pressure Saffire
+    # V rows never join the evidence pool or the observed flow range.
+    rows = [r for r in rows if _standard_pressure(r)]
     stats = stats or {"total_tests": len(rows), "o2_min": 13.6, "o2_max": 22.2, "rows_above_21": 0}
     lows = [f for f in (_flow_low(r) for r in rows) if f is not None]
     highs = [f for f in (_flow_high(r) for r in rows) if f is not None]
@@ -551,6 +555,15 @@ def closest_rows(rows, oxygen_pct, limit=3, material=None):
 
 def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, stats=None):
     """Build one guarded answer. Returns a dict the website can render."""
+    # The low-pressure Saffire V rows (~71 kPa) stay labeled by
+    # pressure and never join the normal ranges or the evidence pool.
+    # Left in, they stretch the overall oxygen range to 26.2% — so
+    # 24% oxygen reads INSIDE even though the quoted range is
+    # 13.6–22.2% — and they show up as the closest rows for
+    # Moon-cabin questions (the nearest-evidence field already cites
+    # them separately). Rows from the PSI CSV or the sample carry no
+    # pressure_kPa and count as standard pressure.
+    rows = [r for r in rows if _standard_pressure(r)]
     result = classify(oxygen_pct, airflow_cm_s, material=material, rows=rows)
     verdict = result["verdict"]
 
@@ -701,20 +714,27 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
 if __name__ == "__main__":
     import os
 
-    rows = load_rows("sample_data.csv")
-    # Full stats come from Lane A's tests.json when it is next to the
-    # repo (200 rows, with outcomes); otherwise the real PSI file;
-    # otherwise fall back to the sample rows and say so.
     tests_json = os.path.join(os.path.dirname(__file__), "..", "data", "tests.json")
     full_csv = os.path.join(os.path.dirname(__file__), "..", "data", "raw",
                             "PSI-25_Experimental table_BASS-II.csv")
+    # The demo questions use the full dataset — tests.json (200 rows)
+    # when it is next to the repo, else the real PSI file, else the
+    # 6-row sample (and the note says so). They used to run on the
+    # sample while the stats came from tests.json, which quoted the
+    # sample's narrower ranges (e.g. SIBAL 18.5–20.8%) next to the
+    # full 200-test stats — wrong once the full data is available.
     if os.path.exists(tests_json):
+        from cards import rows_from_tests_json
+        full_rows = rows_from_tests_json(tests_json)
         stats = dataset_stats_tests_json(tests_json)
     elif os.path.exists(full_csv):
+        from cards import rows_from_full_csv
+        full_rows = rows_from_full_csv(full_csv)
         stats = dataset_stats(full_csv)
     else:
+        full_rows = load_rows("sample_data.csv")
         stats = None
-        print("(neither tests.json nor the full PSI CSV was found next to the repo — stats from the 6-row sample)")
+        print("(neither tests.json nor the full PSI CSV was found next to the repo — answers from the 6-row sample)")
     for q, o2, mat in [
         ("A Moon base runs at 30% oxygen. What does NASA's testing cover?", 30.0, None),
         ("What about 20% oxygen?", 20.0, None),
@@ -722,19 +742,10 @@ if __name__ == "__main__":
         ("What about 14% oxygen for SIBAL?", 14.0, "SIBAL"),
         ("What about oxygen with no value given?", None, None),
     ]:
-        print(build_answer(q, o2, rows, material=mat, stats=stats))
+        print(build_answer(q, o2, full_rows, material=mat, stats=stats))
         print()
 
-    # Highest/lowest questions: computed over the full dataset, not the
-    # sample — tests.json (200 rows) when present, else the PSI CSV.
-    if os.path.exists(tests_json):
-        from cards import rows_from_tests_json
-        full_rows = rows_from_tests_json(tests_json)
-    elif os.path.exists(full_csv):
-        from cards import rows_from_full_csv
-        full_rows = rows_from_full_csv(full_csv)
-    else:
-        full_rows = rows
+    # Highest/lowest questions: computed over the same full rows.
     print(answer_highest_oxygen(full_rows, stats=stats))
     print()
 

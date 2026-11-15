@@ -1,5 +1,5 @@
 {
- "note": "Demo answers, generated from the code (v7, Nov 14, 2026) \u2014 not typed by hand. All six use the 200-row tests.json (Lane A).",
+ "note": "Demo answers, generated from the code (v8, Nov 14, 2026) \u2014 not typed by hand. All six use the 200-row tests.json (Lane A).",
  "answers": [
   {
    "question": "A Moon base runs at 30% oxygen. What does NASA testing cover?",
@@ -7,37 +7,37 @@
    "sentence": "NASA's tests cover 13.6\u201322.2% oxygen, so 30.0% oxygen is beyond what was tested \u2014 we can only show the closest tests, not an answer for that condition.",
    "evidence": [
     {
-     "test_id": "V-2",
-     "material": "other (Saffire V, 70.7 kPa)",
-     "material_form": "cloth",
-     "oxygen_pct": 26.2,
-     "airflow_cm_s": 20,
-     "airflow_end_cm_s": null,
-     "outcome": "burning",
-     "source": "Saffire IV/V (ICES 2021)",
-     "source_url": "https://ntrs.nasa.gov/citations/20210011521"
-    },
-    {
-     "test_id": "V-4",
-     "material": "PMMA (Saffire V, 72.6 kPa)",
-     "material_form": "slab",
-     "oxygen_pct": 25.7,
-     "airflow_cm_s": 20,
+     "test_id": "B1",
+     "material": "PMMA",
+     "material_form": "film",
+     "oxygen_pct": 22.2,
+     "airflow_cm_s": 5,
      "airflow_end_cm_s": 5,
      "outcome": "quenched",
-     "source": "Saffire IV/V (ICES 2021)",
-     "source_url": "https://ntrs.nasa.gov/citations/20210011521"
+     "source": "PSI-25",
+     "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     },
     {
-     "test_id": "V-3",
-     "material": "PMMA (Saffire V, 71.3 kPa)",
-     "material_form": "slab",
-     "oxygen_pct": 25.4,
-     "airflow_cm_s": 20,
+     "test_id": "B2",
+     "material": "PMMA",
+     "material_form": "film",
+     "oxygen_pct": 22.2,
+     "airflow_cm_s": 5,
      "airflow_end_cm_s": 5,
-     "outcome": "quenched",
-     "source": "Saffire IV/V (ICES 2021)",
-     "source_url": "https://ntrs.nasa.gov/citations/20210011521"
+     "outcome": null,
+     "source": "PSI-25",
+     "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+    },
+    {
+     "test_id": "B3",
+     "material": "PMMA",
+     "material_form": "film",
+     "oxygen_pct": 22.2,
+     "airflow_cm_s": 2,
+     "airflow_end_cm_s": 2,
+     "outcome": null,
+     "source": "PSI-25",
+     "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     }
    ],
    "nearest_evidence": {
@@ -54,7 +54,8 @@
     ]
    },
    "unknown": [
-    "airflow_cm_s (not given for this question)"
+    "airflow_cm_s (not given for this question)",
+    "outcome (not recorded for some evidence rows \u2014 not guessed)"
    ],
    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
    "sources": [
