@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+### 2026-11-14 20:30 | Daksh | Lane B v11: cotton, known-outcome evidence, counts without blank oxygen
+
+- What: `logic/cards.py` names the Saffire V-2 cotton jersey "Cotton" (Lane A records it as "other"); `logic/rag.py` adds "cotton" to the material matcher; `logic/answer.py`: closest_rows prefers rows with a known outcome, a material that exists only at low pressure (Cotton) shows its own Saffire V rows as evidence and nearest evidence instead of other materials' rows, the INSIDE/BEYOND count skips rows with no oxygen value, and evidence rows carry pressure_kPa; tests updated and 3 new tests added; demo answers and ask samples regenerated.
+- Why: in v10, "Will cotton burn at 26% oxygen?" showed PMMA tests B1, B2, B3 as evidence even though Saffire V-2 is cotton at 26.2% oxygen and 70.7 kPa; evidence rows for PMMA at 30% were B1, B2, B3 (unknown outcomes) while M2, M5, M14 at the same 22.2% are quenched (doc Step 1.2: use rows with a known outcome); the no-material count (145) included the 2 Saffire III rows that have no oxygen value.
+- How: edited the three files with Claude Code, updated the tests that encoded the old behaviour (Moon-base evidence is now F1, M2, M5; no-material count 143; V-2 labeled Cotton), added TestV11Answers, then ran `python3 generate_samples.py` in `logic/`.
+- Check: `python3 -m pytest -q` in `logic/` gives 89 passed; demo_answers.json and ask_samples.json have 0 failing number checks; cotton at 26% returns BEYOND with V-2 (70.7 kPa, burning) as evidence; SIBAL at 18% evidence rows all have an outcome; count is 143 with no material and 32 for SIBAL.
+
 ## 2026-11-14 20:04 PT — Paridhi Singh — Lane B v10: material names, no-material count, gravity note
 
 - **What:** Material names canonicalised (tests.json "wax"/"silicone" → "Wax"/"Silicone") and the matcher extended (silicone, candle → Wax), so "Silicone at 22%" and "a candle at 17%" are recognised; ask() passes the full rows to build_answer so classify's too-few-rows rule fires (wax: BEYOND, "Only 1 Wax test"); no-material count drops Link rows (145, not 200); INSIDE sentence names the airflow too when one was given; gravity note says pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa) and the BASS-II tables give none; closest_rows matches with \_same_material (PMMA ≡ "PMMA / other" on the CSV path).

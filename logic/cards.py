@@ -263,6 +263,12 @@ def rows_from_tests_json(path):
         gmt = re.match(r"GMT\d+-(.+)$", suffix)
         test_id = gmt.group(1) if gmt else suffix
         material = _canonical_material(t.get("material"))
+        # Lane A records the Saffire V-2 cotton jersey as "other" (its
+        # shape says cotton). Name it Cotton so "Will cotton burn ...?"
+        # can find it (v11, Daksh). It still gets the pressure label
+        # below, so it never joins a standard-pressure range.
+        if material == "other" and "cotton" in (t.get("shape") or "").lower():
+            material = "Cotton"
         pressure = t.get("pressure_kPa")
         if pressure is not None and pressure < STANDARD_PRESSURE_MIN_KPA:
             material = f"{material} (Saffire V, {pressure} kPa)"

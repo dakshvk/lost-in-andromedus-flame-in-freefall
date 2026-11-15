@@ -41,8 +41,9 @@ class TestTestsJsonLoader(unittest.TestCase):
         self.assertEqual(len(labeled), 3)
         self.assertEqual(
             sorted(r["material"] for r in labeled),
-            ["PMMA (Saffire V, 71.3 kPa)", "PMMA (Saffire V, 72.6 kPa)",
-             "other (Saffire V, 70.7 kPa)"])
+            # v11: V-2 (cotton jersey) is named Cotton, not "other".
+            ["Cotton (Saffire V, 70.7 kPa)", "PMMA (Saffire V, 71.3 kPa)",
+             "PMMA (Saffire V, 72.6 kPa)"])
         # And the plain PMMA range never includes their 25.4–26.2%.
         ranges = material_ranges(self.rows)
         self.assertEqual(ranges["PMMA"], (13.6, 22.2))

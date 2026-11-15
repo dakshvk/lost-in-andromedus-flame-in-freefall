@@ -675,6 +675,13 @@ def closest_rows(rows, oxygen_pct, limit=3, material=None, airflow_cm_s=None):
                          if _same_material(r.get("material"), material)]
         if same_material:
             pool = same_material
+    # Prefer rows with a known outcome (doc Step 1.2): at 22.2% PMMA,
+    # B1, B2 and B3 are unknown while M2, M5 and M14 are quenched, so
+    # the evidence should be M2, M5, M14. Falls back to all rows only
+    # when none in the pool has an outcome (v11, Daksh).
+    known = [r for r in pool if r.get("outcome")]
+    if known:
+        pool = known
     if airflow_cm_s is None:
         return sorted(pool, key=lambda r: abs(o2(r) - oxygen_pct))[:limit]
 
@@ -711,6 +718,11 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     # rows (70.7–72.6 kPa), leaving only 100.0 kPa, so a note computed
     # after the filter would read "100.0–100.0 kPa".
     note = gravity_note(rows)
+    # Kept aside before the filter: when a material exists ONLY at low
+    # pressure (Cotton: Saffire V-2 at 70.7 kPa), those rows become the
+    # evidence and nearest evidence instead of unrelated PMMA rows
+    # (v11, Daksh).
+    low_rows = [r for r in rows if not _standard_pressure(r)]
     # The low-pressure Saffire V rows (~71 kPa) stay labeled by
     # pressure and never join the normal ranges or the evidence pool.
     # Left in, they stretch the overall oxygen range to 26.2% — so
@@ -747,9 +759,22 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             "number_check": {"ok": True, "unverified": []},
         }
 
-    evidence = closest_rows(
-        rows_for_outcome_question(rows, question), oxygen_pct,
-        material=material, airflow_cm_s=airflow_cm_s)
+    # A material with no standard-pressure rows but some low-pressure
+    # ones (Cotton): show those rows, never the closest rows of some
+    # other material (v11, Daksh: "cotton at 26%" used to show PMMA
+    # B1, B2, B3).
+    material_low = []
+    if material:
+        material_low = [r for r in low_rows
+                        if _same_material((r.get("material") or "").split(" (Saffire V")[0],
+                                          material)]
+    only_low = result.get("coverage") == "no_rows" and bool(material_low)
+    if only_low:
+        evidence = material_low
+    else:
+        evidence = closest_rows(
+            rows_for_outcome_question(rows, question), oxygen_pct,
+            material=material, airflow_cm_s=airflow_cm_s)
     stats_from_sample = stats is None
     stats = stats or {
         "total_tests": len(rows),
@@ -766,9 +791,13 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     # (paper rod data, always burning, not outcome evidence). With a
     # material it is that material's non-Link count (PMMA: 102);
     # without one it is the whole dataset's non-Link count over the
-    # standard-pressure rows (145, not 200 — v10, Daksh).
+    # standard-pressure rows. Rows with no oxygen value (the two
+    # context-only Saffire III rows) are not counted either: the count
+    # sits next to an oxygen range they cannot be on (143, not 145 —
+    # v11, Daksh).
     count = sum(1 for r in rows
-                if "link" not in (r.get("source") or "").lower())
+                if "link" not in (r.get("source") or "").lower()
+                and r.get("oxygen_pct") not in (None, ""))
 
     # When a material is given, the sentence must quote THAT material's
     # tested range — quoting the overall range would contradict the verdict
@@ -787,7 +816,8 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             # PMMA: 102 (154 minus 52 Link), not 200.
             count = sum(1 for r in rows
                         if _same_material(r.get("material"), material)
-                        and "link" not in (r.get("source") or "").lower())
+                        and "link" not in (r.get("source") or "").lower()
+                        and r.get("oxygen_pct") not in (None, ""))
         else:
             range_text = f"{o2_min}–{o2_max}% oxygen"
             range_bounds = None
@@ -829,6 +859,14 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
                 "in the dataset — too few to cover this condition, so "
                 "this is extrapolated, not covered. We can only show "
                 "the closest tests, not an answer for this condition."
+            )
+        elif result.get("coverage") == "no_rows" and only_low:
+            plural = "s" if len(material_low) != 1 else ""
+            sentence = (
+                f"No {material} tests at standard pressure are in the "
+                f"dataset — the only {material} test{plural} ran at low "
+                "pressure in Saffire V, shown below as nearest evidence, "
+                "so this is not covered."
             )
         elif result.get("coverage") == "no_rows":
             sentence = (
@@ -912,7 +950,26 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
     # row in our dataset, and its numbers are checked against the
     # paper, not the dataset.
     nearest_evidence = None
-    if verdict == "BEYOND" and oxygen_pct is not None and float(oxygen_pct) >= 30.0:
+    if only_low:
+        # Built from the rows themselves (Lane A's values from ICES
+        # 2021 Table 1), not typed in.
+        parts, nums = [], []
+        for r in material_low:
+            outcome = r.get("outcome") or "unknown"
+            parts.append(
+                f"{r.get('test_id')} at {r.get('oxygen_pct')}% oxygen and "
+                f"{r.get('pressure_kPa')} kPa, {r.get('airflow_cm_s')} cm/s "
+                f"flow, outcome {outcome}")
+            nums += [v for v in (r.get("oxygen_pct"), r.get("pressure_kPa"),
+                                 r.get("airflow_cm_s")) if v not in (None, "")]
+        nearest_evidence = {
+            "text": (f"Nearest evidence: Saffire V {material} test "
+                     + "; ".join(parts)
+                     + " — low pressure, so not part of the standard-pressure range."),
+            "source": "Urban et al., ICES 2021, Saffire IV/V paper, Table 1 (NTRS 20210011521)",
+            "numbers": [float(v) for v in nums],
+        }
+    elif verdict == "BEYOND" and oxygen_pct is not None and float(oxygen_pct) >= 30.0:
         nearest_evidence = {
             "text": (
                 "Nearest evidence beyond BASS-II: Saffire V tests V-2 to "
@@ -943,6 +1000,7 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             "airflow_cm_s": row.get("airflow_cm_s") or None,
             "airflow_end_cm_s": row.get("airflow_end_cm_s") or None,
             "outcome": row.get("outcome") or None,
+            "pressure_kPa": row.get("pressure_kPa"),
             "source": row.get("source"),
             "source_url": row.get("source_url"),
         })

@@ -7,7 +7,7 @@
    "answer": {
     "question": "What about 20% oxygen?",
     "verdict": "INSIDE",
-    "sentence": "20.0% oxygen is inside the tested range (13.6\u201322.2% oxygen, 145 tests), so the rows below are direct evidence for this condition.",
+    "sentence": "20.0% oxygen is inside the tested range (13.6\u201322.2% oxygen, 143 tests), so the rows below are direct evidence for this condition.",
     "evidence": [
      {
       "test_id": "M11",
@@ -17,6 +17,7 @@
       "airflow_cm_s": 10,
       "airflow_end_cm_s": 12,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
@@ -28,6 +29,7 @@
       "airflow_cm_s": 2,
       "airflow_end_cm_s": null,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
@@ -39,6 +41,7 @@
       "airflow_cm_s": 5,
       "airflow_end_cm_s": null,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      }
@@ -68,35 +71,38 @@
     "sentence": "NASA's tests cover PMMA 13.6\u201322.2% oxygen, so 30.0% oxygen is beyond what was tested \u2014 we can only show the closest tests, not an answer for that condition.",
     "evidence": [
      {
-      "test_id": "B1",
+      "test_id": "M2",
       "material": "PMMA",
-      "material_form": "film",
+      "material_form": "sheet",
       "oxygen_pct": 22.2,
-      "airflow_cm_s": 5,
+      "airflow_cm_s": 20,
+      "airflow_end_cm_s": 14,
+      "outcome": "quenched",
+      "pressure_kPa": null,
+      "source": "PSI-25",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+     },
+     {
+      "test_id": "M5",
+      "material": "PMMA",
+      "material_form": "sheet",
+      "oxygen_pct": 22.2,
+      "airflow_cm_s": 20,
       "airflow_end_cm_s": 5,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
      {
-      "test_id": "B2",
+      "test_id": "M14",
       "material": "PMMA",
-      "material_form": "film",
+      "material_form": "sheet",
       "oxygen_pct": 22.2,
-      "airflow_cm_s": 5,
-      "airflow_end_cm_s": 5,
-      "outcome": null,
-      "source": "PSI-25",
-      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-     },
-     {
-      "test_id": "B3",
-      "material": "PMMA",
-      "material_form": "film",
-      "oxygen_pct": 22.2,
-      "airflow_cm_s": 2,
-      "airflow_end_cm_s": 2,
-      "outcome": null,
+      "airflow_cm_s": 10,
+      "airflow_end_cm_s": null,
+      "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      }
@@ -115,8 +121,7 @@
      ]
     },
     "unknown": [
-     "airflow_cm_s (not given for this question)",
-     "outcome (not recorded for some evidence rows \u2014 not guessed)"
+     "airflow_cm_s (not given for this question)"
     ],
     "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
@@ -135,20 +140,9 @@
    "path": "code",
    "answer": {
     "question": "PMMA at 20% oxygen and 45 cm/s airflow?",
-    "verdict": "INSIDE",
-    "sentence": "20.0% oxygen and 45.0 cm/s airflow are inside the tested range (PMMA 13.6\u201322.2% oxygen, 0.0\u201349.0 cm/s, 102 tests), so the rows below are direct evidence for this condition.",
+    "verdict": "BEYOND",
+    "sentence": "45.0 cm/s airflow is beyond what was tested (PMMA 0.0\u201320.0 cm/s), so we can only show the closest tests, not an answer for that condition.",
     "evidence": [
-     {
-      "test_id": "O13a",
-      "material": "PMMA",
-      "material_form": "rod",
-      "oxygen_pct": 15.9,
-      "airflow_cm_s": 49,
-      "airflow_end_cm_s": null,
-      "outcome": "quenched",
-      "source": "PSI-25",
-      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
-     },
      {
       "test_id": "M3",
       "material": "PMMA",
@@ -157,19 +151,33 @@
       "airflow_cm_s": 10,
       "airflow_end_cm_s": 18,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
      {
-      "test_id": "M11",
+      "test_id": "IV-2",
       "material": "PMMA",
-      "material_form": "sheet",
-      "oxygen_pct": 20.0,
-      "airflow_cm_s": 10,
-      "airflow_end_cm_s": 12,
-      "outcome": "quenched",
-      "source": "PSI-25",
-      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+      "material_form": "slab",
+      "oxygen_pct": 22.0,
+      "airflow_cm_s": 20,
+      "airflow_end_cm_s": 5,
+      "outcome": "burning",
+      "pressure_kPa": 100.0,
+      "source": "Saffire IV/V (ICES 2021)",
+      "source_url": "https://ntrs.nasa.gov/citations/20210011521"
+     },
+     {
+      "test_id": "2-9",
+      "material": "PMMA",
+      "material_form": "slab",
+      "oxygen_pct": 22.0,
+      "airflow_cm_s": 20.0,
+      "airflow_end_cm_s": 20.0,
+      "outcome": "burning",
+      "pressure_kPa": null,
+      "source": "PSI-99 (SAFFIRE-II)",
+      "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
      }
     ],
     "nearest_evidence": null,
@@ -192,7 +200,7 @@
    "answer": {
     "question": "PMMA at 20% oxygen and 10 cm/s airflow?",
     "verdict": "INSIDE",
-    "sentence": "20.0% oxygen and 10.0 cm/s airflow are inside the tested range (PMMA 13.6\u201322.2% oxygen, 0.0\u201349.0 cm/s, 102 tests), so the rows below are direct evidence for this condition.",
+    "sentence": "20.0% oxygen and 10.0 cm/s airflow are inside the tested range (PMMA 13.6\u201322.2% oxygen, 0.0\u201320.0 cm/s, 102 tests), so the rows below are direct evidence for this condition.",
     "evidence": [
      {
       "test_id": "M11",
@@ -202,6 +210,7 @@
       "airflow_cm_s": 10,
       "airflow_end_cm_s": 12,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
@@ -213,6 +222,7 @@
       "airflow_cm_s": 10,
       "airflow_end_cm_s": 8,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      },
@@ -224,6 +234,7 @@
       "airflow_cm_s": 10,
       "airflow_end_cm_s": 18,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      }
@@ -258,6 +269,7 @@
       "airflow_cm_s": 3,
       "airflow_end_cm_s": null,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      }
@@ -294,6 +306,7 @@
       "airflow_cm_s": 20.0,
       "airflow_end_cm_s": 20.0,
       "outcome": "no_ignition",
+      "pressure_kPa": null,
       "source": "PSI-99 (SAFFIRE-II)",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
      },
@@ -305,6 +318,7 @@
       "airflow_cm_s": 20.0,
       "airflow_end_cm_s": 20.0,
       "outcome": "no_ignition",
+      "pressure_kPa": null,
       "source": "PSI-99 (SAFFIRE-II)",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
      },
@@ -316,6 +330,7 @@
       "airflow_cm_s": 20.0,
       "airflow_end_cm_s": 20.0,
       "outcome": "no_ignition",
+      "pressure_kPa": null,
       "source": "PSI-99 (SAFFIRE-II)",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
      }
@@ -352,6 +367,7 @@
       "airflow_cm_s": 3,
       "airflow_end_cm_s": null,
       "outcome": "quenched",
+      "pressure_kPa": null,
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
      }
@@ -410,8 +426,8 @@
       "oxygen_pct": 22.2,
       "airflow_cm_s": 5,
       "airflow_end_cm_s": 5,
-      "outcome": "quenched",
-      "outcome_source": "BASS-II report NASA/TM-20210011385, Appendix A, test B1, GMT 050; oxygen and flow from PSI-25",
+      "outcome": "",
+      "outcome_source": "",
       "source": "PSI-25",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
       "notes": "Ignited very quickly, turned flow off after spread halfway; flame extinguished very quickly; and sooty with blue leading edge",
@@ -660,9 +676,10 @@
       "spread_rate": null,
       "direction": "unknown",
       "flags": [
-       "outcome_from_report_notes"
+       "outcome_from_report_notes",
+       "low_flow_uncertain"
       ],
-      "low_flow_uncertain": false
+      "low_flow_uncertain": true
      },
      {
       "test_id": "O2",
@@ -680,9 +697,10 @@
       "spread_rate": null,
       "direction": "unknown",
       "flags": [
-       "outcome_from_report_notes"
+       "outcome_from_report_notes",
+       "low_flow_uncertain"
       ],
-      "low_flow_uncertain": false
+      "low_flow_uncertain": true
      }
     ],
     "nearest_evidence": null,
@@ -811,9 +829,10 @@
       "spread_rate": null,
       "direction": "concurrent",
       "flags": [
-       "outcome_from_zhao"
+       "outcome_from_zhao",
+       "low_flow_uncertain"
       ],
-      "low_flow_uncertain": false
+      "low_flow_uncertain": true
      },
      {
       "test_id": "T5",
@@ -830,8 +849,10 @@
       "pressure_kPa": null,
       "spread_rate": null,
       "direction": "concurrent",
-      "flags": [],
-      "low_flow_uncertain": false
+      "flags": [
+       "low_flow_uncertain"
+      ],
+      "low_flow_uncertain": true
      },
      {
       "test_id": "T13",
@@ -849,13 +870,14 @@
       "spread_rate": null,
       "direction": "concurrent",
       "flags": [
-       "outcome_from_zhao"
+       "outcome_from_zhao",
+       "low_flow_uncertain"
       ],
-      "low_flow_uncertain": false
+      "low_flow_uncertain": true
      }
     ],
     "nearest_evidence": null,
-    "note": null,
+    "note": "All tests at the lowest airflow carry the low-flow flag \u2014 low readings are uncertain (flows below 2 cm/s have high error bars), so this is a low reading, not an exact flow.",
     "unknown": [],
     "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
@@ -941,7 +963,7 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.477524071931839,
+      "score": 0.4775242805480957,
       "method": "embedding"
      },
      {
@@ -965,12 +987,12 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
        "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
       },
-      "score": 0.4508100748062134,
+      "score": 0.45081016421318054,
       "method": "embedding"
      }
     ],
     "method": "embedding",
-    "best_score": 0.477524071931839
+    "best_score": 0.4775242805480957
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -1027,7 +1049,7 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.6087582111358643,
+      "score": 0.6087584495544434,
       "method": "embedding"
      },
      {
@@ -1039,7 +1061,7 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.5411369800567627,
+      "score": 0.5411369204521179,
       "method": "embedding"
      },
      {
@@ -1051,12 +1073,12 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.3237680494785309,
+      "score": 0.3237680196762085,
       "method": "embedding"
      }
     ],
     "method": "embedding",
-    "best_score": 0.6087582111358643
+    "best_score": 0.6087584495544434
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -1068,7 +1090,7 @@
     "match": false,
     "results": [],
     "method": "embedding",
-    "best_score": 0.12889380753040314
+    "best_score": 0.12889382243156433
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   }

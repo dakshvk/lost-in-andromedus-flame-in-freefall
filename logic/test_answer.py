@@ -99,11 +99,13 @@ class TestLowPressureRowsStayOut(unittest.TestCase):
             "A Moon base runs at 30% oxygen. What does NASA's testing cover?",
             30.0, self.rows, stats=self.stats)
         self.assertEqual(answer["verdict"], "BEYOND")
-        # The evidence is the closest standard-pressure rows (22.2%);
-        # Saffire V is cited separately in nearest_evidence, not as
-        # evidence rows.
+        # The evidence is the closest standard-pressure rows (22.2%)
+        # with a known outcome (v11: B1, B2, B3 are unknown; F1 is
+        # no_ignition, M2 and M5 are quenched); Saffire V is cited
+        # separately in nearest_evidence, not as evidence rows.
         ids = [r["test_id"] for r in answer["evidence"]]
-        self.assertEqual(ids, ["B1", "B2", "B3"])
+        self.assertEqual(ids, ["F1", "M2", "M5"])
+        self.assertTrue(all(r["outcome"] for r in answer["evidence"]))
         self.assertTrue(all("Saffire V" not in r["material"]
                             for r in answer["evidence"]))
         self.assertIn("Saffire V", answer["nearest_evidence"]["text"])
@@ -297,10 +299,12 @@ class TestV10Answers(unittest.TestCase):
         # standard-pressure range does not cover).
         from answer import ask
 
+        # v11: the 2 context-only Saffire III rows have no oxygen, so
+        # they are not counted next to an oxygen range: 143, not 145.
         out = ask("What about 20% oxygen?", self.rows, stats=self.stats)
         answer = out["answer"]
         self.assertEqual(answer["verdict"], "INSIDE")
-        self.assertIn("145 tests", answer["sentence"])
+        self.assertIn("143 tests", answer["sentence"])
         self.assertNotIn("200 tests", answer["sentence"])
         self.assertTrue(answer["number_check"]["ok"])
 
@@ -326,6 +330,51 @@ class TestV10Answers(unittest.TestCase):
         self.assertEqual(_named_material("a candle at 17%"), "Wax")
         self.assertEqual(_named_material("Will wax burn at 17% oxygen?"), "Wax")
         self.assertEqual(_named_material("What about 20% oxygen?"), None)
+
+
+@unittest.skipUnless(os.path.exists(TESTS_JSON), "tests.json not next to the repo")
+class TestV11Answers(unittest.TestCase):
+    """v11 (Daksh, Nov 14): cotton maps to Saffire V-2, evidence
+    prefers known outcomes, counts skip rows with no oxygen."""
+
+    @classmethod
+    def setUpClass(cls):
+        from cards import rows_from_tests_json
+        from answer import dataset_stats_tests_json
+        cls.rows = rows_from_tests_json(TESTS_JSON)
+        cls.stats = dataset_stats_tests_json(TESTS_JSON)
+
+    def test_cotton_shows_saffire_v2_not_pmma(self):
+        from answer import ask
+        from rag import _named_material
+
+        self.assertEqual(_named_material("Will cotton burn at 26% oxygen?"), "Cotton")
+        answer = ask("Will cotton burn at 26% oxygen?",
+                     self.rows, stats=self.stats)["answer"]
+        self.assertEqual(answer["verdict"], "BEYOND")
+        self.assertIn("No Cotton tests at standard pressure", answer["sentence"])
+        self.assertEqual([r["test_id"] for r in answer["evidence"]], ["V-2"])
+        self.assertEqual(answer["evidence"][0]["pressure_kPa"], 70.7)
+        self.assertIn("V-2 at 26.2% oxygen and 70.7 kPa",
+                      answer["nearest_evidence"]["text"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_evidence_prefers_known_outcomes(self):
+        from answer import ask
+
+        answer = ask("Will SIBAL burn at 18% oxygen?",
+                     self.rows, stats=self.stats)["answer"]
+        self.assertTrue(answer["evidence"])
+        self.assertTrue(all(r["outcome"] for r in answer["evidence"]))
+
+    def test_material_count_skips_rows_without_oxygen(self):
+        from answer import ask
+
+        # SIBAL has 34 rows, 2 of them context-only Saffire III rows
+        # with no oxygen, so the count next to the range is 32.
+        answer = ask("Will SIBAL burn at 18% oxygen?",
+                     self.rows, stats=self.stats)["answer"]
+        self.assertIn("32 tests", answer["sentence"])
 
 
 if __name__ == "__main__":

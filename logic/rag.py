@@ -91,8 +91,10 @@ PSI_ID_RE = re.compile(r"psi-(\d+)", re.IGNORECASE)
 # no_ignition); "candle" is the Japan Wax candle (F4), so it maps to
 # Wax. Without these, "Silicone at 22%" and "a candle at 17%" fell
 # through to the no-material answer (v10).
+# "cotton" is the Saffire V-2 cotton jersey (low pressure, 70.7 kPa).
 MATERIAL_NAMES = {"nomex": "Nomex", "sibal": "SIBAL", "pmma": "PMMA",
-                  "wax": "Wax", "silicone": "Silicone", "candle": "Wax"}
+                  "wax": "Wax", "silicone": "Silicone", "candle": "Wax",
+                  "cotton": "Cotton"}
 # highest/lowest are numeric ONLY with oxygen or airflow in the question.
 COMPARATIVE_WORDS = {"highest", "lowest", "maximum", "minimum", "most", "least",
                      "greater", "smaller", "higher", "lower"}
