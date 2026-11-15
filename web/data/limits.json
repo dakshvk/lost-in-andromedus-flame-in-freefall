@@ -6,8 +6,8 @@
  "duct_airflow_max_cm_s": 55.0,
  "duct_airflow_near_max_cm_s": 65.0,
  "rag_score_cutoff": 0.3,
- "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
- "gravity_note_short": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
+ "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+ "gravity_note_short": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity, and pressure differs, so a Moon-base condition is not covered by these tests.",
  "rules": [
   "A test whose flow changed covers its whole span, from start to end flow.",
   "NEAR means just outside the tested range: 1.0 oxygen point, or 25% of the material's flow range.",

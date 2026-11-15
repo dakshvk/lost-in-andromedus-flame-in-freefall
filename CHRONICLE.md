@@ -26,6 +26,22 @@ Rules:
 
 Entries start here
 
+### 2026-11-14 23:40 | Daksh | Merged Lane B v11.1 (PR #4), oxygen and airflow questions checked together
+
+- What: merged Paridhi's PR #4 (v11.1: the cotton, known-outcome and no-oxygen-count fixes mirrored into the airflow-only answer) into main on top of the PR #2 merge and the gravity note fix. Regenerated logic/ask_samples.json and web/data/ so the saved answers carry the new gravity note.
+- Why: airflow-only questions still had the three v11 bugs ("Is 20 cm/s airflow inside our data for cotton?" said INSIDE with 0 tests). The earlier 168-question check only asked oxygen questions, so it missed them.
+- How: merged with git (no conflicts), then reran everything with Claude Code.
+- Check: validate.py OK; `python3 -m pytest -q logic` 93 passed; `python3 -m pytest -q api` 13 passed; 0 number-check failures in the saved answers; a 194-question sweep (oxygen with and without airflow, airflow-only per material, airflow-only with no material, cotton airflow) gave verdicts matching each material's card ranges, counts matching the cards (143 overall, SIBAL 32), known-outcome evidence and no unknown test ids.
+
+### 2026-11-14 23:10 | Daksh | Merged Lane A update (PR #2), checked Lane A and Lane B together, gravity note fix
+
+- What: merged PR #2 (Jenisha: Link spread rate in cm/s, 100 kPa for Saffire I S1 and Saffire II 2-5 and 2-6, validate.py fix, README count). Resolved the AI_USE_LOG.md conflict by keeping every row. `logic/answer.py`: the gravity note names the experiments with a pressure ("Saffire I, Saffire II and Saffire IV/V", 8 tests) instead of "the 8 PSI-98 and PSI-99 and Saffire IV/V tests", and says the tests were on the ISS or in Cygnus cargo ships (the Saffire burns were in Cygnus, not on the ISS). Updated the one test that quoted the old wording; regenerated logic/demo_answers.json, logic/ask_samples.json and web/data/.
+- Why: Lane A's new pressures made one Lane B test fail and the note read badly; the old note also said every test was on the ISS.
+- How: with Claude Code. Checked the Link unit against the Table S1 PDF: the header is "Vf x10^3 (cm/s)", so 5.23 means 0.00523 cm/s; the right half's "(mm/s)" header has numbers the same size as the left half and as Table S2 (cm/s), so it reads as a typo, as Jenisha said.
+- Check: validate.py prints OK (it can fail now); `python3 -m pytest -q logic` 89 passed; `python3 -m pytest -q api` 13 passed; a sweep of 168 questions (every standard material at oxygen and airflow inside, at the edge, just outside and far outside its card range) gave verdicts matching the card ranges, 0 number-check failures and no unknown test ids; a live uvicorn run answered PMMA at 30%, cotton at 26% and a smoke-detection question correctly.
+- Not merged: PR #3 ("Lane B v11.1: airflow mirrors") is set up backwards (base is Paridhi's branch, head is main) and her branch has no new commits, so her airflow fixes are not on GitHub yet.
+- Open: PSI-100 S1 looks like ICES Table 2 sample III-1 (100 kPa) but has no pressure yet.
+
 ### 2026-11-14 20:55 | Daksh | Merged Lane B, tested everything together, Lane C data layer and API
 
 - What: merged PR #1 (Lane B) into main. New: `web/export_data.py` (builds `web/data/*.json` for the site), `web/data/` (tests, cards, experiments, investigations, limits, demo_answers, meta), `web/js/data.js` (the page's data module, with offline fallback), `api/app.py` (FastAPI: `/api/health`, `/api/ask`, `/api/data/{name}`, serves `web/`), `api/test_api.py` (13 tests), `web/README.md`, `requirements.txt`. Changed: `logic/rag.py` loads `investigations.csv` from next to the file, so the API works from any folder.

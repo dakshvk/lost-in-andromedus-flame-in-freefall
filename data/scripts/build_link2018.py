@@ -68,11 +68,11 @@ for half, s, d, o2, vg, dt, vf in A:
         "shape": f"{COLOR(s)} rod, {d} cm diameter" if COLOR(s) != "color not stated in Table S1" else f"rod, {d} cm diameter, color not stated in Table S1",
         "o2_start": o2, "o2_end": None, "flow_start": vg, "flow_end": None, "direction": "opposed",
         "outcome": "burning", "outcome_note": "", "gravity": "micro", "pressure_kPa": None,
-        "spread_rate": vf, "sample_id": s,
-        "flow_note": f"Flow step {count[s]} of this sample, lasted {dt} s. spread_rate is the number printed in Table S1 (column header: {HDR[half]}); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+        "spread_rate": round(vf / 1000, 6), "sample_id": s,
+        "flow_note": f"Flow step {count[s]} of this sample, lasted {dt} s. spread_rate is in cm/s: the printed Table S1 number {vf} is in units of 10^-3 cm/s (column header: {HDR[half]}). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
         "flags": ["hand_entered"],
         "citation": f"{CIT}, sample {s}, flow step {count[s]}",
-        "raw_spread_rate_header": HDR[half], "raw_step_seconds": dt, "raw_group": "paper-link2018",
+        "raw_spread_rate_header": HDR[half], "raw_spread_rate_printed": vf, "raw_step_seconds": dt, "raw_group": "paper-link2018",
     })
 json.dump(rows, open(f"{D}/tests_link2018.json", "w"), indent=1)
 print("rows written:", len(rows), "| first:", rows[0]["id"], rows[0]["o2_start"], rows[0]["flow_start"], rows[0]["spread_rate"])

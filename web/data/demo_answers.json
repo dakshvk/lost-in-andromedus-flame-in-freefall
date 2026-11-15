@@ -1,5 +1,5 @@
 {
- "note": "Demo answers, generated from the code (v10, Nov 14, 2026) — not typed by hand. All six use the 200-row tests.json (Lane A).",
+ "note": "Demo answers, generated from the code (v11.1, Nov 14, 2026) — not typed by hand. All six use the 200-row tests.json (Lane A).",
  "answers": [
   {
    "question": "A Moon base runs at 30% oxygen. What does NASA testing cover?",
@@ -59,7 +59,7 @@
    "unknown": [
     "airflow_cm_s (not given for this question)"
    ],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -114,7 +114,7 @@
    "unknown": [
     "airflow_cm_s (not given for this question)"
    ],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -171,7 +171,7 @@
     "unknown": [
      "airflow_cm_s (not given for this question)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -193,7 +193,7 @@
       "airflow_cm_s": 20.0,
       "airflow_end_cm_s": 20.0,
       "outcome": "burning",
-      "pressure_kPa": null,
+      "pressure_kPa": 100,
       "source": "PSI-99 (SAFFIRE-II)",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
      },
@@ -205,7 +205,7 @@
       "airflow_cm_s": 20.0,
       "airflow_end_cm_s": 20.0,
       "outcome": "burning",
-      "pressure_kPa": null,
+      "pressure_kPa": 100,
       "source": "PSI-99 (SAFFIRE-II)",
       "source_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99"
      },
@@ -226,7 +226,7 @@
     "unknown": [
      "airflow_cm_s (not given for this question)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -527,7 +527,7 @@
    ],
    "nearest_evidence": null,
    "unknown": [],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -565,7 +565,7 @@
    "nearest_evidence": null,
    "note": "O12, the lowest-oxygen test at 13.6%, never ignited — the PSI-25 CSV's Air display for O12 reads 'no ign at any flow'.",
    "unknown": [],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],
@@ -603,7 +603,7 @@
    "nearest_evidence": null,
    "note": null,
    "unknown": [],
-   "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+   "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7–100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
    "sources": [
     "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
    ],

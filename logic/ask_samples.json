@@ -50,7 +50,7 @@
     "unknown": [
      "airflow_cm_s (not given for this question)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -123,7 +123,7 @@
     "unknown": [
      "airflow_cm_s (not given for this question)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -182,7 +182,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -241,7 +241,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -278,7 +278,7 @@
     "unknown": [
      "more Wax rows"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -339,7 +339,7 @@
     "unknown": [
      "airflow_cm_s (not given for this question)"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -376,7 +376,7 @@
     "unknown": [
      "more Wax rows"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -419,7 +419,7 @@
      ]
     },
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -478,7 +478,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -537,7 +537,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -560,7 +560,7 @@
     "unknown": [
      "oxygen_pct"
     ],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -866,7 +866,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -910,7 +910,7 @@
     "nearest_evidence": null,
     "note": "O12, the lowest-oxygen test at 13.6%, never ignited \u2014 the PSI-25 CSV's Air display for O12 reads 'no ign at any flow'.",
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -954,7 +954,7 @@
     "nearest_evidence": null,
     "note": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -1040,7 +1040,7 @@
     "nearest_evidence": null,
     "note": "All tests at the lowest airflow carry the low-flow flag \u2014 low readings are uncertain (flows below 2 cm/s have high error bars), so this is a low reading, not an exact flow.",
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -1099,7 +1099,7 @@
     ],
     "nearest_evidence": null,
     "unknown": [],
-    "gravity_note": "These tests were in microgravity on the ISS. The Moon is about one-sixth Earth's gravity. Pressure was recorded only for the 5 Saffire IV/V tests (70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
+    "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
      "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
     ],
@@ -1127,7 +1127,7 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.477524071931839,
+      "score": 0.4775242805480957,
       "method": "embedding"
      },
      {
@@ -1151,12 +1151,12 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
        "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
       },
-      "score": 0.4508100748062134,
+      "score": 0.45081016421318054,
       "method": "embedding"
      }
     ],
     "method": "embedding",
-    "best_score": 0.477524071931839
+    "best_score": 0.4775242805480957
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -1213,7 +1213,7 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.6087582111358643,
+      "score": 0.6087584495544434,
       "method": "embedding"
      },
      {
@@ -1225,7 +1225,7 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.5411369800567627,
+      "score": 0.5411369204521179,
       "method": "embedding"
      },
      {
@@ -1237,12 +1237,12 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.3237680494785309,
+      "score": 0.3237680196762085,
       "method": "embedding"
      }
     ],
     "method": "embedding",
-    "best_score": 0.6087582111358643
+    "best_score": 0.6087584495544434
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -1254,7 +1254,7 @@
     "match": false,
     "results": [],
     "method": "embedding",
-    "best_score": 0.12889380753040314
+    "best_score": 0.12889382243156433
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   }
