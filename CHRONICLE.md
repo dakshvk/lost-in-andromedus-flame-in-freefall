@@ -26,6 +26,12 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 | Daksh Kumar | Explain INSIDE, NEAR, BEYOND and the other labels in plain words
+- What: `README.md` (new "How to read an answer" section). The same text was added to the combined submission Google Doc.
+- Why: judges and readers would see BEYOND and other labels without knowing what they mean.
+- How: wrote the definitions from the thresholds in the code (1.0 oxygen point, 25% of airflow range, fewer than 3 tests) and the outcome words in `data/`. Written with Claude Code.
+- Check: definitions compared with `logic/classifier.py` rules and the README rules section; the doc was read back after the edit.
+
 ### 2026-11-15 | Daksh Kumar | Moon turns on its own, even with Reduce motion on
 - What: `web/js/moon.js` (idle turn), `README.md` (3D Moon troubleshooting line).
 - Why: the Moon looked still on a Mac with "Reduce motion" on, and it did not restart while the mouse hovered over it, which would have hurt the demo recording.

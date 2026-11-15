@@ -20,6 +20,18 @@ A Moon base is expected to run at about **30% oxygen or more**. NASA's burn test
 
 **Main finding:** at normal cabin pressure, nothing was tested above 22.2% oxygen. The closest evidence is three Saffire V tests at 25.4 to 26.2% oxygen, run at low pressure.
 
+## How to read an answer
+
+Every answer starts with one of three verdicts. They compare your question to the conditions NASA actually tested for that material.
+
+- **INSIDE:** the question falls within what was tested. Real tests exist at or around those conditions.
+- **NEAR:** just outside the tested range, within 1.0 oxygen point or 25% of the material's airflow range. The tests are close but do not cover it exactly.
+- **BEYOND:** outside everything tested for that material, so no test can say what would happen. It does not mean the material will or will not burn. It means the evidence stops before that point, so the answer shows the closest evidence instead of a guess. Example: PMMA at 30% oxygen is BEYOND, because the highest oxygen tested at normal cabin pressure is 22.2%.
+
+Other labels: **MORE INFO** means the question had no oxygen level, so the site asks for one. **RESULT** means a plain fact from the table, such as "What is the lowest oxygen tested?". **Number check** means code confirmed every number in the answer is in the data.
+
+Outcome words for each test: **quenched** (the flame went out on its own), **blow off** (the airflow pushed the flame off the fuel), **burning**, **no ignition** (the fuel never lit), **ignited only** (the notes say it lit but not how it ended), **unknown** (the notes do not say, so we do not guess).
+
 ## Run it on your computer
 
 You need Python 3 (we used 3.12). In a terminal:
