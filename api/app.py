@@ -31,11 +31,15 @@ LOGIC = os.path.join(ROOT, "logic")
 WEB = os.path.join(ROOT, "web")
 WEB_DATA = os.path.join(WEB, "data")
 TESTS_JSON = os.path.join(ROOT, "data", "tests.json")
-sys.path.insert(0, LOGIC)
+# ROOT so `logic.*` imports resolve; LOGIC so Lane B's own flat imports still work.
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+if LOGIC not in sys.path:
+    sys.path.insert(0, LOGIC)
 
-from answer import ask, dataset_stats_tests_json  # noqa: E402
-from cards import rows_from_tests_json  # noqa: E402
-from rag import _named_material, retrieve  # noqa: E402
+from logic.answer import ask, dataset_stats_tests_json  # noqa: E402
+from logic.cards import rows_from_tests_json  # noqa: E402
+from logic.rag import _named_material, retrieve  # noqa: E402
 
 DATA_FILES = {"tests", "cards", "experiments", "investigations",
               "limits", "demo_answers", "meta"}

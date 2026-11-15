@@ -27,15 +27,19 @@ ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 LOGIC = os.path.join(ROOT, "logic")
 DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(ROOT, "web", "data")
-sys.path.insert(0, LOGIC)
+# ROOT so `logic.*` imports resolve; LOGIC so Lane B's own flat imports still work.
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+if LOGIC not in sys.path:
+    sys.path.insert(0, LOGIC)
 
-from answer import GRAVITY_NOTE, gravity_note  # noqa: E402
-from cards import (LOW_FLOW_CUTOFF_CM_S, STANDARD_PRESSURE_MIN_KPA,  # noqa: E402
-                   rows_from_tests_json)
-from classifier import (AIRFLOW_MAX, FLOW_MARGIN, NEAR_AIRFLOW_MAX,  # noqa: E402
-                        NEAR_POINTS, flow_range)
-from rag import CUTOFF, load_investigations  # noqa: E402
-from ranking import RANKING_NOTE  # noqa: E402
+from logic.answer import GRAVITY_NOTE, gravity_note  # noqa: E402
+from logic.cards import (LOW_FLOW_CUTOFF_CM_S, STANDARD_PRESSURE_MIN_KPA,  # noqa: E402
+                         rows_from_tests_json)
+from logic.classifier import (AIRFLOW_MAX, FLOW_MARGIN, NEAR_AIRFLOW_MAX,  # noqa: E402
+                              NEAR_POINTS, flow_range)
+from logic.rag import CUTOFF, load_investigations  # noqa: E402
+from logic.ranking import RANKING_NOTE  # noqa: E402
 
 TESTS_JSON = os.path.join(DATA, "tests.json")
 OUTCOMES = ["quenched", "blow_off", "burning", "no_ignition", "ignited_only", "unknown"]
@@ -186,18 +190,26 @@ def export_limits(rows):
         "gravity_note_short": GRAVITY_NOTE,
         "rules": [
             "A test whose flow changed covers its whole span, from start to end flow.",
-            "NEAR means just outside the tested range: 1.0 oxygen point, or 25% of the material's flow range.",
+            ("NEAR means just outside the tested range: 1.0 oxygen point, or "
+             "25% of the material's flow range."),
             "Fewer than 3 tests for a material means extrapolated, not covered.",
-            "Flows under 2 cm/s are flagged as uncertain (team choice: the BASS-II report says low flows have high error bars but gives no number).",
-            "If the crew turned the flow off and the flame went out, the outcome is unknown, not quenched.",
-            "Saffire V tests (about 71 kPa) are kept out of the standard ranges and shown by pressure.",
-            "Link et al. 2018 rows are paper rod data: not outcome evidence, different flow calibration.",
+            ("Flows under 2 cm/s are flagged as uncertain (team choice: the "
+             "BASS-II report says low flows have high error bars but gives no "
+             "number)."),
+            ("If the crew turned the flow off and the flame went out, the "
+             "outcome is unknown, not quenched."),
+            ("Saffire V tests (about 71 kPa) are kept out of the standard "
+             "ranges and shown by pressure."),
+            ("Link et al. 2018 rows are paper rod data: not outcome evidence, "
+             "different flow calibration."),
             "Outcomes that are not recorded are shown as unknown, never guessed.",
         ],
         "ranking_note": RANKING_NOTE,
-        "si_acknowledgment": ("Data extraction, logic and code were written with SI assistance "
-                      "(Claude, Claude Code, Muse, Cursor) and reviewed by the team. "
-                      "See AI_USE_LOG.md."),
+        "si_acknowledgment": (
+            "Data extraction, logic and code were written with SI assistance "
+            "(Claude, Claude Code, Muse, Cursor) and reviewed by the team. "
+            "See AI_USE_LOG.md."
+        ),
         "license": "PSI data is CC0 (NASA Physical Sciences Informatics).",
     }
 
