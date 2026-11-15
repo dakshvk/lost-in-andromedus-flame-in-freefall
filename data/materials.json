@@ -27,8 +27,8 @@
    "blow_off": 9,
    "burning": 11,
    "no_ignition": 6,
-   "quenched": 53,
-   "unknown": 25
+   "quenched": 52,
+   "unknown": 26
   },
   "spread_rate_rows_link2018": 52,
   "sources": {
@@ -43,7 +43,7 @@
   ],
   "flow_start_range_cm_s": [
    0,
-   49
+   20
   ],
   "computed_from": "tests.json by build_materials.py"
  },

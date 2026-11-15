@@ -1,0 +1,28 @@
+zhao_key,psi25_o2_start,psi25_air_display,zhao_comment_VERBATIM (fill in),zhao_oxygen (check),zhao_flow (check),outcome (fill in)
+GMT45-T1,18.5,10,(no comment),18.5*,10,unknown
+GMT45-T2,18.5,9   5   4,(no comment),18.5*,10 to 5,unknown
+GMT45-T4,18.7,9  1,Quenched,18.7,10 to 2.2,quenched
+GMT100-T5,18.8,10   2   1,(no comment),18.8,10 to 2.4,unknown
+GMT100-T6,18.8,5  2  1   <1,(no comment),18.8,4.5 to 2.6,unknown
+GMT175-T9,16.4,10,No ignition,16.4,10,no_ignition
+GMT175-T10,16.4,5,No ignition,16.4,5,no_ignition
+GMT178-T11,17.1,5,(no comment),17.1,4,unknown
+GMT178-T12,16.8,5,No ignition,16.8,5,no_ignition
+GMT100-T13,17.5,5  1,Quenched,17.5,4 to 2.2,quenched
+GMT178-T14,16.9,5  3,Quenched,16.9,4 to 2.8,quenched
+GMT45-T15,18.7,9   29,No Blow-off,18.7,10 to 29,burning
+GMT100-T16,17.6,5  3,(no comment),17.6,4 to 3,unknown
+GMT178-T17,16.9,6   53,No Blow-off,16.9,6 to 53,burning
+GMT175-T18,17.4,5  2,Quenched,17.4,5 to 2.6,quenched
+GMT190-T19,17.2,11,(no comment),17.2,11,unknown
+GMT190-T20,17.2,11   3,Quenched,17.2,11 to 3,quenched
+GMT190-T21,17.2,11   max(47),Blow-off,17.2,11 to 47,blow_off
+GMT190-T22,17.1,10   5,Quenched,17.1,10.5 to 5,quenched
+GMT190-T23,17.2,10,"Reused, did not ignite",17.2,10,no_ignition
+GMT190-T24,18.2,10,"Reused, one sided flame",18.2,10,burning
+GMT216-T25,20.8,5   2.5,"Reused, ignited",20.8,5 to 2.5,ignited_only
+GMT216-T26,20.8,5   2.5,"Reused, ignited",20.8,5 to 2.5,ignited_only
+GMT216-T27,20.7,5   2,"Reused, ignited",20.7,5 to 2,ignited_only
+GMT216-T28a,20.7,5,"Reused, did not ignite",20.7,5,no_ignition
+GMT216-T28b,20.7,5,"Reused, did not ignite",20.7,5,no_ignition
+GMT216-T29,20.7,5   2(?),"Reused, ignited",20.7,5 to 2,ignited_only
