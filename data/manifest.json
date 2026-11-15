@@ -1,0 +1,90 @@
+{
+ "made": "2026-11-14",
+ "by": "Lane A (with SI assistance, Claude)",
+ "files": [
+  {
+   "file": "BASS-II_TM-20210011385.pdf",
+   "sha256": "5ffa911fd9b6356f204646003fb9342e341810dcdfdf5cb15756e7f01ec5f770",
+   "bytes": 48972416,
+   "in_repo": false,
+   "note": "unedited copy of the file as downloaded/uploaded; large PDF, not committed, hash recorded so the exact file can be checked"
+  },
+  {
+   "file": "ICES-2021-266_Saffire_IV_V.pdf",
+   "sha256": "d25b394f43774ee79a3223b53e90571be299c8996d1cff2512c76e3308e107f5",
+   "bytes": 6518291,
+   "in_repo": false,
+   "note": "unedited copy of the file as downloaded/uploaded; large PDF, not committed, hash recorded so the exact file can be checked"
+  },
+  {
+   "file": "Link2018_41598_2017_18398_MOESM1_ESM.pdf",
+   "sha256": "e17c9511c4b4b253cd0795b3984ffb9347ad5db6354c4ce792adcaf805f21b23",
+   "bytes": 645055,
+   "in_repo": false,
+   "note": "unedited copy of the file as downloaded/uploaded; large PDF, not committed, hash recorded so the exact file can be checked"
+  },
+  {
+   "file": "PSI-100_Experimental_table_SAFFIRE-3.csv",
+   "sha256": "4d3c717ec20dd0247db670b2784a9fd7d746788bc54a936f80693e48eb8cd117",
+   "bytes": 239,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "PSI-20_Experimental_table_ACME_BRE.csv",
+   "sha256": "4aa5d3f98708ceacced5c620d46858b9965f8d4d941b203229f46467d53e5ab7",
+   "bytes": 1113,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "PSI-21_Experimental_table_CLD_Flame.csv",
+   "sha256": "9fafbc5b3dddaf715ce8025ed9154ce297803f7b69a935f077ec26c8249e44c0",
+   "bytes": 2454,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "PSI-25_Experimental table_BASS-II.csv",
+   "sha256": "71e792bf6b5fb5ea620c5dd70fbbac05515992e12aefcf5dff47312caa48c042",
+   "bytes": 16590,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "PSI-26_Experimental_table_BASS.csv",
+   "sha256": "ccfc3c54d948b64a1c5d2596a63c7c8019e51df0c91a1d62f039f48fa28c300f",
+   "bytes": 4726,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "PSI-47_Experimental_table_DAFT.csv",
+   "sha256": "51f16141f66e920fb7f2c8abc035b460839a16412bd0ffdefd17e83eaac7013f",
+   "bytes": 527,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "PSI-98_Experimental_table_SAFFIRE-1.csv",
+   "sha256": "c01f29c62455f0a3b512290ab85e5687ecded326733189f002f580368402308d",
+   "bytes": 469,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "PSI-99_Experimental_table_SAFFIRE-2.csv",
+   "sha256": "3c24390b9ef86f3d1ebaab911a1a3cc95a8759aebf42062371370e6d4b31b8ac",
+   "bytes": 1973,
+   "in_repo": true,
+   "note": "unedited copy of the file as downloaded/uploaded"
+  },
+  {
+   "file": "Zhao2015_20150008962.pdf",
+   "sha256": "50590fd7e6619203eb75a46f49e83556e6798a53e67869cd52ea89961c692c30",
+   "bytes": 939683,
+   "in_repo": false,
+   "note": "unedited copy of the file as downloaded/uploaded; large PDF, not committed, hash recorded so the exact file can be checked"
+  }
+ ]
+}

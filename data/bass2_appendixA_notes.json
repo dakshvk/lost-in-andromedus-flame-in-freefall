@@ -1,0 +1,884 @@
+{
+ "B1": {
+  "id": "B1",
+  "pdf_page": 111,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "Ignited very quickly, turned flow off after spread halfway; flame extinguished very quickly; and sooty with blue leading edge"
+ },
+ "B10": {
+  "id": "B10",
+  "pdf_page": 111,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Multiple velocities for steady spread, extinguished at pot 0.35"
+ },
+ "B11": {
+  "id": "B11",
+  "pdf_page": 111,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Multiple velocities for steady spread, extinguished at pot 0.35"
+ },
+ "B12": {
+  "id": "B12",
+  "pdf_page": 111,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "Mostly blue, soot only on bottom"
+ },
+ "B13": {
+  "id": "B13",
+  "pdf_page": 111,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Multiple velocities for steady spread, extinguished at pot 0.35"
+ },
+ "B14": {
+  "id": "B14",
+  "pdf_page": 111,
+  "date_gmt_cell": "7/2/14 GMT 183",
+  "gmt": "183",
+  "note": "HCl O, only brief ignition, flame extinguished"
+ },
+ "B15": {
+  "id": "B15",
+  "pdf_page": 111,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Spread at 10 cm/s, did not blowoff"
+ },
+ "B16": {
+  "id": "B16",
+  "pdf_page": 111,
+  "date_gmt_cell": "7/2/14 GMT 183",
+  "gmt": "183",
+  "note": "HCl 1.1 > 1.3; flame quenched after prolonged burn at 0.4 pot, one-sided flame; spread to top side and quenched immediately; did igniter wire affect top flame?"
+ },
+ "B17": {
+  "id": "B17",
+  "pdf_page": 111,
+  "date_gmt_cell": "7/2/14 GMT 183",
+  "gmt": "183",
+  "note": "Burned steadily at higher flows, extinguished just as we reached a pot of 0.4; vapor jetting more on bottom, possibly because of sample tilted slightly to flow?"
+ },
+ "B18": {
+  "id": "B18",
+  "pdf_page": 112,
+  "date_gmt_cell": "7/2/14 GMT 183",
+  "gmt": "183",
+  "note": "HCl 0.6 > 0.9, flame blew out at a fan pot of 7.0"
+ },
+ "B19": {
+  "id": "B19",
+  "pdf_page": 112,
+  "date_gmt_cell": "7/2/14 GMT 183",
+  "gmt": "183",
+  "note": "HCl 1.3 > 1.4; flame blew out at a pot of 6.0"
+ },
+ "B2": {
+  "id": "B2",
+  "pdf_page": 112,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "No stills taken, cable came loose; not quite a straight on edge view"
+ },
+ "B20": {
+  "id": "B20",
+  "pdf_page": 112,
+  "date_gmt_cell": "7/2/14 GMT 183",
+  "gmt": "183",
+  "note": "HCl 0.9 > 1.1; flame burned entire sample"
+ },
+ "B21": {
+  "id": "B21",
+  "pdf_page": 112,
+  "date_gmt_cell": "8/4/14 GMT 216",
+  "gmt": "216",
+  "note": "Ignition at 5 cm/s then fan pot turned down slowly after flame; spreads halfway; flame goes out at 0.355 pot setting"
+ },
+ "B22": {
+  "id": "B22",
+  "pdf_page": 112,
+  "date_gmt_cell": "8/4/14 GMT 216",
+  "gmt": "216",
+  "note": "Ignition at 5 cm/s then decreased flow in step, fan pot 1.7, 0.5, 0.4, 0.36 (flame out)"
+ },
+ "B3": {
+  "id": "B3",
+  "pdf_page": 112,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "Probably 20.6 O2 to start; lower flow flames much more blue overall; still some soot though"
+ },
+ "B4": {
+  "id": "B4",
+  "pdf_page": 112,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "Bubble layer thickness increases with sample thickness"
+ },
+ "B5": {
+  "id": "B5",
+  "pdf_page": 112,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "Repeat of B2 test conditions, to get top view images; question the 20.9 reading; all others were 20.6 this day"
+ },
+ "B6": {
+  "id": "B6",
+  "pdf_page": 112,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Steady burning at 3 and 5 cm/s, did not reach 10 cm/s before end of sample, complete burnout, HCl \u2013>0.3"
+ },
+ "B7": {
+  "id": "B7",
+  "pdf_page": 112,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "Very long bubble layer"
+ },
+ "B8": {
+  "id": "B8",
+  "pdf_page": 112,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Spread at 10 cm/s, did not blowoff"
+ },
+ "B9": {
+  "id": "B9",
+  "pdf_page": 112,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Steady burning at 2 cm/s, extinguished at 0.35"
+ },
+ "F1": {
+  "id": "F1",
+  "pdf_page": 113,
+  "date_gmt_cell": "2/19/2014 GMT 2014 050",
+  "gmt": "050",
+  "note": "Ignited briefly but did not spread at all and extinguished while the igniter was still on"
+ },
+ "F2": {
+  "id": "F2",
+  "pdf_page": 113,
+  "date_gmt_cell": "7/28/2014 GMT 209",
+  "gmt": "209",
+  "note": "Tried to ignite, flame would not sustain"
+ },
+ "F3": {
+  "id": "F3",
+  "pdf_page": 113,
+  "date_gmt_cell": "8/1/14 GMT 213",
+  "gmt": "213",
+  "note": "Brief ignition flash, no sustained flame; no postburn sensor readings taken"
+ },
+ "F4": {
+  "id": "F4",
+  "pdf_page": 113,
+  "date_gmt_cell": "6/24/2018",
+  "gmt": null,
+  "note": "Long ignition, but blue flame established at 3 cm/s, reduced flow in increments: potentiometers 0.6, 0.4, 0.35, 0.32, 0.31, 0.305 flame extinguished"
+ },
+ "P1": {
+  "id": "P1",
+  "pdf_page": 114,
+  "date_gmt_cell": "6/16/14 GMT 167",
+  "gmt": "167",
+  "note": "Broke \u201320, \u201321 igniters, \u201322 worked; nice flame, got down to extinction at pot 0.315 (finite low flow), very slow increments"
+ },
+ "P10": {
+  "id": "P10",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/3/2014 GMT 184",
+  "gmt": "184",
+  "note": "HCl 0.3 > 0.9, steady burn at multiple velocities, finite quench at pot 0.3"
+ },
+ "P12": {
+  "id": "P12",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/29/14 GMT 210",
+  "gmt": "210",
+  "note": "Loss of signal before extinguished, oscillating at 0.36, out immediately at 0.34, multiple steady spread flows"
+ },
+ "P13a": {
+  "id": "P13a",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/14/14 GMT 195",
+  "gmt": "195",
+  "note": "Fan pot 1.1 (5 cm/s), 0.4, 0.36, 0.32, 0.3, 0.28, 0.26; flame out when pot turned to 0; HCL 0.5 > 4.1; flame reached front of sample and began to wrap around"
+ },
+ "P13b": {
+  "id": "P13b",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/14/14 GMT 195",
+  "gmt": "195",
+  "note": "Fan pot 1.3 (5 cm/s), 0.4, 0.36, 0.32; flame out when pot turned to 0.32"
+ },
+ "P14": {
+  "id": "P14",
+  "pdf_page": 114,
+  "date_gmt_cell": "6/23/2014",
+  "gmt": null,
+  "note": "All blue, extinguished at 0.31"
+ },
+ "P15": {
+  "id": "P15",
+  "pdf_page": 114,
+  "date_gmt_cell": "6/23/2014",
+  "gmt": null,
+  "note": "Nice stable burn with sooty tail but blue leading edge"
+ },
+ "P16": {
+  "id": "P16",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/22/14 GMT 203",
+  "gmt": "203",
+  "note": "Extinguished at pot 0.32, one high flow setting"
+ },
+ "P17": {
+  "id": "P17",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/29/14 GMT 210",
+  "gmt": "210",
+  "note": "A few finite flows, then tried blowoff without success, turned back down to 2 cm/s, then 0.36, 0.34 pots, oscillated and out at 0.34; leading edge receded slightly but did not blowoff"
+ },
+ "P18": {
+  "id": "P18",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/30/14 GMT 211",
+  "gmt": "211",
+  "note": "Alternated fan pot between 1 and 2 at 1-min intervals to try to get time constant resolution; finally turned pot down slowly, extinction at fan pot 0.32"
+ },
+ "P19": {
+  "id": "P19",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/22/14 GMT 203",
+  "gmt": "203",
+  "note": "Tried blowoff, did not blowoff at pot 10 2 restrictors, flame out at 0.32, sample mostly gone"
+ },
+ "P2": {
+  "id": "P2",
+  "pdf_page": 114,
+  "date_gmt_cell": "6/16/2014",
+  "gmt": null,
+  "note": "Nice stable burn at low velocity, mostly blue with some inner soot at higher flow, stable flame at pot 0.33, did not get extinction on stills, but was just fan off, not slow ramp"
+ },
+ "P20": {
+  "id": "P20",
+  "pdf_page": 114,
+  "date_gmt_cell": "7/30/14 GMT 211",
+  "gmt": "211",
+  "note": "Alternated fan pot between 1 and 2 at 1-min intervals to try to get time constant resolution; finally turned pot down slowly, extinction at fan pot 0.335"
+ },
+ "P21a": {
+  "id": "P21a",
+  "pdf_page": 114,
+  "date_gmt_cell": "6/23/2014 GMT 174",
+  "gmt": "174",
+  "note": "Flame self-extinguished at 5 cm/s after sample end became flat, dim flame"
+ },
+ "P21b": {
+  "id": "P21b",
+  "pdf_page": 114,
+  "date_gmt_cell": "6/23/2014",
+  "gmt": null,
+  "note": "Igniter broke after third attempt to ignite flattened end of sample"
+ },
+ "P22a": {
+  "id": "P22a",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/8/2014 GMT 189",
+  "gmt": "189",
+  "note": "Extinguished at higher flow, possibly rod not preheated enough by a bit, CO readings elevated, slow response"
+ },
+ "P22b": {
+  "id": "P22b",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/8/2014 GMT 189",
+  "gmt": "189",
+  "note": "Extinguished at lower flow than P22a by a bit, longer slower decrease in flow, CO elevated, slow response"
+ },
+ "P23": {
+  "id": "P23",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/30/14 GMT 211",
+  "gmt": "211",
+  "note": "Alternated fan pot between 1 and 2 at 1-min then 2-min intervals to try to get time constant resolution; finally turned pot down slowly, extinction at fan pot 0.38"
+ },
+ "P24": {
+  "id": "P24",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/30/14 GMT 211",
+  "gmt": "211",
+  "note": "Alternated fan pot between 1 and 2 at 1-min intervals to try to get time constant resolution; finally turned pot down slowly, extinction at fan pot 0.30"
+ },
+ "P25": {
+  "id": "P25",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/8/2014 GMT 189",
+  "gmt": "189",
+  "note": "Reburn of 217m in opposed geometry, repeat of P22b, extinguished at same 0.31 pot, more sparklers from flame, and less leading edge vapor jetting, or more central jetting; rod warped downward in video view at end of test, asymmetrical instabilities noted briefly at pot change to 0.32, CO elevated, slow response"
+ },
+ "P3a": {
+  "id": "P3a",
+  "pdf_page": 115,
+  "date_gmt_cell": "6/16/2014",
+  "gmt": null,
+  "note": "Repeat of last test with clear rod; extinguished at 0.3 pot very small flame, but steady spread"
+ },
+ "P3b": {
+  "id": "P3b",
+  "pdf_page": 115,
+  "date_gmt_cell": "6/16/2014",
+  "gmt": null,
+  "note": "Very low velocity test to get limiting spread rate, pot 0.32 spread, 0.31 spread, etc.; power failed to camera?; fan still running; camera power cable needed repair and taping to camera body to make it work"
+ },
+ "P4": {
+  "id": "P4",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/3/2014 GMT 184",
+  "gmt": "184",
+  "note": "HCl 0.9 > 1.8, long slow burn, steady at multiple pots until turned off flow"
+ },
+ "P5": {
+  "id": "P5",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/14/14 GMT 195",
+  "gmt": "195",
+  "note": "Fan pot 1.5 (5 cm/s), 0.9, 0.4, 0.36, 0.32, 0.308, 0.3, 0.29, 0.28 (flame persisted for all) finally turned down flow to 0 to extinguish; HCL 0 > 4.7; lots of fuel left behind, conical shape"
+ },
+ "P6": {
+  "id": "P6",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/3/2014 GMT 184",
+  "gmt": "184",
+  "note": "HCl 0 > 0.9, steady burning until turned flow off, multiple pot settings"
+ },
+ "P8": {
+  "id": "P8",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/3/2014 GMT 184",
+  "gmt": "184",
+  "note": "HCl 0.9 > 0.9, would not stay lit, tip of sample was flat"
+ },
+ "P9": {
+  "id": "P9",
+  "pdf_page": 115,
+  "date_gmt_cell": "7/14/14 GMT 195",
+  "gmt": "195",
+  "note": "Fan pot 1.5 (5 cm/s), 0.9, 0.4, 0.36, 0.32, 0.3, 0.28 flame out at 0.28; HCL 4.7 > 4.5; flame did not leave conical portion behind, rather fuel was consumed but final sample shape was very irregular"
+ },
+ "M1": {
+  "id": "M1",
+  "pdf_page": 116,
+  "date_gmt_cell": "2/20/14 GMT 2014- 051",
+  "gmt": null,
+  "note": "Prolonged ignition, flame initially on both sides, after igniter off and flame moved away from end, bottom flame died and top flame became all blue and small; very slow propagation; changed flow from 10 to 8 cm/s and flame shrank to a circle; spread just over 1/3 of sample when we ran out of camera card, and put flame out by turning off flow"
+ },
+ "M10": {
+  "id": "M10",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/23/14 GMT 204",
+  "gmt": "204",
+  "note": "Long burn, quick ignition, flame in seconds, kept it on 40 s + 2nd on for another 10 to 15 s when it was shrinking; multiple flows for steady spreading; flame big at 17, so only left it there 3 min; other flows longer; flame self-extinguished at 8 cm/s after almost 10 min; Alex saw it going out and locked shutter for the last few seconds; pictures start after ignition, about every 8 s"
+ },
+ "M11": {
+  "id": "M11",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/11/14 GMT 192",
+  "gmt": "192",
+  "note": "29-min burn; extinguished at 12 cm/s., HCl 0.5 > 5.0"
+ },
+ "M12": {
+  "id": "M12",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/31/14 GMT 212",
+  "gmt": "212",
+  "note": "Vigorous ignition led to trying to get flame under control; finally had about plateaus at pot = 0.35, 0.4, and again 0.35"
+ },
+ "M13": {
+  "id": "M13",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/31/14 GMT 212",
+  "gmt": "212",
+  "note": "Mild ignition at 10 cm/s; decreased flow down holding constant for 6 min at pot settings of 1.7, 1.0, and 0.55; finally extinguished by turning pot down to 0.3"
+ },
+ "M14": {
+  "id": "M14",
+  "pdf_page": 116,
+  "date_gmt_cell": "2/20/14 GMT 2014- 051",
+  "gmt": null,
+  "note": "Prolonged ignition, followed by flow reduction after flame moved away from igniter region and spread steadily; flame self-extinguished at an air reading of 9 cm/s."
+ },
+ "M15": {
+  "id": "M15",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/7/2014 GMT 188",
+  "gmt": "188",
+  "note": "Ignited and turned flow down to control flame size during end burning, then turned flow up to 20 cm/s and got steady spreading there, turned down flow to 15 and got spreading and slow extinction there."
+ },
+ "M16": {
+  "id": "M16",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/23/14 GMT 204",
+  "gmt": "204",
+  "note": "Burned at decreasing flow down to 1 cm/s or so, still fine, at end of sample, turned up flow to 10 cm/s and flame got really long; turned it down but Alex reported some soot on the door and some on the heat sink; dry wipe would not wipe off; try Monday with some other\u2014water?"
+ },
+ "M17": {
+  "id": "M17",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/15/14 GMT 196",
+  "gmt": "196",
+  "note": "30-min burn targeted constant flows of 10, 5, and 3; finally turned fan pot to 0 to extinguish. HCl 0.3 > 3.7"
+ },
+ "M18": {
+  "id": "M18",
+  "pdf_page": 116,
+  "date_gmt_cell": "7/15/14 GMT 196",
+  "gmt": "196",
+  "note": "26-min burn; flow briefly at 15 cm/s but flame was too strong so turned down; HCl 0 > 3.1, extinguished 8 cm/s"
+ },
+ "M19": {
+  "id": "M19",
+  "pdf_page": 117,
+  "date_gmt_cell": "7/23/14 GMT 204",
+  "gmt": "204",
+  "note": "Burned with decreasing flows until it went out on its own at 5 cm/s"
+ },
+ "M2": {
+  "id": "M2",
+  "pdf_page": 117,
+  "date_gmt_cell": "2/20/14 GMT 2014- 051",
+  "gmt": null,
+  "note": "Ignite at 20 cm/s, turn down to 15 cm/s after spread away from igniter; seemed steady, so turned down to 13 cm/s; flame got very dim, so increased flow to 14 cm/s, but it self- extinguished"
+ },
+ "M20": {
+  "id": "M20",
+  "pdf_page": 117,
+  "date_gmt_cell": "8/1/14 GMT 213",
+  "gmt": "213",
+  "note": "Flame took some time to establish, initially only on bottom of fuel; ignition at 10 cm/s (left 8 min) then flow down to 8 cm/s (flame out after 3 more minutes)"
+ },
+ "M3": {
+  "id": "M3",
+  "pdf_page": 117,
+  "date_gmt_cell": "7/11/14 GMT 192",
+  "gmt": "192",
+  "note": "Extinguished at 18 cm/s; HCl 0.6 > 2.6"
+ },
+ "M4": {
+  "id": "M4",
+  "pdf_page": 117,
+  "date_gmt_cell": "7/31/14 GMT 212",
+  "gmt": "212",
+  "note": "Mild ignition at 10 cm/s; decreased flow down holding constant for 6 min at pot settings of 1.7, 1.0, and 0.55; finally extinguished by turning pot down to 0.3"
+ },
+ "M5": {
+  "id": "M5",
+  "pdf_page": 117,
+  "date_gmt_cell": "2/20/14 GMT 2014- 051",
+  "gmt": null,
+  "note": "Rick ignited while we were loss of signal and out of contact with ISS, unfortunately; ignition was ~3 min per his verbal call down when we came back; flame already burning ~1/3 of sample, both sides, long and sooty; more vapor jetting on bottom due to molten ball attached there, visible when lights on to change camera card; turned down to 10 cm/s, then further down in increments to 5 cm/s; extinguished at 5 cm/s after prolonged flashing; during soot cleaning, Rick noticed damage to front door corner by the switches; He sent pictures down for us to evaluate for damage; CO reading posttest was off-scale; came back during purge reading 500"
+ },
+ "M6": {
+  "id": "M6",
+  "pdf_page": 117,
+  "date_gmt_cell": "7/31/14 GMT 212",
+  "gmt": "212",
+  "note": "Aggressive ignition led to large flame initially; once flame settled down, we kept flow low and had two flow plateaus (pot 0.4 and 0.36); when flame reached end of sample it started backing up and spreading along the edges."
+ },
+ "M7": {
+  "id": "M7",
+  "pdf_page": 117,
+  "date_gmt_cell": "7/11/14 GMT 192",
+  "gmt": "192",
+  "note": "18 min burn; burned entire sample; HCl 2.2 > 3.9"
+ },
+ "M8": {
+  "id": "M8",
+  "pdf_page": 117,
+  "date_gmt_cell": "7/11/14 GMT 192",
+  "gmt": "192",
+  "note": "25-min burn; turned down flow to extinguish, went out at pot 0.4; HCl 0.4 > 4.6"
+ },
+ "M9": {
+  "id": "M9",
+  "pdf_page": 117,
+  "date_gmt_cell": "7/11/14 GMT 192",
+  "gmt": "192",
+  "note": "Ignited at 10 cm/s, photographs every 5 s or so, turned up flow when flame looked weak; died after 15 min at 14 cm/s; 17-min burn; HCl 0 > 1.7"
+ },
+ "O1": {
+  "id": "O1",
+  "pdf_page": 118,
+  "date_gmt_cell": "2/18/2014 GMT 2014- 049",
+  "gmt": null,
+  "note": "Bracket test with decreasing flows; very sooty long flame at high flows; rod very thinned out and was wobbling due to vapor jetting later in test; Rick broke it off holder during readjustments"
+ },
+ "O10": {
+  "id": "O10",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/22/14 GMT 203",
+  "gmt": "203",
+  "note": "Leading edge (LE) blew out at fan 81, 25 s for rest of flame to blowoff at maximum flow"
+ },
+ "O11": {
+  "id": "O11",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/8/2014 GMT 189",
+  "gmt": "189",
+  "note": "Repeat of clear rod O8b test, to compare black versus clear for stagnation flame, blowoff at pot of 6.0, fan slightly higher than O8b, HCl 2.8"
+ },
+ "O12": {
+  "id": "O12",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/8/2014 GMT 189",
+  "gmt": "189",
+  "note": "No sustained flame at any flow, flame with igniter but died immediately upon igniter removal, HCL 12.3"
+ },
+ "O13a": {
+  "id": "O13a",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/21/14 GMT 202",
+  "gmt": "202",
+  "note": "Ignited and burned at 5 pot settings, flame self-extinguished after 3+ min at pot 0.31"
+ },
+ "O13b": {
+  "id": "O13b",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/21/14 GMT 202",
+  "gmt": "202",
+  "note": "Only stayed lit at 0.9 for less than a minute"
+ },
+ "O14": {
+  "id": "O14",
+  "pdf_page": 118,
+  "date_gmt_cell": "8/1/14 GMT 213",
+  "gmt": "213",
+  "note": "Ignition at 5 cm/s then slow pot decreases to quenching pot 0.28"
+ },
+ "O15a": {
+  "id": "O15a",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/28/2014 GMT 209",
+  "gmt": "209",
+  "note": "Decrease flow to extinction at 0.32 pot, from 0.35 pot. 1.5 min at 5 cm/s; 2.5 min pot 1.0; 3.5 min at 0.5; 3.5 min 0.35; slow turn down to 0.32, flame out fairly quickly"
+ },
+ "O15b": {
+  "id": "O15b",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/28/2014 GMT 209",
+  "gmt": "209",
+  "note": "Reburn of same rod as previous; decreased flow to extinction at 0.27 pot, much lower than previous; rod heatup effect? 1 min 5 cm/s; 3.5 min pot 0.5; 5 min 0.35; 4 min 0.34; 4 min 0.33; 3 min 0.32; 1 min 0.31; 1 min 0.3; 1 min 0.29; 1.5 min 0.28; 0.27 out"
+ },
+ "O16": {
+  "id": "O16",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/29/14 GMT 210",
+  "gmt": "210",
+  "note": "Brief flame at end of first ignition, but no joy on sustained flame"
+ },
+ "O17": {
+  "id": "O17",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/22/14 GMT 203",
+  "gmt": "203",
+  "note": "Stable burns at slightly higher flows, LE blowoff at fan 72 and turned down flow but flame did not recover and extinguished even after flow was down to 43-44"
+ },
+ "O18": {
+  "id": "O18",
+  "pdf_page": 118,
+  "date_gmt_cell": "7/28/2014 GMT 209",
+  "gmt": "209",
+  "note": "Got rod hot, blue flame, turned flow up to pot 4.0, stag region blew out, Alex turned down quickly to 1.5 and got it to restabilize; we repeated it but it would not restabilize second time and flame extinguished after multiple oscillations at pot 1.0, after 1.5 would not restabilize"
+ },
+ "O19": {
+  "id": "O19",
+  "pdf_page": 118,
+  "date_gmt_cell": "8/1/14 GMT 213",
+  "gmt": "213",
+  "note": "Ignition at 5 cm/s then slow pot decreases to quenching pot 0.288"
+ },
+ "O2": {
+  "id": "O2",
+  "pdf_page": 118,
+  "date_gmt_cell": "2/18/14 GMT2014- 049",
+  "gmt": null,
+  "note": "Ignited at 2 cm/s, and got dim flame that got sooty with lots of vapor jetting, reduced flow to 1.5 pot and got less vapor jetting test; still sooty at these low flows"
+ },
+ "O3a": {
+  "id": "O3a",
+  "pdf_page": 119,
+  "date_gmt_cell": "6/13/2014 GMT 164",
+  "gmt": "164",
+  "note": "Flame extinguished as soon as he turned flow down, probably overshot, flame sooty at 5 cm/s"
+ },
+ "O3b": {
+  "id": "O3b",
+  "pdf_page": 119,
+  "date_gmt_cell": "",
+  "gmt": null,
+  "note": "Flame sooty even at lower flows, didn't get blue until air reading was zero"
+ },
+ "O4": {
+  "id": "O4",
+  "pdf_page": 119,
+  "date_gmt_cell": "7/8/2014 GMT 189",
+  "gmt": "189",
+  "note": "Larger rod, decreased flow, extinguished at 0.36, HCl 9.7"
+ },
+ "O5a": {
+  "id": "O5a",
+  "pdf_page": 119,
+  "date_gmt_cell": "7/21/14 GMT 202",
+  "gmt": "202",
+  "note": "Hard to ignite, broke two igniters, burned for 9 min then blew out with pot of 4.0, tried to stay lit but blew off after multiple oscillations."
+ },
+ "O5b": {
+  "id": "O5b",
+  "pdf_page": 119,
+  "date_gmt_cell": "7/21/14 GMT 202",
+  "gmt": "202",
+  "note": "Would not sustain a flame without igniter on, broke igniter again"
+ },
+ "O6": {
+  "id": "O6",
+  "pdf_page": 119,
+  "date_gmt_cell": "6/26/2014",
+  "gmt": null,
+  "note": "-----------------------------------------"
+ },
+ "O7": {
+  "id": "O7",
+  "pdf_page": 119,
+  "date_gmt_cell": "6/26/2014",
+  "gmt": null,
+  "note": "Blowoff fan 97, HCl post 4.9"
+ },
+ "O8a": {
+  "id": "O8a",
+  "pdf_page": 119,
+  "date_gmt_cell": "6/26/2014",
+  "gmt": null,
+  "note": "Quench at pot 0.31, HCL 4.8 to 5.9"
+ },
+ "O8b": {
+  "id": "O8b",
+  "pdf_page": 119,
+  "date_gmt_cell": "6/26/2014",
+  "gmt": null,
+  "note": "Blowoff fan 78, HCl prepost 5.9 to 7.9"
+ },
+ "O9": {
+  "id": "O9",
+  "pdf_page": 119,
+  "date_gmt_cell": "6/26/2014",
+  "gmt": null,
+  "note": "Blowoff fan 68, HCl 7.5 to 9.3"
+ },
+ "T1": {
+  "id": "T1",
+  "pdf_page": 120,
+  "date_gmt_cell": "2/14/2014 GMT 2014-45",
+  "gmt": null,
+  "note": "Compound Specific Analyzer-Combustion Products (CSA- CP) unit 1024; Carbon Dioxide Monitor (CDM) unit 1018; Prefill O2 reading = 20.9 percent; GN2 fill was from video display time 10:53 to 12:31 at maximum GN2 flow rate (pot = 10); Video display time is currently 1 day plus 6 min 10 s ahead of actual GMT; flow velocity held constant"
+ },
+ "T10": {
+  "id": "T10",
+  "pdf_page": 120,
+  "date_gmt_cell": "6/24/2018",
+  "gmt": null,
+  "note": "Brief ignition but flame extinguished before spreading beyond igniter"
+ },
+ "T11": {
+  "id": "T11",
+  "pdf_page": 120,
+  "date_gmt_cell": "6/27/2014",
+  "gmt": null,
+  "note": "Burned completely, steady, HCl 0.3 to 0.9"
+ },
+ "T12": {
+  "id": "T12",
+  "pdf_page": 120,
+  "date_gmt_cell": "6/27/14 GMT 178",
+  "gmt": "178",
+  "note": "Extinguished quickly"
+ },
+ "T13": {
+  "id": "T13",
+  "pdf_page": 120,
+  "date_gmt_cell": "4/10/2014 GMT 100",
+  "gmt": "100",
+  "note": "HCL 0.2 end, 0.1 start, no HCN, flame extinguished quickly after flow change."
+ },
+ "T14": {
+  "id": "T14",
+  "pdf_page": 120,
+  "date_gmt_cell": "6/27/14 GMT 178",
+  "gmt": "178",
+  "note": "Extinguished as we reduced flow below 3 cm/s"
+ },
+ "T15": {
+  "id": "T15",
+  "pdf_page": 120,
+  "date_gmt_cell": "2/14/2014 GMT 2014-45",
+  "gmt": null,
+  "note": "Initial air reading is 15, but Rick did not wait long enough for the anemometer to stabilize; actual airspeed is about 9 cm/s; no flow restrictors installed, but flow only maxed out to 29 cm/s; no blowoff attained"
+ },
+ "T16": {
+  "id": "T16",
+  "pdf_page": 120,
+  "date_gmt_cell": "4/10/2014 GMT 100",
+  "gmt": "100",
+  "note": "Initial HCl 0.2 final 0.5, no HCN, flame spread whole sample at 3 cm/s"
+ },
+ "T17": {
+  "id": "T17",
+  "pdf_page": 120,
+  "date_gmt_cell": "6/27/14 GMT 178",
+  "gmt": "178",
+  "note": "Tried to blowoff, but did not"
+ },
+ "T18": {
+  "id": "T18",
+  "pdf_page": 120,
+  "date_gmt_cell": "6/24/2018",
+  "gmt": null,
+  "note": "Brief ignition but flame extinguished as it spread away from igniter, further than previous runs today"
+ },
+ "T19": {
+  "id": "T19",
+  "pdf_page": 120,
+  "date_gmt_cell": "7/9/14 GMT 190",
+  "gmt": "190",
+  "note": "Steady burn, HCL 0.3 > 0.6"
+ },
+ "T2": {
+  "id": "T2",
+  "pdf_page": 120,
+  "date_gmt_cell": "2/14/2014 GMT 2014-45",
+  "gmt": null,
+  "note": "Flow velocity changed to 9 to 5 fairly early then very late in the burn changed to 4"
+ },
+ "T20": {
+  "id": "T20",
+  "pdf_page": 120,
+  "date_gmt_cell": "7/9/14 GMT 190",
+  "gmt": "190",
+  "note": "Quick extinction when we turned air down to 3 cm/s, HCl 0.8 end"
+ },
+ "T21": {
+  "id": "T21",
+  "pdf_page": 120,
+  "date_gmt_cell": "7/9/14 GMT 190",
+  "gmt": "190",
+  "note": "Successful blowoff! HCl still 0.8 end"
+ },
+ "T22": {
+  "id": "T22",
+  "pdf_page": 120,
+  "date_gmt_cell": "7/9/14 GMT 190",
+  "gmt": "190",
+  "note": "Ignited at 11, turned down to 5 and extinguished, HCl 2.0"
+ },
+ "T23": {
+  "id": "T23",
+  "pdf_page": 120,
+  "date_gmt_cell": "7/9/14 GMT 190",
+  "gmt": "190",
+  "note": "Did not ignite with moved igniter, HCl 0.8"
+ },
+ "T24": {
+  "id": "T24",
+  "pdf_page": 120,
+  "date_gmt_cell": "7/9/14 GMT 190",
+  "gmt": "190",
+  "note": "Ignited top of sample with retractable igniter and got steady spread of a one-sided flame"
+ },
+ "T25": {
+  "id": "T25",
+  "pdf_page": 121,
+  "date_gmt_cell": "8/4/14 GMT 216",
+  "gmt": "216",
+  "note": "Ignition at 5 cm/s then decrease to 2.5 cm/s and hold constant"
+ },
+ "T26": {
+  "id": "T26",
+  "pdf_page": 121,
+  "date_gmt_cell": "8/4/14 GMT 216",
+  "gmt": "216",
+  "note": "Ignition at 5 cm/s then decrease to 2.5 cm/s and hold constant"
+ },
+ "T27": {
+  "id": "T27",
+  "pdf_page": 121,
+  "date_gmt_cell": "8/4/14 GMT 216",
+  "gmt": "216",
+  "note": "Ignition at 5 cm/s, then quickly to 2 cm/s (fan pot 0.7); fuel is burned out"
+ },
+ "T28a": {
+  "id": "T28a",
+  "pdf_page": 121,
+  "date_gmt_cell": "8/4/14 GMT 216",
+  "gmt": "216",
+  "note": "Tried to get one-sided ignition, but flame only briefly flashed then went out"
+ },
+ "T28b": {
+  "id": "T28b",
+  "pdf_page": 121,
+  "date_gmt_cell": "8/4/14 GMT216",
+  "gmt": "216",
+  "note": "Tried to get one-sided ignition, but again flame only briefly flashed then went out"
+ },
+ "T29": {
+  "id": "T29",
+  "pdf_page": 121,
+  "date_gmt_cell": "8/4/14 GMT 216",
+  "gmt": "216",
+  "note": "Alex commented that he thought the angle of the igniter should be reversed to get one-sided ignition, so he tried that; one-sided flame initially but quickly became two-sided; after ignition, fan pot changed to 0.6 and flame went out after a few seconds"
+ },
+ "T3": {
+  "id": "T3",
+  "pdf_page": 121,
+  "date_gmt_cell": "6/27/14 GMT 178",
+  "gmt": "178",
+  "note": "Multiple ignition attempts on card 3, brief flames go out"
+ },
+ "T4": {
+  "id": "T4",
+  "pdf_page": 121,
+  "date_gmt_cell": "2/14/2014 GMT 2014- 45",
+  "gmt": null,
+  "note": "O2 reading creeped up slightly after a long pause in operations; flow velocity changed immediately after ignition down to 1 (fan pot 0.9); extinguished after turning into flamelet"
+ },
+ "T5": {
+  "id": "T5",
+  "pdf_page": 121,
+  "date_gmt_cell": "4/10/2014 GMT 100",
+  "gmt": "100",
+  "note": "HCN 0 HCL 0.6; ignited at 10, turned down to 2, then 1, sample very small and dim, but seemed to burn full sample length as a flamelet"
+ },
+ "T6": {
+  "id": "T6",
+  "pdf_page": 121,
+  "date_gmt_cell": "4/10/2014 GMT 100",
+  "gmt": "100",
+  "note": "HCL 0.9 at the end, still did not extinguish"
+ },
+ "T7": {
+  "id": "T7",
+  "pdf_page": 121,
+  "date_gmt_cell": "7/9/14 GMT 190",
+  "gmt": "190",
+  "note": "Broke one igniter quickly, took a while to ignite, turned pot down in series ignition at 3.4, 1.6, 1.0, 0.4, 0.36, 0.34, 0.32, 0.31, 0.30, 0.29, 0.285, 0.28 extinction finally, HCl 1.8"
+ },
+ "T9": {
+  "id": "T9",
+  "pdf_page": 121,
+  "date_gmt_cell": "6/24/2018",
+  "gmt": null,
+  "note": "Brief ignition but flame extinguished before spreading beyond igniter"
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "Nomex": {
+  "rows_total": 4,
+  "rows_excluding_link2018": 4,
+  "outcomes": {
+   "no_ignition": 4
+  },
+  "spread_rate_rows_link2018": 0,
+  "sources": {
+   "psi-25": 3,
+   "psi-99": 1
+  },
+  "o2_start_range": [
+   21.0,
+   22.2
+  ],
+  "flow_start_range_cm_s": [
+   8,
+   20.0
+  ],
+  "computed_from": "tests.json by build_materials.py"
+ },
+ "PMMA": {
+  "rows_total": 156,
+  "rows_excluding_link2018": 104,
+  "outcomes": {
+   "blow_off": 9,
+   "burning": 11,
+   "no_ignition": 6,
+   "quenched": 53,
+   "unknown": 25
+  },
+  "spread_rate_rows_link2018": 52,
+  "sources": {
+   "paper-link2018": 52,
+   "paper-saffire45": 3,
+   "psi-25": 98,
+   "psi-99": 3
+  },
+  "o2_start_range": [
+   13.6,
+   25.7
+  ],
+  "flow_start_range_cm_s": [
+   0,
+   49
+  ],
+  "computed_from": "tests.json by build_materials.py"
+ },
+ "SIBAL": {
+  "rows_total": 34,
+  "rows_excluding_link2018": 34,
+  "outcomes": {
+   "blow_off": 1,
+   "burning": 6,
+   "ignited_only": 4,
+   "no_ignition": 6,
+   "quenched": 6,
+   "unknown": 11
+  },
+  "spread_rate_rows_link2018": 0,
+  "sources": {
+   "paper-saffire45": 1,
+   "psi-100": 2,
+   "psi-25": 27,
+   "psi-98": 2,
+   "psi-99": 2
+  },
+  "o2_start_range": [
+   16.4,
+   22.1
+  ],
+  "flow_start_range_cm_s": [
+   5,
+   30.0
+  ],
+  "computed_from": "tests.json by build_materials.py"
+ },
+ "other": {
+  "rows_total": 1,
+  "rows_excluding_link2018": 1,
+  "outcomes": {
+   "burning": 1
+  },
+  "spread_rate_rows_link2018": 0,
+  "sources": {
+   "paper-saffire45": 1
+  },
+  "o2_start_range": [
+   26.2,
+   26.2
+  ],
+  "flow_start_range_cm_s": [
+   20,
+   20
+  ],
+  "computed_from": "tests.json by build_materials.py"
+ },
+ "silicone": {
+  "rows_total": 4,
+  "rows_excluding_link2018": 4,
+  "outcomes": {
+   "no_ignition": 4
+  },
+  "spread_rate_rows_link2018": 0,
+  "sources": {
+   "psi-99": 4
+  },
+  "o2_start_range": [
+   21.5,
+   22.1
+  ],
+  "flow_start_range_cm_s": [
+   20.0,
+   20.0
+  ],
+  "computed_from": "tests.json by build_materials.py"
+ },
+ "wax": {
+  "rows_total": 1,
+  "rows_excluding_link2018": 1,
+  "outcomes": {
+   "quenched": 1
+  },
+  "spread_rate_rows_link2018": 0,
+  "sources": {
+   "psi-25": 1
+  },
+  "o2_start_range": [
+   17.4,
+   17.4
+  ],
+  "flow_start_range_cm_s": [
+   3,
+   3
+  ],
+  "computed_from": "tests.json by build_materials.py"
+ }
+}
