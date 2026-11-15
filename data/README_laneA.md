@@ -5,7 +5,7 @@ Every row has a citation. Paper rows are `hand_entered` and were read twice (scr
 `materials.json` is computed by `build_materials.py`. Link 2018 rows are not counted in outcomes (all are "burning with a spread rate").
 
 ## Known issues (flagged, not silently fixed)
-- **Link 2018 spread-rate unit unresolved.** Table S1 header says cm/s on the left half and mm/s on the right half. Likely a typo, unconfirmed. Values stored as printed.
+- **Link 2018 spread rate:** Table S1 prints cm/s over the left half and mm/s over the right half, both as "Vf x10^3". The numbers in both halves are the same size (about 2 to 10) and match Table S2 (1-g, cm/s x10^3), so the mm/s header looks like a typo. Treated as 10^-3 cm/s: `spread_rate` is stored in cm/s (printed number / 1000, e.g. 5.23 -> 0.00523) and the printed number is kept in `raw_spread_rate_printed`. This unit is inferred, not stated in the paper; the authors' text gives none.
 - **Link vs PSI-25 flow calibration differs** (e.g. P17: Link Vg 1.01, 0.82, 0.41 vs PSI-25 Air display "5 3 2 22 2 low"). Do not mix the two flow scales without noting it.
 - **O2 uncertainty about +/-0.3%** (Link Fig. 7 caption).
 - **GMT190-T24 width conflict:** PSI-25 and BASS-II say 1 cm, Zhao appendix says 2.2 cm. Both recorded in the row.
@@ -15,7 +15,7 @@ Every row has a citation. Paper rows are `hand_entered` and were read twice (scr
 - **SIBAL unknowns T5, T6, T11, T16, T19:** report notes could possibly fill them, but kept `unknown` (no guessing).
 - **Saffire IV/V and Saffire II (PSI-99) conflict with ICES-2021-266 Table 2** on some oxygen/flow values. Noted in rows, not reconciled. Saffire never-ignited samples are not entered.
 - **PSI-98/99/100 oddities:** thickness header says cm but values look like mm; PSI-99 2-6 and 2-9 have blank material (filled from context, noted in the row); 2-7 PMMA & Nomex split into two rows; PSI-100 has no O2 or outcome so rows are `context_only`; PSI-99 1-g columns kept as raw fields only.
-- **Judgement calls:** 13 PSI-25 labels in `review_needed.csv`, 4 silicone labels in `review_saffire123.csv`. Defaults were Claude's suggestions accepted by the Lane A owner on 2026-11-14; second-person check pending.
+- **Judgement calls:** 13 PSI-25 labels in `review_needed.csv`, 4 silicone labels in `review_saffire123.csv`. Defaults were Claude's suggestions accepted by the Lane A owner (second-person check by Daksh Kumar 2026-11-14: all 17 confirmed, no changes) on 2026-11-14; second-person check pending.
 
 ## Still open (team decisions)
 - Low-flow cutoff for `low_flow_uncertain` (not applied yet).
@@ -62,3 +62,7 @@ Update 18:40: PSI-47 CSV received: 2 sessions (D1 GMT 54 2005, D2 GMT 63 2005) t
 - Flow fixes: O5b flow_start 49 -> 5 (49 was the fan reading; "49 5 cm/s", pot 1.3 = 5 cm/s). O13a flow 49 -> 5, flow_end 0 (bracket "5 2 0").
 - Rule for "flow turned off, then flame went out": that is an operator action, not a quench, so the outcome is `unknown`. Applied to B1, P6, P13a, P5, M17 (B1 changed from quenched to unknown). P13b stays quenched (flame went out with the pot still at 0.32).
 - Blind check of 20 rows by Daksh: all 20 matched (18 quenched, 2 burning; blow-off, no ignition and unknown were not in the sample). His file is blind_check_20_daksh.csv.
+
+- **Counts to quote on the site:** PMMA has 156 rows, but 52 are Link rows (all burning, spread-rate data, not outcome evidence). Use PMMA without Link: 104 rows, 78 with a known outcome (BASS-II alone: 98 rows, 72 known).
+- **Pressure:** Saffire I-III rows have no pressure in the PSI tables. ICES-2021-266 Table 2 gives 100 kPa for samples I-1, II-5, II-6, III-1. Filled for PSI-98 S1, PSI-99 2-5 and 2-6 (same sample names); other Saffire I-III rows stay null (PSI-100 S1 lists 30 cm/s, Table 2 says III-1 was 25).
+- `validate.py`: removed an `or True` that stopped the PSI-25 outcome-note check from ever failing.

@@ -4400,15 +4400,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.23,
+  "spread_rate": 0.00523,
   "sample_id": "B13a",
-  "flow_note": "Flow step 1 of this sample, lasted 184 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 184 s. spread_rate is in cm/s: the printed Table S1 number 5.23 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 5.23,
   "raw_step_seconds": 184,
   "raw_group": "paper-link2018"
  },
@@ -4427,15 +4428,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.27,
+  "spread_rate": 0.00527,
   "sample_id": "B13a",
-  "flow_note": "Flow step 2 of this sample, lasted 232 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 232 s. spread_rate is in cm/s: the printed Table S1 number 5.27 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 5.27,
   "raw_step_seconds": 232,
   "raw_group": "paper-link2018"
  },
@@ -4454,15 +4456,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.63,
+  "spread_rate": 0.00463,
   "sample_id": "B13a",
-  "flow_note": "Flow step 3 of this sample, lasted 239 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 239 s. spread_rate is in cm/s: the printed Table S1 number 4.63 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 4.63,
   "raw_step_seconds": 239,
   "raw_group": "paper-link2018"
  },
@@ -4481,15 +4484,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.69,
+  "spread_rate": 0.00469,
   "sample_id": "B13a",
-  "flow_note": "Flow step 4 of this sample, lasted 238 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 4 of this sample, lasted 238 s. spread_rate is in cm/s: the printed Table S1 number 4.69 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13a, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 4.69,
   "raw_step_seconds": 238,
   "raw_group": "paper-link2018"
  },
@@ -4508,15 +4512,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 7.09,
+  "spread_rate": 0.00709,
   "sample_id": "B13b",
-  "flow_note": "Flow step 1 of this sample, lasted 159 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 159 s. spread_rate is in cm/s: the printed Table S1 number 7.09 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13b, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 7.09,
   "raw_step_seconds": 159,
   "raw_group": "paper-link2018"
  },
@@ -4535,15 +4540,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.91,
+  "spread_rate": 0.00491,
   "sample_id": "B13b",
-  "flow_note": "Flow step 2 of this sample, lasted 179 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 179 s. spread_rate is in cm/s: the printed Table S1 number 4.91 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B13b, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 4.91,
   "raw_step_seconds": 179,
   "raw_group": "paper-link2018"
  },
@@ -4562,15 +4568,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.76,
+  "spread_rate": 0.00376,
   "sample_id": "B5",
-  "flow_note": "Flow step 1 of this sample, lasted 192 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 192 s. spread_rate is in cm/s: the printed Table S1 number 3.76 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B5, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.76,
   "raw_step_seconds": 192,
   "raw_group": "paper-link2018"
  },
@@ -4589,15 +4596,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.74,
+  "spread_rate": 0.00374,
   "sample_id": "B5",
-  "flow_note": "Flow step 2 of this sample, lasted 241 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 241 s. spread_rate is in cm/s: the printed Table S1 number 3.74 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B5, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.74,
   "raw_step_seconds": 241,
   "raw_group": "paper-link2018"
  },
@@ -4616,15 +4624,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.57,
+  "spread_rate": 0.00457,
   "sample_id": "B9",
-  "flow_note": "Flow step 1 of this sample, lasted 147 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 147 s. spread_rate is in cm/s: the printed Table S1 number 4.57 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 4.57,
   "raw_step_seconds": 147,
   "raw_group": "paper-link2018"
  },
@@ -4643,15 +4652,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.34,
+  "spread_rate": 0.00334,
   "sample_id": "B9",
-  "flow_note": "Flow step 2 of this sample, lasted 76 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 76 s. spread_rate is in cm/s: the printed Table S1 number 3.34 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.34,
   "raw_step_seconds": 76,
   "raw_group": "paper-link2018"
  },
@@ -4670,15 +4680,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 2.67,
+  "spread_rate": 0.00267,
   "sample_id": "B9",
-  "flow_note": "Flow step 3 of this sample, lasted 154 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 154 s. spread_rate is in cm/s: the printed Table S1 number 2.67 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 2.67,
   "raw_step_seconds": 154,
   "raw_group": "paper-link2018"
  },
@@ -4697,15 +4708,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 2.03,
+  "spread_rate": 0.00203,
   "sample_id": "B9",
-  "flow_note": "Flow step 4 of this sample, lasted 112 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 4 of this sample, lasted 112 s. spread_rate is in cm/s: the printed Table S1 number 2.03 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B9, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 2.03,
   "raw_step_seconds": 112,
   "raw_group": "paper-link2018"
  },
@@ -4724,15 +4736,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.09,
+  "spread_rate": 0.00609,
   "sample_id": "C25",
-  "flow_note": "Flow step 1 of this sample, lasted 115 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 115 s. spread_rate is in cm/s: the printed Table S1 number 6.09 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C25, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 6.09,
   "raw_step_seconds": 115,
   "raw_group": "paper-link2018"
  },
@@ -4751,15 +4764,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.5,
+  "spread_rate": 0.0055,
   "sample_id": "C25",
-  "flow_note": "Flow step 2 of this sample, lasted 169 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 169 s. spread_rate is in cm/s: the printed Table S1 number 5.5 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C25, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 5.5,
   "raw_step_seconds": 169,
   "raw_group": "paper-link2018"
  },
@@ -4778,15 +4792,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.59,
+  "spread_rate": 0.00559,
   "sample_id": "C25",
-  "flow_note": "Flow step 3 of this sample, lasted 181 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 181 s. spread_rate is in cm/s: the printed Table S1 number 5.59 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C25, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 5.59,
   "raw_step_seconds": 181,
   "raw_group": "paper-link2018"
  },
@@ -4805,15 +4820,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.45,
+  "spread_rate": 0.00645,
   "sample_id": "B22",
-  "flow_note": "Flow step 1 of this sample, lasted 123 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 123 s. spread_rate is in cm/s: the printed Table S1 number 6.45 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 6.45,
   "raw_step_seconds": 123,
   "raw_group": "paper-link2018"
  },
@@ -4832,15 +4848,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 8.31,
+  "spread_rate": 0.00831,
   "sample_id": "B22",
-  "flow_note": "Flow step 2 of this sample, lasted 79 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 79 s. spread_rate is in cm/s: the printed Table S1 number 8.31 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 8.31,
   "raw_step_seconds": 79,
   "raw_group": "paper-link2018"
  },
@@ -4859,15 +4876,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.89,
+  "spread_rate": 0.00589,
   "sample_id": "B22",
-  "flow_note": "Flow step 3 of this sample, lasted 120 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 120 s. spread_rate is in cm/s: the printed Table S1 number 5.89 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 5.89,
   "raw_step_seconds": 120,
   "raw_group": "paper-link2018"
  },
@@ -4886,15 +4904,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.1,
+  "spread_rate": 0.0041,
   "sample_id": "B22",
-  "flow_note": "Flow step 4 of this sample, lasted 146 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 4 of this sample, lasted 146 s. spread_rate is in cm/s: the printed Table S1 number 4.1 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B22, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 4.1,
   "raw_step_seconds": 146,
   "raw_group": "paper-link2018"
  },
@@ -4913,14 +4932,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.25,
+  "spread_rate": 0.00325,
   "sample_id": "B4",
-  "flow_note": "Flow step 1 of this sample, lasted 177 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 177 s. spread_rate is in cm/s: the printed Table S1 number 3.25 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B4, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.25,
   "raw_step_seconds": 177,
   "raw_group": "paper-link2018"
  },
@@ -4939,15 +4959,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.1,
+  "spread_rate": 0.0031,
   "sample_id": "B4",
-  "flow_note": "Flow step 2 of this sample, lasted 131 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 131 s. spread_rate is in cm/s: the printed Table S1 number 3.1 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B4, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.1,
   "raw_step_seconds": 131,
   "raw_group": "paper-link2018"
  },
@@ -4966,15 +4987,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 2.69,
+  "spread_rate": 0.00269,
   "sample_id": "B4",
-  "flow_note": "Flow step 3 of this sample, lasted 145 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 145 s. spread_rate is in cm/s: the printed Table S1 number 2.69 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B4, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 2.69,
   "raw_step_seconds": 145,
   "raw_group": "paper-link2018"
  },
@@ -4993,15 +5015,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.08,
+  "spread_rate": 0.00308,
   "sample_id": "B12",
-  "flow_note": "Flow step 1 of this sample, lasted 121 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 121 s. spread_rate is in cm/s: the printed Table S1 number 3.08 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.08,
   "raw_step_seconds": 121,
   "raw_group": "paper-link2018"
  },
@@ -5020,15 +5043,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.45,
+  "spread_rate": 0.00345,
   "sample_id": "B12",
-  "flow_note": "Flow step 2 of this sample, lasted 134 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 134 s. spread_rate is in cm/s: the printed Table S1 number 3.45 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.45,
   "raw_step_seconds": 134,
   "raw_group": "paper-link2018"
  },
@@ -5047,15 +5071,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 3.65,
+  "spread_rate": 0.00365,
   "sample_id": "B12",
-  "flow_note": "Flow step 3 of this sample, lasted 129 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 129 s. spread_rate is in cm/s: the printed Table S1 number 3.65 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 3.65,
   "raw_step_seconds": 129,
   "raw_group": "paper-link2018"
  },
@@ -5074,15 +5099,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 2.37,
+  "spread_rate": 0.00237,
   "sample_id": "B12",
-  "flow_note": "Flow step 4 of this sample, lasted 158 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (cm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 4 of this sample, lasted 158 s. spread_rate is in cm/s: the printed Table S1 number 2.37 is in units of 10^-3 cm/s (column header: Vf x10^3 (cm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B12, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (cm/s)",
+  "raw_spread_rate_printed": 2.37,
   "raw_step_seconds": 158,
   "raw_group": "paper-link2018"
  },
@@ -5101,14 +5127,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 10.0,
+  "spread_rate": 0.01,
   "sample_id": "B6",
-  "flow_note": "Flow step 1 of this sample, lasted 90 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 90 s. spread_rate is in cm/s: the printed Table S1 number 10.0 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B6, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 10.0,
   "raw_step_seconds": 90,
   "raw_group": "paper-link2018"
  },
@@ -5127,15 +5154,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 9.74,
+  "spread_rate": 0.00974,
   "sample_id": "B6",
-  "flow_note": "Flow step 2 of this sample, lasted 121 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 121 s. spread_rate is in cm/s: the printed Table S1 number 9.74 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B6, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 9.74,
   "raw_step_seconds": 121,
   "raw_group": "paper-link2018"
  },
@@ -5154,15 +5182,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 8.32,
+  "spread_rate": 0.00832,
   "sample_id": "B6",
-  "flow_note": "Flow step 3 of this sample, lasted 93 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 93 s. spread_rate is in cm/s: the printed Table S1 number 8.32 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B6, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 8.32,
   "raw_step_seconds": 93,
   "raw_group": "paper-link2018"
  },
@@ -5181,14 +5210,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 7.16,
+  "spread_rate": 0.00716,
   "sample_id": "B15",
-  "flow_note": "Flow step 1 of this sample, lasted 424 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 424 s. spread_rate is in cm/s: the printed Table S1 number 7.16 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B15, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 7.16,
   "raw_step_seconds": 424,
   "raw_group": "paper-link2018"
  },
@@ -5207,15 +5237,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.38,
+  "spread_rate": 0.00638,
   "sample_id": "B14",
-  "flow_note": "Flow step 1 of this sample, lasted 384 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 384 s. spread_rate is in cm/s: the printed Table S1 number 6.38 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B14, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 6.38,
   "raw_step_seconds": 384,
   "raw_group": "paper-link2018"
  },
@@ -5234,14 +5265,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.78,
+  "spread_rate": 0.00678,
   "sample_id": "B16",
-  "flow_note": "Flow step 1 of this sample, lasted 72 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 72 s. spread_rate is in cm/s: the printed Table S1 number 6.78 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B16, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 6.78,
   "raw_step_seconds": 72,
   "raw_group": "paper-link2018"
  },
@@ -5260,15 +5292,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 7.62,
+  "spread_rate": 0.00762,
   "sample_id": "B16",
-  "flow_note": "Flow step 2 of this sample, lasted 139 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 139 s. spread_rate is in cm/s: the printed Table S1 number 7.62 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B16, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 7.62,
   "raw_step_seconds": 139,
   "raw_group": "paper-link2018"
  },
@@ -5287,15 +5320,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.99,
+  "spread_rate": 0.00699,
   "sample_id": "B16",
-  "flow_note": "Flow step 3 of this sample, lasted 198 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 198 s. spread_rate is in cm/s: the printed Table S1 number 6.99 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B16, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 6.99,
   "raw_step_seconds": 198,
   "raw_group": "paper-link2018"
  },
@@ -5314,15 +5348,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.68,
+  "spread_rate": 0.00568,
   "sample_id": "B16",
-  "flow_note": "Flow step 4 of this sample, lasted 170 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 4 of this sample, lasted 170 s. spread_rate is in cm/s: the printed Table S1 number 5.68 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B16, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 5.68,
   "raw_step_seconds": 170,
   "raw_group": "paper-link2018"
  },
@@ -5341,14 +5376,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 7.15,
+  "spread_rate": 0.00715,
   "sample_id": "B1",
-  "flow_note": "Flow step 1 of this sample, lasted 794 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 794 s. spread_rate is in cm/s: the printed Table S1 number 7.15 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B1, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 7.15,
   "raw_step_seconds": 794,
   "raw_group": "paper-link2018"
  },
@@ -5367,14 +5403,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.91,
+  "spread_rate": 0.00591,
   "sample_id": "B1",
-  "flow_note": "Flow step 2 of this sample, lasted 23 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 23 s. spread_rate is in cm/s: the printed Table S1 number 5.91 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B1, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 5.91,
   "raw_step_seconds": 23,
   "raw_group": "paper-link2018"
  },
@@ -5393,14 +5430,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 8.37,
+  "spread_rate": 0.00837,
   "sample_id": "C3a",
-  "flow_note": "Flow step 1 of this sample, lasted 33 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 33 s. spread_rate is in cm/s: the printed Table S1 number 8.37 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C3a, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 8.37,
   "raw_step_seconds": 33,
   "raw_group": "paper-link2018"
  },
@@ -5419,14 +5457,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.42,
+  "spread_rate": 0.00642,
   "sample_id": "C3a",
-  "flow_note": "Flow step 2 of this sample, lasted 30 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 30 s. spread_rate is in cm/s: the printed Table S1 number 6.42 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C3a, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 6.42,
   "raw_step_seconds": 30,
   "raw_group": "paper-link2018"
  },
@@ -5445,14 +5484,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.69,
+  "spread_rate": 0.00469,
   "sample_id": "B19",
-  "flow_note": "Flow step 1 of this sample, lasted 67 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 67 s. spread_rate is in cm/s: the printed Table S1 number 4.69 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B19, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 4.69,
   "raw_step_seconds": 67,
   "raw_group": "paper-link2018"
  },
@@ -5471,15 +5511,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.52,
+  "spread_rate": 0.00652,
   "sample_id": "B19",
-  "flow_note": "Flow step 2 of this sample, lasted 128 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 128 s. spread_rate is in cm/s: the printed Table S1 number 6.52 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B19, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 6.52,
   "raw_step_seconds": 128,
   "raw_group": "paper-link2018"
  },
@@ -5498,15 +5539,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.25,
+  "spread_rate": 0.00625,
   "sample_id": "B19",
-  "flow_note": "Flow step 3 of this sample, lasted 189 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 189 s. spread_rate is in cm/s: the printed Table S1 number 6.25 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B19, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 6.25,
   "raw_step_seconds": 189,
   "raw_group": "paper-link2018"
  },
@@ -5525,15 +5567,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.44,
+  "spread_rate": 0.00544,
   "sample_id": "B19",
-  "flow_note": "Flow step 4 of this sample, lasted 200 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 4 of this sample, lasted 200 s. spread_rate is in cm/s: the printed Table S1 number 5.44 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B19, flow step 4",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 5.44,
   "raw_step_seconds": 200,
   "raw_group": "paper-link2018"
  },
@@ -5552,14 +5595,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 7.25,
+  "spread_rate": 0.00725,
   "sample_id": "B2",
-  "flow_note": "Flow step 1 of this sample, lasted 24 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 24 s. spread_rate is in cm/s: the printed Table S1 number 7.25 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B2, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 7.25,
   "raw_step_seconds": 24,
   "raw_group": "paper-link2018"
  },
@@ -5578,14 +5622,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 7.87,
+  "spread_rate": 0.00787,
   "sample_id": "B2",
-  "flow_note": "Flow step 2 of this sample, lasted 28 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 28 s. spread_rate is in cm/s: the printed Table S1 number 7.87 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B2, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 7.87,
   "raw_step_seconds": 28,
   "raw_group": "paper-link2018"
  },
@@ -5604,15 +5649,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 6.0,
+  "spread_rate": 0.006,
   "sample_id": "C3b",
-  "flow_note": "Flow step 1 of this sample, lasted 109 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 109 s. spread_rate is in cm/s: the printed Table S1 number 6.0 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample C3b, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 6.0,
   "raw_step_seconds": 109,
   "raw_group": "paper-link2018"
  },
@@ -5631,14 +5677,15 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.41,
+  "spread_rate": 0.00541,
   "sample_id": "B10",
-  "flow_note": "Flow step 1 of this sample, lasted 106 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 106 s. spread_rate is in cm/s: the printed Table S1 number 5.41 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B10, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 5.41,
   "raw_step_seconds": 106,
   "raw_group": "paper-link2018"
  },
@@ -5657,15 +5704,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 5.15,
+  "spread_rate": 0.00515,
   "sample_id": "B10",
-  "flow_note": "Flow step 2 of this sample, lasted 104 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 104 s. spread_rate is in cm/s: the printed Table S1 number 5.15 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B10, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 5.15,
   "raw_step_seconds": 104,
   "raw_group": "paper-link2018"
  },
@@ -5684,15 +5732,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.22,
+  "spread_rate": 0.00422,
   "sample_id": "B10",
-  "flow_note": "Flow step 3 of this sample, lasted 148 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 148 s. spread_rate is in cm/s: the printed Table S1 number 4.22 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample B10, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 4.22,
   "raw_step_seconds": 148,
   "raw_group": "paper-link2018"
  },
@@ -5711,15 +5760,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.12,
+  "spread_rate": 0.00412,
   "sample_id": "P17",
-  "flow_note": "Flow step 1 of this sample, lasted 123 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 1 of this sample, lasted 123 s. spread_rate is in cm/s: the printed Table S1 number 4.12 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample P17, flow step 1",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 4.12,
   "raw_step_seconds": 123,
   "raw_group": "paper-link2018"
  },
@@ -5738,15 +5788,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 4.78,
+  "spread_rate": 0.00478,
   "sample_id": "P17",
-  "flow_note": "Flow step 2 of this sample, lasted 187 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 2 of this sample, lasted 187 s. spread_rate is in cm/s: the printed Table S1 number 4.78 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample P17, flow step 2",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 4.78,
   "raw_step_seconds": 187,
   "raw_group": "paper-link2018"
  },
@@ -5765,15 +5816,16 @@
   "outcome_note": "",
   "gravity": "micro",
   "pressure_kPa": null,
-  "spread_rate": 2.26,
+  "spread_rate": 0.00226,
   "sample_id": "P17",
-  "flow_note": "Flow step 3 of this sample, lasted 65 s. spread_rate is the number printed in Table S1 (column header: Vf x10^3 (mm/s)); the unit is unresolved because the two halves of the table print different units and the article text does not state one.",
+  "flow_note": "Flow step 3 of this sample, lasted 65 s. spread_rate is in cm/s: the printed Table S1 number 2.26 is in units of 10^-3 cm/s (column header: Vf x10^3 (mm/s)). The right half of the table prints mm/s, which looks like a typo (see README); the unit is inferred, not stated in the paper.",
   "flags": [
    "hand_entered",
    "low_flow_uncertain"
   ],
   "citation": "Link et al., Scientific Reports 2018 (DOI 10.1038/s41598-017-18398-4), Supplementary Table S1, sample P17, flow step 3",
   "raw_spread_rate_header": "Vf x10^3 (mm/s)",
+  "raw_spread_rate_printed": 2.26,
   "raw_step_seconds": 65,
   "raw_group": "paper-link2018"
  },
@@ -5791,10 +5843,10 @@
   "outcome": "unknown",
   "outcome_note": "",
   "gravity": "micro",
-  "pressure_kPa": null,
+  "pressure_kPa": 100,
   "spread_rate": null,
   "sample_id": "S1",
-  "flow_note": "PSI-98 gives burn time 420 s but no statement of how the flame ended, so outcome is unknown. Oxygen printed as '21.5 - 21.7' (a range, kept as start and end).",
+  "flow_note": "PSI-98 gives burn time 420 s but no statement of how the flame ended, so outcome is unknown. Oxygen printed as '21.5 - 21.7' (a range, kept as start and end). Pressure 100 kPa from ICES-2021-266 Table 2 (matched by sample name), not from the PSI table.",
   "flags": [],
   "citation": "NASA PSI-98 Saffire-1 experimental table, sample S1 (psi.nasa.gov, PSI-98)",
   "raw_sample": "S1",
@@ -6047,10 +6099,10 @@
   "outcome": "burning",
   "outcome_note": "29 cm",
   "gravity": "micro",
-  "pressure_kPa": null,
+  "pressure_kPa": 100,
   "spread_rate": null,
   "sample_id": "2-5",
-  "flow_note": "Micro-g burn length 29 cm equals the 29 cm sample length, burn time 145 s. Oxygen printed as '~ 22.1' (approximate, ~; derived from CO2 production, Note 1). ICES-2021-266 Table 2 lists Saffire II SIBAL tests II-5 and II-6 at 21% oxygen and 20 and 25 cm/s; PSI-99 lists ~22.1% and 20 cm/s. Not reconciled. Ground (1-g) comparison for this sample: burn length 'Complete', spread rate 'Acceleratory'; its test conditions are not stated, so it is kept as raw fields, not as a separate row.",
+  "flow_note": "Micro-g burn length 29 cm equals the 29 cm sample length, burn time 145 s. Oxygen printed as '~ 22.1' (approximate, ~; derived from CO2 production, Note 1). ICES-2021-266 Table 2 lists Saffire II SIBAL tests II-5 and II-6 at 21% oxygen and 20 and 25 cm/s; PSI-99 lists ~22.1% and 20 cm/s. Not reconciled. Ground (1-g) comparison for this sample: burn length 'Complete', spread rate 'Acceleratory'; its test conditions are not stated, so it is kept as raw fields, not as a separate row. Pressure 100 kPa from ICES-2021-266 Table 2 (matched by sample name), not from the PSI table.",
   "flags": [],
   "citation": "NASA PSI-99 Saffire-2 experimental table, sample 2-5 (psi.nasa.gov, PSI-99)",
   "raw_sample": "2-5",
@@ -6082,10 +6134,10 @@
   "outcome": "burning",
   "outcome_note": "29 cm",
   "gravity": "micro",
-  "pressure_kPa": null,
+  "pressure_kPa": 100,
   "spread_rate": null,
   "sample_id": "2-6",
-  "flow_note": "Micro-g burn length 29 cm equals the 29 cm sample length, burn time 115 s. Material cell is blank in PSI-99; taken as the same as the row above (SIBAL), consistent with ICES-2021-266 Table 2. Oxygen printed as '~ 22.1' (approximate, ~; derived from CO2 production, Note 1). ICES-2021-266 Table 2 lists Saffire II SIBAL tests II-5 and II-6 at 21% oxygen and 20 and 25 cm/s; PSI-99 lists ~22.1% and 20 cm/s. Not reconciled. Ground (1-g) comparison for this sample: burn length 'Complete', spread rate 'Acceleratory'; its test conditions are not stated, so it is kept as raw fields, not as a separate row.",
+  "flow_note": "Micro-g burn length 29 cm equals the 29 cm sample length, burn time 115 s. Material cell is blank in PSI-99; taken as the same as the row above (SIBAL), consistent with ICES-2021-266 Table 2. Oxygen printed as '~ 22.1' (approximate, ~; derived from CO2 production, Note 1). ICES-2021-266 Table 2 lists Saffire II SIBAL tests II-5 and II-6 at 21% oxygen and 20 and 25 cm/s; PSI-99 lists ~22.1% and 20 cm/s. Not reconciled. Ground (1-g) comparison for this sample: burn length 'Complete', spread rate 'Acceleratory'; its test conditions are not stated, so it is kept as raw fields, not as a separate row. Pressure 100 kPa from ICES-2021-266 Table 2 (matched by sample name), not from the PSI table.",
   "flags": [],
   "citation": "NASA PSI-99 Saffire-2 experimental table, sample 2-6 (psi.nasa.gov, PSI-99)",
   "raw_sample": "2-6",
