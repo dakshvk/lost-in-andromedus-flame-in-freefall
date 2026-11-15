@@ -317,8 +317,13 @@ class TestV10Answers(unittest.TestCase):
         out = ask("Is 20% oxygen inside our data for PMMA?",
                   self.rows, stats=self.stats)
         note = out["answer"]["gravity_note"]
-        self.assertIn("Pressure was recorded only for the 5 Saffire IV/V tests",
-                      note)
+        # v12: Lane A added 100 kPa for Saffire I S1 and Saffire II
+        # 2-5 and 2-6 (ICES Table 2), so 8 tests carry a pressure. The
+        # Saffire tests burned in Cygnus, not on the ISS.
+        self.assertIn("Pressure is known for only 8 tests", note)
+        self.assertIn("Saffire I, Saffire II and Saffire IV/V", note)
+        self.assertIn("Cygnus", note)
+        self.assertNotIn("PSI-98 and PSI-99", note)
         self.assertIn("70.7–100.0 kPa", note)
         self.assertIn("the BASS-II tables give none", note)
         self.assertNotIn("Pressures recorded in the data run", note)

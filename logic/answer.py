@@ -115,11 +115,24 @@ from classifier import (
 from number_checker import allowed_numbers_from_rows, check_answer_numbers
 
 PSI_25_URL = "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25"
+# BASS-II (and the Link et al. rods) burned on the ISS; the Saffire
+# experiments burned in Cygnus cargo ships after they left the ISS
+# (ICES 2021), so the note names both (v12, Daksh).
 GRAVITY_NOTE = (
-    "These tests were in microgravity on the ISS. The Moon is about "
-    "one-sixth Earth's gravity, and pressure differs, so a Moon-base "
-    "condition is not covered by these tests."
+    "These tests were in microgravity, on the ISS or in Cygnus cargo "
+    "ships in orbit. The Moon is about one-sixth Earth's gravity, and "
+    "pressure differs, so a Moon-base condition is not covered by "
+    "these tests."
 )
+
+
+def _pressure_source_label(source):
+    """"PSI-98 (SAFFIRE-I)" -> "Saffire I"; "Saffire IV/V (ICES 2021)"
+    -> "Saffire IV/V"; anything else -> the name before " (" ."""
+    match = re.search(r"\(SAFFIRE-([IVX]+)\)", source or "")
+    if match:
+        return f"Saffire {match.group(1)}"
+    return (source or "").split(" (")[0]
 
 
 def gravity_note(rows=None):
@@ -134,19 +147,22 @@ def gravity_note(rows=None):
     if not pressured:
         return GRAVITY_NOTE
     pressures = [float(r["pressure_kPa"]) for r in pressured]
-    # Name the rows that record pressure from their source, dropping
-    # the "(ICES 2021)" parenthetical: "Saffire IV/V (ICES 2021)"
-    # becomes "Saffire IV/V".
-    sources = sorted({(r.get("source") or "").split(" (")[0]
-                      for r in pressured} - {""})
-    source_text = " and ".join(sources) if sources else "Saffire IV/V"
+    # Name the experiments whose rows carry a pressure: since Lane A's
+    # update that is Saffire I and II (ICES Table 2) as well as
+    # Saffire IV/V (Table 1), so the old "the 5 Saffire IV/V tests"
+    # became "the 8 PSI-98 and PSI-99 and Saffire IV/V tests" (v12).
+    labels = sorted({_pressure_source_label(r.get("source")) for r in pressured} - {""})
+    if len(labels) > 1:
+        label_text = ", ".join(labels[:-1]) + " and " + labels[-1]
+    else:
+        label_text = labels[0] if labels else "Saffire"
     return (
-        "These tests were in microgravity on the ISS. The Moon is about "
-        "one-sixth Earth's gravity. Pressure was recorded only for "
-        f"the {len(pressured)} {source_text} tests "
-        f"({min(pressures)}–{max(pressures)} kPa); the BASS-II tables "
-        "give none, so a Moon-base condition is not covered by these "
-        "tests."
+        "These tests were in microgravity, on the ISS or in Cygnus cargo "
+        "ships in orbit. The Moon is about one-sixth Earth's gravity. "
+        f"Pressure is known for only {len(pressured)} tests "
+        f"({label_text}: {min(pressures)}–{max(pressures)} kPa); the "
+        "BASS-II tables give none, so a Moon-base condition is not "
+        "covered by these tests."
     )
 
 
