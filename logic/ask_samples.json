@@ -558,7 +558,7 @@
     "sentence": "I need an oxygen value to answer that \u2014 what oxygen level are you asking about?",
     "evidence": [],
     "unknown": [
-     "oxygen_pct"
+     "the oxygen level (not given in the question)"
     ],
     "gravity_note": "These tests were in microgravity, on the ISS or in Cygnus cargo ships in orbit. The Moon is about one-sixth Earth's gravity. Pressure is known for only 8 tests (Saffire I, Saffire II and Saffire IV/V: 70.7\u2013100.0 kPa); the BASS-II tables give none, so a Moon-base condition is not covered by these tests.",
     "sources": [
@@ -578,6 +578,7 @@
    "answer": {
     "question": "Which material was tested at the highest oxygen?",
     "verdict": "INSIDE",
+    "kind": "extreme",
     "sentence": "The highest oxygen tested is 22.2%, in 14 tests (B1, B2, B3, B4, B5, B7, B12, F1, M1, M2, M5, M14, O1, O2) \u2014 materials: Nomex, PMMA.",
     "evidence": [
      {
@@ -884,6 +885,7 @@
    "answer": {
     "question": "What is the lowest oxygen tested?",
     "verdict": "INSIDE",
+    "kind": "extreme",
     "sentence": "The lowest oxygen tested is 13.6%, in 1 test (O12) \u2014 materials: PMMA.",
     "evidence": [
      {
@@ -928,6 +930,7 @@
    "answer": {
     "question": "What is the highest airflow tested?",
     "verdict": "INSIDE",
+    "kind": "extreme",
     "sentence": "The highest airflow tested is 53.0 cm/s, in 1 test (T17) \u2014 materials: SIBAL.",
     "evidence": [
      {
@@ -972,6 +975,7 @@
    "answer": {
     "question": "What is the lowest airflow tested?",
     "verdict": "INSIDE",
+    "kind": "extreme",
     "sentence": "The lowest airflow tested for SIBAL is 1.0 cm/s, in 3 tests (T4, T5, T13) \u2014 materials: SIBAL.",
     "evidence": [
      {
@@ -1120,30 +1124,6 @@
     "results": [
      {
       "entry": {
-       "id": "SAME-R",
-       "psi_id": "PSI-101",
-       "kind": "investigation",
-       "text": "SAME-R \u2014 Smoke Aerosol Measurement Experiment - Reflight (PSI-101): Repeat and extend the smoke detection measurements. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Reflight of SAME with more runs and conditions.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
-       "source_notes": "Objective and sensor text: PSI investigation page summary"
-      },
-      "score": 0.4775242805480957,
-      "method": "embedding"
-     },
-     {
-      "entry": {
-       "id": "SAME",
-       "psi_id": "PSI-102",
-       "kind": "investigation",
-       "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
-       "source_notes": "Objective and sensor text: PSI investigation page summary"
-      },
-      "score": 0.4568689465522766,
-      "method": "embedding"
-     },
-     {
-      "entry": {
        "id": "BASS-II",
        "psi_id": "PSI-25",
        "kind": "investigation",
@@ -1151,12 +1131,36 @@
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
        "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
       },
-      "score": 0.45081016421318054,
+      "score": 0.5308101642131805,
+      "method": "embedding"
+     },
+     {
+      "entry": {
+       "id": "SIBAL",
+       "psi_id": null,
+       "kind": "material_card",
+       "text": "SIBAL (cloth): SIBAL was tested at the lower end of the full dataset (16.4\u201322.1% oxygen), so it is the mid-to-low-oxygen evidence for this material. Next action: Check the cited source for each test for its outcome. Not known: 23 of 34 tests have a recorded outcome; 11 do not, and are not guessed.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Built from Lane A's tests.json by cards.py"
+      },
+      "score": 0.5218774163722992,
+      "method": "embedding"
+     },
+     {
+      "entry": {
+       "id": "Cotton (Saffire V, 70.7 kPa)",
+       "psi_id": null,
+       "kind": "material_card",
+       "text": "Cotton (Saffire V, 70.7 kPa) (cloth): Cotton (Saffire V, 70.7 kPa) was tested at the highest oxygen in the full dataset (26.2%), tied with the other materials that reach 26.2%, so it is among the closest evidence we have for high-oxygen conditions. Next action: Check the cited source for each test for its outcome. Not known: The test has a recorded outcome in the dataset.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Built from Lane A's tests.json by cards.py"
+      },
+      "score": 0.5007044756412506,
       "method": "embedding"
      }
     ],
     "method": "embedding",
-    "best_score": 0.4775242805480957
+    "best_score": 0.5308101642131805
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -1209,11 +1213,11 @@
        "id": "SAME",
        "psi_id": "PSI-102",
        "kind": "investigation",
-       "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
+       "text": "SAME \u2014 Smoke Aerosol Measurement Experiment (PSI-102): How smoke moves and is detected in microgravity. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors. How it differs: Detection not burning: it is about finding a fire not measuring how it spreads.",
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.6087584495544434,
+      "score": 0.694228069782257,
       "method": "embedding"
      },
      {
@@ -1221,28 +1225,28 @@
        "id": "SAME-R",
        "psi_id": "PSI-101",
        "kind": "investigation",
-       "text": "SAME-R \u2014 Smoke Aerosol Measurement Experiment - Reflight (PSI-101): Repeat and extend the smoke detection measurements. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors; no oxygen sensor. How it differs: Reflight of SAME with more runs and conditions.",
+       "text": "SAME-R \u2014 Smoke Aerosol Measurement Experiment - Reflight (PSI-101): Repeat and extend the smoke detection measurements. Fuels: Smoke from burning materials. Conditions: Smoke in microgravity with no buoyancy to carry it upward. Sensors: Smoke detectors and aerosol sensors. How it differs: Reflight of SAME with more runs and conditions.",
        "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
        "source_notes": "Objective and sensor text: PSI investigation page summary"
       },
-      "score": 0.5411369204521179,
+      "score": 0.6270963716506958,
       "method": "embedding"
      },
      {
       "entry": {
-       "id": "SAFFIRE-II",
-       "psi_id": "PSI-99",
+       "id": "BASS-II",
+       "psi_id": "PSI-25",
        "kind": "investigation",
-       "text": "SAFFIRE-II \u2014 Saffire II (PSI-99): How different materials spread fire side by side in a large volume. Fuels: Several material samples burned at once in an uncrewed Cygnus vehicle. Conditions: Large-scale fire in a spacecraft cabin volume in microgravity. Sensors: Video and still cameras; temperature and gas sensors in the vehicle. How it differs: Compares materials in the same fire instead of one material per test.",
-       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
-       "source_notes": "Objective and sensor text: PSI investigation page summary"
+       "text": "BASS-II \u2014 Burning and Suppression of Solids - II (PSI-25): How solid fuels ignite spread and extinguish in microgravity at low airflow. Fuels: PMMA film rods and slabs; SIBAL cloth; Nomex cloth. Conditions: Oxygen 13.6-22.2% airflow 0 to about 55 cm/s in the Microgravity Science Glovebox on the ISS. Sensors: CSA-CP oxygen sensor for oxygen and CO; Carbon Dioxide Monitor for CO2; video camera with data overlay and 35 mm still camera. How it differs: Small-scale solid burning in a flow duct; the only investigation in this table with a full public test-by-test CSV.",
+       "source": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+       "source_notes": "Objective and sensor text: BASS-II Summary Report NASA/TM-20210011385 (abstract and sensor sections) and PSI page"
       },
-      "score": 0.3237680196762085,
+      "score": 0.34639311671257017,
       "method": "embedding"
      }
     ],
     "method": "embedding",
-    "best_score": 0.6087584495544434
+    "best_score": 0.694228069782257
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   },
@@ -1254,7 +1258,7 @@
     "match": false,
     "results": [],
     "method": "embedding",
-    "best_score": 0.12889382243156433
+    "best_score": 0.10618305206298828
    },
    "reason": "The question is about meaning (objectives, fuels, conditions, sensors, how investigations differ) \u2014 that goes to retrieval."
   }

@@ -447,5 +447,88 @@ class TestV11_1Airflow(unittest.TestCase):
             self.assertTrue(all(r["outcome"] for r in answer["evidence"]), q)
 
 
+@unittest.skipUnless(os.path.exists(TESTS_JSON), "tests.json not next to the repo")
+class TestUiRound(unittest.TestCase):
+    """Found by typing questions into the page (2026-11-15): highest/lowest
+    answers need their own kind, and a bare "Will it burn?" must ask for the
+    missing material and oxygen instead of showing an unrelated investigation."""
+
+    @classmethod
+    def setUpClass(cls):
+        from cards import rows_from_tests_json
+        from answer import dataset_stats_tests_json
+        cls.rows = rows_from_tests_json(TESTS_JSON)
+        cls.stats = dataset_stats_tests_json(TESTS_JSON)
+
+    def test_extreme_answers_are_marked(self):
+        from answer import ask
+        for q in ["Which material was tested at the highest oxygen?",
+                  "What is the lowest oxygen tested?",
+                  "What is the highest airflow tested?",
+                  "Which PMMA test had the lowest airflow?"]:
+            answer = ask(q, self.rows, stats=self.stats)["answer"]
+            self.assertEqual(answer.get("kind"), "extreme", q)
+
+    def test_condition_answers_are_not_marked_extreme(self):
+        from answer import ask
+        answer = ask("Will PMMA burn at 20% oxygen?", self.rows, stats=self.stats)["answer"]
+        self.assertNotEqual(answer.get("kind"), "extreme")
+
+    def test_bare_burn_question_asks_for_oxygen(self):
+        from answer import ask
+        for q in ["Will it burn?", "Will PMMA burn?", "Is nomex flammable?", "Does silicone ignite?"]:
+            out = ask(q, self.rows, stats=self.stats)
+            self.assertEqual(out["path"], "code", q)
+            self.assertEqual(out["answer"]["verdict"], "NEED_OXYGEN", q)
+            self.assertIn("oxygen", out["answer"]["sentence"].lower(), q)
+
+    def test_meaning_questions_about_burning_stay_with_retrieval(self):
+        from answer import ask
+        for q in ["Which investigation studies burning of solids?", "Tell me about PSI-98",
+                  "How does BASS differ from BASS-II?"]:
+            self.assertEqual(ask(q, self.rows, stats=self.stats)["path"], "rag", q)
+
+    def test_range_question_states_the_tested_range(self):
+        from answer import ask
+        out = ask("What oxygen range was SIBAL tested at?", self.rows, stats=self.stats)
+        answer = out["answer"]
+        self.assertEqual(out["path"], "code")
+        self.assertEqual(answer["kind"], "range")
+        self.assertIn("SIBAL was tested at 16.4–22.1% oxygen", answer["sentence"])
+        self.assertIn("32 tests", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+        self.assertTrue(answer["evidence"])
+
+    def test_range_question_without_a_material_covers_all_materials(self):
+        from answer import ask
+        answer = ask("What airflow range was tested?", self.rows, stats=self.stats)["answer"]
+        self.assertEqual(answer["kind"], "range")
+        self.assertIn("13.6–22.2% oxygen", answer["sentence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_need_oxygen_answer_names_what_is_missing_in_words(self):
+        from answer import ask
+        answer = ask("Will PMMA burn?", self.rows, stats=self.stats)["answer"]
+        self.assertEqual(answer["unknown"], ["the oxygen level (not given in the question)"])
+
+    def test_retrieval_material_notes_use_the_full_table(self):
+        from rag import build_corpus
+        notes = {e["id"]: e for e in build_corpus(self.rows) if e["kind"] == "material_card"}
+        self.assertIn("PMMA", notes)
+        self.assertNotIn("PMMA / other", notes)
+        self.assertIn("Cotton (Saffire V, 70.7 kPa)", notes)
+        self.assertEqual(notes["PMMA"]["source_notes"], "Built from Lane A's tests.json by cards.py")
+
+    def test_oxygen_sensor_question_finds_bass_ii(self):
+        try:
+            import sentence_transformers  # noqa: F401
+        except ImportError:
+            self.skipTest("sentence-transformers not installed (keyword fallback in use)")
+        from rag import retrieve
+        out = retrieve("What sensors measured oxygen?", self.rows, top_k=3)
+        self.assertTrue(out["match"])
+        self.assertEqual(out["results"][0]["entry"]["id"], "BASS-II")
+
+
 if __name__ == "__main__":
     unittest.main()

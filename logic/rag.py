@@ -307,7 +307,13 @@ def build_corpus(rows):
         })
     full_csv = os.path.join(os.path.dirname(__file__), "..", "data", "raw",
                             "PSI-25_Experimental table_BASS-II.csv")
-    if os.path.exists(full_csv):
+    if len(rows) >= 100:
+        # The full table (Lane A's tests.json through rows_from_tests_json):
+        # material notes then match the cards and answers on the page, and
+        # know about Saffire V and cotton. The raw PSI-25 CSV does not.
+        card_rows = rows
+        card_note = "Built from Lane A's tests.json by cards.py"
+    elif os.path.exists(full_csv):
         card_rows = rows_from_full_csv(full_csv)
         card_note = "Built from the full PSI-25 CSV by cards.py"
     else:
@@ -439,6 +445,15 @@ def retrieve(question, rows, top_k=3, cutoff=CUTOFF):
             for entry in corpus
         ]
 
+    if model is not None:
+        # Hybrid score: the embedding score plus a small bonus for each
+        # meaningful word the question shares with the entry. Embeddings alone
+        # ranked SAME-R above BASS-II for "What sensors measured oxygen?",
+        # though only BASS-II lists an oxygen sensor.
+        question_terms = {w for w in _words(question) if len(w) > 3}
+        for s in scored:
+            shared = len(question_terms & _words(s["entry"]["text"]))
+            s["score"] += min(0.2, 0.04 * shared)
     scored.sort(key=lambda s: s["score"], reverse=True)
     best = scored[0]["score"] if scored else 0.0
     # The cutoff applies to embedding scores (0–1). The keyword fallback

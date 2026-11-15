@@ -111,13 +111,15 @@ h1 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 720; color: #fff; }
 .stage.is-dragging .moon-canvas { cursor: grabbing; }
 .moon-flat {
   position: absolute; inset: 20%; border-radius: 50%; transition: opacity 0.6s ease;
+  /* The near side from NASA's map (the middle half of the width), shaded and
+     tinted to match the 3D Moon. */
   background:
-    radial-gradient(circle at 62% 30%, rgba(40, 60, 110, 0.55) 0 9%, transparent 10%),
-    radial-gradient(circle at 35% 38%, rgba(40, 60, 110, 0.6) 0 16%, transparent 17%),
-    radial-gradient(circle at 55% 62%, rgba(40, 60, 110, 0.45) 0 12%, transparent 13%),
-    radial-gradient(circle at 30% 70%, rgba(230, 240, 255, 0.5) 0 3%, transparent 4%),
-    radial-gradient(circle at 38% 32%, #e3ecff, #9fb6e6 55%, #4d6398 100%);
-  box-shadow: 0 0 60px 10px rgba(80, 140, 255, 0.55), 0 0 140px 40px rgba(50, 100, 240, 0.25), inset -18px -18px 50px rgba(5, 10, 40, 0.55);
+    radial-gradient(circle at 34% 30%, rgba(190, 215, 255, 0.10), transparent 48%),
+    radial-gradient(circle at 72% 78%, rgba(3, 6, 20, 0.70), transparent 66%),
+    linear-gradient(rgba(30, 55, 110, 0.38), rgba(30, 55, 110, 0.38)),
+    url("../assets/moon.jpg") 50% 50% / 200% 100% no-repeat;
+  background-color: #1b2540;
+  box-shadow: 0 0 40px 6px rgba(80, 140, 255, 0.35), 0 0 110px 26px rgba(50, 100, 240, 0.16), inset -18px -18px 50px rgba(5, 10, 40, 0.55);
 }
 /* The flat Moon sits above the 3D canvas; in 3D mode it must not catch the
    pointer, or only the Moon's edge can be dragged. */
@@ -426,7 +428,8 @@ summary { cursor: pointer; }
    Moon stage clips marker labels that drift past its edge while spinning. */
 .topbar nav { min-width: 0; }
 .topbar { min-width: 0; }
-.hero-moon { overflow: hidden; }
-@media (max-width: 560px) { .topbar nav a[href="#sources"] { display: none; } }
+/* Labels sit outside their markers, so the stage must not clip them. On phones
+   they face inward (see sideLabels in app.js), so clipping there is safe. */
+@media (max-width: 560px) { .hero-moon { overflow: hidden; } .topbar nav a[href="#sources"] { display: none; } }
 .stage.is-3d { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .stage.is-dragging { cursor: grabbing; }

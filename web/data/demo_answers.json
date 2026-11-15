@@ -239,6 +239,7 @@
   {
    "question": "Which material was tested at the highest oxygen?",
    "verdict": "INSIDE",
+   "kind": "extreme",
    "sentence": "The highest oxygen tested is 22.2%, in 14 tests (B1, B2, B3, B4, B5, B7, B12, F1, M1, M2, M5, M14, O1, O2) — materials: Nomex, PMMA.",
    "evidence": [
     {
@@ -539,6 +540,7 @@
   {
    "question": "What is the lowest oxygen tested?",
    "verdict": "INSIDE",
+   "kind": "extreme",
    "sentence": "The lowest oxygen tested is 13.6%, in 1 test (O12) — materials: PMMA.",
    "evidence": [
     {
@@ -577,6 +579,7 @@
   {
    "question": "What is the highest airflow tested?",
    "verdict": "INSIDE",
+   "kind": "extreme",
    "sentence": "The highest airflow tested is 53.0 cm/s, in 1 test (T17) — materials: SIBAL.",
    "evidence": [
     {

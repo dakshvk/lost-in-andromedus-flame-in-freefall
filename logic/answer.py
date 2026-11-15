@@ -279,7 +279,7 @@ def answer_highest_oxygen(rows, stats=None):
             "sentence": "No oxygen values are in the rows I was given.",
             "evidence": [],
             "nearest_evidence": None,
-            "unknown": ["oxygen_pct"],
+            "unknown": ["the oxygen level (not given in the question)"],
             "gravity_note": gravity_note(rows),
             "sources": [PSI_25_URL],
             "number_check": {"ok": True, "unverified": []},
@@ -297,6 +297,7 @@ def answer_highest_oxygen(rows, stats=None):
     return {
         "question": "Which material was tested at the highest oxygen?",
         "verdict": "INSIDE",
+        "kind": "extreme",   # a fact from the table, not a verdict about a condition
         "sentence": sentence,
         "evidence": evidence,
         "nearest_evidence": None,
@@ -421,7 +422,7 @@ def _extreme_answer(question, label, value, ties, rows, stats, material=None, no
             "evidence": [],
             "nearest_evidence": None,
             "note": note,
-            "unknown": ["oxygen_pct"],
+            "unknown": ["the oxygen level (not given in the question)"],
             "gravity_note": gravity_note(rows),
             "sources": [PSI_25_URL],
             "number_check": {"ok": True, "unverified": []},
@@ -440,6 +441,7 @@ def _extreme_answer(question, label, value, ties, rows, stats, material=None, no
     return {
         "question": question,
         "verdict": "INSIDE",
+        "kind": "extreme",   # a fact from the table, not a verdict about a condition
         "sentence": sentence,
         "evidence": evidence,
         "nearest_evidence": None,
@@ -664,6 +666,63 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None, material=None
     }
 
 
+def answer_tested_range(question, rows, material=None, stats=None):
+    """"What oxygen range was SIBAL tested at?": the tested oxygen and airflow
+    range for a material (or all materials) at normal pressure, without the
+    Link et al. rod rows, with the number of tests. A fact from the table, not
+    a verdict about a condition."""
+    pool = [r for r in _material_rows(rows, material)
+            if _standard_pressure(r)
+            and "link" not in (r.get("source") or "").lower()
+            and r.get("oxygen_pct") not in (None, "")]
+    name = material or "All materials"
+    base = {
+        "question": question, "kind": "range", "nearest_evidence": None, "note": None,
+        "gravity_note": gravity_note(rows), "sources": [PSI_25_URL],
+    }
+    if not pool:
+        sentence = f"No {name} tests at normal pressure with an oxygen value are in the dataset."
+        return {**base, "verdict": "BEYOND", "sentence": sentence, "evidence": [], "unknown": [],
+                "number_check": check_answer_numbers(sentence, [], stats or {"total_tests": len(rows), "o2_min": 0, "o2_max": 0, "rows_above_21": 0})}
+    o2 = [float(r["oxygen_pct"]) for r in pool]
+    lo, hi = min(o2), max(o2)
+    flo, fhi = flow_range(pool)
+    count = len(pool)
+    verb = "was" if material else "were"
+    flow_part = f" and {flo}–{fhi} cm/s airflow" if flo is not None else ""
+    sentence = (f"{name} {verb} tested at {lo}–{hi}% oxygen{flow_part} "
+                f"({count} test{'s' if count != 1 else ''}, at normal pressure).")
+    ends = [r for r in pool if float(r["oxygen_pct"]) == lo][:2] + [r for r in pool if float(r["oxygen_pct"]) == hi][:2]
+    evidence = []
+    for r in ends:
+        if r not in evidence:
+            evidence.append(r)
+    stats = stats or {"total_tests": len(rows), "o2_min": lo, "o2_max": hi, "rows_above_21": 0}
+    check = check_answer_numbers(sentence, evidence, stats, range_bounds=(lo, hi),
+                                 flow_bounds=((flo, fhi) if flo is not None else None),
+                                 extra_allowed={float(count)})
+    return {**base, "verdict": "INSIDE", "sentence": sentence, "evidence": evidence, "unknown": [],
+            "number_check": check}
+
+
+def _asks_will_it_burn(question):
+    """True for a yes/no question about burning or flammability that names no
+    investigation, e.g. "Will it burn?", "Will PMMA burn?", "Is nomex
+    flammable?". Questions about an investigation or its topic ("Which
+    investigation studies burning?") are meaning questions and stay with
+    retrieval."""
+    import re
+    from rag import _named_investigations
+
+    q = (question or "").lower()
+    if _named_investigations(question):
+        return False
+    words = re.findall(r"[a-z]+", q)
+    if not words or words[0] not in {"will", "would", "can", "could", "does", "do", "is", "are", "might"}:
+        return False
+    return bool(set(words) & {"burn", "burns", "ignite", "ignites", "flammable", "safe"})
+
+
 def ask(question, rows, stats=None):
     """The website's single call: route the question and return the answer.
 
@@ -676,6 +735,13 @@ def ask(question, rows, stats=None):
     from rag import route, retrieve, _named_material
 
     routing = route(question)
+    if routing["path"] == "rag" and _asks_will_it_burn(question):
+        # "Will it burn?" or "Will PMMA burn?" with no oxygen level: ask for
+        # what is missing instead of showing an unrelated investigation.
+        return {"path": "code",
+                "answer": build_answer(question, None, rows, material=_named_material(question), stats=stats),
+                "retrieval": None,
+                "reason": "The question asks whether something burns but gives no oxygen level, so the answer asks for one."}
     if routing["path"] == "rag":
         return {"path": "rag", "answer": None,
                 "retrieval": retrieve(question, rows), "reason": routing["reason"]}
@@ -714,6 +780,8 @@ def ask(question, rows, stats=None):
 
     pct = re.search(r"(\d+(?:\.\d+)?)\s*%", q)
     flow = re.search(r"(\d+(?:\.\d+)?)\s*cm/s", q)
+    if not pct and not flow and (about_oxygen or about_flow) and words & {"range", "ranges", "limit", "limits"}:
+        return code_result(answer_tested_range(question, rows, material=material, stats=stats))
     if pct:
         # Pass the FULL rows, not the material pool: build_answer
         # filters by material itself (closest_rows, the range/count
@@ -841,7 +909,7 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             "verdict": verdict,
             "sentence": "I need an oxygen value to answer that — what oxygen level are you asking about?",
             "evidence": [],
-            "unknown": ["oxygen_pct"],
+            "unknown": ["the oxygen level (not given in the question)"],
             "gravity_note": note,
             "sources": [PSI_25_URL],
             "number_check": {"ok": True, "unverified": []},

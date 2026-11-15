@@ -13,7 +13,7 @@ import {
 } from "./materials.js";
 import { renderRanking, openInvestigation } from "./ranking.js";
 import { renderLimits, renderFooter } from "./limits.js";
-import { initMoon } from "./moon.js";
+import { initMoon, moonFailure } from "./moon.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -21,6 +21,7 @@ const $ = (id) => document.getElementById(id);
 const VARIANTS = {
   nasa: { flat: false },
   procedural: { flat: false },
+  flat: { flat: true },   // the no-WebGL view, for previewing it on any machine
   photo: { flat: true, image: "assets/inspo_moon_photo.png", label: "Inspiration image, source to be credited" },
   illustration: { flat: true, image: "assets/inspo_moon_illustration.webp", label: "SI-generated image" },
 };
@@ -106,6 +107,16 @@ function markerButton({ key, label, color, cls, content, onOpen, onFocus }) {
   return btn;
 }
 
+// On a wide screen a label sits outside its marker. On a narrow one there is no
+// room outside the stage, so it faces inward and nothing is cut off.
+function sideLabels(stage, buttons) {
+  const narrow = stage.clientWidth < 520;
+  buttons.forEach((b) => {
+    const c = Number(b.dataset.cos);
+    b.classList.toggle("is-left", narrow ? c > 0.2 : c < -0.2);
+  });
+}
+
 // Flat Moon (image variants, or no WebGL): markers sit around the disc.
 function layoutFlat(stage, buttons, baseButton, variant) {
   stage.classList.add("is-flat");
@@ -119,8 +130,10 @@ function layoutFlat(stage, buttons, baseButton, variant) {
     const a = (i / buttons.length) * Math.PI * 2 - Math.PI / 2 + 0.5;
     b.style.left = `${50 + Math.cos(a) * 41}%`;
     b.style.top = `${50 + Math.sin(a) * 41}%`;
-    b.classList.toggle("is-left", Math.cos(a) < -0.2);
+    b.dataset.cos = String(Math.cos(a));
   });
+  sideLabels(stage, buttons);
+  window.addEventListener("resize", () => sideLabels(stage, buttons));
   baseButton.style.left = "43%";
   baseButton.style.top = "40%";
 }
@@ -275,7 +288,12 @@ async function main() {
     if (!moon) {
       stage.removeAttribute("tabindex");
       layoutFlat(stage, buttons, baseButton, {});
-      $("moon-hint").textContent = "Hover a marker for a preview, select it for every test.";
+      const why = {
+        webgl: "WebGL is turned off or unsupported in this browser",
+        download: "the 3D library could not be downloaded (a network, firewall or extension may block cdn.jsdelivr.net and unpkg.com)",
+        renderer: "WebGL could not start",
+      }[moonFailure()] || "the 3D view could not start";
+      $("moon-hint").textContent = `Flat Moon: ${why}. Hover a marker for a preview, select it for every test.`;
     } else {
       window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", (e) => moon.setReducedMotion(e.matches));
     }

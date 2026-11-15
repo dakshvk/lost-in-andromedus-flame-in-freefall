@@ -14,6 +14,10 @@ const MOON_RELIEF = "assets/moon_displacement.jpg";
 const RING_RADIUS = 1.13;
 const CAMERA_Z = 5.05;
 
+// Why the 3D Moon did not start (shown on the page and in the console).
+let failure = null;
+export const moonFailure = () => failure;
+
 export function webglAvailable() {
   try {
     const c = document.createElement("canvas");
@@ -201,18 +205,28 @@ function glowTexture(THREE, stops) {
 // controller, or null when the 3D Moon could not start (the caller then
 // shows the flat Moon).
 export async function initMoon({ stage, markers, base, variant, reduced }) {
-  if (!webglAvailable()) return null;
+  if (!webglAvailable()) { failure = "webgl"; console.warn("Moon: WebGL is off or unsupported in this browser."); return null; }
   let THREE;
   try {
     THREE = await import("three");
   } catch (_) {
-    return null;
+    // The first download source (cdn.jsdelivr.net) failed or is blocked: try
+    // the same pinned version from a second source before giving up.
+    try {
+      THREE = await import("https://unpkg.com/three@0.160.0/build/three.module.js");
+    } catch (err) {
+      failure = "download";
+      console.warn("Moon: the Three.js library could not be downloaded from jsdelivr or unpkg.", err);
+      return null;
+    }
   }
 
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-  } catch (_) {
+  } catch (err) {
+    failure = "renderer";
+    console.warn("Moon: WebGL could not start.", err);
     return null;
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -388,7 +402,11 @@ export async function initMoon({ stage, markers, base, variant, reduced }) {
       }
       v.project(camera);
       const x = (v.x * 0.5 + 0.5) * w, y = (-v.y * 0.5 + 0.5) * h;
-      it.button.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+      // Wide: the label sits outside the marker. Narrow: it faces inward, so it
+      // never reaches the edge of the screen.
+      const flip = w < 520 && x > w * 0.5;
+      it.button.classList.toggle("is-left", flip);
+      it.button.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)${flip ? " translateX(-100%)" : ""}`;
       it.button.classList.toggle("is-behind", hidden);
     }
   }

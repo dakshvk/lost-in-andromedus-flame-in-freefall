@@ -19,6 +19,7 @@ checker, retrieval). No language model writes any answer here.
 import json
 import os
 import sys
+import threading
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -34,7 +35,7 @@ sys.path.insert(0, LOGIC)
 
 from answer import ask, dataset_stats_tests_json  # noqa: E402
 from cards import rows_from_tests_json  # noqa: E402
-from rag import _named_material  # noqa: E402
+from rag import _named_material, retrieve  # noqa: E402
 
 DATA_FILES = {"tests", "cards", "experiments", "investigations",
               "limits", "demo_answers", "meta"}
@@ -43,6 +44,17 @@ MAX_QUESTION_CHARS = 300
 # Loaded once at startup: 200 rows is small, and every answer reads them.
 ROWS = rows_from_tests_json(TESTS_JSON)
 STATS = dataset_stats_tests_json(TESTS_JSON)
+
+def _warm_up():
+    """The first text question loads the language model (about 10 seconds).
+    Do that now, in the background, so a live demo never waits for it."""
+    try:
+        retrieve("warm up", ROWS)
+    except Exception as err:  # never stop the server over this
+        print("warm-up skipped:", err)
+
+
+threading.Thread(target=_warm_up, daemon=True).start()
 
 app = FastAPI(title="Will it burn in a Moon base?", version="0.1.0")
 # Public, read-only API with no cookies or accounts, so any origin may call it

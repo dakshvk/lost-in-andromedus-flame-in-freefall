@@ -8,7 +8,7 @@ const VERDICTS = {
   INSIDE: { cls: "v-inside", words: "Inside the tested range" },
   NEAR: { cls: "v-near", words: "Near the tested range" },
   BEYOND: { cls: "v-beyond", words: "Beyond what was tested" },
-  NEED_OXYGEN: { cls: "v-neutral", words: "Needs an oxygen level" },
+  NEED_OXYGEN: { cls: "v-neutral", words: "Needs an oxygen level", label: "MORE INFO" },
   INVALID: { cls: "v-neutral", words: "Not a possible condition" },
 };
 
@@ -33,14 +33,20 @@ function evidenceTable(rows) {
 
 // One code answer (verdict, sentence, evidence and notes).
 function codeAnswer(a, heading) {
-  const v = VERDICTS[a.verdict] || { cls: "v-neutral", words: a.verdict || "Answer" };
+  // A highest/lowest answer is a fact from the table, not a verdict about a
+  // condition, so it gets a neutral label instead of "Inside the tested range".
+  const fact = a.kind === "extreme" || a.kind === "range";
+  const v = fact
+    ? { cls: "v-neutral", words: "From the test table" }
+    : VERDICTS[a.verdict] || { cls: "v-neutral", words: a.verdict || "Answer" };
+  const label = fact ? "RESULT" : (v.label || a.verdict || "");
   const check = a.number_check;
   return el("div", { class: "answer-block" },
     heading && el("p", { class: "eyebrow" }, heading),
     el("div", { class: "badges" },
       el("span", { class: `verdict ${v.cls}` }, el("span", { class: "verdict-dot", "aria-hidden": "true" }),
-        el("b", {}, a.verdict || ""), el("span", {}, v.words)),
-      check && check.ok && el("span", { class: "badge badge-ok" },
+        el("b", {}, label), el("span", {}, v.words)),
+      check && check.ok && a.verdict !== "NEED_OXYGEN" && el("span", { class: "badge badge-ok" },
         el("svg", { viewBox: "0 0 16 16", width: 13, height: 13, "aria-hidden": "true" },
           el("path", { d: "M3 8.5l3.2 3L13 4.5", fill: "none", stroke: "currentColor", "stroke-width": 2, "stroke-linecap": "round", "stroke-linejoin": "round" })),
         "Every number checked against the data"),
