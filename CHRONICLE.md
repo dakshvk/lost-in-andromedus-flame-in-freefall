@@ -26,6 +26,14 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 14:30 | Daksh | One Google Doc for the submission links and page text
+
+- What: the links doc and the project page text doc are now one Google Doc, "Lost in Andromedus NasaSpaceApps Hackathon Project" (title), with the subheader "Challenge: Flame in Freefall challenge", then "Links for the submission form" (repo link, demo video link still to add), then the text for every NASA project page field. The old "Project Links" doc was trashed (recoverable from Drive's Trash). The doc lives outside the repo; its address is in the wiki page flame-in-freefall.md.
+- Why: Daksh asked for one doc, with that title and subheader.
+- How: with Claude Code, edited in place through the Google Docs connector, then read back and viewed in the browser pane.
+- Check: the title, subheader and clickable repo link render correctly. The doc is public and editable by anyone with the link (inherited from the team folder): set it to Viewer before submitting, or lock it once the video link is in.
+- Open: add the demo video link to the doc and to the project page.
+
 ### 2026-11-15 14:10 | Daksh | README: plain text only
 
 - What: `README.md` has no emoji and no special symbols now (the two middle dot separators in the title line became commas); every character in the file is plain ASCII.
