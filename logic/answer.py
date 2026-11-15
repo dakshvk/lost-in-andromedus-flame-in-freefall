@@ -515,18 +515,96 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None, material=None
     # The gravity note's pressure range comes from the data BEFORE
     # the standard-pressure filter below (as in build_answer).
     note = gravity_note(rows)
+    # Keep the low-pressure rows aside before the filter (as in
+    # build_answer): a material that exists ONLY at low pressure
+    # (Cotton: Saffire V-2) is not covered, and those rows become the
+    # nearest evidence instead of the hardware band with 0 tests
+    # (v11.1).
+    low_rows = [r for r in rows if not _standard_pressure(r)]
     # Same pressure filter as build_answer: the low-pressure Saffire
     # V rows never join the evidence pool or the observed flow range.
     rows = [r for r in rows if _standard_pressure(r)]
     stats = stats or {"total_tests": len(rows), "o2_min": 13.6, "o2_max": 22.2, "rows_above_21": 0}
     pool = _material_rows(rows, material) if material else rows
+    if material and not pool:
+        # No standard-pressure rows for this material. If it exists
+        # only at low pressure (Cotton), show those rows as nearest
+        # evidence; if it is not in the dataset at all, say so.
+        # Either way the verdict is BEYOND — the hardware band must
+        # not call it INSIDE with 0 tests (v11.1).
+        material_low = [r for r in low_rows
+                        if _same_material((r.get("material") or "").split(" (Saffire V")[0],
+                                          material)]
+        if material_low:
+            plural = "s" if len(material_low) != 1 else ""
+            sentence = (
+                f"No {material} tests at standard pressure are in the "
+                f"dataset — the only {material} test{plural} ran at low "
+                f"pressure in Saffire V, shown below as nearest evidence, "
+                f"so {airflow_cm_s} cm/s airflow is not covered."
+            )
+            evidence_out = [{
+                "test_id": r.get("test_id"), "material": r.get("material"),
+                "material_form": r.get("material_form"),
+                "oxygen_pct": r.get("oxygen_pct"),
+                "airflow_cm_s": r.get("airflow_cm_s") or None,
+                "airflow_end_cm_s": r.get("airflow_end_cm_s") or None,
+                "outcome": r.get("outcome") or None,
+                "pressure_kPa": r.get("pressure_kPa"),
+                "source": r.get("source"), "source_url": r.get("source_url"),
+            } for r in material_low]
+            parts, nums = [], []
+            for r in material_low:
+                outcome = r.get("outcome") or "unknown"
+                parts.append(
+                    f"{r.get('test_id')} at {r.get('oxygen_pct')}% oxygen and "
+                    f"{r.get('pressure_kPa')} kPa, {r.get('airflow_cm_s')} cm/s "
+                    f"flow, outcome {outcome}")
+                nums += [v for v in (r.get("oxygen_pct"), r.get("pressure_kPa"),
+                                     r.get("airflow_cm_s")) if v not in (None, "")]
+            nearest_evidence = {
+                "text": (f"Nearest evidence: Saffire V {material} test "
+                         + "; ".join(parts)
+                         + " — low pressure, so not part of the standard-pressure range."),
+                "source": "Urban et al., ICES 2021, Saffire IV/V paper, Table 1 (NTRS 20210011521)",
+                "numbers": [float(v) for v in nums],
+            }
+            check = check_answer_numbers(sentence, evidence_out, stats,
+                                         question_flow=airflow_cm_s)
+            unknown = []
+            if any(not r.get("outcome") for r in material_low):
+                unknown.append("outcome (not recorded for some evidence rows — not guessed)")
+            return {
+                "question": question, "verdict": "BEYOND", "sentence": sentence,
+                "evidence": evidence_out, "nearest_evidence": nearest_evidence,
+                "unknown": unknown,
+                "gravity_note": note, "sources": [PSI_25_URL],
+                "number_check": check,
+            }
+        sentence = (
+            f"No {material} tests are in the dataset, so this cannot "
+            f"be answered from the data."
+        )
+        check = check_answer_numbers(sentence, [], stats,
+                                     question_flow=airflow_cm_s)
+        return {
+            "question": question, "verdict": "BEYOND", "sentence": sentence,
+            "evidence": [], "nearest_evidence": None,
+            "unknown": [],
+            "gravity_note": note, "sources": [PSI_25_URL],
+            "number_check": check,
+        }
     lows = [f for f in (_flow_low(r) for r in pool) if f is not None]
     highs = [f for f in (_flow_high(r) for r in pool) if f is not None]
     low, high = (min(lows), max(highs)) if lows and highs else (0.0, 0.0)
     # The count is for this material, without Link rows (as in
     # build_answer) — or the whole dataset, without Link rows, when
-    # no material is given (145, not 200 — v10, Daksh).
-    count = sum(1 for r in pool if "link" not in (r.get("source") or "").lower())
+    # no material is given. Rows with no oxygen value (the two
+    # context-only Saffire III rows) are not counted either, so the
+    # count matches build_answer (143, not 145 — v11.1).
+    count = sum(1 for r in pool
+                if "link" not in (r.get("source") or "").lower()
+                and r.get("oxygen_pct") not in (None, ""))
     if material and lows and highs:
         # The material's own range with the 25% margin.
         margin = FLOW_MARGIN * (high - low)
@@ -554,13 +632,19 @@ def build_airflow_answer(question, airflow_cm_s, rows, stats=None, material=None
         f"({range_text}), so the rows below are "
         f"{'direct evidence' if verdict == 'INSIDE' else 'the closest evidence we have'}."
     )
-    evidence = sorted(pool, key=lambda r: abs((_airflow_value(r) if _airflow_value(r) is not None else float("inf")) - airflow_cm_s))[:3]
+    # Prefer rows with a known outcome (doc Step 1.2, as in
+    # closest_rows): the closest-flow rows are not much use as
+    # evidence when their outcome was never recorded. Falls back to
+    # all rows only when none in the pool has an outcome (v11.1).
+    evidence_pool = [r for r in pool if r.get("outcome")] or pool
+    evidence = sorted(evidence_pool, key=lambda r: abs((_airflow_value(r) if _airflow_value(r) is not None else float("inf")) - airflow_cm_s))[:3]
     evidence_out = [{
         "test_id": r.get("test_id"), "material": r.get("material"),
         "material_form": r.get("material_form"), "oxygen_pct": r.get("oxygen_pct"),
         "airflow_cm_s": r.get("airflow_cm_s") or None,
         "airflow_end_cm_s": r.get("airflow_end_cm_s") or None,
-        "outcome": r.get("outcome") or None, "source": r.get("source"),
+        "outcome": r.get("outcome") or None, "pressure_kPa": r.get("pressure_kPa"),
+        "source": r.get("source"),
         "source_url": r.get("source_url"),
     } for r in evidence]
     check = check_answer_numbers(sentence, evidence_out, stats,

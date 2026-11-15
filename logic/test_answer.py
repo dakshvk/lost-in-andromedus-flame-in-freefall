@@ -382,5 +382,70 @@ class TestV11Answers(unittest.TestCase):
         self.assertIn("32 tests", answer["sentence"])
 
 
+@unittest.skipUnless(os.path.exists(TESTS_JSON), "tests.json not next to the repo")
+class TestV11_1Airflow(unittest.TestCase):
+    """v11.1: the v11 fixes mirrored into build_airflow_answer — the
+    no-rows guard for a low-pressure-only material, counts skipping
+    rows with no oxygen, and evidence preferring known outcomes."""
+
+    @classmethod
+    def setUpClass(cls):
+        from cards import rows_from_tests_json
+        from answer import dataset_stats_tests_json
+        cls.rows = rows_from_tests_json(TESTS_JSON)
+        cls.stats = dataset_stats_tests_json(TESTS_JSON)
+
+    def test_cotton_airflow_is_beyond_with_saffire_v2(self):
+        from answer import ask
+
+        answer = ask("Cotton at 20 cm/s airflow?",
+                     self.rows, stats=self.stats)["answer"]
+        self.assertEqual(answer["verdict"], "BEYOND")
+        self.assertIn("No Cotton tests at standard pressure", answer["sentence"])
+        self.assertIn("20.0 cm/s airflow is not covered", answer["sentence"])
+        self.assertEqual([r["test_id"] for r in answer["evidence"]], ["V-2"])
+        self.assertEqual(answer["evidence"][0]["pressure_kPa"], 70.7)
+        self.assertIn("V-2 at 26.2% oxygen and 70.7 kPa",
+                      answer["nearest_evidence"]["text"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_unknown_material_airflow_is_beyond(self):
+        from answer import build_airflow_answer
+
+        answer = build_airflow_answer("Kevlar at 20 cm/s airflow?", 20.0,
+                                      self.rows, stats=self.stats,
+                                      material="Kevlar")
+        self.assertEqual(answer["verdict"], "BEYOND")
+        self.assertIn("No Kevlar tests are in the dataset", answer["sentence"])
+        self.assertEqual(answer["evidence"], [])
+        self.assertIsNone(answer["nearest_evidence"])
+        self.assertTrue(answer["number_check"]["ok"])
+
+    def test_airflow_count_skips_rows_without_oxygen(self):
+        from answer import ask
+
+        # No material: 143, not 145 — the two context-only Saffire
+        # III rows have no oxygen, as in build_answer (v11).
+        answer = ask("What about 20 cm/s airflow?",
+                     self.rows, stats=self.stats)["answer"]
+        self.assertIn("143 tests", answer["sentence"])
+        self.assertNotIn("145 tests", answer["sentence"])
+        # SIBAL: 32, not 34.
+        answer = ask("SIBAL at 10 cm/s airflow?",
+                     self.rows, stats=self.stats)["answer"]
+        self.assertIn("32 tests", answer["sentence"])
+        self.assertNotIn("34 tests", answer["sentence"])
+
+    def test_airflow_evidence_prefers_known_outcomes(self):
+        from answer import ask
+
+        for q in ("What about 20 cm/s airflow?",
+                  "SIBAL at 10 cm/s airflow?",
+                  "PMMA at 45 cm/s airflow?"):
+            answer = ask(q, self.rows, stats=self.stats)["answer"]
+            self.assertTrue(answer["evidence"], q)
+            self.assertTrue(all(r["outcome"] for r in answer["evidence"]), q)
+
+
 if __name__ == "__main__":
     unittest.main()
