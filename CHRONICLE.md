@@ -26,6 +26,13 @@ Rules:
 
 Entries start here
 
+## 2026-11-14 16:35 PT — Paridhi Singh — Address second RAG review (v4)
+
+- What: Router fix (numbers count only with a unit; PSI IDs and investigation names are meaning questions; highest/lowest numeric only with oxygen/airflow); added max_oxygen()/answer_highest_oxygen() over the full 129 rows (22.2%, 14 ties, number-checked); corrected the Saffire V citation to Urban et al., ICES 2021, Table 1 (NTRS 20210011521), ranges 25.4–26.2% O2 at 70.7–72.6 kPa, 20 cm/s flow; rebuilt material cards from the full CSV (PMMA/other 98, Nomex 3, SIBAL 27, Wax 1) with tied highest-oxygen wording; added exact PSI-ID/name lookup before embeddings; added BASS (PSI-26) and replaced ACME PSI-10 with PSI-20/PSI-21, with a source_notes column per row.
+- Why: Daksh's second RAG review on PR #1 asked for all of these before merge, including his correction that the Saffire V numbers come from the ICES 2021 paper, not NASA's challenge notes.
+- How: Written with SI assistance (Muse), reviewed by Paridhi Singh. Saffire numbers verified against the NTRS FLARE deck test matrix; ACME BRE/CLD verified against NASA Science investigations page. Tested in the VM (keyword fallback): router, exact lookup, cutoff and max-oxygen answer all pass; embedding ranking of the Saffire-objective and oxygen-sensor questions to be confirmed on the Mac with the real model.
+- Check: python3 rag.py, python3 answer.py, python3 cards.py run clean.
+
 ### 2026-11-14 16:00 | Paridhi | Revised RAG for Daksh's review: router, text corpus, embedding cache, score cutoff, Saffire V nearest evidence
 
 - What: `logic/rag.py` (router + text corpus + embedding cache + 0.30 score cutoff + source citations), `logic/investigations.csv` (8 investigations), `logic/answer.py` (nearest_evidence field for 30%+ O2), `logic/demo_answers.json` (regenerated, Q1 carries the Saffire V note).
