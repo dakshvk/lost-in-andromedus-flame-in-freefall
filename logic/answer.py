@@ -147,6 +147,25 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
             "are direct evidence for this condition."
         )
 
+    # Nearest evidence beyond BASS-II, for Moon-cabin conditions.
+    # NASA's challenge notes (per Daksh, Nov 14) put the Moon cabin at
+    # 30%+ O2 at about 10 psi, and Saffire V at about 26% O2 at about
+    # 71 kPa — the closest published reference, still below the cabin.
+    # Saffire IV/V data is NOT in PSI (GIPOC-locked, per Daksh Part 1),
+    # so this is cited to NASA's notes, not to a row in our dataset,
+    # and its numbers are checked against the notes, not the dataset.
+    nearest_evidence = None
+    if verdict == "BEYOND" and oxygen_pct is not None and float(oxygen_pct) >= 30.0:
+        nearest_evidence = {
+            "text": (
+                "Nearest evidence beyond BASS-II: Saffire V, at about 26% "
+                "oxygen and about 71 kPa — still below a 30%+ oxygen Moon "
+                "cabin at about 10 psi."
+            ),
+            "source": "NASA challenge notes (per Daksh, Nov 14, 2026)",
+            "numbers": [26.0, 71.0, 10.0, 30.0],
+        }
+
     unknown = list(result["unknown"])
     if stats_from_sample:
         unknown.append("dataset stats are from the 6-row sample only — the full 129-test CSV was not loaded, so do not quote these as dataset numbers")
@@ -175,6 +194,7 @@ def build_answer(question, oxygen_pct, rows, airflow_cm_s=None, material=None, s
         "verdict": verdict,
         "sentence": sentence,
         "evidence": evidence_out,
+        "nearest_evidence": nearest_evidence,
         "unknown": sorted(set(unknown)),
         "gravity_note": GRAVITY_NOTE,
         "sources": [PSI_25_URL],
@@ -212,3 +232,4 @@ if __name__ == "__main__":
     ]:
         print(build_answer(q, o2, rows, material=mat, stats=stats))
         print()
+
