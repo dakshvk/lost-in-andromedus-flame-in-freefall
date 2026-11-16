@@ -39,3 +39,5 @@ One line per use. Newest at the bottom.
 | 2026-11-15 | Daksh            | Claude Code                   | Wrote the plain-words explanation of the verdicts and outcome words for the README and the submission doc |
 | 2026-11-15 | Daksh            | Claude Code                   | Recorded the demo GIFs of the site, built the 7 slide space themed deck and its scripts, wrote the takeover instructions in the planning doc |
 | 2026-11-15 | Daksh            | Claude Code                   | Wrote the deck tests, moved the demo to Google Slides, upgraded its GIFs, fixed the name spelling and added Daksh's links |
+
+| 2026-11-15 | Daksh            | Claude Code                   | Pre-submission audit of the NASA form, the public slideshow and the repo; README AI line and deck test tolerance |

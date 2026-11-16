@@ -26,6 +26,12 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 | Daksh Kumar | Pre-submission audit: NASA form, slideshow, repo
+- What: `README.md` (AI line now names Claude Fable, matching the write-up and the NASA form), `docs/demo/test_deck.py` (0.01 inch tolerance for the slide edge).
+- Why: final check before submission that the NASA project form, the public slideshow and the repo all say the same thing.
+- How: read every field of the filled NASA project form (demo field links straight to the slideshow, project field to this repo, 7 NASA and 8 other links); downloaded the public Google Slides export with no login and ran `test_deck.py` on it; opened the slideshow in a logged-out headless Chrome. Google's export rounds the slide width down by about 0.0001 inch, so the full-bleed background failed the edge check; the tolerance fixes that. Done with Claude Code.
+- Check: `test_deck.py` passes on the live Slides export, the repo deck and the light deck; the live export holds the seven full quality GIFs; the logged-out view shows the deck with no sign-in wall.
+
 ### 2026-11-15 | Daksh Kumar | Demo slideshow on Google Slides, tests for the deck, name and links
 - What: Google Slides copy of the deck in the team folder (public link, replaces the MP4); `docs/demo/test_deck.py` (new, 59 checks); lighter GIFs `s1_lite.gif` to `s7_lite.gif` and `lost-in-andromedus-demo-lite.pptx`; `cut.sh` and `build_deck.py` take size options; deck footers now name the team, slide 7 credits NASA PSI and discloses AI use, speaker notes lengthened. README team table now says "Paridhi Singh" and has Daksh's LinkedIn; the demo line points to the slideshow.
 - Why: the demo is now the GIF slideshow, not an MP4, so it must open publicly with no login, and every point we need to make has to be on a slide or in its notes.

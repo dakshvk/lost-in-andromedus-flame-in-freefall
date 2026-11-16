@@ -118,7 +118,7 @@ cd .. && python3 -m pytest -q api            # 14 tests
 
 ## Use of AI
 
-AI tools helped write code, data tooling, tests and documentation: Claude and Claude Code (Anthropic), Muse, and Cursor. The team chose the question and approach, and team members checked the results against the sources. Every file an AI helped write has a note in its header, and the full log is in `AI_USE_LOG.md`.
+AI tools helped write code, data tooling, tests and documentation: Claude and Claude Code (Anthropic), Muse, and Cursor. Claude Fable made a first draft of the web page, which was then reworked. The team chose the question and approach, and team members checked the results against the sources. Every file an AI helped write has a note in its header, and the full log is in `AI_USE_LOG.md`.
 
 The default site has no AI-generated images. One optional comparison view (`?moon=illustration`) shows an AI-generated Moon image with a visible label.
 

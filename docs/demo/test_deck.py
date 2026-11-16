@@ -54,7 +54,8 @@ for i, sl in enumerate(slides, 1):
     gifs = [p for p in pics if p.image.content_type == "image/gif"]
     check(len(gifs) == 1, f"slide {i}: one GIF picture")
     check(len(notes_txt[i - 1]) >= 200, f"slide {i}: speaker notes at least 200 characters ({len(notes_txt[i-1])})")
-    off = [s for s in sl.shapes if s.left < 0 or s.top < 0 or s.left + s.width > W or s.top + s.height > H]
+    tol = 9144  # 0.01 inch: Google Slides exports round the slide size, so a full-bleed background pokes past by a hair
+    off = [s for s in sl.shapes if s.left < -tol or s.top < -tol or s.left + s.width > W + tol or s.top + s.height > H + tol]
     check(not off, f"slide {i}: every shape inside the slide")
     nums = sum(1 for s in sl.shapes if s.has_text_frame and s.text_frame.text.strip().isdigit())
     check(nums >= 4, f"slide {i}: at least 4 numbered steps ({nums})")
