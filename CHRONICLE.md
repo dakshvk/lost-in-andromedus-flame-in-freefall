@@ -26,6 +26,12 @@ Rules:
 
 Entries start here
 
+### 2026-11-15 | Daksh Kumar | Fable taken out of the AI disclosure
+- What: `README.md` AI line, the submission Google Doc and the NASA project form no longer name Claude Fable.
+- Why: Daksh's call; the disclosure still names Claude and Claude Code (Anthropic).
+- How: edited the three texts in place. Done with Claude Code.
+- Check: no "Fable" left in the README, the doc export or the form's Project Details.
+
 ### 2026-11-15 | Daksh Kumar | Pre-submission audit: NASA form, slideshow, repo
 - What: `README.md` (AI line now names Claude Fable, matching the write-up and the NASA form), `docs/demo/test_deck.py` (0.01 inch tolerance for the slide edge).
 - Why: final check before submission that the NASA project form, the public slideshow and the repo all say the same thing.
